@@ -1,0 +1,3 @@
+in.next().trim()
+
+remove spaces from both ends of a string

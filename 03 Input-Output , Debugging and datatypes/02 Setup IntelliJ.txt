@@ -1,0 +1,9 @@
+1) Project SDK -> Add path of JDK
+2) Create using template
+3) Give project name
+4) Base package : com.abhi
+
+
+SHORTCUTS: 
+psvm  : public static void main
+sout	: System.out.println("")

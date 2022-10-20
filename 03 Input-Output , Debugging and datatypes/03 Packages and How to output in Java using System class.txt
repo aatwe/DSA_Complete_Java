@@ -1,0 +1,42 @@
+Q1) What is package? folder where java file is present	
+	Why packages? provide rules and security
+
+
+package com.abhi		//implies our java file is in com.abhi folder or package
+
+public class Demo {
+}
+
+Q1.2) How to print output in java? System.out.println()
+
+
+Q2) Where is System.out.println() ?
+	Separate class: System	-> contains what? separate methods of System class for user ease
+		ctrl + CLick  on system		
+			System.java opens
+			//Where is it? java.lang
+	2.a) Wha tis println()
+			public void println(@NullableStringx) {
+				if (getClass() == PrintStream.class) {
+					writeln(String.valueOf(x));
+			}else {
+				synchronized (this) {
+					print(x);
+					newLine();
+	}
+}			
+}
+		
+	Q2.1) How are we able to access this system class method system.out.println()? 
+		Inherited by default //everything in lang package
+
+	2.b) What is out? variable of Type of printStream
+		public static final PrintStream out = null;			//null means standard output stream by default
+		
+			What is print stream?
+			What is standard Output stream bydefault value? Command Line
+				What other possible standard output streams? File/text file etc	
+				
+
+
+			

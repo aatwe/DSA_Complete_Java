@@ -1,0 +1,19 @@
+What is pseudo code? tell what algo is doing without telling syntax etc
+
+
+How to write pseudo code?
+1) start
+2) take input
+3) c=2
+4) while c < num					//trick check only till root(num) to minimize while loop operations
+   4,1) check if c divides num  //num%c =0
+	output not prime -> exit 5)
+   4.2) c =c +1
+
+5) end while
+6)output prime
+
+
+
+
+How to have fore sight? Check repeating patterns in brute force solution

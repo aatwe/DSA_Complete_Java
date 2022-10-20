@@ -1,0 +1,2 @@
+String word = "hello"
+System.out.println(word.charAt(0));

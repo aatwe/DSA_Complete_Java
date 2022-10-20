@@ -1,0 +1,15 @@
+1) Inbuilt:
+Integer.reverse(num);
+
+
+
+2)
+ Scanner input = new Scanner(System.in);
+       int n = input.nextInt();
+       int ans = 0;
+       while(n > 0){
+           int temp = n%10;
+            n = n/10;
+            ans = ans * 10 + temp;
+       }
+        System.out.println(ans);

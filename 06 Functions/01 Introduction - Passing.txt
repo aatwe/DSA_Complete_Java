@@ -1,0 +1,143 @@
+import java.util.Scanner;
+
+public class test {
+
+    public static void main(String[] args) {
+       
+	accessmodifier return_type function_name() {
+		//Body
+		return statement;
+	}
+
+
+
+       }
+    }
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q1) What can we return
+
+
+Q2) If return type specified, compulsory to return
+//Below doesnt work
+static String greet() {
+	return 23;
+}
+
+
+
+
+Q3) Parameters
+psvm(String[] args) {
+	int ans = sum3(20, 30);		//Pass in order of declaration
+}
+static int sum(int a, int b) {
+	int sum = a + b;
+	return sum;
+}
+
+Q4) Can parameter and argument be different name? Yes. Why? only value is passed
+
+String name = "Abhi"		//Where is this object stored? Heap
+greet(name);			//value of object reference variable name passed		//reference is not passed in Java
+
+						
+static void greet(String naam) {	//both reference variable point to same object
+
+
+
+}
+
+
+Q5)
+
+String name = "Abhi";
+changename(var1);
+
+static void changename(String var2) {
+	var2 = "Abhi2";
+}
+
+
+
+Q6) why and how java is pass by value
+
+1) What are arguments? Inside function call in main() etc fir ex greet(name);
+
+2) What are parameters? inside function definition for ex static void greet(String naam)
+
+3) What is pass by value? parameter values changename(var1) //value of var1
+
+
+Q7) Why below doesnt swap?
+1) for passing primitives like  : int, short, byte, char----> pass by value 						//Summary: if value changed in function , does not reflect
+2) for passing objects		  :  				    ----> pass by value of reference variable		//Summary: if value changed in function , does reflec74
+3) for passing strings
+
+
+a) For Primitives:
+			for ex below:
+					where a points 		? 10
+					where b points 		? 20
+					where num1 points	? 10	//pass by value
+					where num1 points	? 20	//pass by value
+					-> Enter swap()
+						temp = 10;
+						num 1= 20
+						num 2= 10	//swapping done in function scope
+								//But a and b are NOT SWAPPED! Why? pass by value
+Code:
+public static void main(String[] args) {
+int a = 10;
+int b = 20;
+swap(a,b)							//Call function
+System.out.println(+a + "," +b);			//a and b still same
+
+
+static void swap(int num1, int num2) {		//Pass variables by value
+	int temp = num1;
+	num1 = num2;
+	num2 = temp;					//Swapping done only in local scope
+		
+}
+}
+
+b) For Objects:
+			for ex below:
+					where arr[] points? [1,3,2,45,6]
+						-> Enter change()
+							where nums pointing? Same object [1,3,2,45,6]
+Code:
+ public class ChangeValue {
+	public static void main(String[] args) {
+		int [] arr = {1,3,2,45,6};	
+		change(arr);						//Call function   //pass string object 
+		System.out.println(Array.toString(arr));	//Array gets printed [99,3,2,45,6]
+}
+
+	static void change(int[] nums) {		//Pass Array object by value of reference
+		nums[0] = 99;				 
+
+}
+}
+
+c)
+Code:
+
+ 
+ public class ChangeValue {
+	public static void main(String[] args) {
+		String name = "Abhi ajio";
+		changeName(name);			//Call function  //pass string object	//reference = name
+		System.out.println(name);	
+}
+
+	static void changeName(String naam) {		//Pass Array object by value of copy of reference
+		naam = "Rajesh Rojki";			//(Since string immutable ->(copy of reference(name)) i.e naam points to a new String object. CANNOT MODIFY Strings (Immutable)					 
+
+}
+}
+
+
+
+
+Conclusion: In Java no pointers

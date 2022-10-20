@@ -1,0 +1,63 @@
+0) What are primitives?  Data types that you cant break further
+		ex int,char
+		//string is not a primitive
+
+1) Objective: Store primitive data types in a Primitives class
+
+package com.kunal
+
+public class Primitives {
+
+	public static void main(String[] args) {
+		int rollno = 64;		
+		char letter ='r';
+		float marks = 98.6;	
+		double largeDecimalNumbers = 4567654.4567;
+		long largeInteger = 34567876543L;
+		boolean check = false;
+
+		
+}
+}
+
+
+Q) Why add f or L?
+	Decimal values by default double, to store in fload  -> add f
+Q) Why use double instead of float? larger decimal values
+
+Q) Where are primitive data types stored? There are wrapper classes for them also
+
+	for ex use case
+	1) Integer rno = 64
+	2) rno.
+		hashCode(), longValue(), shortValue(), toString() etc methods available
+
+Q) How to comment all? Select part to comment --> Ctrl + /
+
+
+
+Q)Try taking an input and printing it out
+
+package com.abhi
+import java.util.Scanner	
+
+public class Input(){
+public static void main(String[] args)
+
+	Scanner input = new Scanner(System.in);
+	System.out.println("Please enter some input");
+	int rollno = input.nextInt();
+	System.out.println("Your roll no is" +rollno);
+
+
+	}
+}
+
+Output:
+>Please enter some input
+>67
+>Your roll no is 67
+
+
+Q)int a = 234_000_000;	//How to write million? Use "_" 
+						//dont use comma ","

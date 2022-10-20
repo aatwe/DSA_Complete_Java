@@ -1,0 +1,54 @@
+1) given 2 functions , with same name
+
+
+2) can we create? Yes , if the parameters are different
+a)Either no. of arguments different
+b)or type of arguments different 
+c)or both
+
+
+
+3) When is which called?
+Function overloading : //How determined which function to call? Decided at compile time
+
+
+	if parameters of first used when calling -> first function called
+	if parameters of second used when calling -> second function gets called
+	
+
+
+Code:
+
+public class Overloading {
+		public static void main(String[] args) {
+
+
+}
+
+
+
+public void fun(int a) {
+	System.out.println(a);
+}
+
+
+public void fun(String name) {
+	System.out.println(name);
+}
+}
+
+
+
+
+4) Note: when overloading var args, cant use empty function call
+for ex
+
+psvm(String[] args) {
+	demo();				
+
+
+static void demo(int ...v){}
+
+static vodi demo(String ...v) {}
+
+}

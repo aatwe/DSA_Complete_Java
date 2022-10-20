@@ -1,0 +1,5 @@
+1) bw 2
+int max = Math.max(a,b);
+
+2) bw 3
+int max = Math.max(c,Math.max(a,b));

@@ -1,0 +1,70 @@
+Questions to ask
+1) Start 					//Where program starts  //where program stops 			//Oval
+
+2) Input and Output				//what is program input //what is program output		
+											   //parallelogram  
+
+3) Processing				//what done with inputs				           //rectangle
+
+
+4) Condition				//Check if something is true or false		//diamond	shaped rhombus
+
+5) ------------>				// what flow					                //arrow
+
+6) Stop												//Oval
+   I
+		
+	
+
+How to visualize thought process?
+
+1) Take input name and output: Hello "name"
+
+Start : 		//Oval
+   I
+  V	
+Input name	//parallelogram
+   I
+  V
+Output Hello {name}  //parallelogram
+   |
+  V
+End		//Oval		
+
+
+2) take salary input, if salary >10000 give bonus of 2000, else give bonus of 1000
+
+start  	//Oval
+  I 
+ V
+Input salary  //parallelogram
+  |
+ V		           yes
+Condition salary > 10000 -------> salary = salary + 2000 //processing
+  I					  I
+ V					  I
+salary = salary + 1000 //processing			  I
+   |____________ _______________________________/
+   |
+  V
+ Output Salary     //parallelogram  
+   |
+  V
+  End 	//Oval
+
+
+3) Find prime: Check if no. c starting from 2 till that number--> divide given number (modulo =0)
+start 
+  I
+ V
+Input num
+  |
+ V		          
+ process c = 2   _________  processing c= c+1
+  I	        /	 	     I n			 
+ V                     /	           y	     I     	               y
+condition check c < num ---->  conditon n%c =0 --->  output not prime			  I
+  In							|
+  | 							|
+ V  				                 		                 V
+output prime------------------------------------------------------------------------->     End

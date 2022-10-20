@@ -1,0 +1,54 @@
+What is programing langugage?
+Instruction to a computer in human readable format
+//internally translated to 0s and 1s
+
+
+
+
+
+
+What types of languages?
+
+
+1) Procedural:
+	well structured steps and procedures(order of statements+function+command)
+
+	for ex -> order important below
+	1) input first no.
+	2) input second no.
+	3) calculate sum of both
+	//many ways to take care of order: loops,statements,cases, functions etc
+
+	for ex java,c++, python : all follow procedural lang
+
+
+
+2) Functional
+	write program in pure functions
+	what is function? reusable bundle of code	
+
+Use case: lots of same operations on different set of data		//does not modify the original dataset -> creates new one as output
+ 
+ex Dataset for machine learning , used to create algo,models etc
+
+ex first class functions:
+	assigning functions to variables etc  ex python
+		python has first class functions
+
+
+Q) Does python follow functional and procedural?
+
+
+3) Object orient programming
+	object = code + data
+
+	What if different data types mixed in a collection? -> Custom data type
+	How to create custom data types? classes
+		What are classes? properties + functions named groups
+			What is instance of this class? object
+			int a = 10	//10 is object instance running in memory
+
+
+Objective of oop: divide code into chunks to make it ez to develop, debug and reuse & maintain software
+
+All are mixed

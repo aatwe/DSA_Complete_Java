@@ -1,0 +1,3 @@
+m1) if (ch >= 'a' && ch < 'z')
+
+m2) ch.isUpperCase() method

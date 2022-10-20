@@ -1,0 +1,29 @@
+Its called type checking
+What is type checking? Computer will compile and interpret program into  machine level code
+
+Converting  from program lang --> machine level code = compilation
+
+When is type checking done
+
+for ex a =10
+
+1) compile time	//static language
+
+int a = 10		
+int a = "Kunal"	//gives error	//before running, during conversion program should know what is type of a
+	
+
+//runtime errors are less
+
+
+2) runtime	//runtime
+Type checking at runtime
+dont have to specify type previously
+
+ex 
+a = 10		//no error
+a = "Kunal"	//no error		//points to correct place before compilation
+
+
+//saves time
+//runtime error prone

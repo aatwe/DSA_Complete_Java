@@ -1,0 +1,8 @@
+ JAVA SE16
+
+
+1) JDK  //oracle.com
+	download for your system
+
+2) IntelliJ IDE //community edition
+

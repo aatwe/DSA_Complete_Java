@@ -1,0 +1,23 @@
+while(condition) {
+	//body
+}
+
+1) Implement for loop using a while
+
+initialize
+while(condition) {
+	body
+	operation
+}
+
+
+//Note: variables initialized inside while loop are in scope only till body is executing
+
+
+
+
+case 1) infinite while loop needs to be broken
+
+while(1) {
+	break
+}

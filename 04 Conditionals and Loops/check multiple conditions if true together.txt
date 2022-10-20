@@ -1,0 +1,3 @@
+Bitwise Operators
+condition  && condition2 	AND 		`Operator	//both should be true for over all to be true
+condition1 || condition2 	OR		 Operator	//either can be true for overall to be true

@@ -1,0 +1,38 @@
+0) How to input in java?
+	a) Create object of class Scanner
+		pass parameter System.in for selecting keyboard as input
+	b) Use methods with Scanner class object, store relevant output in a variable
+
+
+
+1) Scanner class
+
+Scanner.java
+Where? java.util.Scanner
+
+What does it do? pass primitive types and strings using regular expresssions
+
+package com.kunal
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner input  = new Scanner(System.in)		//Create a new object of scanner
+
+										//System.in means standard input stream from keyboard
+										OR
+		Scanner input = new Scanner(File);
+		
+		System.out.println(input.nextInt());
+}
+}
+
+> 456
+Output: 456
+
+
+How to take continious inputs in console?
+        int n1 = input.nextInt();
+        int n2 = input.nextInt();
+        int n3 = input.nextInt();

@@ -1,0 +1,41 @@
+1) What is varargs? method with variable no. of arguments
+
+2) how to implement?
+
+public class VarArgs {
+	public static void main(String[] args) {
+		fun(...v:2,3,4,5,56,87,23,45,65);
+	}
+	static void fun(int ...v) {
+		System.out.println(Arrays.toString(v));
+}
+}
+3) What input parameter? Array of integers , or char etc
+4) What data type? you specify , argument and parameter should match
+5) Can we provide 0 arguments? Yes
+
+public class VarArgs {
+	public static void main(String[] args) {
+		fun();
+	}
+	static void fun(int ...v) {
+		System.out.println(Arrays.toString(v));
+}
+}
+
+
+6) How to pass multiple different types of data? Separate by comma, pass in order specified
+{(dont change order), also variable length argument at end
+public class Varargs 
+
+	public static void main(String[] args) {
+		multiple(2,3,"Abhi");
+
+}
+
+static void multiple(int a, int b, String ..v) {
+	
+
+}
+	
+}

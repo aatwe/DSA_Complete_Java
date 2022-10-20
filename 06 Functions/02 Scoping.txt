@@ -1,0 +1,29 @@
+Q1) What is scope? region where we can access our variables
+for ex below scope of a is main()
+			 not in random() -> cannot access and use a in random()
+
+public class Scope {
+	public static void main(String[] args) {
+		int a = 10;
+		int b = 20;
+}
+
+	static void random() {
+		System.out.println(a);
+
+}
+
+}
+
+
+1) What is function scope? Variables inside a function can be accesssed inside a function
+
+
+2) What if we insert simple {} block scope inside variable. 
+	variables init in that --> accessible in that only
+
+
+3) Can we change value initialized outside, inside a block? yes
+
+4) initialized outside --> can use inside block, cannot be initialized inside block
+   initialized inside  --> cannot be used outside block , can be initialized again outside block

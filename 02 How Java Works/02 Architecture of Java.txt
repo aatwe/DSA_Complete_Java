@@ -1,0 +1,79 @@
+0) Java Source Code (.java file)
+
+
+1) (JDK)Java Dev Kit = = Java Runtime Environment + Dev tools										(Input: .java file)  			 
+A     -> download package from internet
+B     -> sets up basic envt to develop program
+D**  -> *provides COMPILER 		(javac)  //compiler for converting .java --> .class				(Output: .class file //Byte code)  [COMPILE TIME]
+C     -> provides JRE		(JRE)
+		
+  		C: 1.a) (JRE)Java Runtime Environment= Java Virtual Machine + Library classes   		(Input: .class file)  ()
+			-> provides environment to run program (not create program )
+			-> provides class loader loads all classes needed to execute
+			->Send .class file --> Bytecode verifier  //format checking
+			-> contains
+		  		deployment technologies
+				ui toolkits
+				integeration libraries
+				Base Libraries
+				JVM
+					1.b) (JVM) Java virtual machine 				(Input .class file)     		[RUN TIME ENGINE]
+						->contains 
+							1.b.1) class loader
+								1.b.1.1) Loading //reads .class ---> binary data 
+									-> creates binary object of class in heap  //running instance created						
+
+								1.b.1.2) Linking:  
+									verifiy .class file
+									allocate memory to class variables and default values for the object   
+									replace reference variables with actual values: (reference variable---> object)
+
+								1.b.1.3) Initialization
+									assign static variables to their values
+									what are static variables? do not depend on object / particular instance  //this property is same for every object (ex population for person a, person b etc)
+								1.b.1.4) Stack memory allocation	//when new function call -> new stack frame created
+								1.b.1.5) Heap Memory allocation
+					
+							1.b.2) Byte code verifier			(input: .class file / Byte code)
+
+							1.b.3) Interpreter 				(Input: .class file / Byte code)  (Output: Machine code/exe)
+								-> converts byte code (.class) --> machine code (exec)
+								-> does this execution line by line
+								-> if function called many times in code, this will interpret (.class to machine code) again and again
+
+							1.b.4) Runtime
+								-> machine code /executable runs on CPU when user event triggers
+
+							1.b.5) Hardware
+						
+				
+					1.c) Just in time compiler: The machine code that interpreter has to convert again and again , is givven by just in time compiler
+					Makes Interpreting faster
+
+					1.d) Garbage Collector 
+
+
+E     -> provides archiver - 		(jar)
+F     -> provides doc generator- 	(javadoc)
+G     -> provides Interpreter and loader 	(java)	
+
+
+
+
+
+Q) JRE -- JVM relationship?
+jvm is the worker
+library / files that jvm needs is provided by JRE
+
+
+
+Q) General flow ? XD
+
+Java source code
+	|
+                 V
+               JDK ---------> Bytecode
+		          |
+		         V
+		      JVM---------> Output back into JRE //use executable to run whatever
+		Hardware

@@ -1,0 +1,38 @@
+1) Where is code stored in java?
+	.java file
+
+
+2) Code is given to Compiler 
+	What compiler does? takes file and converts to machine readable format
+	Does it compile into machine code? No not directly
+
+	2.a) Java Compiler(javac) Convert (.java file) into Byte code (.class file)
+		What compier does? Converts ENTIRE FILE
+		How to run byte code? Java Virtual Machine(JVM)
+
+	2.b) Java Interpreter Convert byte code(.class file) into machine code () (0s , 1s)
+		What interpreter does? converts LINE BY LINE		//quick fact: python can execute line by line -> 								interpreted langugage
+		How to run machine code?
+	
+____________________________________________________________________________________________________________
+Q1) How C / C++ compiling different? Directly converts into executable machine code
+									//LOL : also java does not have pointers
+
+Q2) What is java feature in compiling?
+			-> Java is platform indpeendent (Can share .class file to run on any OS)
+Q3) What is platform independence?
+
+Byte code (.java -> .class )can run on all OS  
+    executable file compiled on Macbook wont run on windows. Have to compile again on Windows
+	.exe : -> Has instructions depending on platform : depends on Architecture of computer(CPU, registers)
+                 .class -> can run on any ---> .exe run on any system
+			   via JVM
+
+	3.1) Can JVM run on any OS? no, different for different (Platofrm dependent)
+		Windows JVM , Mac JVM
+	but .class file still same
+
+
+_______________________________________________________________________________________________________________
+     
+	 

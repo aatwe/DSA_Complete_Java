@@ -1,0 +1,4 @@
+1) Add a break point in left
+2) Click Debug 
+	Code runs line by line	//Perform relevant input , check for relevant output in console
+		Click step into	

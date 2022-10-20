@@ -1,0 +1,35 @@
+1) 
+If(boo1) 
+lean expression){
+
+}
+
+
+2) 
+If(boolean expression){
+
+}
+else {
+}
+
+3) 
+
+If(boolean expression){
+
+}
+elseif {}
+else{}
+
+
+
+Case1) Note: 
+when you have 2 conditions that can be true at same time 
+	use 2 if statements
+	NOT 1 if and 1 else if
+
+for ex when calculating sum
+int max = a;
+if (a > max) {max = a}
+if (b > max) {max = b}
+sysout max;
+

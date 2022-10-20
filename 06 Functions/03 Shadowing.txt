@@ -1,0 +1,25 @@
+1) 2 variables with same name
+2) both in same scope
+	-> Higher level scope gets hidden/shadowed
+
+
+
+forex
+
+public class Shadowing {
+	static int x = 90;					// add x								//upper level		
+	public static void main(String[] args) {
+		System.out.println(x);			// 90
+		int x = 40;					//add x again in same scope		//scope overlap  //lower level
+		System.out.println(x);			//40
+		fun();
+}
+
+static void fun() {
+	System.out.println(x);				//90
+	
+}
+}
+
+
+Does not work in methods

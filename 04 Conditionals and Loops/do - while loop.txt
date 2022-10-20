@@ -1,0 +1,21 @@
+What flow?
+1) do -> execute do body
+2) Check condition in while
+	2.1) if condition true
+		1)
+	
+
+	2.2) if condition false
+		3) exit to statement after do-while loop body
+
+
+
+do {
+	System.out.println(n);
+}
+
+while{n <= 5};
+
+
+
+When to use? program executes atleast once

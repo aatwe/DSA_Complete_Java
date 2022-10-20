@@ -1,0 +1,111 @@
+Q1) When are switch statements used?
+	
+
+Q2) Why are switch statements used?
+	Many if conditions
+
+
+Flow:
+1) evaluate expression
+2) jump directly to case value that matches expression value
+3) execute all below until break observed or till end 			//note no case checking after that , straightaway it executes all
+
+
+Syntax: 
+
+switch(expression) {
+
+	case value1:
+		//do something
+		break;
+
+	case value2:
+		//do something
+		break;
+
+	case value3:
+		//do something
+		break;
+
+	default:
+		//do something
+}
+
+
+
+
+
+
+
+Case1) Check multiple variables and expression in  switch case
+
+ switch (true) {
+
+     case (var1 === true && var2 === true) :
+       //do something
+       break;
+     case (var1 === false && var2 === false) :
+       //do something
+       break;
+
+      default:
+
+    }
+
+
+
+Case 2: Alt enter for cleaner format	//break condition not needed in this / internal break present
+
+switch(fruit) {
+	case "value1" -> System.out.println("King of fruits");
+	case "value2" -> System.out.println("King of bog");
+	case "value3" -> System.out.println("King of fds");
+	case "value4" -> System.out.println("King of wer");
+	case "value5" -> System.out.println("King of iuy");
+	default -> System.out.println("Please enter a valid fruit");
+
+}
+
+Case3: What switch case looks like in if else
+switch (num) {
+            case 2 -> {
+                System.out.println("2 found");
+                System.out.println("1 found");
+            }
+            case 1 -> System.out.println("1 found");
+            default -> System.out.println("dont care");
+        }
+Case4: 
+switch(day){
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+
+		System.out.println("Weekday");
+		break;
+	case 6:
+	case 7:
+		System.out.println("Weekend");
+		break;
+}
+switch(day){
+	case 1, 2, 3, 4, 5 ->System.out.println("Weekday");
+	case 6,7 -> System.out.println("Weekend");
+}
+}
+
+if (num == 2) {
+            System.out.println("2 found");
+            System.out.println("1 found");
+        } else if (num == 1) {
+            System.out.println("1 found");
+        } else {
+            System.out.println("dont care");
+        }
+
+Case5:
+
+
+

@@ -1,0 +1,103 @@
+When type conversion occurs?
+	1 type of data ---> assigned to other type of variable	
+
+
+How type conversion occurs? 
+	1) Automatically (Implicitly)
+		Scanner input = new Scanner(System.in);
+		float num = input.nextFloat();
+		System.out.println(num);
+
+		>67			//input : int
+		-> 67.0		//auto convert int -> float
+		
+
+	2) Explicitly	//When implicit not allowed
+		int num = (int)(67.56f);	//narrow down float to int	to type < from type
+		System.out.println(num);
+
+
+
+What conditions for implicit typecasting?
+	1) 2 types should be compatible
+		Numeric to numeric  allowed
+		numeric to non numeric not allowed
+			however? char a =(char)num1	//can do explicitly
+
+
+	2) to type > from type	ex float > int	
+		for ex int num = input.nextFloat();	//doesnt work
+
+
+Philosophy: Asking for small and getting bigger doesnt work, as for bigger and get small
+
+Case1: 
+	What if range of to type < from type no. ? 	Remainder of exceeding value
+	for ex a > range of b  //byte range = 256
+	int a = 257;
+	byte b = (byte)(a);
+	System.out.println(b);
+	> 1					// 257%256
+
+	
+
+Case2:
+	byte a = 40;
+	byte b = 50;
+	byte c = 100;
+	int d = a*b/c;			//Why int? a*b/c got auto promoted from byte to int	
+	System.out.println(d);
+
+	//How 50*40 = 2000 is stored in byte data type , mid calculation? 
+	AUTO PROMOTION
+	//Byte promoted to Int during mid calculation
+
+
+	for ex blow //Error
+	byte b = 50;
+	b = b*100		//exceeds + auto promoted to int  , cant store in byte ,  should be int instead
+
+
+Q) What auto promotions are allowed?
+byte/char/short 			---> int
+int/byte/char/short 		---> long
+int/byte/char/short 		---> float
+int/byte/char/short/float	---> double
+
+
+
+Case 3:
+	How to type cast int/float to boolean? Use Boolean class method parseBoolean
+	String s1 = "true";
+	boolean b1 =Boolean.parseBoolean(s1);
+	System.out.println(b1);
+
+	>Output: true
+
+
+
+Case 4:
+	What if System.out.println("नमस्ते") ?
+	>Output: नमस्ते
+	//How didi it get printed in terminal? Unicode
+	//Implies:  java supports unicode, can print different character in different languages
+
+Case 5:
+	int number = 'A';
+	int number2 = 'a';
+	System.out.println(number);
+	System.out.println(number2);
+
+	Output:  
+		    
+	>65
+	>97
+	//How auto implicit conversion from char to int (	ASCII)
+
+
+
+Case 6:
+	What if there are multiple types?
+	ALL GET cONVERTED TO BIGGER ONES
+
+	

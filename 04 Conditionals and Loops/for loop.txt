@@ -1,0 +1,39 @@
+for(initialize ; coniditon; operation)
+{
+
+}
+Flow
+1) Initialize
+2) check condition if true 
+	2.1) run the body
+	2.2) do operation after body executed
+	2)
+3) Check condition if false
+	3.1) exit to statement after for loop
+	
+
+
+
+for(int num=1 ; num <=5 ; num+=1 ) {
+	System.out.println(num)
+		
+}
+
+
+Case:Does the final illegal value get stored in loop variable? Yes
+public class test {
+    static int num = 0;
+    public static void main(String[] args) {
+
+        for(num =1; num <=5; num+=1) {
+                System.out.println(num);
+        }
+        System.out.println(num);
+    }
+}
+
+//why cant declare static variables in main()?
+
+//Where to declare static varaibles? inside class, as class member
+	//meaning: static means, belongs to the whole class, does not belong to any object
+		declaring in methods like main dont make sense

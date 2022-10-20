@@ -1,0 +1,6 @@
+for: know how many times loop will run
+	when know exactly when
+
+while: dont know how many times loop will run
+	for ex , do till  user press x
+	we dont know when user will press x --> use while loop

@@ -1,0 +1,49 @@
+All Java objects are allocated on heap
+
+a 		=		 10
+//reference var			//object
+a from stack points towards 10 from heap 		//variable does not store, every variable is pointing towards object (value)
+							
+
+//why it only points and not stores?
+person1 calls it a
+person2 may call it x etc
+
+
+more than one reference variable can point to same object
+if any 1 reference variable change object , original object changes , and gets changed for all(change visible to all reference variables)
+
+
+
+How is this stored in memory?
+
+1)Stack Memory
+a		//variable stored in stack
+
+
+2) Heap Memory
+10		//actual object stored in heap
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In C/C++ we have pass by reference/ pass by value
+In java : only pass by reference value
+
+
+Ex // change a object via a reference variable, check whether change visible to all reference variables pointing to same object
+
+ex a= [1,3,5,9]	
+b = a
+a[0] = 99
+b = ? = [99,3,5,9]		//why? b is pointing to same a object, and object got modified'
+
+
+
+
+Q1) What if no reference variable to object? garbage collector will remove them
+
+ex 
+a = 10;	//10 will be removed by garbage collector
+a= 37;
+

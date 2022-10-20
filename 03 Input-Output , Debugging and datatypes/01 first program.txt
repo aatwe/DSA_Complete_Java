@@ -1,0 +1,104 @@
+1) What to save file as? main.java in a folder
+	Q) What is this .java file? A Class itself	//named group of property and functions
+				What is the name of class? filename : mainn 
+	Q) How to identify a class? First letter capital 
+for ex
+Main.java
+public class Main {		//What is public? restricts sharing code to other files  // makes available out side calss
+                                                                                                                                                                                                                                                                                
+}
+-> try compiling -> Output .java file  //bytecode cv 
+
+
+2) What is inside? a main functionj where program //where program starts
+		What if no main function? cant run the program
+
+
+3) //Where is the main function in java?
+public class Main {
+  public static void main (String[] args) {
+
+}
+}
+
+
+
+
+4) Create a byte code from java file. How? Compile the code using javac
+1) cd to your directory
+2) javac main.java
+3) What output generated? main.class  --> Byte code
+
+public class Main {
+  public static void main (String[] args) {
+   System.out.println("Hello World");
+}
+}
+
+
+5) What byte code looks like? Open in text editor
+//Cant understand
+
+
+6) What if we share main.class file with anyone ---> anyone can run //platform independent
+__________________________________________________
+ public static void main (String[] args) {
+___________________________________________________
+
+
+Q1) what is public? access modifier ,  for sharing with anyone
+
+Q2) What is static? NOT DEPENDENT ON OBJECT
+  	Some variables and methods are object dependent	for ex name variable of a Class Human , depends on object of Class Human		//manoj, dinesh etc
+	some variables do not depend on any object	for ex population variable of class HUman , does not depend on any object		//7 Million constant (for now)
+
+Q3) What is main? a function 
+	  When is main run? first thing
+		How to run it first? without creating object
+				How to make it run without creating object? declare static
+				How to run 
+			
+
+Q4) What is void?Return type
+				What is return type? what value function is returning	
+			 		what the function is returning for void return type --> No value 
+
+Q5) What is args? array of command line args
+	What is in args? command line arguments we give in terminal
+			//What are command line arguments? What are commands? executable files located in computer 
+				Where are commands stored? Command : where javac 
+					/usr/bin/javac
+					//when enter command --> same as opening the javac file					
+				How computer finds these commands ? Path variables + Environment variables
+					for ex echo $PATH --> it will check in given locations, checks command availalbe in List of folders in environment variable
+				//can check: cat .zprofile
+Use of args:
+check	below
+
+//Demo.java	
+public class Demo {
+	public static void main(String[] args) {
+		System.out.println(args[0]);
+}
+//
+> javac Demo.java
+> java Demo 30	//30 passed as command line argument
+Output: 30
+
+or
+
+> javac Demo.java
+> java Demo 30 Kunal	//30 passed as command line argument
+Output: Kunal
+
+	//Q) How computer finds command javac from location?
+		
+
+Q) How to change location of byte code (.class) file? Do while compiling
+javac-d . Demo.java	//Stores .class in Current directory
+javac-d .. Demo.java	//Stores .class in Previous directory
+
+Q) What is the best practice?
+source code -> src folder
+Byte code   -> out folder
+
