@@ -1,0 +1,107 @@
+Q) How to represent a negative no. in binary?
+
+
+for ex
+
+-24 in binary
+
+
+
+Q0) Given: 1 byte size
+
+   How to store 10 in 1 byte ?
+
+   10 -> 0 0 0 0 1 0 1 0
+
+
+   How to store -10 in 1 byte?
+
+
+
+Q1) What determines negative no. in binary? MSB
+
+ What is MSB and LSB
+
+0   0   0   0   1   0   1   0
+msb					lsb 
+//tells 				
+if no. is +ve/-ve	
+	
+
+Q2) What is special about msb?
+	MSB is reserved bit.
+
+	for ex given: int -> 4 bytes = 32 bits
+	32nd bit = MSB = tells if no. positive/negative
+	remaining 31 bits = value of no.
+
+
+
+Q3) How to find negative of a no.
+Given
+
+0   0   0   0   1   0   1   0		//8 digits		//stored in 1 byte = 8 bits
+msb					lsb 
+
+
+++++++++++++++++++++++++++++++++
+1) compliment no.
+	
+
+2) Add 1 to the compliment
+
+//Twos Compliment
++++++++++++++++++++++++++++++++++
+
+	
+1) 00001010 --> 11110101
+2) 11110101 
+  +       1
+   ________
+   11110110 = -10  // in 1 byte
+
+
+
+Q) Why take compliment and add1 to find negative of a binary?  
+		
+	Q) Can we store 500 in 1 byte/8 bits?
+		500 = 111110100 = more than 8 bits
+			  ________ 
+			1 discarded  11110100 stored		//space not available
+
+	Q) How to get negative of a normal decimal no.?
+
+	a)		0 - no.
+			
+
+	b) Add extra 1, since will be discarded  anyway
+
+
+		    1  	00000000			//What is this no.? power of 2  //only one 1, other digits 0  = 16
+		-		00001010	
+				________	
+				Negative
+	  			
+	
+
+For ex	16
+		  15+1
+			1111
+		   + 0001
+			____
+		    10000	
+
+Similarly
+	 100000000 = 111111111 + 1	 
+
+Negative  = 111111111 + 1	- 00001010
+	    = 111111111 - 00001010 + 1
+	    =      Compliment      + 1
+	 
+	
+		 
+
+
+		
+
+   

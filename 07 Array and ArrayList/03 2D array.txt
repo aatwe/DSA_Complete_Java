@@ -1,0 +1,99 @@
+Q) What is 2D array? matrix / multidimensional array
+
+
+Q) How does it look like?
+	/*
+		1  2  3
+
+		4  5  6
+
+		7  8  9 
+
+	*/
+
+
+
+Q) What syntax?	//specifying rows: compusory
+			  specifying col : not compulsory
+				Why col size not necessary? array can be [1,2][1,2,3][4,5,6,7]]
+					//Can be different sized col
+				
+
+	int [][]arr = new int [3][];
+
+
+
+
+
+
+	int [][]arr = {
+				{1, 2, 3},
+				{4, 5, 6},
+				{7, 8, 9}
+		};
+	}
+}
+
+Q) How 2D array is stored?
+
+	int [][]arr (reference variable) (Stack) --------> 	[[1,2,3],[4,5,6],[7,8,9]] //array of arrays	(Heap)
+												//array contains references to individual arrays
+
+	arr[1] 	--> [4,5,6]
+	arr[1][0]  --> 4													
+					
+
+
+Q) How to input in 2D array? use for loop to represent rows and columns
+
+1) using For loop
+
+ traverse to the correct row 
+for(int row = 0; row < arr.length; row++) {
+	2) traverse to correct col in the correct row
+		for(int col =0; col <arr[row].length; col++) {
+			arr[row][col] = in.nextInt();
+		}
+		System.out.println();
+	
+	
+}
+Note: remmeber to print new line after each row, for matrix form
+
+
+2) Using array.toString to print array itself 
+
+for(int row = 0; row < arr.length; row++) {
+	System.out.println(Arrays.toString(arr[row]));
+	
+		}
+	}
+}	
+	
+
+
+3) Using enhanced for loop and tostring
+	for(int[] a : arr) {
+		System.out.println(Arrays.toString(a));
+	}
+}
+
+
+
+
+Q) How to print 2D array with varying column length?
+
+for(int row = 0; row < arr.length; row++) {
+	for(int col = 0; col < arr[row].length; col++) {
+		System.out.print(arr[row][col] + " ")
+}
+	System.out.println();
+
+		} 
+	}
+}
+
+> 
+1 2 3 4
+5 6
+7 8 9

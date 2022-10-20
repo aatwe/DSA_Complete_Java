@@ -1,0 +1,15 @@
+
+
+public class Methods {
+	public static void main(String[] args) {
+		String name = "Abhilash Atwe";
+		System.out.println(Arrays.toString(name.toCharArray()));		//>[A,b,h,i,l,a,s,h, ,A,t,w,e]
+		System.out.println(name.toLowerCase());					//>abhilash atwe	//creates a new object
+		System.out.println(name);								//>abhilash atwe
+		System.out.println(name.indexOf('a'));						//>0		//prints first one
+		System.out.println("   Kunal   ".strip());					//kunal	//removes blank spaces
+		System.out.println(Arrays.toString(name.split(" ")));			//wherever space, will divide into elements comma
+														//[Abhilash, Atwe]
+}		
+
+}

@@ -1,0 +1,107 @@
+data
+	1)What given?	int[] mountainArr	-> arr.length >=3
+
+
+	2) What output? minimum value of index
+				mountainArr.get(index) == target		//how to access elements of array?s mountainArr.get()
+											what cant we use? mountainArr[index]	
+				if index not found -> return -1
+
+
+Algo
+
+
+1) search left subarray for target, -> if found -> it is the minimum value
+	how to search left array? find peak 
+
+2) if not found in left sub array
+	search in right subarray
+		if found -> it is the minimum
+	
+	
+
+Code Without modifications
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+class Solution {
+
+    int search(int[] arr, int target) {
+
+	int peak = peakIndexInMountainArray(arr);
+	int firstTry = binarySearch(arr, target, 0, peak);
+	if(firstTry != -1) {
+		return firstTry;
+}
+	return orderAgnosticBS(arr,target, peak+1, arr.length-1);
+	
+}
+static int orderAgnosticBS(int[] arr, int target, int start, int end) {
+
+	boolean isAsc = arr[start] < arr[end];
+	while(start <= end) {
+		int mid = start + (start -end)/2;
+
+		if (arr[mid] == target) {
+			return mid;
+	}
+	
+	if (isAsc) {
+		if(target < arr[mid]) {
+			end = mid -1;
+				} else if (target > arr[mid]) {
+					start = mid + 1;
+				}else {
+					if(target < arr[mid]) {
+						end = mid - 1;
+					} else if (target > arr[mid]) {
+						start = mid + 1;
+					}
+				}
+			}	
+		return -1;
+	}
+}
+	
+
+
+//Methods used
+    public int peakIndexInMountainArray(int[] arr) {
+        		int start = 0;
+		        int end = arr.length-1;
+		        while(start< end) {
+			        int mid = start + (end - start)/2;
+			            if(arr[mid] > arr[mid+1]) {
+				        end = mid;
+			        }
+			    else {
+				        start = mid + 1;
+			        }
+                }
+                return start;
+
+        }
+    }
+
+
+	static int binarySearch(int[] arr, int target) {
+			int start = 0;
+			int end = array.length -1;
+
+			while(start <= end) {
+			//int mid = (start + end) / 2
+			
+			//what is problem with above? start + end might exceed largest allowed integer value (exceeds range)
+			//alternative
+			//int mid = start + (end - start)/2;
+
+			 
+				end = mid -1;
+			} else if (target > arr[mid]) {
+				start = mid + 1;
+			}else {
+				return mid;
+			}
+		
+		}
+		return -1;
+	

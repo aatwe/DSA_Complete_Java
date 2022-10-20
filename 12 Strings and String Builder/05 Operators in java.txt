@@ -1,0 +1,86 @@
+1) + 	//supported for int and long	//addition works only for primitives
+								however, same operator is overloaded (used for other purpose)	
+			
+							//Use + to concat strings
+
+//different languages support/not support operator overloading
+
+C++ ; supports
+Python: supports
+Java: Not supported	//Exception Strings : why? poor code
+
+Q) What difference between '' and ""
+'a' = char
+"b" = string
+
+public class operators {
+	public static void main() {
+		System.out.println('a' + 'b');		
+}
+	
+}
+
+
+Q) How + converts?
+	converts 'a' -> unicode/Ascii value
+
+System.out.println('a' + 'b');	
+	>195
+System.out.println('a' + 'b');	
+	>ab
+
+System.out.println('a' + 3)
+	>d
+
+System.out.println("a" + 1);
+	>a1
+
+
+Q) What when awe add integer to string -> integer converted to wrapper class Integer -> calls toString()
+		integer + string -> (integer convert to wrapper class Integer) -> .toString()
+
+trick: if obejct -> clals toString()
+
+System.out.println("Abhilash" + new ArrayList<>());		//calls ArrayList toString , why? its object
+> Kunal[]
+	
+System.out.println("Abhilash" + new integer(56));			//also object, calls toString()
+>Kunal56
+
+Q) System.out.println(new integer(56) + new ArrayList<>());	//Error , why? in expression, atleast 1 object should be string
+>Error
+
+
+Q) System.out.println(new integer(56) + "" + new ArrayList<>());
+>56[]
+
+
+Q) Subtracting strings
+System.out.println("a" - "b");	//subtracting strings error -> - operator works for primitives only
+>error
+
+Q) 
+ex
+short a = 1;
+short b = 2;
+	
+short c = a + b;		//not constant expression	//no output
+short c = (short)(a + b);					//
+short c = 1 + 2;		//constant expression		//compile time	//3
+
+
+
+Q) What if we add 2 strings
+System.out.println("a" + "b");
+
+//garbage collector will later remove it
+
+
+Q) Where primitives stored? callstack
+	what advantage of callstack? cheaper to manipulate
+				
+Q) Where objects stored? heap ->
+
+Q) Where string obejcts stored? heap -> string pool
+	//why string pool? faster
+	

@@ -1,0 +1,265 @@
+Why Patterns? thought process
+
+
+How to solve pattern questions?
+
+What Every pattern has?
+	rows
+	columns
+
+1) find no. of rows // outer loop count
+
+2) find how many col in each row //relationship 
+ find relationship bw no. of row and no. of col
+	 find how many col in each row
+	 no. of rows in pattern = outer loop count
+	 find what type of element in each col
+
+3) find what to print
+
+
+
+For ex
+* 
+* * 
+* * * 
+* * * *
+* * * * *
+for above
+	5 rows
+	1 col in 1st row
+		2 col in 2nd row
+			... n col in nth row
+
+						//col<=row
+	type of element = *
+
+
+
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+	
+	  pattern1(4);
+	
+}
+
+
+	static void pattern1(int n) {
+
+	for(int row = 1; row<=n; row++) {
+		for(int col = 1; col <= row; col++) {
+			System.out.println("* ");
+			
+		}
+		System.out.println();
+		}
+	}
+}
+
+ 
+
+
+
+
+Ex2) 
+****
+****
+****
+****
+****
+
+row: 1 to n
+col: 1 to n
+
+
+
+
+
+Ex3) 
+*****
+****
+***
+**
+*
+
+
+row 1 to n
+col = n+1 -r
+
+
+if row 0 to n
+col = n - r
+
+
+Ex 4
+1 
+1 2
+1 2 3
+1 2 3 4
+1 2 3 4 5
+
+row: 1 to n
+ col: 1 to row
+  print(col)
+
+
+
+Ex5)
+*
+**
+***
+****
+***
+**
+*
+
+how many rows? 2n-1
+
+What relationship bw rows and col?
+
+for(int row = 0; row< 2*n; row++){
+	int totalColsinRow = row > n ? 2 * n - row - 1: row;
+	for(int col= 0; col< totalColsinRow; col++) {
+		System.out.println("* ");
+}
+	System.out.println();
+}	
+
+
+
+Ex6
+
+  *
+ ***
+*****
+ ***
+  *
+
+1) 2 spaces 1 col 2 spaces
+2) 1 space  3 col 1 space
+3) 2 spaces 1 col 2 spaces
+
+
+static void pattern28(int n) {
+
+for(int row = 0; row< 2*n; row++){
+	int totalColsinRow = row > n ? 2 * n - row - 1: row;
+	
+	int noOfSpaces = n - totalColsInRow;
+
+	for(int s =0; s < noOdSpaces; s++) {
+		System.out.println(" ");
+}
+
+
+	for(int col= 0; col< totalColsinRow; col++) {
+		System.out.println("* ");
+}
+	System.out.println();
+}	
+}
+
+
+
+Ex7)
+
+        1
+      2 1 2
+    3 2 1 2 3
+  4 3 2 1 2 3 4
+5 4 3 2 1 2 3 4 5
+
+
+public static void main(String[] args) {
+	pattern30(5);
+}
+
+static void pattern30(int n) {
+
+for(int row = 1; row< n; row++){
+
+  for(int row = 1; row <=2*n; row++) {	//automated loop for any row  	
+ 
+	int c = row > n ? 2 * n - row: row;
+
+	for(int space = 0; space < n-row; spaces++) {		//automated loop for spaces in a row
+		System.out.println(" ");
+	}
+
+	for(int col= row; col >= 1;  col--) {				//automated loop for decreasing no. in a row
+		System.out.println(col);
+	}
+
+	for(int col= 2; col <= row;  col++) {				//automated loop for increasing no. in a row
+		System.out.println(col);
+	}
+
+	System.out.println();
+ }
+	
+}
+
+
+
+Ex8)
+
+
+4 4 4 4 4 4 4 
+4 3 3 3 3 3 4
+4 3 2 2 2 3 4
+4 3 2 1 2 3 4
+4 3 2 2 2 3 4
+4 3 3 3 3 3 4
+4 4 4 4 4 4 4
+
+Note: assume some max value at atEveryIndex
+	do basic setup of row,col and what to print once
+
+What pattern?
+	What are value are we printing?
+		value = 4 											    wall of 4 starting row 1 col 1
+				what is 4/3/2/1? opposite of min distance from wall (original n - min distance)
+
+		value = 3 in (2,2) , (2,3), (2,4), (2,5), (2,6) , (3,6) , (4,6) ...   wall of 3  starting row 2 col 2
+			   2 in (3,3) , (3,4) (3,5)							    wall of 3  starting row 3 col 3
+	
+
+static void pattern31(int n) {
+	for(int row = 0; row<2n -1; row++) {
+		for(int col = 0; col< 2*n - 1; col++) {
+			int atEveryIndex = Math.min(Math.min(row,col), Math.min(n - row, n - col));
+			System.out.println(atEveryIndex + " ");
+
+	}
+	System.out.println();	
+}
+}
+
+0 0 0 0 0 0 0 
+0 1 1 1 1 1 0
+0 1 2 2 2 1 0
+0 1 2 3 2 1 0
+0 1 2 2 2 1 0
+0 1 1 1 1 1 0
+0 0 0 0 0 0 0
+
+//what is 2 here? min distance from wall of 0s
+
+
+
+static void pattern31(int n) {
+	int originalN = n;
+	n = 2*n;
+	for(int row = 0; row<n; row++) {
+		for(int col = 0; col< 2*n - 1; col++) {
+			int atEveryIndex = originalN -  Math.min(Math.min(row,col), Math.min(n - row, n - col));
+			System.out.println(atEveryIndex + " ");
+
+	}
+	System.out.println();	
+  }
+}

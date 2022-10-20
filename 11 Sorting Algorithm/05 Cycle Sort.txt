@@ -1,0 +1,139 @@
+0) What complexities we observed till now?
+
+	bubble:    O (N)	//best case
+			O (N^2) //worst case
+
+	selection  O(N^2)	// best case
+			O(1)	//worst case
+
+	insertion sort
+			O(N)		Best case: 
+			O(N^2)	Worst case :
+
+
+1) Why selection sort?
+	given array : 3,5,2,1,4
+
+	how to sort? any above methods
+	how to sort in just one for loop? Cyclic sort
+
+
+2) When to use cyclic sort? no. in range 1  to n
+	for ex 
+	Q) find missing no. 1 to n
+	Q) find duplicate no. in 1 to n
+		
+
+1) What is cyclic sort? 	
+	
+
+	given array 2 1 4 3 5
+
+	Sorted array 1 2 3 4 5
+
+	//What is special about output? arr[index] = index + 1 
+
+
+2) how to sort array in 1 pass(cyclic sort)?	arr = 3,5,2,1,4
+
+a) select first element of current array, put at correct index		
+			what is correct index? element - 1
+				how to put? swap with no. at position element -1
+
+
+	i.e keep sorting position 0 while correct element reaches position	 
+	select 3 , put at index 2 by swapping
+		|
+		3,5,2,1,4
+		    |	    	
+		 -> 2,5,3,1,4	
+			   |  
+			-> 5,2,3,1,4	
+				  |
+				->4,2,3,1,5
+					  |
+					->1,2,3,4,5
+	
+
+b) select 2nd element, put at correct index by swapping
+		  |
+		1,2,3,4,5
+		
+
+c)select 3rd element, put at correct index by swapping
+	 	    |
+		1,2,3,4,5
+
+d)select 4th element, put at correct index by swapping
+		      |
+		1,2,3,4,5
+
+e)select 4th element, put at correct index by swapping
+			   |
+		1,2,3,4,5
+
+
+3)
+	Q) How many comparisons?
+		worst case: n-1 comparison   //last no. not compared
+				 + 1
+				 + 1
+			 	 + 1
+				 + 1 ...	n 
+	   = n-1 + n = 2n-1
+        = O(n)
+
+
+Pseudo code:
+
+1) main
+
+
+
+2) sort()
+	2.1) start at i=0 
+	2.2) while i < array length
+	  2.2.a)
+		2.2.1) find correct position of element at i
+		2.2.2) swap with element at that position
+		... keep checking and swapping until correct element at position i
+	  2.2.b) i++	
+	  //do above while i is < array length
+
+	
+		
+
+	
+Code: 									
+
+public class Main {
+        public static void main(String[] args) {
+            int[] arr =  {3,5,2,1,4,6,8,7,9};
+            sort(arr);
+            System.out.println(Arrays.toString(arr));
+    }
+
+        static void sort(int[] arr){
+            //3,4,2,5,1
+            int i = 0;
+            while(i< arr.length) {
+                int correct = arr[i] - 1;  //2 //what is correct? correct position of ith element
+                if(arr[i] != i+1) { //or is arr[i] = arr[correct] //element at 0 should be equal to element at index 2
+                    swap(arr,i, correct);
+                } else {
+                    i++;
+                }
+            }
+        }
+         static void swap (int[] arr, int first, int second) {
+            int temp = arr[first];
+            arr[first] = arr[second];
+            arr[second] = temp;
+    }
+    }
+
+		
+
+NOTE: Dont think : this index should contain
+	 instead think : where should no. at this index go
+		

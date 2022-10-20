@@ -1,0 +1,5 @@
+public static final Printstream out = null;
+
+out: variable
+PrintStream: class
+println() L: method

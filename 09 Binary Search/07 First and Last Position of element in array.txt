@@ -1,0 +1,138 @@
+1) Given: array int array nums[]
+
+A) 
+
+
+1) loop from start until target found
+		
+
+2) loop from end until target found
+
+public static void findFirstAndLast(int arr[], int x)
+    {
+        int n = arr.length;
+        int first = -1, last = -1;
+        for (int i = 0; i < n; i++) {
+            if (x != arr[i])
+                continue;
+            if (first == -1)
+                first = i;
+            last = i;
+        }
+        if (first != -1) {
+            System.out.println("First Occurrence = "
+                               + first);
+            System.out.println("Last Occurrence = " + last);
+        }
+        else
+            System.out.println("Not Found");
+    }
+
+
+
+a) Find target in array using BinarySearch
+
+
+	arr[5,7,7,7,7,8,8,10]
+
+
+
+Algo:
+1) find first index using Binary Search
+
+How to find first index?
+a) Find using binary search
+b) if element found at index mid //potential answer found 
+		-> search subarray to left of mid
+			
+ 
+
+2) find last index using Binary Search
+a) Find using binary search
+b) if element found at index mid -> search subarray to right of mid
+ 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code:
+class Solution {
+    public  int[] searchRange(int[] nums, int target) {
+         int [] ans = {-1,-1};
+	    int start = search(nums, target, true);
+		If(ans[0] != -1) {
+         		int end  = search(nums, target, false);
+        	}
+         ans[0] = start;
+         ans[1] = end;
+        
+         return ans;
+    }
+    int search( int[] nums, int target, boolean findStartIndex) {
+        int ans = -1;   
+	   int start = 0;
+        int end = nums.length -1;
+
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+            
+            if (target < nums[mid]) {
+                end = mid -1;
+            } else if (target > nums[mid]) {
+                start = mid + 1;
+            } else {
+                ans = mid;
+                if(findStartIndex == true) {
+                    end = mid - 1;
+                 }else {
+                    start = mid +1;
+                 }   
+         }        
+    }
+    return ans;
+  }
+
+}
+
+///ANOTHER SOLUTION OPTIMIZATION
+class Solution {
+    public  int[] searchRange(int[] nums, int target) {
+        int [] ans = {-1,-1};
+        
+	    ans[0] = search(nums, target, true);
+		if(ans[0] != -1) {
+         		 ans[1] = search(nums, target, false);
+        	}
+         return ans;
+    }
+    int search( int[] nums, int target, boolean findStartIndex) {
+        int ans = -1;   
+		int start = 0;
+        int end = nums.length -1;
+
+        while(start <= end) {
+            int mid = start + (end - start)/2;
+            
+            if (target < nums[mid]) {
+                end = mid -1;
+            } else if (target > nums[mid]) {
+                start = mid + 1;
+            } else {
+                ans = mid;
+                if(findStartIndex == true) {
+                    end = mid - 1;
+                 }else {
+                    start = mid +1;
+                 }   
+         }        
+    }
+    return ans;
+  }
+
+}
+
+
+
+Time complexity? 
+	O(log(n) + O(log(n) = 2O(log(n)	/constant ignore --> O(log(n)
+
+
+

@@ -1,0 +1,47 @@
+same sequence if we read from start and from behind
+					   //left		  //right
+
+Note:
+Q) What difference between array arr.length and string str.length()
+						//variable			//function
+
+
+
+1) initialize a start and end pointer
+	check if start == end as both traverse towards each other
+
+	when loop ends? start == end OR any > half
+
+
+
+
+public class Palin{
+	public static void main(String[] args) {
+		String str = "abcdcba";
+		System.out.println(isPalindrom(str));
+		
+}
+
+	static boolean isPlaindrome(String str) {
+		if( str == null || str.length() == 0) {		//order important
+			return true
+}
+		str = str.toLowerCase();			//convert string to lower case
+		for(int i=0 ; i< str.length()/2; i++) {
+			char star = str.charAt(i);
+			char end  = str.charAt(str.length() - 1 - i);
+
+			if(start != end) {
+				return false;
+		}
+	   }		
+	   return true;
+
+     }
+  }
+
+
+/Q) What if we test for null string? index out of bound exception	///thats why put a sanity check	
+	if(str.length() == 0 || str == null) {
+			return true
+}

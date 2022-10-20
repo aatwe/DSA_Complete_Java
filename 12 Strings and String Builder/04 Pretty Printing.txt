@@ -1,0 +1,43 @@
+Q) How to print till x decimal values only
+
+note: what is printf? prints formatted string
+Q) What is .3f% : Placeholder in string
+
+
+
+public class PrettyPrinting {
+	public static void main(String[] args) {
+		float  a = 453.1234f;
+		System.out.printf("Formatted no. is 5.2f", a)
+	
+}
+		
+}
+
+
+>Output: 453.12	//Q) will it round off? yes
+
+
+
+Q) How to print value of PI
+System.out.println("Pie: %.3f",Math.PI)
+
+>Output: 3.142
+
+
+
+Q) How to use placeholder?
+ex
+System.out.println("Pie: %.3f", Math.PI)
+System.out.println("Hello my name is %s and I am %s", "Abhilash", "Excited");
+
+Q) What other placeholders?
+	%f	Floating-point no.
+	%i	Integer
+	%o	Octal
+	%s	String
+	%u	Unsigned decimal
+	%x	Hexadecimal no
+	%t	Date/time
+	%n	newline
+	

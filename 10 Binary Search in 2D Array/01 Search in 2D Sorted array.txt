@@ -1,0 +1,110 @@
+1) How to search for element n in sorted (eachrow and each col sorted) 2D array? int [][] array
+
+
+
+m1) 2 for loops
+
+
+
+
+m2) 
+	How to search something faster? minimize search space
+					how to minimize search space in matrix ? eliminate row and col to search
+			
+
+	
+
+	a) If sorted ascending
+Summary algo:
+	start at first row, last col , Check until col>=0 and row <=n
+		check if target < arr[row][col] -> eliminate col
+		check if target > arr[row][col] -> eliminate row
+
+
+Basically pointer starts at arr[0][n] and either shifts left or down to find the element until element found or rows /col finish
+
+
+//Checkign columnwise
+start at last col, col = row.length
+			   row = 0
+
+
+			//last Column
+			a.1) if target <  smallest element of last col
+					if so -> eliminate last col
+					col--
+
+
+				if target > smallest element of last col
+					if so -> eliminate smallest row
+					row++
+
+
+			//second last column
+			a.2)  if target <  smallest element of second last col
+					if so -> eliminate second last col
+					col--
+
+
+				if target > smallest element of largest col
+					if so -> eliminate second smallest row
+					row++
+				
+
+			//third last last column
+			a.3)  if target <  smallest element of third last col
+					if so -> eliminate third last col 
+					col--
+
+
+				if target > smallest element of largest col
+					if so -> eliminate third smallest row
+					row++
+				
+		..	//first column
+
+	
+
+
+				
+Q) How many comparisons worst case?
+n + n = 2n
+
+O(n)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code:
+
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+
+public class Main {
+    public static void main(String args) {
+        int[][]matrix =  {
+                {10,20,30,40},
+                {15,25,35,45},
+                {28,29,37,49},
+                {33,34,38,50}
+        };
+        System.out.println(Arrays.toString(search(matrix,37)));
+    }
+
+    static int[] search(int[][] matrix, int target) {
+        int row = 0;
+        int col = matrix.length - 1;
+
+        while (col >= 0 && row < matrix.length) {
+
+            if (matrix[row][col] == target) {
+                return new int[]{row, col};
+            }
+            if (matrix[row][col] < target) {
+                row++;
+            } else {
+                col--;
+            }
+        }
+        return new int[]{-1, -1};
+    }
+}

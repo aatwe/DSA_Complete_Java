@@ -1,0 +1,38 @@
+1) Linear Recursive
+
+	fibo(n) = fibo(n-1) + fibo(n-2)
+	//search spaces not divided, just subtracted
+
+Ex //below program takes lot of time to calculate fibo(50)
+public class Fibo {
+	public static void main(String[] args) {
+		int ans = fibo(50);
+		System.out.println(ans);
+}
+
+	static int fibo(int n) {
+	if (n < 2) {
+		return n;
+}
+
+		return fibo(n-1) + fibo(n-2)
+}
+}
+
+
+Q) We were thinking earlier, why f(2) evaluated twice for this
+
+similarly, many repeated function calls -> hence taking time
+
+Solution? Dynamic Programming : if 2 recursive calls doing same work, dont calculate again and again 
+
+
+Q) What tc? (golden ratio) ^n
+
+
+
+
+
+2) Divide and Conquer
+
+Gets reduced by a factor : BS	 

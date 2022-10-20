@@ -1,0 +1,91 @@
+note: String + char = String 
+	System.out.println("a" + 'b');
+	>ab
+//we use same concept beow 
+
+1) Create empty string
+2) loop characteres
+	char ch = char('a' + i)
+	System.out.println(ch);
+	
+
+>a b c d ... z
+
+3) add characters in string
+	series = series + ch
+
+4) System.out.println(series);
+>a b c d ... z
+
+
+public class Performance {
+	public static void main(String[] args) {
+		String series = "";
+		for(int i =0; i< 26; i++) {
+			char ch=  (char)('a' + i);
+			series = series + ch;
+		}
+		
+	System.out.println(series);		
+}
+
+}
+
+
+
+Q1) Is above a good solution?
+
+What iteations are going on?
+series =  " "					//What is series string object value? " "		//we know strings are immutable
+series =  " " + "a" = "a"			//What is series string object value? "a"		//is a new string object created? Yes
+series =  " " + 'b' = "ab"			//What is series string object value? "ab"			
+series =  "ab" + 'c' = "abc"
+
+
+1) create empty string object " "
+2) create new string object , copy from old " " , append a  = " " + "a" -> "a"
+ 
+2) create new string object "ab" , copy from earlier object = "a" + "b" -> "ab" -> append b to new string object 
+3) again create new string object "abc"
+
+
+
+Q) Why is this bad?
+again and again creating new string objects,
+Q) what is reference var to these new string object ? NO Reference variable
+
+
+a,ab,abc,abcd,abcde...
+
+What time complexity for adding character to string? O(N^2) : Bad
+no. of comparisons till size n ? 1 + 2 + 3 + 4 + ... n = n(n+1)/2
+
+	N^2/2 + n/2
+a) eliminate less dominating term
+	N^2/2
+
+b) eliminate constant
+	N^2
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Problem: String not allowing to modify value
+
+
+Solution to complexity in string?
+Use alternative to String data type --> that allows to modify value
+
+
+
+which datatype allows to modify value? String Builder 
+	String builder separate class
+
+String builder will create only 1 object, and make changes in that
+
+
+
+
+
+
+	

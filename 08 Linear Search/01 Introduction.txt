@@ -1,0 +1,57 @@
+Q) What is Linear search? searching algo
+	Q) What is the algo?
+		Start searching at beginning until element found
+
+Q) Given: Array,  find whether a no. exists
+
+
+Q) What is TC? how time grows as input grows
+	Best Case :O(1)	//makes 1 comparisong for element at start
+			O(N)	//makes n comparisons for element at last/ not present
+
+
+What is TC? Time vs size graph
+		Worst case :  slope graph
+		best case  :  constant time graph
+
+Code:
+1) package com.abhi
+2) public class Main() {
+	public static void main(String[] args) {
+		int [] nums = {23,45,1,2,8,,19,-3,1};
+		int target = 19;
+		int ans = linearSearch(nums, target);
+		System.out.println(ans);
+
+}
+
+//M1 : using for loop
+	static int linearSearch(int[] arr) {
+	//a) validity check
+
+		if(arr.length == 0) {
+			return -1;
+		}
+	//b) 
+		for(int i=0; i< arr.length; i++) {
+			int element = arr[i];
+			if (element == target) {
+				return index;
+			}
+		}
+//M2 : using enhanced for loop
+		for (int element : arr) {
+			if (element == target) {
+				return element;
+			}
+		}
+		
+		return -1;
+}
+}
+
+
+
+Note: Refactor -> rename //renames all code without doing individually
+
+Note: ex of few constants: return Integer.MAX_VALUE

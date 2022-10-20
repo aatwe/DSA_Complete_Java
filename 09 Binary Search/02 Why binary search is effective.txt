@@ -1,0 +1,7 @@
+for ex array of 1 million
+
+
+1) Linear search comparison : 1 million comparisons
+
+2) binary search			 : log (1M) = 20 comparisons
+						2

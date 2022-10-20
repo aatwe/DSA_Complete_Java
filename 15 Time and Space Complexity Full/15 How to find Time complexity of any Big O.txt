@@ -1,0 +1,278 @@
+Q 0) a) Worry about large data
+        b)  Ignore all Constants
+        c)  Ignore less dominating terms
+	ex O(N^3	+ logN)
+		lets say i million size
+		O(1M^3 + log (1M)) = 1 M seconds + 6 seconds = 1 M
+	ex    	O(N^3+ N^2 + N)    = O(N^3)
+
+
+
+Q 0.1) General Order
+	O(1) < O(log(N) < O(N) < O(2^n)	//figure out rest
+
+Q 1) Big O =  basically upper bound / worst case //our algo will never exceed given Big O, coz worst case
+	: we look for worst case, best case may be deceiving/temporary
+	grow input size -> check how much work cpu is doing
+	
+
+Q2) How Big O approx mathematically / calculates upper bound of any function	?
+
+	f(n) = O(g(n))
+ 	lim n-> ∞    f(n) / g(n) < ∞
+	
+	when n size reaches infinity
+
+Ex O(N^3) = O(6N^3 + 3N + 5)
+        f(n)		g(n)
+
+Solve: lim n-> ∞ (6N^3 + 3N + 5) / N^3 = 6
+	
+	
+Ex n elements in array
+    2 operations performed
+
+a) grow input size : n -> 2n
+b) check how many operations performed
+	a) if no of operations for algo to finish  2 -> 2 //still 2 
+		means TC = O(1) = constant
+	b) if no. of operations for algo to finish become 2 -> 4 after size grew n -> 2n
+		means TC= O(n)
+			why ? size : n -> 2n Operations : 2 -> 4	//O(n) linear function
+
+	c) if no. of operations for algo to finish become 2 -> 8 after size grew n -> 2n
+		means TC = O(n^3/2) = O(n^3)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+Q 2) What is operation? depends on problem
+	can be +,-,/,*,comparison, assignment
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Q 3) What is O(1) =  Time taken is constant
+no matter how many elements in stack , operation will take same time
+
+
+Q 4) Why basic operations are constant time.
+Assumption: if fixed no. of operations -> Basic operation = constant time
+--------------------------------------------------------------------------------------------------------------------------------------
+Q 5) Time taken by code
+
+statement1;
+statement2;
+...
+statementN;
+
+Total time taken = time(statement1) + time(statement2) + ... time (statementN)
+
+Ex.
+function squareSum(a, b, c) {
+  const sa = a * a;
+  const sb = b * b;
+  const sc = c * c;
+  const sum = sa + sb + sc;
+  return sum;
+}
+Total timetaken = O(1) + O(1) + O(1) + O(1) + O(1) = 5O(1)
+--------------------------------------------------------------------------------------------------------------------------------------
+Q6) How to find TC in conditional statements? Find whichever maximum
+	
+if (isValid) {
+  statement1;
+  statement2;
+} else {
+  statement3;
+}
+
+Ans: 
+T(n) = Math.max([t(statement1) + t(statement2)], [time(statement3)])
+
+Ex
+if (isValid) {
+  array.sort();
+  return true;
+} else {
+  return false;
+}
+
+Ans O([n log n] + [n]) => O(n log n)
+--------------------------------------------------------------------------------------------------------------------------------------
+Q 7) how to find TC in linear time Loop Statements? 	TC(loop) = runtime of block * n
+					//n = no. of times block is run in loop
+
+Ex
+for (let i = 0; i < array.length; i++) {
+  statement1;
+  statement2;
+}
+
+1
+T(n) = n * [ t(statement1) + t(statement2) ]
+       = n * [O(1) + O(1)] 
+       = O(n)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+Q8) How to find time complexity in  constant time loops = constant_n* runtime of block = constant
+
+Ex
+for (let i = 0; i < 4; i++) {
+  statement1;
+  statement2;
+}
+ = O(1)		//statement 1 and 2 always run 4 times
+--------------------------------------------------------------------------------------------------------------------------------------
+Q9) How to find tc in logarithmic time loop?
+for ex binary search an array
+below function returns mid. Split array in half
+function fn1(array, target, low = 0, high = array.length - 1) {
+  let mid;
+  while ( low <= high ) {
+    mid = ( low + high ) / 2;
+    if ( target < array[mid] )
+      high = mid - 1;
+    else if ( target > array[mid] )
+      low = mid + 1;
+    else break;
+  }
+  return mid;
+}
+
+
+Why O(logn)?
+What operation? split in half / one step in tree
+	n -> n/2 -> n/4 -> n/8  ->...1	//n / 2^k
+
+since in end index will be 1 ->n / 2^k <= 1
+			log2N = k
+
+Basically : since width of tree grows exponentially , height of tree grows logarithmically
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Q10) How to find TC of nested loop?	T(n) = n * [t(statement1) + m * t(statement2...3)]
+
+for ex visit all elements 2d array	-> if  m = n -> O(n^2)
+
+for (let i = 0; i < n; i++) {
+  statement1;
+
+  for (let j = 0; j < m; j++) {
+    statement2;
+    statement3;
+  }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Q11) How to find TC of function call statements. Find TC of function(calculate/documentation)
+Ex function in for loop:  T(n) = n * [ t(fn1()) + n * [ t(fn2()) + n * [ t(fn3()) ] ] ]
+for (let i = 0; i < n; i++) {
+  fn1();
+  for (let j = 0; j < n; j++) {
+    fn2();
+    for (let k = 0; k < n; k++) {
+      fn3();
+    }
+  }
+}
+----------------------------------------------------------------------------------------------------------------------------------------------
+Q12) How to find TC in recursive function statements? explore recursive tree
+for ex
+function fn(n) {
+  if (n < 0) return 0;
+  if (n < 2) return n;
+
+  return fn(n - 1) + fn(n - 2);
+}
+a)  if n =2 ->3 recursive calls = fn(2), fn(1), fn(0)
+		fn(2)
+	            /	           \
+	       fn(1)	        fn(0)
+
+b)  if n =3 ->5 recursive calls = 
+
+		fn(3)
+	             /	         \
+	      fn(2)	       fn(1)
+                   /         \
+               fn(1)      fn(0)
+
+c)  if n =4 ->9 recursive calls ...
+
+What pattern observations?
+A)  leftmost nodes => decreasing order -> height of tree = n
+B) Will this be a complete BT always? NO
+C) relationship with increasing size n vs Runtime
+n -> n+1
+operations -> operations*2 - 1
+D) How many total calls in complete BT? 2^n -1
+
+What TC then?we can assume worst case when complete BT -> O(2^n)
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Ex 
+for(i = 1; i<=n) {
+	for(j=1; j<=k; j++) {
+	//operation with time t		
+}
+	i = i+k; 
+}
+
+total time =  (time taken by for loop + time taken by i = i +k) no. of times outer loop run	
+		(kt                      +  O(1)) * no. of times outer loop runs	
+	
+how many times outer loop is running?lets say x
+given i<=n -> 
+ 	1) i=1  	->  i = 1+k
+			
+	2) i=1+k   ->  i = 1+k +k = 1+2k
+
+	3)...	    ...
+	
+	4)	     	  i = 1+ xk		//Final iteration of outer loop
+
+	as per given condition 
+	i <= n
+	1 + xk <= n
+	xk <= n -1	
+	x = n-1/k = last value = count of outer loop	
+
+total time = [kt + O(1)] * (n-1)/k
+
+O(totaltime) = TC = O(kt * (n-1)/k) = O(nT)
+if t assumed O(1)
+O(N)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Bubble Sort TC
+
+Ex Find time complexity of bubble sort
+	Worst case : O(n*n)
+	Best case   : O(n)
+	Auxillary space : O(1) 
+	Boundary case : takes minimum time when elements are already sorted
+	Sorting in plae? yes
+	Stable? Yes
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+Selection Sort TC		//doesnt take more than O(n) swaps
+			//Useful when memory write is costly
+	Worst case : O(n^2)
+	Average: n^2
+	Best case: n^2
+	Auxillary space
+	Space complexity: 1
+	Boundary case :
+	Stable? Yes
+
+________________________________________________________________________
+Insertion Sort TC
+	TC : O(n^2)
+	Aux: O(1)
+	Boundary Case: max time when elements sorted reverse
+		           min time when elements already sorted
+	
+________________________________________________________________________
+	

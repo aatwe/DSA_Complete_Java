@@ -1,0 +1,240 @@
+Everything is based on Recursion , most important
+ok to face difficulty, dont exit
+
+
+Q) Why recursion
+
+
+
+
+Q1) how to write a function that prints helloworld
+
+public static void main(String[] args) {
+	message();
+}
+static void message() {
+	System.out.println("Hello World");
+} 
+
+
+
+Q2) How to print helloworld 5 times?
+
+public static void main(String[] args) {
+	message();
+	message();
+	message();
+	message();
+	message();
+}
+static void message() {
+	System.out.println("Hello World");
+	System.out.println("Hello World");
+	System.out.println("Hello World");
+	System.out.println("Hello World");
+	System.out.println("Hello World");
+} 
+
+
+Q3) How to print helloworld 5 times (not alloweed to chagne the message())?
+	 make identical more functions and call each separately
+		CHEATING , you created fake versions of function
+
+
+another way:
+
+public static void main(String[] args) {
+	message();
+
+}
+static void message() {
+	System.out.println("1");
+	message1();
+	
+} 
+static void message1() {
+	System.out.println("2");
+	message2();
+	
+} 
+static void message2() {
+	System.out.println("3");
+	message3();
+	
+} 
+static void message3() {
+	System.out.println("4");
+	message4();
+	
+} 
+static void message4() {
+	System.out.println("5");
+	
+} 
+> 1,2,3,4,5
+What is happening? user level: only message() is called,
+
+
+	main() -> message() -> print hello -> message1() -> print hello -> message2() -> print hello  ->  message3() -> print hello  -> message4() -> print hello ->
+		... -> message4() exits -> message3() exits -> message2() exits -> message1() exits -> message() exits
+
+
+
+Q) What if we change the order of printing and function call?
+class main {
+    public static void main(String[] args) {
+        message();
+    }
+    static void message() {
+        message1();
+        System.out.println("1");
+
+    }
+    static void message1() {
+        message2();
+        System.out.println("2");
+
+    }
+    static void message2() {
+        message3();
+        System.out.println("3");
+
+    }
+    static void message3() {
+        message4();
+        System.out.println("4");
+
+    }
+    static void message4() {
+        System.out.println("5");
+    }
+}
+
+> 5,4,3,2,1
+
+
+
+
+
+
+Q) How to check callstack?
+where function calls are stored? stack
+
+
+0) how long is function in stack? while function is executing its in stack
+
+1) when is function removed from stack? after finish executing, removed.
+	where flow goes? point after function call
+
+	1) fnuction finish executing -> 2) remove from stack -> 3) flow after where function call was +nt
+	
+
+
+2) where is stack in ide? in debugger, left hand side can see function calls inside stack
+	//can see main is lowest
+	main() goes first in stack, comes out last
+
+
+
+Q) 
+What is recursion?
+	function calling other function
+	body of functions are same // doing same thing	
+
+
+__________________________________________________________________________________________________________
+IMPORTANT : What is recursion
+	
+Q) How to print 1 lac no. like these? without calling separate simialr functions nested. Call one function only
+
+
+-> How to generalize?
+
+A:
+	1) Calling similar but new functions again and again
+
+
+
+class main {
+    public static void main(String[] args) {
+        print1(1);
+    }
+
+    static void print1 (int n) {
+   
+        System.out.println(n);
+     	   print2(2);
+
+    }
+    static void print2 (int n) {
+        
+        System.out.println(n);
+	  print3(3);
+
+    }
+    static void print3 (int n) {
+        
+        System.out.println(n);
+	  print4(4);
+
+    }
+    static void print4 (int n) {
+        
+        System.out.println(n);
+	  print5(5);
+
+    }
+    static void print5 (int n) {
+        System.out.println(n);
+    }
+}
+
+Callstack:
+print1(1) -> print2(2) -> print3(3) -> print4(4) -> print5(5)
+ 
+>1	      >2		  >3		   >4	 	    >5
+-> 
+
+B: Calling the function itself but manipulating parameters inside
+
+
+public static void main(String[] args) {
+	print(1);
+}
+
+static void print(int n){
+
+ if(n == 5) {
+	return;
+}
+
+	System.out.println(n);
+	print(n+1);
+}
+
+
+Callstack:
+print(1) -> print(2) -> print(3) -> print(4) -> print(5) -> return
+
+>1	      >2		  >3		   >4	 	    >5
+
+
+Q) What if no n ==5 return  condition in recrusive function definition?
+prints 19k no. -> error
+
+
+Why function not stopping? base condition
+
+for ex
+ if(n == 5) {
+	return;
+}
+
+Q) if a function is called again and again. how memory allocated?
+
+Every function call(different parameter maybe) ->takes separate memory for each print()
+
+Why no base condition error?
+no base condition -> stack overflowed 
+____________________________________________________________________________________________________________
+

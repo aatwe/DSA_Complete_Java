@@ -1,0 +1,93 @@
+Where is binary search used? Sorted arrays
+
+
+Why binary search?
+	linear search ->how many comparisons max? N
+	
+	arr = [2,4,6,8,9,11,12,14,20,36,48]
+	Objective: find 36 if present?
+
+	Linear Search? 1 by 1 till end
+	Binary Search //discards elements by finding middle elements
+		a) find middle elements
+		b) check if target > middle -> search in right
+			   if target < middle -> search in left
+		c) 	   if target == middle -> answer found = middle
+
+
+
+Logic:
+	Do below: till start < end
+
+	1) start = 0 end = array.length-1
+	2) if target > middle -> search in right
+			start = middle, end = array.length-1 , middle =start + end / 2
+
+	3) if target < middle -> search in left
+			start = 0, end = middle -1 , middle =start + end / 2
+
+
+What time complexity?
+	Best case O(1)
+	Worst case?
+		how to find worst case tc? find max comparisons in worst case?	
+
+0th level		-------------*--------------	N		= N/2^0
+1st level					<----*----->	N/2		= N/2^1
+	
+2nd level					<--*-->		N/4		= N/2^2
+3rd level					    <*>		N/8		= N/2^3
+							.
+							.
+kth level						.		1		= N/2^k
+
+							N/2^k = 1 -> N = 2^k
+
+How many total levels?
+log N	 = klog 2
+
+
+
+k = log N		//What is k?how many comparison = no. of levels/comparisons in worst case
+	 2
+
+so worst case complexity : log N	
+
+
+
+Code:
+
+
+public class BinarySearch {
+	public static void main(String[] args) {
+			int [] arr = {-18,-12,-4,0,2,3,4,15,16,18,22,45,89};
+			int target = 22;
+			int ans = binarySearch(arr,target);
+			System.out.println(ans);
+
+}
+	static int binarySearch(int[] arr, int target)
+		int start = 0;
+		int end = array.length -1;
+
+		while(start <= end) {
+			//int mid = (start + end) / 2
+			
+			//what is problem with above? start + end might exceed largest allowed integer value (exceeds range)
+		//alternative
+			//int mid = start + (end - start)/2;
+
+			 
+				end = mid -1;
+			} else if (target > arr[mid]) {
+				start = mid + 1;
+			}else {
+				return mid;
+			}
+		
+		}
+		return -1;
+	}
+}
+
+>Output: 10

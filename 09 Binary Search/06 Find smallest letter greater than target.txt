@@ -1,0 +1,43 @@
+Input:
+what given array of characters char[] letters
+	is it sorted? increasing/constant
+
+letter => >= 2 characters
+
+char target
+
+
+Output:? smallest character c in letters[] > target
+
+Ex
+letters[] = poerid
+target = f
+smallest char lexico > f
+
+letters = ["f", "g", "h" , "i"j 
+
+Algo
+0) if char > target not found -> return first element	
+Note: letters wrap around
+
+Code:
+
+
+class Solution {
+    public char nextGreatestLetter(char[] letters, char target) {
+        
+	int start = 0;
+	int end = letters.length -1;
+	
+	while(start <= end) {
+		int mid = start + (end - start)/2;
+
+	if(target < letters[mid]) {
+		end = mid -1;
+	} else {
+		start = mid + 1;	
+	}
+}
+
+return letters[start% letters.length];
+}

@@ -1,0 +1,250 @@
+0) Why insertion sort? less swaps than bubble sort	
+				  more stable
+				 
+Use case: when array is partially sorted, or small n values
+		Used in hybrid sorted algo (merge+quick+insertion)
+		inbuilt sort methods usually use insertionsort/hybrid
+
+
+Note: all algo above are not used  for large data
+	for large data: merge sort, quicksort
+
+
+Best case: O(N)
+Worst case : O(N^2)
+
+
+
+1)  What is insertion sort?
+
+Sort in parts 1 by 1 compounding.
+
+
+
+1) sort subarray till index 0
+
+
+2) sort subarray till index 1	//sortSubarray(arr, i,j)
+	insert arr[1] in correct position in subarray till 0
+		Q) Where sub array ends ? arr[i]  //for defining subarray size wee use variable i
+			here i = 1
+		Q) what element is outside subarray that we are inserting at correct position? arr[j]
+
+		Q) What will be max possible value i will take? for ex array of 4 elements ,subarray to sort can be max size of 3 (cant sort a already sorted array)
+																Also j will be index out of bound
+																	i <= n-2 		
+
+		Q)How to insert arr[j] at correct place in subarray till i? keep comparing arr[j] with its adjacent element in subarray
+												keep comparing until? until it finds its spot i.e j!<= j-1 OR j =0
+													implies 2 conditions for swap:
+														j < j-1  and j>0
+													if these condition not satisfy -> break subarray sort()
+																								
+															
+ 
+
+	2.1) How to insert j=1 at correct place in subarray till i=0 	
+				keep comparing j=1 with its adjacent element i
+		sort(arr, 0,1)
+
+		a.1)  i = 0 , j = i+1
+	
+		a.2) if(arr[j] < arr[i]) 
+			 swap (arr[i],arr[j])
+		a.3)   i++
+
+		a.4) do above till j > 0 & i <= n-2
+		
+		b) i++; 
+
+ 
+3) sort subarray till index 2
+	insert arr[2] in correct position in subarray till 1
+
+	3.1) How to insert j=1 at correct place in subarray till i=0	
+
+		a.1)  i = 1 , j = i+1
+	
+		a.2) if(arr[j] < arr[i]) 
+			 swap (arr[i],arr[j])
+		a.3)   i++
+
+		a.4) do above till j > 0 & i <= n-2
+		
+		b) i++; j++
+	
+
+
+4) sort subarray till index 3
+	insert arr[3] in correct position in subarray till 2
+
+...
+
+5) sort subarray till index n-1
+	insert arr[n] in correct position in subarray till n-1
+
+
+
+
+
+
+for ex 5,3,4,1,2		-> __ part is sorted output after that itertation
+ 
+0) 5,3,4,1,2
+  ___
+1) 3,5,4,1,2		//i=0
+   _____	
+2) 3,4,5,1,2		//i=1
+   _______	
+3) 1,3,4,5,2		//i=2
+   _______
+4) 1,2,3,4,5		//i=3
+  
+
+
+Code:
+
+1) main
+
+
+2) static void insertion (int[] arr) {
+
+	2.1) i starts at 0, i runs till n-2 (i.e <arr.length -1 OR <=arr.length-2) , each step iteration i increments by 1
+
+		2.1.1)  j starts at i+1, j run till >0 , decrement j by 1
+			
+			2.1.1.1)  if (arr[j] < arr[j-1])
+					swap (j andj-1)
+				     else
+					break 	
+
+
+
+
+
+
+public class Main {
+        public static void main(String args[]) {
+            int[] arr = {5,3,4,1,2};
+            insertion(arr);
+            System.out.println(Arrays.toString(arr));
+        }
+
+        static void insertion(int[] arr){
+            for(int i= 0 ; i< arr.length -1; i++ ) {
+                for(int j =i+1 ; j> 0; j--) {
+                    if(arr[j] < arr[j-1]) {
+                        swap(arr, j, j-1);
+                    } else {
+                        break;
+                    }
+                }
+
+            }
+
+        }
+        static void swap (int[] arr, int first, int second) {
+            int temp = arr[first];
+            arr[first] = arr[second];
+            arr[second] = temp;
+    }
+    }
+
+
+
+Q) Will this work for empty array? Yes prints  []
+	i for loop will start at i = 0. 
+	j loop wont find i+1 i.e 1st index
+	end at i=0
+
+Q) Will it work for negative no.? Yes 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q) What complexity?
+	Worstcase : Descending sorted, sort in ascending -> O(n^2)
+		HOw many comparisons?
+			1 comparison + 2 comparison + 3+.. n-1 comparisons   //why n-1? 
+	 			= 1+ 2+3+4+5...n-1
+				= (n-1)(n) / 2
+				= O(N^2)
+
+	Bestcase : sorted array
+			for ex 1,2,3,4,5		//5 elements
+				j=1,i=0 -> since j!<= i -> 1 comparison ,
+				j=2,i=1 -> since j!<= i -> 1 comparison
+				j=3,i=2 -> since j!<= i -> 1 comparison
+				j=4,i=3 -> since j!<= i -> 1 comparison
+								Total Comparison ?4 =>  n-1	
+				Complexity? O(n) 
+				
+
+
+
+
+
+

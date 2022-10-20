@@ -1,0 +1,24 @@
+1) break down problem into smaller versions of problem
+
+2) write recurrence relation
+
+3) Draw recursive tree
+	
+4) find order in which functions are in stack
+
+ 
+5) left sub tree  before right subtree
+
+6) find where function call is returning value at each step
+
+7) Check variable values
+	in function return type
+	in arguments
+		goes in /useful in future function calls
+
+	in body
+		specific to function call / useful in current function call only
+
+
+8) Check if return type +nt in function call -> if so return
+	What if we forget to return? main wont return

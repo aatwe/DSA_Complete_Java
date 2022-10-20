@@ -1,0 +1,118 @@
+Given: Array : 3,1,5,4,2
+
+Output: 1,2,3,4,5
+
+
+
+
+
+What is bubble sort? Sort by comparison			//Sinking sort //exchange sort	
+
+
+3,1,5,4,2 
+
+1) Pass1	   //Why pass1? largest element at end							//last element subarray gets sorted
+
+
+   i j
+a) 1,3,5,4,2  //	   iteration 1	
+b)   i j	   //   iteration 2 skip
+
+     	  i j
+c) 1,3,4,5,2  //   iteration 3
+
+ 	    i j
+d) 1,3,4,2,5  //   iteration 4
+
+
+2) Pass2	   //why pass2? brings second largest element at second last		//last 2 element subarray gets sorted
+	
+a) i j   	   //    iteration 1 skip
+b)   i j  	   //    iteration2 skip
+
+	  i j
+c) 1,3,2,4,5  //    iteration 3			
+d) 		   //    iteration 4 skip
+ 
+
+3) Pass 3	   //why pass3? brinds third largest element at third last			//last 3 element subarray gets sorted
+
+a) 		   //    iteration1 skip
+b) 1,2,3,4,5  //    iteration 2			--> SORTED
+c) 		   //    itertaion 3 skip
+d) 		   //    itertaion4 skip
+
+
+
+Q) What space Complexity : O(1) : //No extra space required
+						//inplace sorting algo -> dont have to create new array
+
+Q) What time complexity  :
+				What is n? no. of how many comparisons to achieve its result
+
+			Best Case : O(n-1) = O(n)		//array sorted
+			WorstCase : O(n^2)	//array sorted oppositeway
+					(N-1)+ (N-2) + (N-3) + (N-4) + ..
+					= 4N - (N*(N+1)/2)
+					= (7N - N^2) / 2
+					= O(N^2) 
+
+
+
+	
+Q) Why is bubble sort a stable sorting algo?
+		
+	What is stability?
+	Consider ball with values and colors:
+		10B 20R 20B 30B 10R	//Original unsorted	//Black before Red
+		10B 10R 20R 20B 30B	//roted			//Black before red		//ex of stable sorted
+
+			//Original order is mentioned	
+		10R 10B 20B 20R 30B										//ex of unstable sorted	//original order not maintained
+
+
+
+
+Pesudo Code:
+
+ create main class
+	a) create main method
+		
+
+	b) create bubble() sorting method
+		1) loop through i values from start to end
+			1.1) loop through j values from 1 to j - i
+				1.1) if element at arr[j] < arr[j-1]
+					swap j and j-1
+
+Code:
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {5,4,3,2,1};
+        bubble(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    static void bubble(int[] arr) {
+	  boolean swapped;
+        for (int i = 0; i < arr.length; i++) {
+		swapped = false;
+            for (int j = 1; j <= arr.length - i - 1; j++) {
+                if (arr[j] < arr[j - 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
+			    swapped = true;
+                }
+            }
+	  if(!swapped) {break};		//why added? if array already sorted after i=0 it will directly end instead of again checking
+	
+        }
+    }
+}
+
+
+
+Q

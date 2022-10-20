@@ -1,0 +1,3 @@
+θ*N^2)
+
+means Upper bound and lower bound both are N^2

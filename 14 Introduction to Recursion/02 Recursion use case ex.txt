@@ -1,0 +1,141 @@
+1) find  nth fibonacci no.
+
+
+0, 1, 1, 2, 3, 5, 8, 13....
+
+
+Q) How to find nth fibonacci no.?
+
+a) Recursion
+
+	q) What is smaller version solution? What is recurrence relation?
+		fib(n) = fib(n-1) + fib(n-2)
+		//we broke down into smaller solutions
+			//can be broken down further
+	q) What Recursive tree looks like?
+		
+			f(5)
+		  /		  \
+		f(4)	       f(3)
+	   / 		\         /	  \
+	f(3)  +    f(2) 	    f(2) +   f(1)
+      /   \     /   \
+  f(2)   f(1)  f(1) f(0)
+  /   \
+f(1)  f(0)	 
+ 
+Q) which executes first? f(3) of left subtree or f(2) of right ? f(3)
+
+	q) What is base condition? see data
+		we know f(0) = 0 and f(1) = 1   //base condition
+
+Pseudo code:
+1) find recurrence relation fibo(n-1) + fibo(n-2)
+	return recurrence relation in recursive function defn
+
+2) write base case
+	what is base case? if n < 2 -> return ns
+
+Code:
+public class Fibo {
+	public static void main(String[] args) {
+		int ans = fibo(4);
+		System.out.println(ans);
+}
+
+	static int fibo(int n) {
+	if (n < 2) {
+		return n;
+}
+
+		return fibo(n-1) + fibo(n-2)
+}
+}
+
+>Output: 8
+>Output: 13
+
+Call Stack:
+
+
+
+
+f(1)
+  return 1
+	f(1) removed
+	  f(0)
+	    return 0			     / \		|
+		f(0) removed
+		f(0) + f(1) = f(2) = 1	|		|
+		  
+f(2)							|		|
+	f(1) + f(0) = f(2)			|		|
+	1    + 0	 = 1				|		|
+							|		|
+f(3)							|		|
+	f(2) + f(1) = f(3)			|		|
+	1    + 1    = 2  			|		|
+							|		|
+f(4)							|		|
+	f(3) + f(2) = f(4)			|		|
+	2    + 1	 = 3				|		|
+main()						|		V
+  print f(4) = 3
+
+
+main() -> f(4) -> f(3) -> f(2) -> f(1) -> ...
+
+	
+____________
+Recursive tree:
+			
+				
+		f(4)	      
+	   / 		\       
+	f(3)    +   f(2) 	   
+      /   \     /   \
+  f(2)   f(1)  f(1) f(0)
+  /   \
+f(1)  f(0)	
+
+
+Q) does f(3) wait in stack while f(2) and f(1) is evaluated ? yes
+	howf(2) gets its answer is upto f(2)
+
+
+Q) In print() program earlier -> print(n+1) was the last statement, in above, entire return fibo(n-1) + fibo(n-2) is last statement
+
+When last statement = function call() //TAIL Recursion
+
+
+Ex TAIL Recursion
+public static void main(String[] args) {
+	print(1);
+}
+
+static void print(int n){
+
+ if(n == 5) {
+	return;
+}
+
+	System.out.println(n);
+	print(n+1);
+}
+
+
+Ex Not Tail Recursion
+public class Fibo {
+	public static void main(String[] args) {
+		int ans = fibo(4);
+		System.out.println(ans);
+}
+
+	static int fibo(int n) {
+	if (n < 2) {
+		return n;
+}
+
+		return fibo(n-1) + fibo(n-2)
+}
+}

@@ -1,0 +1,55 @@
+what is bitonic array 1 2 3 4 5 7 6 3 2	
+
+				->>>>>>inc<<<<<dec
+
+
+Q1) how to find peak in this?
+	a) find largest element linearly 
+
+How to find max no. in bitonic array?
+
+
+a) Linear Search
+
+
+
+b) Binary Search
+
+	1) How to find max no. in bitonic array using binary search
+		-> find middle --> find no. to right of  middle 
+		-> if middle found 2 no. found , m and m+1, do below check
+			//What condition for below check? what end goal find peak, what condition at peak? start and end = peak 
+					1.a) if m > m+1 -> we are in decreasing part of array -> peak = either m or to the left of m
+							end = middle
+
+					1.b) if m < m+1 -> we are in increasing part of array -> peak = either m+1 or to the right of m+1
+							start = middle+1
+
+	 
+	 				
+ 			1) create start pointer
+			2) create end pointer
+			3) find middle and do below checks on middle  until start < end
+				3.a) find middle how? int mid = start + (start - end)/2
+				3.b) run first check
+				3.c) run second check
+	
+
+Code:
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        		int start = 0;
+		        int end = arr.length-1;
+		        while(start< end) {
+			        int mid = start + (end - start)/2;
+			            if(arr[mid] > arr[mid+1]) {
+				        end = mid;
+			        }
+			    else {
+				        start = mid + 1;
+			        }
+                }
+                return start;
+
+        }
+    }

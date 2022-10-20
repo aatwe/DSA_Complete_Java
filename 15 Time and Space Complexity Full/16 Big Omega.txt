@@ -1,0 +1,2 @@
+1) What is Big Omega? opposite of Big O
+	lower bound / best case

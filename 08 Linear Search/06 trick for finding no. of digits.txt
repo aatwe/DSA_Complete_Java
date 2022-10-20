@@ -1,0 +1,12 @@
+a) Decimal No.
+
+System.out.println(digits2(num: 345678));
+
+static int digit2(int num) {
+	return (int)(Math.log10(num)) + 1;
+
+}
+
+
+b) Binary No.
+return (int)(Math.log2(num)) + 1;

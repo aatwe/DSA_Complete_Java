@@ -1,0 +1,3 @@
+1) When to apply binary search? 
+a) sorted array -> try BS first
+b) follow same sequence

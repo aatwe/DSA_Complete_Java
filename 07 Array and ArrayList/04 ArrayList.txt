@@ -1,0 +1,89 @@
+Q) Why Array List? 
+	Arrays need size specified
+	if dont know size -> Use ArrayList
+	Similar to vector in C++
+
+
+Q) How to use ArrayList?
+
+import java.util.ArrayList;
+
+	public class ArrayListExample {
+		public static void main(String[] args) {
+			ArrayList<Integer> list = new ArrayList<>(initialCapacity : 10);		//Constructor	//size doesnt matter, can add asmany
+				//pass wrapper class Integer
+	
+}
+}
+
+
+Q) How ArrayList compares with Array?
+	ArrayList Slower than array
+			
+
+
+Q) how to add to arrayList?
+	ArrayList<Integer> list = new ArrayList<>(initialCapacity : 10);		
+	list.add(67);
+	list.add(75);
+	list.add(43);
+	list.add(567);
+
+Q) How to print this list?
+	System.out.println(list);
+
+
+Q) How to update?
+	list.set(0, 99);	//index, replacewith
+
+
+
+Q) How to remove?
+	list.remove(2);	//specify what to remove //index
+
+
+Q) How to get item at any index	//normal syntax wont work for arrayList
+	list.get(i);
+
+
+
+
+
+Q) How ArrayList stores indefinite no. of elements?
+	1) ArrayList cannot hold primitive data types such as int, double, char, and long
+		Wrapped class : Integer solved this problem
+
+	2) Does it take fixed size? yes
+		but when array filled 50% -> Creates list of Doubles size -> copy elements to new list -> deletes old list
+							O(1) //Amortized time complexity	//on avg constant time
+
+
+
+
+Q) How to create 2D / multiD ArrayList
+
+public  class MultiAl {
+	public static void main(String[] args){
+
+		Scanner in = new Scanner(System.in);
+		ArrayList<Integer>> list = new ArrayList<>();
+//Initialize arrayList list of ArrayLists.Why initialize? the list otherwise would be empty	
+	
+		for(int i = 0; i< 3; i++) {
+			list.add(new ArrayList<>());
+		}
+
+//Input into each ArrayList
+	//get ith Arraylist object from Arralist list --> add in.nextInt to that Arraylist
+		for(int i = 0; i< 3; i++) {
+			for(int j=0; j<3; j++) {
+				list.get(i).add(in.nextInt());
+ 						
+		}
+		}
+	System.out.println(list);
+
+>Input: 1 2 3 4 5 6 7 8 9
+Outpu: [[1,2,3], [4,5,6], [7,8,9]]
+
+

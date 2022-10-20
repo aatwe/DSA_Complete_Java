@@ -1,0 +1,64 @@
+1)
+public class SearchinStrings {
+	public  static void main(String[] args) {
+		String name = "Abhi";
+		char 	target = 'u';
+		System.out.println(search(namee,target));
+}
+
+	static boolean search(String str, char target) {
+	//validity check
+		if(str.length() == 0) {
+			return false;
+		}
+	//search a string using for loop
+		for (int i=9; i< str.length(); i++) {
+			if(target == str.charAt(i)) {
+				return true;
+			}
+		}
+
+	//search a string using for-each loop		
+		for(char ch : str.toCharArray()) {
+			if (ch == target) {
+				return true;
+			}
+		}
+		return false;
+	}
+	return false;
+}
+
+
+Q) 
+qhy str.length() vs arr.length;?
+	//function		//variable
+	//internally
+	value.length
+
+
+Q) How to search only for a range? for ex1 -4
+	
+	public class  SearchInRange {
+		public static void main(String[] args){
+			int[] arr = {18,12,-7, 3, 14, 28};	
+			int target = 3;
+			System.out.println(linearSearch(arr,target,1,4));
+	}
+}
+
+	static int linearSearch(int[] arr, int target, int start, int end) {
+		if(arr.length == 0) {
+			return -1;
+}
+	for(int index = start; index <= end; index++) {
+		
+		int element = arr[index];
+		if(element == target) {
+			return index;
+		}
+	}
+	return -1;
+	
+
+}

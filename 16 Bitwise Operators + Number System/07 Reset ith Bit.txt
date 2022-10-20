@@ -1,0 +1,22 @@
+1) How to reset ith bit(set to 0)? &0 
+
+For ex reset,5th bit (if 1 -> 0. if 0 -> 0)
+
+
+
+	1010110
+&	1101111		//Mask
+	_______
+	1000110
+
+
+How to find mask? (1<<(n-1))!
+	
+1<<4
+(0010000)!
+1101111	//mask
+
+
+
+
+

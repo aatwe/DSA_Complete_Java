@@ -1,0 +1,45 @@
+Given: arr = [2,3,5,9,14,16,18]
+target = 15
+
+
+Find what? ceil of a number
+	What is ceil =? smallest element in array >= target
+for ex
+target = 14, ceil = 14
+target = 15, ceil = 16
+
+
+Algo:
+
+1) Find where the target is
+
+2) find the ceil
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+public static void main (String[] args) {
+	int[] arr = {2,3,5,9,14,16,18};
+	int target = 22;
+	int ans = ceiling(arr,target);
+	System.out.println(ans);
+}
+
+
+static int ceiling (int[] arr, int target) {
+	if(target > arr[arr.length - 1])
+		return -1;  
+	int start = 0;
+	int end = arr.length-1;
+
+	while(start <= end) {
+		int mid = start + (end - start)/2;
+	}
+	if (target < arr[mid]) {
+		end = mid - 1;
+	} else if (target > arr[mid]) {
+		start = mid + 1;
+	} else {
+		return mid;
+	}
+}
+return start;

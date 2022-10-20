@@ -1,0 +1,40 @@
+1) How value is passed in functions
+
+	Java: Call by value
+	When we pass object's reference in function? takes copy of reference, copy points to same object
+
+
+
+
+2)public class Passingfunctions {
+	public static void main(String[] args) {
+		int[] nums = {3,4,5,12};				//what ref var? nums
+		System.out.println(Arrays.toString(nums));
+		change(nums);							//function call
+		System.out.println(Arrays.toString(nums));
+
+
+}
+
+	static void change(int [] arr) {				//arr object passed in function
+		arr[0] = 99;						//arr object modified
+
+}
+	
+}
+
+
+
+How arr object passed to function?
+
+	1) ref var nums ---> object {3,4,5,12};
+	2) copy of ref var created 	
+	3) copy of ref var = arr
+	4) int[] arr   ----> object {3,4,5,12};	//pointing to same object
+	5) arr[0] // first reference variable's value changed, where first reference variable pointing to? same object
+	6) same object's value changed
+	   ref var nums ---> object {99,4,5,12};
+
+
+CONCLUSION: ARRAYS ARE MUTABLE IN JAVA		//what is mutable? object can be changed
+	//Strings ARE IMMUTABLE IN JAVA

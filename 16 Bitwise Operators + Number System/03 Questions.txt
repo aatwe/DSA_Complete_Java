@@ -1,0 +1,96 @@
+1) Check if a no. n is odd or even
+
+What determines odd or even? last digit     
+						Least significant bit
+if we know the binary repre
+	if units place = 1 -> odd
+	if units place = 0 -> even
+
+	Ex 10011 = odd
+	   10110 = even
+
+
+12 + 7
+
+
+  1100
++ 0111
+______
+ 10011 = 19
+
+
+
+Q) check if 100101 & 000001 = odd or even
+
+we know 1&1 = 1 -> hence odd
+
+
+Q)in an array 1 no. appearing only once
+find which no. it is
+
+
+arr = [2,3,4,1,2,1,3,6,4]
+
+
+
+bruteforce first:
+
+
+
+a) sort the array nlogn
+
+
+
+b) using Bitwise operators
+	a XOR a = 0
+	a XOR 0 = a
+
+
+		duplicate => 0
+		non duplicate
+
+
+Code:
+
+	public class FindUnique {
+		public static void main(String[] args) {
+			int[] arr = {2,3,3,4,2,6,4};
+			System.out.println(ans(arr));
+}
+
+
+public static int ans(int[] arr) {
+	int unique = 0;
+
+	for(int n:arr) {
+	 unique ^= n;
+}
+	return unique;
+
+ }
+}
+
+>Output: 6
+
+> What property we using?
+ 2^3^3^4^2^6^4 =  2^2^3^3^4^4^6
+we know a ^a = 0 
+eventually we get 0^6 = 6
+
+If there were only couples, all woule = 0^0^0.. = 0
+
+
+
+ 0^2 = 2
+  2^3 = 1			//10 ^ 11 = 01 = 1
+  3^3 = 0
+  0^4 = 4
+  4^2 = 6			//100 ^ 010 =   110 = 6
+
+
+Q) [-2,3,2,4,-5,5,-4]
+
+
+
+
+

@@ -1,0 +1,28 @@
+1 0 1 1 0 1 1 0
+	      _
+----------	  ---
+    a		   b
+	 
+rightmost set bit = index 2
+
+
+Q) how to find right most 1?
+
+
+for ex a 1 b
+
+What input: 		1 0 1 1 0 1 1 0
+What output we want?  0 0 0 0 0 0 1 0
+
+Given: N = a 1 b		-1
+ 	 -N = a' 1 b	-2		//why? -N ? later
+
+ 1&2
+ N&(-N) =  (a&a') (1&1) (b&b)
+		   0     1     0 
+	  =  0 0 0 0 0 0 1 0
+
+
+
+
+

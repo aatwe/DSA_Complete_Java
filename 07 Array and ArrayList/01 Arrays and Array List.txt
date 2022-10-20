@@ -1,0 +1,198 @@
+1) Why need arrays?
+
+	Store multiple values
+
+2) What are arrays?
+		
+	Syntax:
+		datatype[] variable_name = new datatype[size];
+		int[] rnos = new int[5];
+		int[] rnos2 = {23,12,45,32,15};
+
+Q) Can we store different data type in array? NO, All have to be same
+
+Q) How to declare arrays?
+	int []  ros;
+			//ros = reference variable
+
+	Where is reference variable pointing? during declaration not pointing
+	
+Q) How memory allocated for array? initialization
+	How to initialize?
+
+a)	int[] rnos = new int[5];		//object created in memory 
+								Where created memory? in heap
+									Why heap? variable in stack, object in heap
+
+b) 	int[] rnos = new int[5];
+
+
+
+	Q) What is new?
+		Creates an object
+
+Q) When declaration happens, when initialization?
+	//Declaration		//Initialization
+	//compiletime		//Run time
+
+	int[] arr		= 	new int [5];
+
+
+	//This is Dynamic Memory allocation: memory allocated at runtime
+
+
+Q) How memory is allocated? Dynamic memory allcoation is done
+
+
+	Stack : Stores what? Function call + reference variable go , for ex arr
+	Heap  : Stores array object [3,18,9,2]
+
+
+arr (stack) (points) --->  object [3,18,9,2] (in heap)
+
+	Q) What happens when we want to get item from array?
+		In C++ Where items stored? each contigious block -> stored address
+		In Java : no pointers -> it depends on jvm if each block is contagious or not
+
+
+	Basically when we write  int[] arr = new int [5]; --> stored dynamically(during runtime)  (may/ may not) store contagiously (JVM Dependent)
+ 
+
+
+Q) How to access and print array elements? Array.toString() method in java.util.Arrays
+
+	String gfg[] = {"Geeks", "for", "Geeks"};
+	System.out.println(Arrays.toString(gfg);			//Converts array and prints as 1 string
+											//Output: ["Geeks", "for", "Geeks"]		//with brackets and commas
+
+
+	//print 2D arrays
+	System.out.println(Arrays.deepToString(gfg)); 
+
+	//print individual element
+	  for (int i = 0; i <= 2; i++) { 
+            System.out.print(gfg[i] + " "); 
+        } 
+
+
+Q) What int array stores By default ? 0
+	int [] ros;
+	ros = new int[5];	
+	System.out.println(ros[1]);
+	>Output 0
+
+Q) What string array stores by default? null
+	String[] ros;
+	ros = new String[4]
+	System.out.println(ros[0]);
+	>Output null
+		What is null? special literal of type null.Reference variables -> by default are null
+			cannot reference to primitive: for ex int num    = null;	//Error		
+										String str = null;	//No error
+
+		Why is it null by default?
+		Given: string array // of type string
+		//note: in python everything is object 
+
+		Where are primitives stored? stack
+		Where are other objects stored? Heap
+												//Array of reference variables
+
+		if we have array of string
+			array reference variable in stack --> array object in heap
+											-> each object has separate reference var in separate area of heap
+												->each reference variables pointing to individual objects
+												  //by default value for each =  null
+		//Note What primitives? cannot be broken down into char
+			 What non primitives? can be broken down for ex string
+
+
+
+Q) How to fill array using for loop?
+	public class Input {
+		public static void main(String[] args) {
+
+			Scanner input = new Scanner(System.in) 
+			int [] arr=  new int[5];
+
+1) Get inputs into array
+			
+			for (int i=0; i< arr.length; i++) {
+			arr[i] = in.nextInt();
+}
+
+2) Print array elements
+			for(int i= 0; i< arr.length; i++){
+				System.out.println(arr[i]);			//prints arr[0], arr[1]....arr[4]
+			}
+		}
+	}
+
+}			
+
+}
+
+}
+
+
+Q) How to use enhanced for loop (For each loop)
+
+	for(int num : arr) {					//implies: for every element num in array arr, print element num
+		System.out.println(num + " ");
+	
+}
+
+
+
+Q) What if we print element outside array?
+	System.out.println(arr[5]);			//gives index out of bound error	//what size we gave? 5 , last index what?4
+
+
+Q) How to modify a string? directly access reference variable inside array 
+	
+	str[] = {aa , bb, cc ,dd}
+	str[1] = "kunal"
+
+	//Which object gets changed? original
+	System.out.println(str)
+	>[aa, kunal, cc, dd]
+	//Why? Strings are immutable, String arrays are mutable
+
+
+
+Q) Ex how strings work : String Immutable, Arrays mutable
+
+Ex1
+    String s1 = "hello";	//s1 pointing to literal	   in pool
+    String s2 = s1;		//s2 pointing to same literal in pool
+    s1 = "world";		//s1 changed, new literal created for s1 , s1 pointing to new literal
+
+  How to check?
+	s1 == s2
+Before
+
+Before
+s1 ---> "hello" <---- s2
+
+After
++-------+
+| world |  <- s1
++-------+
+
++-------+
+| hello |  <- s2
++-------+
+
+Ex2
+	    String[] a = {"a","b","c"};
+          String[] b = a;
+ 	    a[0] = "Z";
+  	    System.out.println(Arrays.toString(a) + " - a"); //a and b are same	//[Z, b, c] - a
+	    System.out.println(Arrays.toString(b) + " - b")					//[Z, b, c] - b
+
+Before
+a ---> ["a", "b", "c"] <---- b
+
+After
+
+a ---> ["Z", "b", "c"] <---- b

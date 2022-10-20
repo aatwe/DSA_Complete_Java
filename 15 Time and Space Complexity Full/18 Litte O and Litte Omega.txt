@@ -1,0 +1,4 @@
+Littel O: not strict/ loose upper bound
+
+
+Little Omega: not strict / loose lower bound

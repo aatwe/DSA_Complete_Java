@@ -1,0 +1,42 @@
+Q) How to create stringBuilder object?
+	StringBuilder builder = new StringBuilder();
+
+Q) How to add to String builder
+	.append()		//input data type: ch
+
+
+Q) How to return String builder
+		System.out.println(builder);
+		System.out.println(builder.toString());
+
+
+public class SB {
+	public static void main(String[] args) {
+		StringBuilder builder = new StringBuilder();
+		for(int i =0; i< 26; i++) {
+			char ch=  (char)('a' + i);
+			builder.append(ch);
+		
+		}
+	
+		System.out.println(builder);
+}
+}
+
+
+
+ADVANTAGE: CHANGES IN ORIGINAL STRING OBJECT
+-> String BUilder: Mutable
+   Arrays : Mutable
+
+
+
+String builder methods:
+
+1)builder.append()
+2)builder.toString()
+3) builder.delete()
+4) builder.CharAt()
+5) builder.indexOf()
+...
+

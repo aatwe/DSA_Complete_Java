@@ -1,0 +1,14 @@
+auxillary space =space reqd by algo during execution
+
+
+space complexity = aux space + input value space
+
+
+Q1) how to calculate space complexity?
+{  
+   int a = x + y + z;
+   return (a);
+}
+
+a,x,y,z		return a
+4*4 	+	 4 = 20 bytes

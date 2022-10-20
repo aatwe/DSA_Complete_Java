@@ -1,0 +1,93 @@
+Q) Convert Decimal to Binary:
+(10) 10 --> (1010)2
+
+
+
+Decimal(Base 10)		: 		0,1,2,3,4,5,6,7,8, 9, 10,11,12,13,14,15,16..
+	                    					|
+Octal(Base 8) 		: 	 	0,1,2,3,4,5,6,7,10,11,12,13,14,15,16,17,20 
+
+	(8)10 = (10)8
+
+Hexadecimal(Base 16)	:		0,1,2,3,4,5,6,7,8, 9, A, B, C, D, E, F
+	(10) 10 = (A)16	
+	(12) 10 = (c)16
+
+
+++++++++++++++++++++++++++++++++++++++++++++
+
+Q) How to convert from any no. system to any?
+
+Decimal -> base b
+
+a) keep dividing decimal no. by base, 
+
+b) store remainders , write opposite
+
+
+Base b -> Decimal
+
+a) keep multiplying no. from right to left by base^index
+
+b) add all the no.	
+
++++++++++++++++++++++++++++++++++++++++++++++
+
+1) Convert from decimal to base b
+
+We understand, how they are mapped.
+
+ex1)  convert 17 to base 2
+
+
+a.1) Divide by base
+17/2 = 8	//rem = 1
+8/2 = 4	//rem = 0
+4/2 = 2	//rem = 0
+2/2 = 1	//rem = 0
+1/2 = 0	//rem = 1
+
+
+a.2) Store remainders and write opposite
+
+10001
+
+
+
+//Computer stores 17 as 10001
+
+
+
+
+ex2) Convert 17 from decimal to octal
+
+a.1) Divide by base
+17/8 = 2	//rem = 1
+2/8 = 0	//rem = 2
+
+
+a.2) Store remainders and write opposite
+
+21
+
+
+
+
+
+2) Convert from base b to decimal
+
+	ex1) Convert  (10001)2 to decimal
+
+		a) 2^0*1 + 2^1*0 + 2^2*0 + 2^3*0 + 2^4	*1
+	 	  1 	    + 0	+ 0	+	0	+	1 = (17)10
+
+	ex2) Convert  (21)8 to decimal
+	
+		a) 8^0 *1 + 8^1*2 = 
+
+		b) add them
+		 (17) 10
+
+
+
+

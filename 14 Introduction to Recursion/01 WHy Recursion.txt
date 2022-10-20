@@ -1,0 +1,38 @@
+can solve big complex problem in simpler way
+
+DP/Star of hanoi etc
+
+
+Can we convert recursion to without function calls with loops (iteration) ? YES
+
+
+1) solve using recursion
+2) solve using iteration for optimization (difficult)
+
+
+
+Q) Recursion time complexity analysis:
+
+
+Q) Recursion space complexity analysis:
+
+Recursion:
+	Growing : O(n)
+	//printing n no. 
+
+
+Iterative:
+	Constant: O(1)
+
+
+Q) How to visualize recursion? Recursion tree
+
+Recursion tree
+
+  print(1) -> print(2) -> print(3) -> print(4) -> print(5) -> return
+>1	      >2		  >3		   >4	 	    >5
+
+
+
+Q) how to check if recursion is applicable? If smaller version of problem solvable -> can apply recursion
+1) Try breaking into smaller problems  //find recurrence relation

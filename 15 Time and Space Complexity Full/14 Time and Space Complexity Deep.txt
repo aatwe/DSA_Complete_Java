@@ -1,0 +1,25 @@
+1) Time complexity is NOT =  time taken to run algo
+	if time taken by computer A > computer B
+	does not mean TC (A) >  TC (B)
+
+2) For TC plot time taken vs size
+
+
+3) We if time vs size for A = linear
+	time vs size for B = linear //less slop
+
+TC (A) = TC(B) = O(n)
+
+4) What is TC? function time vs size
+____________________________________________
+Analyse Linear search vs Binary search
+
+
+1) Linear Search
+Time vs Size : O(n)
+Why Linear search TC is O(n) -> worst case last element of array
+
+
+2) Binary Search
+Time vs Size : O(Log(n))
+

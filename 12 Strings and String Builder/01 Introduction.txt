@@ -1,0 +1,195 @@
+Q) What are strings?
+
+Data type/ class 	//most common class in java
+
+Q) What we know about memory allocation?
+	a) reference variables in Stack memory
+		int a = 10;
+
+	b)
+		int[] arr = {2,3,5,4,19}
+		//stack	 //object in heap
+	//ref var
+	//Any change ref var arr -> results in change in main object
+	
+	c)	String name = "Abhilash Atwe"
+
+	 //datatype //ref	//object
+
+
+Q) How to print a string?
+
+String name = "Abhilash Atwe"
+System.out.println(name);
+
+
+
+
+Q) How to check what string class is made of? Ctrl + CLick "String"
+
+Q) How is string stored?
+lets test
+
+String a = "Abhilash"
+String b = "Abhilash"
+
+
+2 possible ways stack and heap mapped
+
+1)  //Correct
+Stack			Heap
+a  b 			Abhiash	//pointing to 1 object				//a == b : true
+
+
+2) //Incorrect
+Stack			Heap
+a			Abhilash	//pointing to 2 different objects		//a == b: false
+b			Abhilash
+
+
+
+
+Where are string objects stored? separate DS in memory
+What is string pool? separate DS in heap to store strings
+
+Why separate DS? same/similar objects are not created again.String pool checks if an object already exists in pool
+						if exists, no need to create object again
+		What advantage of this? optimized program
+
+
+Q) Can we change string object? NO
+Q) If objects are stored using method 1, isnt it dangerous, if someone makes change via ref a, but ref b also changes
+	(worked in array same way)?NO
+
+Immutability doesnt let change string object from reference variables after objects created
+
+
+Q) Does this work the same with array?
+	2 reference variables pointing to same array. Will it create 2 objects?
+
+Q) Is array of character mutable in java? Yes (array of char != string in java)
+
+
+Q) How will we modify string object then? (for ex rename)
+
+//How string got changed below? Same reference variables, 2 different object 	//a was pointing to object Abhilash , now a pointing to different object Atwe
+
+String a = "Abhilash"
+System.out.println(a);
+
+a = "Atwe"
+System.out.println(a);
+	
+
+
+	Q) What happens to earlier object? garbage collector
+
+Q) Why immutable strings? SECURITY
+	Ex 5 people variables with name "Abhilash"
+	if one person changes his name, other person should be safe from the change  -> hence immutability
+
+
+
+Q) How to test obejct creation? Check if both are equal
+
+public class Comparison {
+	public static void main(String[] args) {
+		String a = "Abhilash"
+		String b = "Abhilash"
+
+		System.out.println(a == b);
+}
+
+}
+
+>Output: true	//implies what? both objects are same for a and b
+
+Q) What a==b mean?
+	 object pointed to by reference var a == object pointed to by ref var  b
+
+-------OBJECT CREATION IN POOL-------------------------------------------------
+
+Q) How to create new objects? explicitly mention new keyword
+
+	String a = new String("Kunal");
+	String b = new String("Kunal");
+	String c = a;
+
+		//where are these created? Outside pool , in heap only
+
+	System.out.println(a == b);
+	System.out.println(c == a);
+
+>false 						//why not same object? explicitly mention new keyword
+>true							//why? only ref var assigned, new object not created
+
+-----------------------------------------------------------------------------------------------
+Q) What if we dont care if same / different object, and just check if same value
+
+.equals
+
+System.out.println(a.equals(b));
+> Output :true
+
+
+Ex2
+
+	String a = new String("Kunal");
+	String b = new String("  Kunal");
+
+	System.out.println(a == b);
+
+>Output: false
+
+
+
+Q) How to access string elements?
+		System.out.println(a.chatAt(0));
+--------------------------------------------------------------------------------------------------
+q) wHAT CLASS STRING CONTAINS?
+
+a) implements x y z
+b) private final byte[] value
+c) uses char array	//not exactly , why? cannot use a[0] with strings
+						    
+
+
+Q) What args stores? command line arguments
+
+
+Q) What is output of uninitialized string? How println() works with string
+		Q) How println works? everything(no matter what input data types)-> is printed using toString() method
+		System.out.println(56);
+		System.out.println("Abhilash");
+		System.out.println(new int[] {2,3,4,5});
+
+		String name;
+		System.out.println(name);
+
+Q) Why below doesnt work?
+
+System.out.println(new int[]{2,3,4,5})
+>[I@5acf980
+
+Object x : takes input :new int[]{2,3,4,5} -> calls .value -> calls .toString() //
+
+Soln
+--> Instead use Arrays toString() method
+
+System.out.println(Arrays.toString(new int[]{2,3,4,5}));
+
+
+//Array has its own toString method (Overriden)
+
+
+Q) Useing wrapper class internally
+	what wrapper class does? can use all OOP principles with for ex Integer here	
+				WHy cant integer use them normally? Integer in stack, objects in heap
+				//Note: in python everything is in heap
+
+Integer num = new Integer(56);
+System.out.println(num.toString());   === equivalent to === System.out.println(num);		
+	//can use many functions with int
+	how? wrapper class
+	//can we do normally with int? no , is a primitive, not a object
+
