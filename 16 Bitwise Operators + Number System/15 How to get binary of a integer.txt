@@ -1,0 +1,13 @@
+
+FUN FACT: How to see binary representation of a no.? .toBinaryString()			//in Integer class   //Input arg: integer   //Output: String value of bianry
+
+
+public class SetBits {
+	public static void main(String[] args) {
+		int n = 10;
+
+		System.out.println(Integer.toBinaryString(n));
+}
+	
+}
+

@@ -1,0 +1,100 @@
+ given all no. occuring thrice in array
+	how to find no. that is appearing only once?
+
+
+num = [2,2,3,1,7,7,8,7,8,8]
+
+Q) 
+
+Premise: if 3 were not in array: every no. would be appearing 3 times
+ bits of no. also 3 times
+
+ if every bit appearing 3 times -> set bits also appearing 3 times
+
+ set bits % 3 should be 0 if no extra no.
+
+
+
+  -> every no. is divisible by 3
+
+	Take  n  % 3
+
+What if we add the no.s
+add the digit we find in a separate array
+
+
+	0 0 0 0 0  1 0		//add 2
+		     1 0		//add 2
+		     1 1		//add 3
+		     1 0		//add 2
+		   1 1 1		//add 7 
+		   1 1 1		//add 7
+		 1 0 0 0		//add 8	
+		   1 1 1		//add 7	
+	 	 1 0 0 0		//add 8
+	 	 1 0 0 0		//add 8
+	_______________
+		 3 3 7 4		//total no. of 1  bits / set bits  
+	---------------
+
+		 3 3 6 3		//if 3 were missing from array	
+
+
+		
+
+	total % 3 = 	3 3 7 4 % 3 	=  0 0 1 1 = 3   //found the extra no. in array
+
+
+
+Q) 
+Find nth magic no. 
+
+    5^3	5^2	 5^1			//given
+1 : 0 	0	 1 		//5
+ 
+2 : 0	 	1	 0		//25
+
+3 : 0 	1	 1		//30
+
+4 : 1		0	 0		//125
+
+5 : 1		0	 1		//130
+
+
+
+Q)How to find nth magic no.?
+6 : 1		1	 0		//150		//note: 6&1 : is same as : 110 & 001		//can think as same
+
+n :			 n&1 //calculate last digit
+				
+	//rightshift by 1 , why? 2 focus on only 2 digits
+
+
+Code:
+
+
+public class MagicNumber {
+	public static void main(String[] args) {
+		int n = 6;				//check for 6th magic no.
+		int ans = 0;
+		int base = 5;
+
+
+		while(n>0) {
+			int last  = n & 1;		//last digit for the nth no.
+			n = n >> 1;
+
+			ans += last*base;		//
+			
+			base = base*5;			//5^1 on first iteration
+								//5^2 on 2nd iteration 
+									...			
+
+		}
+
+		System.out.println(ans);
+   }
+}
+
+>150
+		

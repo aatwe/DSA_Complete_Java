@@ -1,0 +1,5 @@
+given binary n  //means base = 2
+
+
+n&1 = 0 -> no. is even
+n&1 = 1 -> no. is odd

@@ -1,0 +1,24 @@
+a		XOR (0 to a)
+
+0		0	*
+1		1		#
+2		3
+3		0	*
+4		4		#
+5		1
+6		7
+7		0	*
+8		8 		#
+9		1	
+
+//pattern after observation:
+
+if a%4 = 0 -> XOR(0..a) = a
+if a%4 = 1 -> XOR(0..a) = 1
+if a%4 = 2 -> XOR(0..a) = a+1
+if a%4 = 3 -> XOR(0..a) = 0
+
+..repeating
+
+
+

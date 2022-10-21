@@ -1,0 +1,78 @@
+(6)10 ==> 1
+
+
+(6)10  ==> (110)2 = 3 digits
+
+Q)How to find how many digits in a base b representation of decimal no. n
+
+
+What we know:
+Decimal -> base b
+
+a) keep dividing decimal no. by base, 
+
+b) store remainders , write opposite
+
+
+Base -> decimal
+
+	ex1) Convert  (10001)2 to decimal
+
+		a) 2^0*1 + 2^1*0 + 2^2*0 + 2^3*0 + 2^4	*1
+	 	  1 	    + 0	+ 0	+	0	+	1 = (17)10
+
+
+
+
+Q) What is base?
+
+log 6 = x
+   2
+
+
+6 = 2^x 	//What is x? no. of digits in representation of base
+
+		//how many times  2 multiplied to get n\
+
+		 int(x) + 1 = int ( log n ) + 1
+						 b
+
++++++++++++++++++++++++++++++++++++++++
+int(log n) + 1
+	 b
+++++++++++++++++++++++++++++++++++++++++
+
+ex how many digits in binary repr of decimal no. 10
+
+int(log 10) + 1
+       2
+
+= 
+
+why?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code:
+
+
+
+public class NoOfDigits {
+	public static void main(String[] args) {
+		int n = 34567;
+		int b = 10;
+		
+		int ans = (int)(Math.log(n) / Math.log(b)) + 1;			//using prop :   log a
+																   x
+															      ______ = log a
+																log b		  b
+																   x
+
+		System.out.println(ans);
+	
+}
+
+}
+
+> Output: 5
+
+
+Q) What complexity? log(n)

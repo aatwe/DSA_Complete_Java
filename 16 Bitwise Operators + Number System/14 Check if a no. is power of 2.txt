@@ -1,0 +1,52 @@
+note: NOT ASKED IF EVEN OR ODD
+
+
+given: 100000
+
+
+Q) When is a no. power of 2? 
+
+a binary no. 
+
+
+Ex 
+10000000	//Given power of 2
+	can be represented as = 1111111 + 1
+
+
+ 10000000
+& 1111111
+__________
+000000000  --> implies no. is power of 2
+
+
+
+Ex
+10010  	//Given power of 2
+
+   10010
+ & 01111
+   -----
+   00010   --> implies no. is not power of 2	
+
++++++++++++++++++++++++++++++++++++++++++++++
+n&(n-1) = 0 --> power of 2
++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Code:
+
+
+public class PowOfTwo {
+	public static void main(String[] args) {
+		int n = 16;
+		boolean ans = (n & (n-1)) == 0;
+		System.out.println()
+
+}
+		
+}
+
+>True
+
+What is exception?
+	is 0 power of 2? no

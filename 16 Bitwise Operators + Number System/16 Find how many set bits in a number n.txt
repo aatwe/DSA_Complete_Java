@@ -1,0 +1,109 @@
+What given? : n
+
+
+for ex n = 9 = 1001
+
+
+Set bits= 2
+
+
+m1) Pseudo:
+
+while(n > 0)
+
+if(n&1 == 1)
+  c++
+
+ n = n>>1
+
+
+
+
+
+m2)
+1) How to get rightmost set bit?
+	n&(-n)
+
+	if we apply to n = 9 = 1001
+		we get : 001
+
+Do below: till n>0 //finding rightmost bit and deleting one by one
+
+2) what if we subtract rightmost set bit from n?
+	n - [n&(-n)] = 1000
+
+
+3) Subtract this with n&(-n)
+		if n = 1000, what is n&(-n) == 1000	//why? it is the rightmost set bit
+	n - [n&(-n)] = 1000	
+     1000 - 1000 = 0
+
+4) 	Answer = no. of set bits = no. of iteration
+
+
+
+
+m3)
+
+//OR METHOD 3
+	while(count > 0) {
+		count ++;	
+		n = (n& (n-1));
+		
+}
+
+FUN FACT: How to see binary representation of a no.? .toBinaryString()			//in Integer class   //Input arg: integer   //Output: String value of bianry
+
+
+public class SetBits {
+	public static void main(String[] args) {
+		int n = 10;
+
+		System.out.println(Integer.toBinaryString(n));
+}
+	
+}
+
+
+
+Code:
+
+public class SetBits {
+	public static void main(String[] args) {
+		int n = 10;
+
+		System.out.println(Integer.toBinaryString(n));
+		System.out.println(setBits(n));
+}
+	
+
+private static int setBits(int n) {
+
+	int count = 0;
+	
+	while(count > 0) {
+		count ++;	
+		n -= (n& -n));
+		
+}
+
+//OR METHOD 2
+/*
+	while(count > 0) {
+		count ++;	
+		n = (n& (n-1));
+		
+}
+*/
+
+return count;
+
+}
+
+>Input was 10:  101101
+ Output: 4
+}
+
+
+TC: O(log(n)
+

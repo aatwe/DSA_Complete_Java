@@ -1,0 +1,85 @@
+For ex
+
+
+XOR of all no. bw a and b
+
+
+a = 3;
+
+b = 9;
+
+
+3^4^5^6^7^8^9
+
+
+How to calculate? below cases work for 0 to 9
+
+if a%4 = 0 -> XOR(0..a) = a
+if a%4 = 1 -> XOR(0..a) = 1
+if a%4 = 2 -> XOR(0..a) = a+1
+if a%4 = 3 -> XOR(0..a) = 0
+
+..repeating
+
+
+Solution?
+
+0^1^2^3^4^5^6^7^8^9
+----- _____________
+  a		b
+How to remove highlighted part?
+
+(a^b)^a = b
+
+
+
+
+[0^....^a^....^b ] ^(0^...^a-1) 		= 	(a^....^b)
+
+What advantage?
+XOR for every no. -> bad complexity
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+CODE:
+
+
+
+public class RangeXOR {
+
+	public static void main(String[] args) {		//XOR(0..a)
+		//range xor from a to b  = xor(b) ^ xor(a-1)
+		int a = 3;
+		int b = 9;
+	
+		int ans = xor(b) ^ xor(a-1);
+
+		System.out.println(ans);
+
+		int ans2 = 0;					//this give time limit exceeded for large no.
+		for(int i=a; i<b; i++) {
+		  ans2^=i;
+}
+
+	
+}
+	static int xor(int a) {					//XOR pattern
+		if(a%4 == 0){
+			return a;
+		}
+		if(a%4 == 1){
+			return 1;
+		}
+		if(a%4 == 2){
+			return a+1;
+		}
+		if(a%4 == 3){
+			return 0;
+		}
+}
+
+}
+
+
+>Output: 2		// 3^4^5^6^7^8^9		//Efficient
+
+>Output: 2		//TLE for large no.
