@@ -1,0 +1,68 @@
+Q) What is prime? no. divisible by 1 and itself
+
+
+
+Q) Program how to check if a no. is prime?
+
+Efficient: check only till root(n)	
+
+
+for ex is 13 prime?
+
+m1) check all no. bw 1 and n, if divides n-> n is not prime
+
+	x*y =13	//x and y integers
+		
+(x and y combinations) / 2 -> can ignore
+
+
+if given: 1,2,3...,12,13
+
+which no. we were checking if n divisible by --> for 1 to 13
+	except 1 and 13 all no. in between]
+		n-2
+
+
+Do we have to check all n-2? No
+check only till root(n)	//middle
+
+
+
+Code:
+
+
+public class Prime{
+
+	public static void main(String[] args) {
+		int n = 20;
+		for(i = 2; i< n; i++) {
+			if(N%i) {
+			 System.out.println(i+ " " + isPrime(i));				
+			}	
+		}
+	static boolean isPrime(int n) {
+		if(n<=1) {return false;}
+		int c= 2;
+		while(c * c <= n) {
+			if(n%c == 0) {
+				return false;
+			}	
+			c++;
+		}		
+	} 
+	return true;
+}
+
+>Output:
+1 false
+2 true
+3 true
+4 false
+5 true
+6 false
+7 true
+8 false
+9 false
+10 false
+11 true
+....

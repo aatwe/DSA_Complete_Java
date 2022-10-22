@@ -1,0 +1,107 @@
+size : 3,5
+Achieve 4 litre
+
+3,0 ->0,3 ->3,3 -> 1,5 -> 1,0 -> 0,1 -> 3,1 -> 0,4
+
+
+How to program?
+
+1) Jug 1: variables:			//a jug has 2 states: empty or full
+	capacity
+	how many times filled
+	how m
+
+jug a : 	capacity 		: a
+		filled times	: s1
+
+
+jug b : 	capacity 		: b
+		filled times	: s2
+
+
+What is remainder amount? amount filled - amount removed
+				    as1 		  - bs2
+
+
+	r = as1 + (-bs2)
+	  = as1 + t'b - t'b -bs2
+	  = L - (t' + u)b
+	  	   //r > 0
+			t' + u = 0
+			u = -t'
+
+	r = s1a + t'b
+
+//why we did above?
+	How to make particular amount of water from 2 jugs?
+		Combination of linear equation
+
+
+
+Solution:
+	Find HCF  of 2 no.
+
+	find minimump positive value of 
+		ax + by 
+ 
+	for ex what is hcf of 4 and 8? 4
+
+
+Q) How to find hcf of 2 no. 
+
+for ex 3 and 9
+
+
+1) 	find factors of 3
+	find factors of 9
+	find highest common factor
+
+
+2)   min(3x + 9y) = 3		//3 is hcf  //what are x and y?
+	x + 3y = 1
+
+//x = -2, y=1	//satisfies 
+
+
++++++++++++++++++++++++++++++++++++++
+
+Ex case:
+given 2l and 4l jug
+How to(if you can) form 5l jug?
+
+
+
+Can we form 5l jug using 2l and 4l?
+	1) 2x + 4y = 5
+		what is minimum value? 2
+		x + 2y = 2.5
+		
+		//cannot form 2.5 from 2l and 4l
+
+
+
+Ex case:
+given 3l and 6, can we form 9
+	
+	3x + 6y = 9
+		What is minimum value? 3
+			3(x+ 2y) = 9
+				x + 2y = 3
+					//9 can be formed , why? 3(hcf) divides 9
+
+
+Ex case:
+given 3l and 5l jug
+	how to form 17l?
+
+	3x + 5y = 17
+	  what is minimum value? 1
+		1(3x + 5y) = 17
+		   //17 can be formed	//why? 1(hcf) divides 17
+
+
+What observation?
+if hcf of 2 jug capacities is 1 -> can form any amount of water
+
+	for 3l and 5l
+	since hcf = 1 ----> we can form any amount of water using 3l and 5l jug

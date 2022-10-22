@@ -1,0 +1,78 @@
+1) What is lcm (a,b) ?
+
+
+	smallest no. div by both a and b
+
+LCM(a,b) * HCF(a,b) = a * b 
+
+
+++++++++++++++++++++++++++++++++++++++++
+-> lcm c = f * g * d
++++++++++++++++++++++++++++++++++++++++=
+Ex no. div by both 17 and 19 --> 17 x 19
+
+Shortcut proof:
+no. = a*b
+      f*d * g*d
+	f*g*d			//remove d since repeating
+
+we know a*b = f*d*g*d
+	       = d * (d*f*g)
+++++++++++++++++++++++++++++++++++++++++
+	  a*b	 = HCF * (LCM)						//
+++++++++++++++++++++++++++++++++++++++++	
+________________________________________
+
+
+if 
+ d = gcd(a,b) , c = lcm(a,b)
+
+ f = a/d	;  
+ g = b/d	;
+-> a = f*d, b = g*d
+
+
+c = lcm(a,b) =lcm(f*d, g*d)
+
+What are common factors of f and g? none ,why? d is the greatest common factor , f= a / d , smaller f not possible
+
+
+Q) for ex a,b(9,18)
+
+Find lcm?
+
+1) d = gcd(9,18), c = lcm(9,18)
+  //d = 9		 c = 18
+
+
+  f = 9/d  g = 18/d
+  f = 9/9  g = 18/9
+  f = 1	g = 2
+
+
+   c = lcm(9,18) = lcm(fd,gd)
+
+Conclusion: f and g have no common factor
+
+++++++++++++++++++++++++++++++++++++++++
+-> lcm c = f * g * d
++++++++++++++++++++++++++++++++++++++++=
+
+
+
+CODE:
+
+public class GDC_LCM {
+	public static void main(String[] args) {
+		System.out.println(lcm(2,7));
+		
+}
+
+static int lcm(int a, int b) {
+	return a*b / gcd(a,b);
+	}
+
+}
+
+>Output: 
+14

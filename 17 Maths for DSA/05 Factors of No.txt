@@ -1,0 +1,125 @@
+What is factor of a no. n?
+
+	factor divides n
+
+	Ex factors(20) = 1,2,4,5,10,20
+
+
+M1) Check for all no. 
+	TC: O(n)  
+
+	SC: O(1)
+
+
+
+public class Factors {
+	public static void main(String[] args) {
+		
+	
+}
+	static void factors1(int n){
+		for(int i= 0; i<n ; i++) {
+			if(n%i == 0) {
+				System.out.println(i + " ");
+			}
+			
+		}
+		
+}
+
+}
+
+> 
+1 2 4 5 10 20
+
+
+M2) Efficient Code:
+
+Idea: If 4 is a factor of 20 -> 5 is also a factor of 20
+	Why? 5x4 = 20	
+
+
+if x is factor of n
+
+	x * y = n
+	-> n/x also a factor of n
+
+
+How long to check? sqrt(n)
+
+
+1)
+
+
+
+Q) What TC? O(sqrt(n))?
+
+
+public class Factors {
+	public static void main(String[] args) {
+		
+	
+}
+	static void factors2(int n){
+		for(int i= 0; i<Math.sqrt(n); i++) {
+			if(n%i == 0) {
+				if(n/i == i) {
+			 	  System.out.println(i);
+			} else{
+				  System.out.println(i + " " + n/i + " ");
+			}
+			
+		}
+		
+	}
+
+}
+
+>Output:
+1 20 2 10 4 5
+
+
+Why not sorted?How to make sorted?
+	 	sysout(i) is in sorted order: 1,2,4
+
+	sysout(i , n/i) is descending order
+
+
+Solution: store the other factors in a list ->
+
+
+public class Factors {
+	public static void main(String[] args) {
+		factors3(20);
+	
+}
+	static void factors3(int n){
+		ArrayList<Integer> list = new ArrayList<>();
+		for(int i= 0; i<Math.sqrt(n); i++) {
+			if(n%i == 0) {
+				if(n/i == i) {
+			 	  System.out.println(i);
+			}
+				  System.out.println(i + " " );
+				  list.add(n/i);
+			}
+			
+		}
+		
+	}
+
+	for(int i = list.size() - 1; i>= 0; i--) {
+		System.out.println(list.get(i) + " ");	
+
+		}
+	}
+
+}
+
+>Output
+1 2 4 5 10 20
+
+What TC now? O(sqrt(n)
+
+
+What SC now?

@@ -1,0 +1,65 @@
+Q) How to find hcf of 2 no. 
+
+for ex 3 and 9
+
+
+1) 	find factors of 3
+	find factors of 9
+	find highest common factor
+
+
+2)   min(3x + 9y) = 3		//3 is hcf, what are x and y?
+	x + 3y = 1
+
+//x = -2, y=1	//satisfies 
+
+
+
+3) Eucledian Algo
+
+	gcd(a,b) = gcd(rem(b,a),a)
+
+	gcd(105,224) = gcd(rem(224,105),105)
+			  = gcd(14,105)
+
+
+	Why works? gcd(105,224) also divides linear combination of (105,224) like 
+												105x + 224y  
+					//y = 1, x = -2
+					224 - 210  = 14	//gcd of (105,224) also divides 14
+
+	105x + 224y  --> 14x + 105y	
+
+corner case: if any 1 no. = 0 ,gcd is other no.
+
+
+Code:
+
+
+1) find return type and put
+2) Use recursion
+
+public class GCD_LCM {
+	public static void main(String[] args) {
+		
+
+}
+static int gcd(int a, int b) {
+	if(a == 0) {
+	 return b;
+	}
+	return gcd(b%a,a)
+   } 
+
+}
+
+
+
+4) How to find the actual values of x and y ?
+ Extended Eucledian Algo
+
+
+
+
+
+	

@@ -1,0 +1,111 @@
+1) Find all prime < N
+
+for ex 40
+How to find all no. < 40?
+
+	all prime = 2,3,5,7,11,13,17,19,25,29,31,37
+
+
+
+
+
+Sol1) Check all no. <n
+
+public class Prime{
+
+	public static void main(String[] args) {  O(n)
+		int n = 20;
+		for(i = 2; i< n; i++) {
+			if(N%i) {
+			 System.out.println(i+ " " + isPrime(i));				
+			}	
+		}
+	static boolean isPrime(int n) {		O(root(n))
+		if(n<=1) {return false;}
+		int c= 2;
+		while(c * c <= n) {
+			if(n%c == 0) {
+				return false;
+			}	
+			c++;
+		}		
+	} 
+	return true;
+}
+
+TC O(n* root(n))
+
+Sol2)
+
+Check one by one
+1,2......,n-1,n
+
+
+if 2 is not prime -> multiples of 2 also not prime
+
+if 3 is not prime -> multiples of 3 also not prime
+...
+how long to check? till we reach sqrt(n)
+
+...repeats after
+
+
+	How to track these? Create a boolean array
+		removed value = false;
+
+
+if true encountered in array : its factor appeared in past
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Also called: Sieve of Eratosthenes
+
+public class Seive {
+	public static void main(String[] args) {
+		int n = 37;	
+		boolean[] primes = new boolean[n+1];		//by default initially bool array : false values
+		sieve(n,primes);
+	}
+
+	static void sieve(int n, boolean[] prime){
+		for(int i =2 ; i*i <= n; i++) {
+			if(!primes[i]) {		//if primes[i] is false -> removed value -> not prime
+				for(int j = i*2; j<=n; j+=i) {
+					primes[j] = true; 
+				}
+			}	
+		}
+	
+		for(int i = 2; i<= n; i++) {
+			if(!primes[i]) {
+				System.out.println(i + " ")
+			}	
+		}		
+	}
+	
+}
+
+
+>Output:
+2 3 5 7 11 13 17 19 23 29 31 37
+
+
+Q) What TC?
+	
+	if 2 foundprime -> mark all multiples of 2 as prime (n/2)
+	if 3 found		-> mark all multiples of 3 as prime (n/3)
+	if 4									    n/4		//ignore
+										    (n/5)
+											(n/7)
+
+
+	(n/2) + (n/3) + (n/5) + (n/7) ...		//harmonic progression for primes
+
+	Taylor series sum = log(log(n))
+							
+
+Total TC = O(N*log(logN))			
+
+Q) What SC?
+
+	auxillary space: boolean[] primes = new boolean[n+1];	.//n
