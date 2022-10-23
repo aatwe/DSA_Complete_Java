@@ -1,0 +1,47 @@
+
+public class Reverse {
+
+	public static void main(String[] args) {
+		rev1(1234);
+		System.out.println(rev2(1234));
+
+	}
+	
+	static int base = 0;					//note : sum variables stores reversed no.s --> it is updated outside the rev1() function
+	static int rev2(int n) {
+		int digits = (int)(Math.log10(n) + 1;
+		return helper(n,digits);
+		
+	}	
+	
+	private static int helper(int n, int digits) {
+		if(n%19 == n) {
+			return n;
+		}
+		int rem = n%10;
+		return rem * (int)(Math.pow(10, digits-1)) + helper(n/10, digits-1);
+	
+	}
+
+
+	static boolean palindrome(int n){
+			return n == rev(n);		//true or false
+	
+	}
+
+
+	private static void main(String[] args) {
+		System.out.println(palindrome(1234321));
+		
+	}						
+
+}
+
+>Output1: True
+//edge case: 1 digit no. -> true
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+M2) Pure recursion / helper function	/ without rev(n) function
+
+s,e
+f(n,s,e)
+

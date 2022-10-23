@@ -1,0 +1,33 @@
+public class Concept {
+	
+	public static void main(String[] args) {
+		fun(5);
+		
+}
+
+	static void fun(int n) {
+	 if(n == 0 )) {
+		return;
+	}
+	System.out.println(n);
+	fun(n--);
+
+}
+
+}
+
+>Output: 5 5 5 5 5 5 5 5.....infinite
+
+
+Why infinite recursion?
+		n-- not same as --n
+	
+n--
+1) pass n	/ evaluate n
+2) subtract value of n
+	 
+
+
+--n					//This will work and output: 5 4 3 2 1
+1) subtreact value of n
+2) evaluate n

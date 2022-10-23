@@ -1,0 +1,54 @@
+What we learnt?
+	How to count no. of things using recursive function
+
+
+What given: a no . N
+
+Find How t reduce the no. to 0?
+
+1) check if n is even -> n/2
+2) check if n is odd  -> n-1
+
+
+Q) Why helper? variable in argument 
+		why variables in argument? pass value in recursion calls
+
+
+Q) What is recursion tree?
+
+	f(41,0)
+	   |
+	f(40,1)
+	   |
+	f(20,2)
+	   |
+	f(10,3)
+	   |
+	f(5,4)
+	   |
+	f(4,5) 
+	   |
+	f(2,6)
+	   |
+	f(1,7)	
+	   |
+	f(0,8)
+
+class Solution {
+    public int numberOfSteps(int num) {
+        	return helper(num,0);	
+    }
+    private int helper(int num, int steps) {
+		//Base case
+		if(num == 0) {
+			return steps;
+		}
+
+		if(num%2 == 0) {
+			return helper(num/2, steps+1);
+		}
+		return helper(num-1, steps+1);
+		
+	}
+
+}

@@ -1,0 +1,114 @@
+For ex N = 30204
+	 
+
+Do below while n!= 0
+1) take N = N%10
+2) check if rem 0 -> increment count
+
+
+Ex. 30204
+
+
+
+++++++++++++++++++++++++++++++
+1) take count inside argument
+
+What is recursive relation?
+F(N,0)
+
+
+What recursive tree?
+Check rem
+f(30204,0)
+  | //check if rem = 0? no 4 != 0
+f(3020, 0)
+  | //check if rem = 0? yes 0 = 0 -> increment count
+f(302,1)
+  | //check if rem = 0? no 2 != 0
+f(30,1)
+  | //check if rem = 0? yes 0 = 0 -> increment count
+f(3,2)
+  | //check if rem = 0? no  3 != 0
+f(0,2)
+  | 	base case if no. = 0 -> return ans = 2
+
+ //Q) Where ans returned? where it was called from
+
+
+Code:
+
+public class CoutnZeroes {
+	public static void main(String[] args) {
+		System.out.println(count(30210));
+	
+}
+
+	static int count(int n) {
+		return helper(n,0)
+}
+
+
+
+	private static int helper(int n, int c) {
+		if(n == 0) {return c;}		//Base case
+
+	}
+
+	int rem = n%10;
+	if(rem == 0) {
+		return helper(n/10, c+1)
+	}
+
+	return helper(n/10, c);	
+
+
+}
+
+>Output: 2 
+
+----------------------------------------
+Debug:
+
+0) call count() for n
+	0.1) call helper(for n and count 0)
+
+Do below till base check
+
+1) start from helper
+
+2) do base check if n==0 -> return final count c
+3) find remainder
+4) check if remainder is 0
+	if so -> call helper for n/10 and incrment count by 1
+
+5) call helper with n/10 and same count
+
+
+>Output: final count
+		
+
+Q) How often base check return c is hit? oNly once
+	after that -> value passed to above calls
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++++++++++
+2) take count outside
+

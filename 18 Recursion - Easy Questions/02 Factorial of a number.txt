@@ -1,0 +1,57 @@
+What is factorial (5) = 5*4*3*2*1
+
+
+1) What is recursive relation?
+
+
+factorial (5) = 5 * factorial(4)
+factorial (n) = N*factorial(n-1)
+
+
+2) what is base case? 
+	factorial(1) = 1
+
+
+3) What is recursion tree?	(Note tree can be binary or anything)
+
+f(n) = N!
+
+	f(5)							|    /\
+	 |							|	|
+	5*f(4)						|	|	
+   	    |							|	|
+	   4*f(3)						|	|
+		  |						|	|	
+	    	 3*f(2)					|	|
+		    |						|	|
+		   2*f(1)					|	|
+			 | return 1			|	|
+								V
+
+				 //All recursive call return same type
+				//where is this return value stored? where function was called
+				for ex 1 is stored in f(1)
+				for ex where was f(50 called ? in main -> where will it return 20?
+				in main()
+
+
+
+Code:
+
+public class Fact {
+	public static void main(String[] args) {
+		
+
+
+}
+
+	static int fact(int n) {
+		if(n<=1) {
+			return 1;
+		}
+		return n*fact(n-1);
+	}
+
+}
+
+>Output: 120

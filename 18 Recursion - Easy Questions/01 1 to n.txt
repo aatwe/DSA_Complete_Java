@@ -1,0 +1,58 @@
+public class Nto1 {
+  public static void main(String[] args) {
+	fun(5);
+
+}
+
+  static void fun(int n) {
+	if(n == 0) {
+		return;
+	}
+	System.out.println(n);
+	fun(n-1);
+	
+	}
+
+
+}
+
+
+
+> 5 4 3 2 1
+
+//Try debugging to see how stack filled
+
+fun(1)
+fun(2)
+fun(3)
+fun(4)
+fun(5)
+main()	
+
+
+Q) How to print in reverse order using recursion?
+
+
+public class Nto1 {
+  public static void main(String[] args) {
+	fun(5);
+
+}
+
+  static void fun(int n) {
+	if(n == 0) {
+		return;
+	}
+	fun(n-1);
+	System.out.println(n);
+	
+	}
+
+
+}
+//What TC? O(n)
+
+// Below will print in both orders
+	System.out.println(n);
+	fun(n-1);
+	System.out.println(n);
