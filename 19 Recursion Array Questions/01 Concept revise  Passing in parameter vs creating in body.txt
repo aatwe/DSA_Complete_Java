@@ -1,0 +1,6 @@
+Q) How to have return type as ArrayList?
+	1)  Take arrayList inside function call parameter
+		arrayList passed onto all function calls
+
+	2)  Create arrayList inside function body
+		only available for that one function call

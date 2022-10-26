@@ -1,0 +1,25 @@
+Solution: Arrays.sort(array_name);
+//the above method uses dual pivot quick sort + insertion sort + heap sort
+//check code documentation	(shift + click)
+
+What tc? O(n) on all Data structures
+
+public class QuickSort {
+
+	public static void main(String[] args) {
+		int[] arr = {5,4,3,2,1};
+		Arrays.sort(arr);
+
+}
+
+static void sort(int[] nums, int low, int hi) {
+	if(low >= hi) {
+		return;
+	}
+	
+
+	int s = low;
+	int e = hi;
+	int m = s + (e - s)/2;
+}
+}

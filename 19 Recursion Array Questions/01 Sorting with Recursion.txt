@@ -1,0 +1,92 @@
+What we learnt?
+1) What value to return?
+2) What arguments to pass
+3) Where to pass arguments. (Outside Recursive function/ inside recursive function)
+
+
+
+Q) What if given array.
+	How to check if this array is sorted? 1,2,4,8,9,12,
+
+		1) linear iteration
+			start pointer  , compare with start + 1 pointer
+				if found violation, stop checking (dont check rest of array)
+
+			if start reaches last index -> array is sorted
+
+
+		2) Recursion
+			What is recursive relation?
+				Compare arr[i] < arr[i+1]  	& REMAINING ARRAY SORTED
+	
+			What is recursion tree? start and check if first element < 2nd while rest array is sorted
+
+			f(1248912, 0) 			// (1248912 is sorted, compare index 0)
+				|
+				1<2  &&  f([1,2,4,8,9,12]  , 1)		//(248912 is sorted, comparing index 1)
+							|
+						 2<4 &&  f([4,8,9,12] , 2)					(XXXXXXX is sorted, index 2)
+								  |
+							4<8 && ([8,9,12]  , 1)
+									|
+									.	
+									.
+									.
+				
+									( ,5)	//last element reached, nothign left to compare  
+										-> return truw
+		
+
+		
+
+
+		Ex2)
+			arr = [1,8,4,5]							|	     /\
+				(arr, 0)							|		|
+				  |								|		|
+				 1<8   &&  (arr, 1)					|		|	//returns false & true = false				//arr is separate reference var
+						   |						|		|
+						8<4 && (arr,2)				|		|										//arr is separate reference var
+							   |					|		|
+							 4<5 &&  (arr,3)			|		|	//return true & true = true					//arr is separate reference var
+									|			|		|	//above calls wait for below to finish			//all these arr are separate ref var 
+								   return true		V		|										//but point to same object
+
+
+			What is base case?
+				if last element reached wwhile comparing , return true
+
+>Final Output: false
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code:
+
+public class Sorted {
+	 public static void main(String[] args) {
+		int [] arr = {1,2,3,5,16,8};
+		System.out.println(sorted(arr, 0));
+
+	}
+
+	static boolean sorted(int[] arr, int index) {	//recursive function 
+		if(index == (arr.length -1) {
+			return true;
+		}
+
+		return arr[index] < arr[index + 1] && sorted[arr,index + 1];
+
+	}
+
+}
+
+>Output: false
+
+
+
+Q) Is array object being changed in recursion call parameters? No, arr object is only passed
+Q) What is changed in parameters? only index value
+Q) Is new object created for every function call? No
+		Why? no pass by reference in java
+			how java passes instead? pass by value of reference(Same object + Different references)
+Q) If we modify array for any 1 recursion call? is it modified for all recursion calls	? YES
+	WHY? same object modified

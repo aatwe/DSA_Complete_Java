@@ -1,0 +1,270 @@
+Direct question what is quick sort?
+
+every language has implementation of these
+
+
+
+How does it sort?
+
+what previous sorting algo did?
+	a) Bubble sort:	largest element comes at end after every pass
+
+	b) Selection sort: largest element comes at end
+
+	c) Insertion sort: small to large parts of array get sorted
+
+	d) Quick sort 	 : after every pass -> pivot at correct position
+						lesser than pivot on left, greater than pivot on right
+
+What is Quick sort?
+uses pivot.
+
+What is pivot? a reference point
+	ex of reference
+
+What pivot does? 
+After first pass, all elements < pivot are on left of pivot
+
+			  all elements > pivot are on right of pivot 
+
+
+for ex
+5,4,3,2,1
+
+1) Input = 5,4,3,2,1
+pivot = 4 randomly chosen
+Output	1,3,2,4,5				---> after recursion --> 12345
+     	     -----   --
+		/		\
+	    1,3,2		 5		//sort both by recursion
+	   /
+2) Input: 132
+ pivot = 3 chosen 
+  Output:  1,2,3
+	/
+  
+3)Input = 1,2,3
+pivot = 3
+Output: 1 2 3
+
+	/
+4)Input = 1,2
+pivot = 1
+output = 1,2
+
+
+
+Q) What was happening in merge sort?
+if array was sorted, still algo goes till end base condition
+
+
+Q) How quick sort better?
+does not go till end.
+if array sorted -> does not go till end
+
+Q) Are we creating new array in this? no, we are sorting the original array
+
+Q) Why void ? not creating new array, sorting original array 
+				why? same reference var
+
+QA) How to put pivot at correct position after every pass? 
+Objective: put pivot at correct position: 
+
+
+ 
+1)	start pointer
+2)	end pointer
+3)   if volationleft1 and violationright1 found -> swap
+4) 	when is violation?
+		while( n[s] < pivot) -> move forward(s++)
+		while( n[e] > pivot) -> move forward(s++)
+
+4)   s++
+5)   e--
+
+For ex
+1) 
+Input:
+5,4,3,2,1		: pivot : 4
+			s = 0 -> violation: 5 
+			e = 4 -> violation  1
+
+swap(0,4)
+e=  e-1;
+s=  s+1;
+	     s  e
+Output: 1,4,3,2,5
+	    p
+//pivot still is 4
+
+
+
+
+
+
+
+2) Input:
+	     s   e
+	   1,4,3,2,5
+	     p
+
+: pivot = 4
+s = 1 -> violation: 4	(4 is not < 4)
+e = 3 -> violation: 2
+swap(1,3)
+s++
+e--
+		s e
+Output: 1,2,3,4,5
+		   p
+
+//pivot reached correct position
+
+//when loop terminate? s>p
+//when recursion call will occur? after pivot reaches correct position
+ 1,2,3,4,5
+-------+--
+low   e s high
+
+
+
+Q) What is recursion tree?
+		5,4,3,2,1
+
+			|
+		1,2,3,4,5
+		----- + -
+		/	    \
+	  1 2 3 		5
+	low	end		s to high
+
+
+
+
+Q) How to choose pivot?
+	1) choose last element
+
+	2) chose random
+
+	3) chose corner
+
+	4) choose middle
+
+
+Q) What is time complexity?
+
+	------------p--------------
+		k		n-k-1
+
+T(P) = time taken to put pivot at correct position 
+		total elements N, every element checked once
+			O(N)
+ 
+T(R) =  T(k) + T(n-k-1)	time taken for recursion call on both
+
+
+What is recurrence relation?
+
+T(N) = T(K) + T(n-k-1) + O(N)
+-----------------------------------------------------------------
+
+Q) What is worst case TC?
+
+	pivot smallest/ largest
+	for ex 3,5,8,9,20,33
+				  p
+	//k = 0
+	how many elements in recursion call? n-1
+T(N) = T(0) + T(n-1) + O(n)
+
+T(N) = T(N-1) + O(N)
+
+	What complexity for this recurrence relation?  
+O(N^2)									 how? check SC and TC. How to find TC for a recurrence relation
+--------------------------------------------------------------------
+Q) What is best case?
+	pivot = middle
+T(N) = T(N/2) + T(N/2) + O(n)
+	= 2T(N/2) + O(N)			//how to solve? Akkra Baazi : SC and TC lesson + merge sort lesson -> exact solution
+	= O(Nlog(N))
+--------------------------------------------------------------------
+Q) avg case: take all possible permutations of array
+(TC and SC only care about best case and worst case)
+
+
+Q) Is quick sort stable? not stable (if 2 things with same value, may ont appear in same order as previously)\
+
+
+Q) What SC? Space for recursion
+		No extra space, hwy preferred over merge sort(merge sort takes O(n) extra space for mix array)
+
+Q) When to use merge sort? linked list
+
+Q) Why merge sort still sorts a sorted array, while quick sort doesnt?
+
+	while(s<=e)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pseudo Code:
+
+1) base case : low >= high -> dont do anythin
+2) start from s = low and end at e = hi
+	pivot =  m = s+ ( e - s)/2
+
+3) pivot = nums[m];
+
+4) when to swap, condition for swapping
+while s< 3
+	move s++
+		e--
+	if condition false -> violation -> swap
+
+5) /once pivot at correct index, sort 2 halves	(low,e) and (s,hi)
+
+Code:
+
+import java.util.Arrays;
+class main {
+        public static void main(String[] args) {
+            int[] arr = {5,4,3,2,1};
+            sort(arr,0,arr.length-1);
+            System.out.println(Arrays.toString(arr));
+
+
+        }
+        static void sort(int[] nums, int low, int hi) {		//2 pointers tell which part of array we working
+		if(low >= hi) {
+            return;
+        }
+        int s = low;
+        int e = hi;
+        int m = s+ (e - s)/2;
+        int pivot = nums[m];
+
+		while(s<=e) {
+            while(nums[s] < pivot) {
+                s++;
+            }
+            while(nums[e] > pivot) {
+                e--;
+            }
+
+            if(s <= e) {
+                int temp = nums[s];
+                nums[s] = nums[e];
+                nums[e] = temp;
+                s++;
+                e--;
+            }
+        }
+
+        //once pivot at correct index, sort 2 halves
+        sort(nums,low, e);
+        sort(nums, s, hi);
+    }
+
+}
+>Output: 1,2,3,4,5
+
+
+//note : above quick sort may have different implementation : but this is his idea		 
+	

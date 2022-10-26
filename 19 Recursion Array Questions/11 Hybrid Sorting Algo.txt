@@ -1,0 +1,7 @@
+Tin Sort
+
+
+Merge Sort + Insertion Sort(works well with partially sorted data)
+	//dont have to write code //use in competitive programmming	
+
+

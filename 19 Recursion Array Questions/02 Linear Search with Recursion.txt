@@ -1,0 +1,466 @@
+arr = [3,2,1,18,9]
+
+How to search for target?
+
+1) normal linear search
+
+	a) search from 0
+	
+	b) check if found,
+		if reach end -> exit
+
+
+2) Recursion:
+
+What is recursive relation?
+(arr, target, 0)  : check if element at index 0 = target 2
+
+What is base case?
+	if index out of bound -> return false //element not found
+
+Recrusive relation:
+	if arr[0] = target || (arr,target, 1)		//either element found or search in remaining array	 
+
+Recursive Tree:
+	if arr[0] = target || (arr,target, 1)	
+						|
+					if arr[1] = target || (arr,target, 2)
+										|
+									if arr[2] = target || (arr,target, 3)
+														|.....
+												if arr[n-1] = target || (arr,target, outofbound)
+														
+
+
+CODE:
+
+
+public class Find {
+	public static void main(String[] args){
+		int[] arr  = {2,3,1,4,5};	
+		System.out.println(find(arr,4,0));			//Output: true
+		System.out.println(findIndex(arr,4,0));		//Output: 3
+		System.out.println(find(arr,4,arr.length-1));	//Output: 3 
+
+
+	}
+
+	static boolean find(int[] arr, int target, int index) {
+		if(index == arr.length) {
+			return false;
+		}
+		
+		return arr[index] == target || find(arr, target, index+1);
+	}
+
+
+	static boolean findIndex(int[] arr, int target, int index) {
+		if(index == arr.length) {							//is it possible for both -1 and index to return? no
+			return -1;										where is return value passed? above function calls
+		}
+
+		if(arr[index] == target) {
+			return index;
+		}
+		else{
+			return  findIndex(arr, target, index+1)	//element found or search in  remaining array	
+		}
+
+	}
+
+	static boolean findIndex(int[] arr, int target, int index) {
+		if(index == -1) {
+			return -1;								
+		}
+
+		if(arr[index] == target) {
+			return index;
+		}
+		else{
+			return  findIndex(arr, target, index-1)	//element found or search in  remaining array	
+		}
+
+	}
+
+
+}
+			
+
+CODE:
+
+public class Find {
+	public static void main(String[] args){
+		int[] arr  = {2,3,1,4, 4, 5};	
+		System.out.println(find(arr,4,0));			//Output: true
+		System.out.println(findIndex(arr,4,0));		//Output: 3		//gives starting 4
+		System.out.println(find(arr,4,arr.length-1));	//Output: 3 		//gives ending 4
+
+
+	}
+
+	static boolean find(int[] arr, int target, int index) {
+		if(index == arr.length) {
+			return false;
+		}
+		
+		return arr[index] == target || find(arr, target, index+1);
+	}
+
+
+	static boolean findIndex(int[] arr, int target, int index) {
+		if(index == arr.length) {							//is it possible for both -1 and index to return? no
+			return -1;										where is return value passed? above function calls
+		}
+
+		if(arr[index] == target) {
+			return index;
+		}
+		else{
+			return  findIndex(arr, target, index+1)	//element found or search in  remaining array	
+		}
+
+	}
+
+	static void findAllIndex(int[] arr, int target, int index) {
+		if(index == -1) {
+			return -1;								
+		}
+
+		if(arr[index] == target) {
+			return index;
+		}
+		else{
+			return  findAllIndex(arr, target, index-1)	//element found or search in  remaining array	
+		}
+
+	}
+
+
+}
+>
+true
+3
+4
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) How to search for multiple index?  {2,3,1,4,4,5};  : When find target -> add in array list
+				
+
+public class Find {
+	public static void main(String[] args){
+		int[] arr  = {2,3,1,4, 4, 5};	
+		System.out.println(find(arr,4,0));			//Output: true
+		System.out.println(findIndex(arr,4,0));		//Output: 3		//gives starting 4
+		System.out.println(find(arr,4,arr.length-1));	//Output: 3 		//gives ending 4
+		findAllIndex(4,0);
+		System.out.println(list);
+
+	}
+
+	static boolean find(int[] arr, int target, int index) {
+		if(index == arr.length) {
+			return false;
+		}
+		
+		return arr[index] == target || find(arr, target, index+1);
+	}
+
+	static ArrayList<Integer> list = new ArrayList<>();
+	static void findAllIndex(int[] arr, int target, int index) {
+		if(index == arr.length) {							//is it possible for both -1 and index to return? no
+			return -1;										where is return value passed? above function calls
+		}
+
+		if(arr[index] == target) {
+			list.add(index);
+		}
+		else{
+			return  findIndex(arr, target, index+1)	//element found or search in  remaining array	
+		}
+
+	}
+}
+
+>Output: [3,4]
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) How to search for multiple index without arrayList outside??
+Add arraylist in paremetr -> return arrayList  		//change findAllIndex() return type to ArrayList
+
+public class Find {
+	public static void main(String[] args){
+		int[] arr  = {2,3,1,4, 4, 5};	
+		System.out.println(find(arr,4,0));			//Output: true
+		System.out.println(findIndex(arr,4,0));		//Output: 3		//gives starting 4
+		System.out.println(find(arr,4,arr.length-1));	//Output: 3 		//gives ending 4
+		findAllIndex(4,0);
+		System.out.println(list);
+
+	}
+
+	static boolean find(int[] arr, int target, int index) {
+		if(index == arr.length) {
+			return false;
+		}
+		
+		return arr[index] == target || find(arr, target, index+1);
+	}
+
+	static ArrayList<Integer> list = new ArrayList<>();				//static list created outside the recursive function
+	static ArrayList findAllIndex(int[] arr, int target, int index) {
+		if(index == arr.length) {							//is it possible for both -1 and index to return? no
+			return list;										where is return value passed? above function calls
+		}
+
+		if(arr[index] == target) {
+			list.add(index);
+		}
+		else{
+			return  findIndex(arr, target, index+1)	//element found or search in  remaining array	
+		}
+
+	}
+}
+
+
+Explaination: How arrayList is returned in recursive function?
+ 
+Q) How to have return type as ArrayList?
+	1)  Take arrayList inside function call parameter
+		arrayList passed onto all future function calls
+		
+		Recursive relation:
+			f(arr,target,index, list)
+	
+		Base case:
+			if(index == end) {return list; }
+
+			if(target == arr[index])  {add in list}
+
+	2)  Create arrayList inside function body
+		only available for that one function call
+
+Test case: Input: [1,2,3,4,4,8]		target = 4
+		Output: [3,4]
+
+
+Q) How  arrayList is returned to the top? value of reference is passed ( new object not created, reference variable created)
+		Q) When are new objects created? list inside function body(not good approach)
+
+Q) How array list gets updated in each function call after returned? different function call-> different reference variables -> 
+																				 all pointing to same object
+
+
+Q) What is recursive tree?
+
+arr = 1,2,3,4,4,8
+
+			  //tar//num
+	(1,2,3,4,4,8  ,4, 0, [])							//note every function call list reference var ----> points to same list object	|    /\
+	   | 																										|	|
+	  (2,3,4,4,8  ,4 ,1, [])																						|	|entire recursive function returns [3,4]]
+		|					//check if index 1 = 4																|	|
+	     (2,3,4,4,8  ,4 ,2,[])																						|	|entire recursive function returns [3,4]]
+		 |					//check if index 2 = 4																|	|
+	      (2,3,4,4,8  ,4 ,3, [])																					|	|entire recursive function returns [3,4]]
+		   |					//check if index 3 = 4 -> true -> add index in list -> list.add(3)								|	|
+	        (2,3,4,4,8  ,4 ,4, [3])																					|	|entire recursive function returns [3,4]]
+  			|					//check if index 4 = 4 -> true -> add index in list -> list.add(3)							|	|	
+		     (2,3,4,4,8  ,4 ,5, [3,4])																				|	|entire recursive function returns [3,4]]
+				|					//check if index 5 = 4 -> false													|	|
+		     	 (2,3,4,4,8  ,4 ,6, [3,4])																				|	|
+										//out of bound index														V     
+										//base case : return the list 
+											list returned where? from where called
+
+
+Code:
+
+
+
+
+public class Find {
+	public static void main(String[] args){
+		int[] arr  = {2,3,1,4, 4, 5};	
+	/*
+		//Both below works fine: both below lists created inside the recursive functioncall.			//Earlier we had lists outside the function call
+
+	a) 	ArrayList<Integer> ans = findAllIndex(arr,4,0,new ArrayList<>())
+	
+  	b)*/ 	ArrayList<Integer> list = new ArrayList<>();
+		ArrayList<Integer> ans = findAllIndex(arr,4,0,list)		
+
+	*/
+		System.out.println(ans);
+		System.out.println(list);			//this proves both work fine
+
+	}
+
+	static boolean find(int[] arr, int target, int index) {
+		if(index == arr.length) {
+			return false;
+		}
+		
+		return arr[index] == target || find(arr, target, index+1);
+	}
+
+	static ArrayList<Integer> findAllIndex(int[] arr, int target, int index, ArrayList<Integer> list) {
+		if(index == arr.length) {							//is it possible for both -1 and index to return? no
+			return list;										where is return value passed? above function calls
+		}
+
+		if(arr[index] == target) {
+			list.add(index);
+		}
+		else{
+			return  findIndex(arr, target, index+1, list)	//element found or search in  remaining array		//different list reference variables	
+		}
+
+	}
+}
+
+
+Debug:
+
+1)
+  a) base case
+  b) target 4  index 0
+ 	| //check is 0 = 4 , if so add in list
+     recursive call with target, index+1 ,list parameter
+
+2) 
+  a) base case
+  b) target 4 index 1 , list parameter
+	| //check is 1 = 4 , if so add in list
+     recursive call with target, index+1 ,list parameter
+
+....
+
+
+7)
+  a) base case:
+	index outof bound
+		return list
+		//where returned -> from where called -> where called findAllIndex()
+
+-------------------------------------------------------
+Stack:
+
+
+findAllIndex()
+findAllIndex()
+findAllIndex()
+findAllIndex()
+findAllIndex()
+findAllIndex()
+findAllIndex()
+main()
+------------------------------------------------------
+Variables:	
+arr
+target
+index
+list
+arr[index]
+arr.length
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) Case when new list on every function call		//NOT SUITABLE APPROACH
+
+
+	int[] arr  = {2,3,1,4, 4,5};	
+
+Objective: how to return list without taking in argument 
+why it worked before? one object different reference variables
+ how to create list inside the body of function
+	But What problem in this case: new list created again and again for every function call
+		Why? everytime function call called -> that create new list is encountered
+
+	how to pass data above?
+	What other problems?
+		what return type of recursive function? arrayList
+		what function call parameters? (arr,t,0)
+		what function call(arr,t,0) will contain?			//Note allv variables and methods inside function call --> exist  only inside  function call
+			a) create new list  list = []				//new list created
+			b) check if index 0 = target t
+			c) if not call (arr,t,1)
+		
+		  What function call (arr,t,1) contain?
+				a) create new list	list = []				//new list created
+				b) check if index 1 = target t
+				c) if not call (arr,t,2)	
+
+	  		What function call (arr,t,2) contain?
+					a) create new list  list = []						//new list created
+					b) check if index 2 = target t
+					c) if not call (arr,t,3)
+
+	
+				What function call (arr,t,3) contain?
+						a) create new list  list = []						//new list created
+						b) check if index 3 = target t	
+									list.add(3) -> list = [] => list = [3]			//added to list		Q) earlier after adding to list,what happened to to other list reference variables? they allwere pointing to same object , so all reference variables pointed to list = [1]1
+						c) if not call (arr,t,2)												Q) What happening here? every reference variable has different object  
+																						//conclusion: list = [3] is only available in this function call
+																						past and future function call dont know list is added with 1
+
+					What function call (arr,t,4) contain?
+							a) create new list  list = []							//new list created
+							b) check if index 4 = target t							//true
+																			//doesnt know index 3 was added in list, adds only 4 
+										list.add(4) = [4]						//what problem? automatically above and below ones are not updated	
+																		
+							c) if not call (arr,t,2)	
+
+						....
+						What function call (arr,t,6) contain?	//outof bound
+								a) base case return empty list = []
+
+
+
+1) USING ABOVE CASE,base case returns what? empty list
+		returns where ? above function calls
+			final returned? empty list
+
+	Problem: if below function cal returning list X, while current function call having filled/updated list Y. How to update the final returned list?s
+	Solution:		add a check
+				if current call has updated list X + returned list Y
+					final returned list = X + Y
+					//how will we add? list.addAll() method
+				
+
+CODE:
+
+
+
+
+
+static ArrayList<Integer> findAllIndex(int[] arr, int target, int index) {
+		
+
+		public static void main(String[] args){
+			int[] arr  = {2,3,1,4,4,5};
+			System.out.println(findAllIndex2(arr, 4, 0));
+		}
+
+
+		ArrayList<Integer> list = new ArrayLi st<>();
+	
+		if(index == arr.length) {							//is it possible for both -1 and index to return? no
+			return list;										where is return value passed? above function calls
+		}
+
+
+		
+		if(arr[index] == target) {
+			list.add(index);			//what list contains? answer for that function call only
+		}
+
+		ArrayList<Integer> ansFromBelowCalls = findAllIndex(arr,target,index+1);		//why writing this atlast? this line executed when function call removed froms stack
+																	//note : this part is executed every time, but returned only after last function call base reached
+		list.addAll(ansFromBelowCalls);										//note: this part only executed after bottom most function call reached and during stack clearing part
+
+		return list;				//dont forget to return this list
+	}
+}
+
+NOTE: NOT SUITABLE APPROACH
+
+>Output: 3,4

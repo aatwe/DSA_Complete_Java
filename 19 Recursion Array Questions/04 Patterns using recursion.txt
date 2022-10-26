@@ -1,0 +1,120 @@
+Bubble Sort/ Selection Sort using recursion
+
+
+
+Objective: Print below pattern using recursion
+
+* * * * 
+* * *
+* * 
+*
+
+How we solved using iteration? 2  loops
+how many will we need for recursion? dont worry
+
+How to convert iteration problem to recursion? later
+what will recursive function do? print stars , fun(r,c) 
+
+How to print? print rowwise
+
+	   col0  1 2 3
+row 4 	*  * * * 
+row 3		*  * *
+row 2		*  *  
+row 1		*
+
+
+What is recursive subproblem? prnt one * + print (remaining *)
+
+What is base case? if 0th row reached , return
+
+What condition to print *? 
+			if c < r
+					print *				//print one *
+					triangle (r,c+1);		//recursive call for next * in row
+				
+			else  	
+					print ln				//print new line
+					triangle (r-1,0);		//recursive call from next row col 0
+
+
+What recursion tree?
+
+
+1) start row 4 col 0 
+	print *
+
+2) 	   f(4,1)				|    /\
+		print *			|	|
+						|	|
+3) 	   f(4,2)				|	|	
+		print *			|	|
+						|	|
+4) 	   f(4,3)				|	|
+		print /n			|	|
+						|	|
+5) 	   f(3,0)				|	|
+		print *			|	|
+						|	|
+6) 	   f(3,1)				|	|
+		print *			|	|
+						|	|
+7)	   f(3,2)				|	|
+		print *			|	|
+						|	|
+8) 	   f(3,3)				|	|
+		print /n			|	|
+						|	|
+ 						|	|
+9) 	   f(2,0)				|	|
+						|	|
+	    (2,1)				|	|		
+						|	|
+	    (1,0)				|	|
+						|	|
+	    (0,0)				V	|
+
+...
+	   f(4,0)
+
+
+Code:
+
+
+public class Triangle {
+	public static void main(String[] args) {
+		triangle(4, 0);
+		triangle2(4,0);	//prints opposite * pattern
+}
+
+	static void triangle(int r, int c) {
+		if(r == 0) {
+			return ;		
+		}
+		
+		if(c < r) {
+			System.out.println("*")
+			triangle (r,c+1);
+		} else {
+			System.out.println();
+			triangle (r-1, 0)
+		}
+	static void triangle2(int r, int c) {
+		if(r == 0) {
+			return ;		
+		}
+		
+		if(c < r) {
+			triangle (r,c+1);
+			System.out.println("*")		//print lines executed when function popped
+
+		} else {
+			triangle (r-1, 0);
+			System.out.println();			//executed when function popped
+		}
+	
+	
+}
+
+}
+

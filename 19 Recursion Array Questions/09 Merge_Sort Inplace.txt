@@ -1,0 +1,162 @@
+1) dont create new copies of arrays/object
+	use and modify original array
+
+
+
+Solution: pass index values of start, middle and end
+What earlier? we didnt know start and end
+what now? pass variables start and end
+
+
+
+//why? manipulate range with index
+//earlier we were making copy of arr
+//now we will just change and shift value of pointers to get the answer
+
+
+   s   m   e
+   0 1 2 3 4
+1) 5,4,3,2,1
+
+What recursive tree?
+
+
+	(arr,s,e)
+1) 	 (arr,0,4)
+	/		\
+arr,s,m		arr.m.e	
+	
+	
+
+
+
+ Q) How merging takes place
+	for ex 4,5		and 1,2,3
+
+ Ans: what are we merging? in same array 2 parts. to join we will have to create a new array
+	what earlier? 2 separate copies of array
+	
+
+a) take i and j
+
+b) create new array mix
+
+	mix will look like: mix = [1,2,3,4,5]
+
+	
+c) update mix in original array
+	arr[s+k] = mix [k]
+
+	How to update mix elements in original array
+	for (k = 0; k< mix.length; k++) {
+		arr[s+k] = mix[k]	//updation 
+	}
+
+for ex while updating 
+
+currently at 3 in 1,2,3,4,5
+	3,2,1			     /\
+    /		\			|
+   3	 	2,1			|  //update 2,1 with 1,2		how? arr[3+0] becomes  = 1
+	   /		\		|							arr[3+1] = 2
+	  2		 1		|  [1,2]					//this is why doing: s+k
+											//range of 2,1 starts from s
+											//if had done arr[k] would modify from 0
+
+
+What we doing?
+
+while merging
+we create new array
+put sorted elements for particular fun	ction call -> in new created array
+repalce function call array with new created array
+
+// one array contains og non sorted, other contains sorted elements
+//This is how individual part of original object array gets sorted
+
+											
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code:
+
+changes:
+int[] left = mergeSortInPlace(arr,0,mid)); ->	 int[] left = mergeSortInPlace(arr,s,mid));
+
+ int[] right = mergeSortInPlace(Arrays.copyOfRange(arr,mid,arr.length)); ->  int[] right = mergeSortInPlace(arr,mid,arr.length));
+ if(arr.length == 1)  ---> if(s + e == 1) {
+
+return merge(left,right); --->   mergeInPlace(arr,s,m,e);	//not returning anything, just changing original array
+
+         int i = 0;   
+         int j = 0;
+         int k = 0;
+ -->
+	    int i = s;
+         int j = m;
+         int k = 0;
+
+  private static void mergeInPlace(int[] arr, int s, int m, int e) { --> wont return anything
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+import java.util.Arrays;
+class main {
+        public static void main(String[] args) {
+            int[] arr = {5,4,3,2,1};
+            mergeSortInPlace(arr, 0, arr.length);
+            System.out.println(Arrays.toString(arr));
+        }
+
+    static void mergeSortInPlace(int[] arr, int s, int e) {
+        if (e - s == 1) {
+            return;
+        }
+
+        int mid = (s + e) / 2;
+
+        mergeSortInPlace(arr, s, mid);
+        mergeSortInPlace(arr, mid, e);
+
+        mergeInPlace(arr, s, mid, e);
+    }
+
+    private static void mergeInPlace(int[] arr, int s, int m, int e) {
+        int[] mix = new int[e - s];
+
+        int i = s;
+        int j = m;
+        int k = 0;
+
+        while (i < m && j < e) {
+            if (arr[i] < arr[j]) {
+                mix[k] = arr[i];
+                i++;
+            } else {
+                mix[k] = arr[j];
+                j++;
+            }
+            k++;
+        }
+
+        // it may be possible that one of the arrays is not complete
+        // copy the remaining elements
+        while (i < m) {
+            mix[k] = arr[i];
+            i++;
+            k++;
+        }
+
+        while (j < e) {
+            mix[k] = arr[j];
+            j++;
+            k++;
+        }
+
+        for (int l = 0; l < mix.length; l++) {
+            arr[s+l] = mix[l];
+        }
+    }
+
+    }
+
+>[ 1 2 3 4 5]

@@ -1,0 +1,272 @@
+Q) When to use merge sort? linked list
+	why? linked list are random memory allocation , connected by chains
+
+
+What is merge sort?
+
+
+how we use recursion to solve problems? divide problem into small problems
+
+
+Given: 8,3,4,12,5,6 Array
+
+how to sort this using merge sort?
+ 
+
+
+1) divide array in 2 parts
+3,5,9			4,6,8
+
+2) Sort 1st half of the array using recursion
+	3,5,9
+
+3) Sort 2nd half of array using recursion
+
+	4,6,8
+
+4) Merge both halves   //compare index 0 of both : if arr1[0] < arr2[0] arr1[i++]
+	3,4,5,6,8,12
+
+	How to merge arr1[] and arr2[]
+	new array arr3[] of size arr1[] + arr2[]
+
+	checks what?
+	3<4? 3 -> arr1[i++] , add arr1[i] to arr3[] = [3]
+	5<4? 4 -> arr2[i++] , add arr2[i] to arr3[] = [3,4]
+	5<6? 5 -> arr1[i++] , arr arr1[i] to arr3[]	=  [3,4,5]
+	9<6? 6 -> arr2[i++] , arr arr2[i] to arr3[]	=  [3,4,5,6]
+	9<8? 8 -> arr2[i++] , arr arr2[i] to arr3[]	=  [3,4,5,6,8]
+	 
+	if any elements remaining -> put at back of arr3[]
+
+___________________________________________________________________________________
+
+How to merge sort using recursion?
+	
+What is recursive relation?
+
+1) divide array in 2 parts
+2) Sort first half
+3) Sort second half
+4) merge
+
+	
+What is base condition?
+	if length of array = 1-> return it
+
+
+What is recursive tree?
+
+     /\	8,3,4,12,5,6			|
+	|	----- ------			|
+	|				|
+ret	//8	/ \	//4	\			V
+	   8,3  4	 	12  5  6
+	   ---  --
+
+
+Q) What is returned? array
+
+Code:	//Note: to divide code, create new packages, for ex create sorting
+
+Objective:
+1) write base case
+2) pass copy of array in left	//note a new array will be passed in recursion calls
+						//sorting will be done on copy of array (not original array)
+
+
+What will recursive function mergeSort do?
+
+	a) Create a new array  //mix array with size as sum of both
+
+	b) how many variables needed?
+		3 // one for arr1 and one for arr2 and one for mix array
+
+		hwo logn to check index? till any one becomes out of bound
+
+		What to compare? first[i] < second[j-> add first[i] in mix[k]
+
+	c) what if one of the array is not complete?	
+		i< first.length		//while i not finished copy remaining elements
+			i++
+			k++
+
+		j<second.length
+			j++;
+			k++;
+
+--------------------------------------------------------------------------
+
+package com.abhi.sorting
+
+
+ class main {
+    public static void main(String[] args) {
+        int[] arr = {5,4,3,2,1};
+        arr = mergeSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    static int[] mergeSort(int [] arr) {
+        if(arr.length == 1) {									//Base case
+            return arr;
+        }
+
+        int mid = arr.length/2;								//Find middle
+        int[] left = mergeSort(Arrays.copyOfRange(arr,0,mid));			//Find left sort
+        int[] right = mergeSort(Arrays.copyOfRange(arr,mid,arr.length));	//Find right sort
+
+        return merge(left,right);								//merge both
+    }
+
+     private static int[] merge(int[] first, int[] second) {
+         int[] mix = new int[first.length + second.length];
+
+         int i = 0;
+         int j = 0;
+         int k = 0;
+
+         while (i < first.length && j < second.length) {
+             if (first[i] < second[j]) {
+                 mix[k] = first[i];
+                 i++;
+             } else {
+                 mix[k] = second[j];
+                 j++;
+             }
+             k++;
+         }
+
+         // it may be possible that one of the arrays is not complete
+         // copy the remaining elements
+         while (i < first.length) {
+             mix[k] = first[i];
+             i++;
+             k++;
+         }
+
+         while (j < second.length) {
+             mix[k] = second[j];
+             j++;
+             k++;
+         }
+
+         return mix;
+     }
+
+}
+> 1 2 3 4 5
+
+
+
+Q) How to check original array was modified or not?
+
+    public static void main(String[] args) {
+        int[] arr = {5,4,3,2,1};
+        arr = mergeSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+> 1 2 3 4 5	//note original array not modified in it
+
+Change above to
+    public static void main(String[] args) {
+        int[] arr = {5,4,3,2,1};
+        int[] ans = mergeSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+> 5 4 3 2 1
+_______________________________________________________________________
+
+
+What is recursive tree
+
+			5 4 3 2 1
+			--  -----
+	    	    /			\
+//1		 5 4	 //4	    3  2  1
+   		/ \			/	\
+//2       5   4	  //3	    3		2 1
+  
+
+//all arrays created in between are new arrays
+
+
+
+What other way if dont want to create new arrays? start,middle and end index values and divide array virtually (like in BS)
+
+
+Q) What TC?
+
+a) 	----	----	size N
+	/	    \
+   n/2	   n/2
+ /	\	   /	 \
+n/4	n/4   n/4	 n/4
+...
+1 1 1 1 1 1 1  1 1 1..n
+
+how many elements at every level merged? n
+
+1) how many comparisons at every level? N
+
+2) total levels? log n 
+
+		  n,n/2,n/4,n/8,n/16...1
+		  n/2^0, n/2^1, n/2^2, n/2^3, n/2^4.... n/2^k
+
+	1 = n/2^k
+	klog2 = log n
+
+	k = log N
+		 2
+
+
+3) What complexity? total level * work at every level
+	O(N * log(n))		//Merge sort time complexity
+
+
+Q) What space complexity? max height of tree
+	total n elements in stack memory of array at a time
+	O(N)
+
+
+
+Q) What is recurrence relation using Akkra baazi formuala
+
+T(N) = T(N/2) + T(N/2) + N-1
+		//why n-1 ? n-1 comparisons required to merge 2 arrays of n/2
+		not checking last element with anyone	 
+
+	2T(N/2) + (N-1)
+
+calculate p
+	2 * (1/2^p) = 1
+	hence p = 1
+
+		  x
+T(N) = x + x ∫ u - 1 / u^(p+1)
+		 1
+
+		  x
+T(N) = x + x ∫ u - 1 / u^(2)
+		 1
+
+
+		   
+∫ [1/u  - 1/u^2].du    
+		 
+		  1
+log u + 1/u |
+		  x
+
+log x + 1/x - 1
+
+
+x + x [log x + 1/x - 1]
+
+= x + xlogx + 1 - x
+= xlogx + 1
+
+= O(xlogx) or O(nlog(n))
+

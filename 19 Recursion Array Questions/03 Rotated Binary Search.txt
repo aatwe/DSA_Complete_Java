@@ -1,0 +1,78 @@
+How to do rotated binary search using recursion.
+
+
+Given: [5,6,7,8,9,1,2,3]
+target: search for 7
+
+
+
+1) Find middle
+
+7 elements /2 = 3
+
+2) find start
+	s = 0
+
+3) find end 
+	e = arr.length-1
+
+
+
+4) What is target ?
+
+
+5) All possible test cases
+	check first half is sorted
+	check if second half is sorted
+	
+
+
+
+ if arr[s] <= arr[mid]				//sorted part of array
+	if key >= arr[s] & <= arr[mid]		//check if key is in first half
+		end = mid - 1;
+	else							//chekc if target is outside window
+		s = m+1
+
+ 	if key >= arr[s] & <= arr[e]
+		s = mid + 1
+
+
+	else							//what if 
+		e = mid - 1
+
+
+Code:
+
+public class RBS {
+	public static void main(String[] args) {
+		int[] arr = {5,6,7,8,9,1,2,3};
+		System.out.println(search(arr, 8, 0 , arr.length-1));			//what recursive relation contains?  arr, target, starting index, ending index
+
+	}
+	static int search(int[], int target, int s, int e) {
+		if(s> e) {return -1;}									//Base case
+		  
+
+		int m = s + (e - s) / 2;								//find mid
+		if(arr[m] == target) {return m;}							//base case element found		
+
+		if(arr[s] <= arr[m])									//current first half window sorted
+			if(target >= arr[s] && target <= arr[m]) {			//target element present in 1st half
+				return search(arr,target, s, m-1);						//recursive search in s to m-1
+			} else {							  	   //target element not present 1st half
+				return search(arr, target, m+1, e); 						//recursive search in m+1 to e
+									
+			}
+		}
+			if(target >= arr[m] && target <= arr[e]) {			//target element present in 2nd half
+				return search(arr,target, m+1, e);						//recursive search in m+1 to e
+			}
+			return search(arr,target, s, m-1);
+	}
+
+}
+>Output: 3		//if an element does not exist -> returns -1
+
+
+What space and time complexity?

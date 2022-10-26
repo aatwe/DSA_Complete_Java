@@ -1,0 +1,116 @@
+What is selection sort? 4,3,2,8,1 
+How t find largest element? linear search
+
+1) take largest element in array (8) 	   -> put at last
+
+				 4,3,2,1,8
+				 ------- +
+2) take largest element in array (-) (4) -> put at last
+				 1,3,2,4,8
+				 ----- + +
+
+3) take largest element in array (-) (3) -> put at last
+				 1,2,3,4,8
+				 ----+ + +
+
+How to implement using recursion? 
+
+find a way to track max element?
+	1) check max index -> pass to future recursion calls
+						how to pass? pass in argument
+
+Q) What is recursive FUNCTION PARAMETERS
+Since we want to pass  max -> put in argument
+
+arr = [4,3,8,1]
+
+F(R,C,MAX)
+
+
+//r = 4 : will check first 4 elements
+//r = 3 : will check first 3 elements
+...
+
+
+q) wHAT IS RECURSIVE TREE?
+1) f(4,0,0)
+	|		//is 4> max
+2) f(4,1,4)
+	|		//is 3> max
+3) f(4,2,8)
+	|
+4) f(4,3,8)
+ 
+
+Code (Similar)
+
+public class Triangle {
+	public static void main(String[] args) {
+	
+		int[] arr ={4,3,2,1};
+		bubble(arr,arr.length - 1, 0);
+		System.out.println(Arrays.toString(arr));
+Goal: 
+1) maintain max for current row
+ if (arr[col] > arr[max]) {
+	recrusive call
+}
+
+
+
+public class triangle {
+	public static void main(String[] args) {
+
+	int[] arr = {4,3,2,1};
+	selection(arr,arr.length,0,0);		//note arr.length , not arr.length -1 -> not skipping
+	System.out.println(Arrays.toString(arr));
+
+
+	static void selection(int[] arr, int r, int c, int max) {
+		if(r == 0) {					//Base case
+			return ;		
+		}
+		
+		if(c < r) {					//condition for one single row c < r	
+
+			if(arr[c] > arr[max]) {		//if c element > c+1 element -> swap
+
+				selection(arr, r, c+1, c)
+		} else {
+				selection(arr, r, c+1, max)
+
+		}
+									
+		} else {
+								//why swap if c is not < r?entire row evaluated, we have the final max of the row, for ex for 4th row, swap with 3 (row-1)
+			int temp = arr[max];
+			arr[max]; = arr[r-1];
+
+			arr[r-1] = temp;
+								
+			selection (arr,r-1, 0, 0	)			//if row condition breaks, bubble recursive on next bottom row col 0			
+		}
+	
+	}
+
+}
+  
+>Output:
+1,2,3,4
+
+++++++++++++++		//note: max shows index
+Debug:
+[1,4,3,5]
+selection(arr,4,0,0)
+ | //check 0< 4 true
+ |	  check 4 > 0 true
+selection(arr,4,1,0) 
+ | //check 1<4 true
+	  check arr[c] > arr[max]
+ |	             4 > 1	
+		//max update to 1	
+
+
+		//max updated to 3
+//once traversed entire row
+	swap max with last indedx	

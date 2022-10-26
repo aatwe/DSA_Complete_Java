@@ -1,0 +1,88 @@
+
+
+Q) What was bubble sort? comparing adjancent elements, until bubbles out
+	largest element after every pass used to go to end
+	then second largest comes	
+	...
+
+Above is similar to bubble sort.
+instead of print()
+How? in a row : if col > col+1 -> swap
+
+
+
+
+Q)bubble sort  Dry Run:
+
+[4,3,2,1]
+
+1) (3,0) 			//4>3 -> swap
+
+[3,4,2,1]
+
+2) (3,1) 	 		//4>2 -> swap
+
+[3,2,4,1]			
+
+3) (3,2)			//4>1 -> swap
+
+[3,2,1,4]			
+
+4) (3,2)			///n
+...
+
+5) (2,0)			//
+
+
+
+How original array got sorted? objects and references
+We know how arrays work in recursion
+	What we learnt?
+		how memory management works
+		how arrays passed
+		how arrays returned
+		how arrays are created in body?
+
+Here also many reference var -> pointing to same object
+if we swap in any reference var -> original object will be swapped
+	(passing array in parameter)
+
+If we created in body, new would be created everytime
+
+++++++++++	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code similar:
+
+
+
+public class Triangle {
+	public static void main(String[] args) {
+	
+		int[] arr ={4,3,2,1};
+		bubble(arr,arr.length - 1, 0);
+		System.out.println(Arrays.toString(arr));
+;}
+
+	static void bubble(int r, int c) {
+		if(r == 0) {					//Base case
+			return ;		
+		}
+		
+		if(c < r) {					//condition for one single row c < r	
+			if(arr[c] > arr[c+1]) {		//if c element > c+1 element -> swap
+				int temp  = arr[c];
+				arr[c] = arr[c+1];
+				arr[c+1] = temp;
+		}
+									
+			bubble (arr,r,c+1);			//if c element <= c+1 ->bubble recursive on r,c+1	//next element in row
+		} else {								
+			bubble (arr,r-1, 0)			//if row condition breaks, bubble recursive on next bottom row col 0			
+		}
+	
+	
+	
+}
+
+}
+
+>Output: [1,2,3,4]
