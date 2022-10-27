@@ -1,0 +1,180 @@
+Very important topic for interview prep 
+	 
+
+Note: First observe what we are doing -> then think how we are doing
+
+Note: subset -> arrays
+	 subseq for string
+
+
+When to apply subsets?
+
+1) dealing with permutations and combinations
+
+What are subsets?
+	Non adjacent collection
+
+for ex
+	[3,5,9] --> [3], [3,5], [3,9] , [3,5,9] , [5,9] , [5] , [9]
+				//valid subsets
+				//[5,3] is not a subset	//order always same
+
+How to implement using Recursion / Iteration
+
+a) Given String "abc"
+
+
+What all subsets of this string? str = "abc"
+	a,b,c,ab,ac,bc,abc  
+
+
+
+b) Subset patterns
+ how to create any subset?
+include/not include an element
+
+ex a  =  include a, exclude b, exclude c
+
+
+
+
+
+c) How to implement subset pattern w recursion
+
+
+ 1) take 2 arrays
+	processed    --> 	" " --> a,b,c,ab,ac,bc,abc  
+	unprocessed  --> 	abc
+
+
+
+ w) 		Recursion tree
+		input: = abc	
+			  p    up										| /\
+			" " / "abc"									| |
+														| |
+  		     /		\									| |
+		//include a	   //exclude a							| |
+		("a" / bc)		      (""/ bc)							| |
+ 														| |
+ 		 / inc b	\ec	        / ib	\eb						| |
+		ab/c		 a/c	        b/c	   ""/c					| | 		note: values of up will be local to function call
+	   ic	/    \ec	ic/   \ec	  /ic  \ec	   ic/    \ec				| |
+	    abc/"" ab/"" ac/"" a/""  bc/""  b/""  c/""   ""/""				V |
+
+
+How long till run recursive loop? base condition
+if up is empty -> one of the subset found
+  //possible combo of including and excluding
+
+
+		1
+	/	
+   2
+  /
+3    4
+
+
+
+Q) How many possible answers
+
+abc ,ab  ,ac  a, bc,  b, c		//7 answers
+
+Till now can figure out
+a) How to think
+b) How values are returned
+c) What is base condition
+d) What value of variable at every single level
+e) how value at every single level 
+f) how value of every variable at every level manipulated in arrays / normal var / int / string
+
+
+
+
+Code:Subset using arrays (Iteration)
+
+Given [1,2,3]
+
+2 choices for 1
+	  	   []
+     		/ 	    \ 
+  	  []	   	    [1]			//include/exclude 1
+ 	 /  \		   /	  \
+	[]  [2]	  [1]     [1,2]		//include/exclude 2 given 1 processed
+    /  \ /  \     /  \      /    \
+  [] [3][2][2,3] [1][1,3]  [1,2] [1,2,3]
+
+//always think till here by talking to yourself on any problem
+
+We need a array to add new elements to
+------------------------------------------------------------------------------------------------
+Pseudo Code
+Return list of list of integer  // in this we will add lists
+
+
+What to di internally?
+	initially: outer list empty
+
+	for every no. in array -> take size of list -> create new list -> add in original list
+	for ex creater list of size 3 for array with no. 3 //store in outer n = outer.size
+
+How to add?
+	Create a copy of ith list, add to it
+		How to create copy of internal list, as copy of outer
+			List<Integer> internal = new ArrayList<>(outer.get(i));
+
+
+------------------------------------------------------------------------------------------------
+
+ import java.util.Arrays;
+ import java.util.ArrayList;
+ import java.util.List;
+
+ class main {
+         public static void main(String[] args) {
+             int[] arr = {1,2,3};
+             List<List<Integer>> ans = subset(arr);
+
+             for(List<Integer> list : ans) {
+                 System.out.println(list);
+             }
+         }
+
+         static List<List<Integer>> subset(int[] arr) {
+             List<List<Integer>> outer = new ArrayList<>();
+
+             outer.add(new ArrayList<>());
+
+             for(int num : arr) {
+                 int n = outer.size();
+                 for(int i = 0; i< n; i++) {
+                     List<Integer> internal = new ArrayList<>(outer.get(i));
+                     internal.add(num);
+                     outer.add(internal);
+
+                 }
+
+             }
+             return outer;
+
+         }
+     }
+
+
+
+Q) What tc? 
+	total no. of level / time taken at each level
+
+
+	how much time taken at each level? n   //why? copying n elements
+
+
+how many subset elements? 2^n
+
+
+TC = N*2^n		///why N? creating new subset from original
+
+
+Q) What SC?	
+	O(2^n * N)		//2^n subsets , N" every subset taking O(N) space
+

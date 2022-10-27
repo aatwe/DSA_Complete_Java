@@ -1,0 +1,144 @@
+Q1) What given
+input  -> 	str = baccad
+
+output ->	ans = bccd	 
+
+Q2) How to make? remove all as
+
+
+Q3) How to remove all a's
+	1) iteration :  Stirng Builder
+
+
+	2) Recursion : 
+
+Q4) How to do with recursion?
+
+a) pass answer string in recursion function
+	why? pass to new function calls
+
+b) Create answer variable in function body
+		creates new array on each function call
+
+
+Q5)by passing in argument and extra ans array
+//logic : if !a -> add in ans
+											|    /\
+	(ans = " ", arr = baccad)						|	|
+		|									|	|
+	(ans = "b", arr = accad)						|	|
+											|	|
+											|	|
+	(ans = "ba", arr = ccad)						|	|
+											|	|
+											|	|
+	(ans = "bc", arr = cad)						|	|
+											|	|
+											|	|
+	(ans = "bcc", arr = ad)						|	|
+											|	|
+											|	| return ans above, entire object updated
+	(ans = "bcc", arr = d)						V
+
+	(ans = "bccd", arr = )   //original string is empty
+							Answer found
+							display/return ans
+
+
+
+ 
+Q6) how to do without passing extra arr?
+Use ch pointer to track
+
+
+for ex
+baccad
+answ(baccad)
+ch = b+ answer from answ(accad)//body
+												main()
+//a found -> skip 								|    /\bccd 	
+ch = " "+ answer from answ(ccad)//body					|	| ccd
+		|									|	|
+ch = c  +	answer from answ(cad)//body					|	| ccd							|	|
+		|									|	|											|	|
+ch = c  +	answer from answ(ad)//body					|	| cd	// d(recursive) takes c(local) with it
+		|									|	|
+ch = " " + answer from answ(d)//body					|	| d
+											|	|
+ch = d + 	" "			   						|	|
+	//ans found								|	|
+											|	|
+											|	| return ans above, entire object updated
+											V
+
+	(ans = "bccd", arr = )   //original string is empty
+							Answer found
+							display/return ans
+
+//note: variables clreated in fucntion body -> have scope of function call only
+		//they are passed when function call empties
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pseudo Code:
+main() 
+
+call skip p = " " and up = 	baccadah	
+
+
+recursive call skip() 
+1) pass processed and unprocessed string
+2) base condition: unprocessed when empty ->	 print answer
+3) find 1st char found a
+	recursive call skip keep processed array as it is, remove from up using substring method 	//substring //creates new object //removes first char
+	else if any other char found
+	recursive call skip add ch to pas it is, remove from up using substring method	
+
+Code:
+
+    import java.util.Arrays;
+    class main {
+            public static void main(String[] args) {
+                skip(" ", "baccdah");
+            }
+    
+            static void skip(String p, String up) {	///processed and unprocessed string
+                if(up.isEmpty()) {
+                    System.out.println(p);
+                    return;
+                }
+    
+                char ch = up.charAt(0);
+                if (ch == 'a') {
+                    skip(p, up.substring(1));
+                }
+                else {
+                    skip(p+ch, up.substring(1));
+                }
+            }
+    }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//How to return a string
+without passing extra arr
+
+
+    import java.util.Arrays;
+ 
+    class main {
+        public static void main(String[] args) {
+            System.out.println(skip("baccdah"));		//this value will contain a string
+        }
+
+        static String skip(String up) {	///processed and unprocessed string
+            if(up.isEmpty()) {
+                return "";
+            }
+            char ch = up.charAt(0);
+            if (ch == 'a') {
+                return skip(up.substring(1));
+            }
+            else {
+                return ch + skip(up.substring(1));
+            }
+        }
+    }
+
+> bccdh

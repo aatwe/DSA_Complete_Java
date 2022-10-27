@@ -1,0 +1,106 @@
+1) Ex
+Given arr = 1,2,2
+
+		[]
+	  /		\
+	[]		[1]
+
+    /  \ 	    /    \
+[]    [2]    [1]     [1,2]
+
+... add another layer of include/not include 2
+
+[] [1] [2] [1,2] [2] [1,2] [1,2] [2,2] [1,2,2]
+
+
+We have duplicate elements in subset
+
+
+Q) Why repeating? we added 2 again
+
+Q) What to do?
+	Add 2 only in the subsets that are newly created  
+
+
+Algo:
+`	1) find newly created subsets
+
+	2) add only in these
+
+
+Q) how to find newly created subsets?
+
+	how to find duplicate at which level?
+	Solution: duplicates adjacent   for ex [2,1,2]
+		how to keep them adjacent together? sort array
+
+
+
+	1) Sort array
+	2) find newly created subsets
+
+	3) add only to these new elements
+
+-------------------------------------------------------------
+Pseudo Code:
+1) Sort the array
+2) Use start and end index
+	What condition for finding duplicate?
+	if current and prev element same -> s = e+1
+	
+	start index = prvious end index + 1		//we start adding from end + 1 position
+	end  = arr.length //last element
+
+
+Code:
+
+ import java.util.Arrays;
+ import java.util.ArrayList;
+ import java.util.List;
+
+ class main {
+         public static void main(String[] args) {
+             int[] arr = {1,2,2};
+             List<List<Integer>> ans = subsetDuplicate(arr);
+             for(List<Integer> list : ans) {
+                 System.out.println(list);
+             }
+         }
+
+         static List<List<Integer>> subsetDuplicate(int[] arr) {
+		  Arrays.sort(arr);							//sort arr
+             List<List<Integer>> outer = new ArrayList<>();
+    		  outer.add(new ArrayList<>());
+		  int start = 0;
+		  int end = 0
+
+             for(int i = 0; i< arr.length; i++) {
+			 start = 0;
+			 if(i>0 && arr[i] == arr[i-1]) {
+				start = end + 1;
+			}
+			end = outer.size() -1;
+
+                 int n = outer.size();
+                 for(int j = start; j< n; j++) {
+                     List<Integer> internal = new ArrayList<>(outer.get(j));
+                     internal.add(arr[i]);
+                     outer.add(internal);
+
+                 }
+
+             }
+             return outer;
+
+         }
+     }
+
+[]
+[1]
+[2]
+[1, 2]
+[2, 2]
+[1, 2, 2]
+
+
+What complexity? same as subset iteration

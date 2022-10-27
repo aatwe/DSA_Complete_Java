@@ -1,0 +1,35 @@
+Objective: Skip a particular string 
+Use .startsWith() method
+
+logic
+if starts with "apple"  -> skip
+
+No change in terms of recursion tree
+only comparison changed
+
+import java.util.Arrays;
+class main {
+    public static void main(String[] args) {
+        System.out.println(skipAppNotApple("bacappledah"));		//this value will contain a string
+    }
+
+    static String skipAppNotApple(String up) {	///processed and unprocessed string
+        if(up.isEmpty()) {
+            return "";
+        }
+        char ch = up.charAt(0);
+
+        if (up.startsWith("app") && !up.startsWith("apple")) {
+            return skipAppNotApple(up.substring(3));
+        }else {
+            return up.charAt(0)  + skipAppNotApple(up.substring(1));
+        }
+    }
+}
+
+
+Q) What TC? Length of string	//every char checked once 
+	//both recursion calls wont run all time (if,else)	
+	one of them will run
+
+

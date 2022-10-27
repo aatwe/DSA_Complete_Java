@@ -1,0 +1,28 @@
+Objective: Skip a particular string 
+Use .startsWith() method
+
+logic
+if starts with "apple"  -> skip
+
+
+  import java.util.Arrays;
+ 
+    class main {
+        public static void main(String[] args) {
+            System.out.println(skipApple("bacappledah"));		//this value will contain a string
+        
+		}
+
+        static String skipApple(String up) {	///processed and unprocessed string
+            if(up.isEmpty()) {
+                return "";
+            }
+            char ch = up.charAt(0);
+            if (up.startsWith("apple")) {
+                return skipApple(up.substring(5));
+            }
+            else {
+                return up.charAt(0)  + skipApple(up.substring(1));
+            }
+        }
+    }
