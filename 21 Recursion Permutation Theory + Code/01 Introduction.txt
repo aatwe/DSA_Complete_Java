@@ -1,0 +1,203 @@
+Q0) Objective: Code to find premutations of a string str = "abc"
+
+cba
+bca
+bac
+cab
+acb
+abc
+
+Q1) What is permutation
+		//combinations of include/exclude
+	
+
+for ex str = abc
+	What permutations of str?
+	[abc, bac, cab, bca, acb]
+
+
+1) rule: no character can be ignored
+
+2) take 2 arr[]
+	p[] up[]
+	" "/ "abc"
+
+3) How to solve using recursion?
+		take first char  , find subsets
+
+
+4) if up is empty -> answer found  
+What is recursion call?
+					 p  / up
+
+		  	        	" " / abc
+	  	        /     	 	  			//1 recursion call
+	    	  a/bc
+       /		       \					//2 recursion calls
+ 
+     ab/c		          ba/c
+
+ /     |     \         /     |   \			//3-3 recursion call
+
+cab/"" acb/"" abc/"" cba/""  bca/"" bac/""  			//up = " " -> permutation found
+
+
+
+Total permutation for size 3 = 3! = 6
+
+
+
+5) 
+How to display permutations?
+How to return permutations in list?
+How to return count of permutations?
+
+6) What is new about this recursive pattern?
+variable recursion calls at every level
+
+earlier, every function call -> 2 recursion calls
+
+
+How many recursion call at a level? size of p + 1
+
+7) What is each recursive function call doing?
+	add first char of up -> into -> potential answers' respective positions
+
+	how many positions = p.length + 1
+	for ex
+	positions to add for recursive function for p of length 1 = 2
+
+8) How to implement variable no. of recursive function call?
+	recursive call in for loop
+	how many times? p.size + 1 
+
+
+For ex
+	ba / c
+
+positions to add = 3
+
+represent b as 0 , a as 1
+
+    0   1
+  _ b _ a _
+  x   y   z
+
+x = [0,0) + ch + (0,end)
+
+y = (0,1] + ch + [1,end]
+  
+z = (0,2] + ch + (2,2]
+
+
+f = substring(0,i)
+s = substring(i, length)
+p = f +ch + s
+
+for(i=0; i<=2; i++) 
+
+
+Q) How many function calls? size + 1
+Q) Concept is same, what is changing? no. of recursion calls etc
+Pseudo Code:
+
+a) main
+
+b) permutations
+	b.1) base case : if up is empty -> print p
+	b.2) get first char
+	b.3) loop till p length
+		b.3.1) get first part / substring till i
+		b.3.2) get second part / substring from i till p.length
+		b.3.3) recursive call permutations() for p = f+ch+s  up = skip first char of up
+
+Code:
+
+
+
+     class main {
+         public static void main(String[] args) {
+            permutations("", "abc");
+         }
+         static void permutations(String p, String up) {
+             if(up.isEmpty()) {
+                   System.out.println(p);
+                   return;
+             }
+             char ch = up.charAt(0);
+             for(int i = 0; i<= p.length() ; i++) {
+                String f = p.substring(0,i);
+                String s = p.substring(i, p.length());
+                permutations(f + ch + s,up.substring(1));
+;             }
+
+         }
+     }
+
+
+
+Q) How to return using ArrayList? .addAll() method as  before
+
+Changes:
+1) return ArrayLIst
+2) Create a new arrayList ans
+3) Create new arrayList in base case
+3) call recursive function in ans.addAll
+
+
+import java.util.ArrayList;
+
+class main {
+    public static void main(String[] args) {
+        ArrayList<String> ans = permutationsList("", "abc");
+        System.out.println(ans);
+    }
+    static ArrayList<String> permutationsList(String p, String up) {
+        if(up.isEmpty()) {
+            ArrayList<String> list = new ArrayList<>();
+            list.add(p);
+            return list;
+        }
+        char ch = up.charAt(0);
+        ArrayList<String> ans = new ArrayList<>();
+
+        for(int i = 0; i<= p.length() ; i++) {
+            String f = p.substring(0,i);
+            String s = p.substring(i, p.length());
+            ans.addAll(permutationsList(f + ch + s,up.substring(1)));
+        }
+        return ans;				//ans keeps getting updated	  .addAll() runs for all recursion calls
+    }
+}
+
+
+
+
+
+Q) How to get count?  //remember to return count (all answers) after function over
+
+import java.util.ArrayList;
+
+class main {
+    public static void main(String[] args) {
+        System.out.println(permutationsCount("", "abc"));
+    }
+    static int permutationsCount(String p, String up) {
+        if(up.isEmpty()) {
+            return 1;
+        }
+        int count = 0;
+        char ch = up.charAt(0);
+        for(int i = 0; i<= p.length() ; i++) {
+            String f = p.substring(0,i);
+            String s = p.substring(i, p.length());
+            count = count + permutationsCount(f + ch + s,up.substring(1));
+            }
+        return count;
+    }
+}
+
+
+
+
+
