@@ -1,0 +1,133 @@
+How many ways to form 4 on a die
+
+
+1) no. on die = 1,2,3,4,5,6
+
+
+2) output: [4], [2,2], [1,3] , [3,1] 
+//combinations
+
+
+What output looks like:
+
+ output: [4], [2,2], [1,3] , [3,1] 
+	
+What approach? p/up , why? taking some no. ignoring some
+
+____________________________________________________________________
+
+
+1) Objective: sum should be 4
+	how to make sum of 4?
+			p  up
+			""/4
+     /      /	          \	\
+  1/3     2/2			3/1   4/0		//condition: both argument no. <= target
+								//when target found? up = 0
+
+
+ /  |  \
+
+11/2 12/1 13/0						//read as can take 1 agian, remaining = 4 -(1+1) = 2
+
+
+
+//how to return? return list -> list.addAll()
+
+Pseudo Code:
+a) main
+	a.1)
+
+b) dice
+	b.1) base condition if target == 0 -> print p and return
+	b.2) loop over all integers and recursive call
+		for()
+		//take i, remaining target - i
+		//also add i<= target condition
+		   dice(p+i, target - i);
+
+
+Code:								
+
+
+import java.util.ArrayList;
+    class main {
+        public static void main(String[] args) {
+            dice("", 4);
+        }
+
+        static void dice(String p, int target) {
+            if(target == 0) {
+                System.out.println(p);
+                return;
+            }
+        for(int i =1; i <= 6 && i<= target; i++) {
+            dice(p+i, target - i);
+            }
+        }
+
+    }
+>1111		//All ways to form 4 listed
+112
+121
+13
+211
+22
+31
+4
+
+>Nothing is new, all is explained
+
+Q) How to return in arrayList
+
+
+
+
+import java.util.ArrayList;
+    class main {
+        public static void main(String[] args) {
+
+            System.out.println(diceRet("", 4));
+        }
+
+        static ArrayList<String> diceRet(String p, int target) {
+            if(target == 0) {
+                ArrayList<String> list = new ArrayList<>();
+                list.add(p);
+                return list;
+            }
+            ArrayList<String> list = new ArrayList<>();
+
+
+            for(int i =1; i <= 6 && i<= target; i++) {
+                list.addAll(diceRet(p + i, target - i));
+            }
+            return list;
+        }
+
+    }
+
+
+>1111		//All ways to form 4 listed
+112
+121
+13
+211
+22
+31
+4
+Q) What if n faced die ? return in arg
+static ArrayList<String> diceRet(String p, int target, int face) {
+            if(target == 0) {
+                ArrayList<String> list = new ArrayList<>();
+                list.add(p);
+                return list;
+            }
+            ArrayList<String> list = new ArrayList<>();
+
+
+            for(int i =1; i <= face && i<= target; i++) {
+                list.addAll(diceRet(p + i, target - i, face));
+            }
+            return list;
+        }
