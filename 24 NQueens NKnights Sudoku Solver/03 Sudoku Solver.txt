@@ -1,0 +1,290 @@
+1) When to use backtracking? if putting potential answer -> affects future answers
+Uses back tracking
+Given: partial filled sudoku
+
+5 3 _ _ 7 _ _ _ _
+6 _ _ 1 9 5 _ _ _
+_ 9 8 _ _ _ _ 6 _
+8 _ _ _ 6 _ _ _ 3
+4 _ _ 8 _ 3 _ _ 1
+7 _ _ _ 2 _ _ _ 6
+_ 6 _ _ _ _ 2 8 _ 
+_ _ _ 4 1 9 _ _ 5
+_ _ _ _ 8 _ _ 7 9
+
+
+
+
+What is sudoku?
+	a) 9x9 grid
+	b) add 1-9
+	c) every row: 1-9 cant repeat
+	d) every col: 1-9 cant repeat
+	e) every 3x3 grid
+
+
+Same concept, just few changes in isSafe()
+
+
+2) recursive function argument: board 
+
+3) find which row / col is empty
+	
+	if empty found(for ex 0,2), put every no. 1-9
+
+	Recursion tree forms
+
+	(0,2)	//check if can put 1 , works
+	/
+   (0,3)  //col++ //check if can put 1	, not works //check if can put 2
+ 	/
+   (0,5)		//check 1 	 //check 2 //check3  //check 4 works
+
+   (0,6)		//check1 ,2,3,4,5,6,7,8 works
+ 
+   (0,7)		//...//check9 works
+  
+   (9,8)		//check 6 -> cannot put 6 -> backtrack		
+
+
+4) how  to check if isSafe()
+	a) check all cols
+	b) check all rows
+	c) check grid
+		how to check grid	
+		if at position 7,4 : 1
+		What is box from , to?
+
+//Eliminate extra items
+			row = nearest multiple of 3 = 7 - 7%3	  = 6
+					//3 is root of n in nxn grid
+    			col = nearest multiple of 3 = 4 - 4%3   = 3
+
+   			From(6,3)
+
+Pseudo Code:
+
+
+SudokuSolver
+
+
+a) main
+	create sudoku input
+     int[][] board = new int[][]{...}
+
+
+	print(solve(board));
+
+
+
+b) solve			//what arg? board[][] 
+		b.1) get board length
+		b.2) initiate row and col as -1
+		b.3) check if empty item found in board
+				store in row and col
+				after every emtpy space found-> set emptyLeft to false
+				break	
+ 				if found any empty element (emptyLeft == false) -> break
+		b.4) if no empty found ->  return true; (Sudoku Solved)
+		
+
+
+c) isSafe()		//what arg? int[][] board, int row, int col, int num to be entered	 
+
+	b.1) Check if row contains that num
+	loop from 0 to board.length
+		check if board[row][col] already is num
+
+
+	b.2) Check if col contains that num
+	loop nums in board
+		if nums[col] == num
+			return false
+
+	b.3) check grid
+	int sqrt = (int)(Math.sqrt(board.length));	//find sqrt
+	int start = row - row%sqrt				//findstart //discussed above
+ 	int end = col - col%sqrt;				//find end
+			b.3.1) loop grid
+					if num found return false
+				
+			
+	b.4) if no empty element found -> return true	
+
+
+	b.5) Backtrack
+	How to backtrack?backtrack condition?
+
+	loop all no. 1 to 9
+	if isSafe() to enter that row,col,number at row,col
+			put the number
+			again run solve() -> if return true
+								display the board //display()
+								return true	//backtrack answer found
+							else
+								again backtrack //replacing changes
+								board[row][col] = 0;
+
+	else if still cant find answer -> return false //sudoku cant be solved
+
+
+	 for(int number =1; number <=9; number++) {
+                if(isSafe(board,row,col,number)) {
+                    board[row][col] = number;
+                    if(solve(board)) {
+                        display(board);
+                        return true;
+                    } else {
+                        board[row][col] = 0;
+                    }
+                }
+            }}
+
+
+
+d) display(int [][] board)
+	How to display
+	loop all rows in board
+		loop all num in row
+			print all num 
+		print new line	 
+
+
+	for(int[] row: board) {
+		for(int num : row) {
+			System.out.println(num + " ");
+		}
+		System.out.println();
+
+}
+
+
+EDIT: dont display inside
+instead display in main ///why? many sudoku solutions
+  if (solve(board)) {
+                    display(board);
+                } else {
+                    System.out.println("Cannot solve");
+                }
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Code:
+
+
+
+ class main {
+     public static void main(String[] args) {
+        int[][] board = new int[][]{
+                { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
+                { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
+                { 0, 8, 7, 0, 0, 0, 0, 3, 1 },
+                { 0, 0, 3, 0, 1, 0, 0, 8, 0 },
+                { 9, 0, 0, 8, 6, 3, 0, 0, 5 },
+                { 0, 5, 0, 0, 9, 0, 6, 0, 0 },
+                { 1, 3, 0, 0, 0, 0, 2, 5, 0 },
+                { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
+                { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
+
+                if (solve(board)) {
+                    display(board);
+                } else {
+                    System.out.println("Cannot solve");
+                }
+     }
+     static boolean solve(int[][] board) {
+         int n = board.length;
+         int row = -1;
+         int col = -1;
+
+         boolean emptyLeft = true;
+
+         // this is how we are replacing the r,c from arguments
+         for (int i = 0; i < n; i++) {
+             for (int j = 0; j < n; j++) {
+                 if (board[i][j] == 0) {
+                     row = i;
+                     col = j;
+                     emptyLeft = false;
+                     break;
+                 }
+             }
+             // if you found some empty element in row, then break
+             if (emptyLeft == false) {
+                 break;
+             }
+         }
+
+         if (emptyLeft == true) {
+             return true;
+             // soduko is solved
+         }
+
+         // backtrack
+         for (int number = 1; number <= 9; number++) {
+             if (isSafe(board, row, col, number)) {
+                 board[row][col] = number;
+                 if (solve(board)) {
+                     // found the answer
+                     return true;
+                 } else {
+                     // backtrack
+                     board[row][col] = 0;
+                 }
+             }
+         }
+         return false;
+     }
+     private static void display(int[][] board) {
+         for(int[] row : board) {
+             for(int num : row) {
+                 System.out.print(num + " ");
+             }
+             System.out.println();
+         }
+     }
+
+
+     static boolean isSafe(int[][] board, int row, int col, int num) {
+         // check the row
+         for (int i = 0; i < board.length; i++) {
+             // check if the number is in the row
+             if (board[row][i] == num) {
+                 return false;
+             }
+         }
+
+         // check the col
+         for (int[] nums : board) {
+             // check if the number is in the col
+             if (nums[col] == num) {
+                 return false;
+             }
+         }
+
+         int sqrt = (int)(Math.sqrt(board.length));
+         int rowStart = row - row % sqrt;
+         int colStart = col - col % sqrt;
+
+         for (int r = rowStart; r < rowStart + sqrt; r++) {
+             for (int c = colStart; c < colStart + sqrt; c++) {
+                 if (board[r][c] == num) {
+                     return false;
+                 }
+             }
+         }
+         return true;
+     }
+ }
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Qa) What complexity?
+
+how many possible checks for every 9 no.? n^2
+
+
+O(9^n^2)
+
+
+Qb) What space complexity?
+	Array space complexity : O(N^2)
