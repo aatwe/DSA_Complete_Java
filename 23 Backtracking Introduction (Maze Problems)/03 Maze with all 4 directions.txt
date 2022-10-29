@@ -1,0 +1,216 @@
+	  0    1    2
+ 
+0	 X |     |
+	   |     |
+	--------------
+1	   | 	    |
+	   |     |
+	--------------
+2	   |     |
+	   |     |  Y
+
+
+Q1) What allowed directions? up/down/left/right 
+
+Q2) just like diagonal direction added if case
+	cant we add for these directions?
+
+
+
+What changes?
+1) change recursive function name to allPath
+
+2) How to go up? col : same, row: r-1
+	limit condition? row >0
+
+3) How to go left? row : same, col -> reduced by 1
+	limit condition? col >0
+
+Pseudo code:
+
+
+
+Code:
+
+
+
+import java.util.ArrayList;
+class main{
+
+    public static void main(String[] args) {
+
+        boolean board[][] = {
+                {true,true,true},
+                {true,false,true},
+                {true,true,true}
+
+        };
+        pathRestrictions("", board, 0, 0);
+    }
+
+    static void allPaths(String p, boolean[][] maze, int r, int c) {
+        if(r == maze.length - 1 && c ==  maze[0].length -1) {
+            System.out.println(p);
+            return;
+        }
+
+        if (!maze[r][c]) {
+            return;
+        }
+
+        if(r < maze.length - 1) {				//Down 
+            allPaths(p + 'D',maze ,r+1, c);	
+        }
+        if(c < maze[0].length - 1) {				//Right
+            allPaths(p + 'R',maze, r, c+1);
+        }
+	  if(r > 0) {							//Right
+            allPaths(p + 'U',maze, r-1, c);
+        }
+	  if(c> 0) {
+		 allPaths(p + 'U',maze, r, c-1);
+		}
+
+
+    }
+}
+
+//Backtracking Problem : stuck in endless loop, why? reached where it started
+
+Output:
+For below : stack overflow error. Why stack overflow? check by drawing recursion tree
+
+
+ boolean[][] board = {
+                {true,true,true},
+                {true,true,true},
+                {true,true,true}
+
+        };
+
+Q1) how many recursive calls? 4
+
+
+Q2) recursive tree
+
+		  			  ("",0,0)
+					/   	|	    \
+  			(D,1,0)   		(R,0,1)	X//cant go left or up  //condition not hit	
+  	     /    	|	   \ //return
+(DD,2,0)    	(DR,1,1)  (DU,0,0)
+  /      \
+DDR,2,1    DDU,1,0 //return
+
+ /  	     |	    \//return
+DDRR,2,2 DDRU,1,1  DDRL,3,0  
+
+We reached 0,0 after making DU move --> hence never ending
+
+
+
+Solution: //Backtracking Solution: mark the path, remove mark when retracing
+What rule to establish? Do not move back a same path
+We reach back where we started
+Hence back tracking problem
+
+
+
+mark cells -> dont allow to go to visited cells
+	How? mark visited cells as false (rock)
+
+
+
+What issue in marked cells
+
+
+
+	if take path1 and mark cells as visited
+	if take path2 and encounter same marked cell -> should allow
+
+
+Solution: erase marker when function returning (remark as true)
+
+what is Backtracking: making changes while going in below recursion calls -> when coming out, recursion call changes should also be not available
+	when function is returned -> change the changes
+
+Pseudo Code;
+What changes?
+
+1) When goind into function
+	eearlier: if false in boolean array -> return	
+	
+	When goind in recursion call:
+		   if not false -> consider as rock -> set it as false			//Mark
+		maze[r][c] = false;
+
+2) When coming out of a function 
+
+	How to remove changes?
+		maze[r][c] = true;
+
+
+Code:
+
+
+import java.util.ArrayList;
+class main{
+
+    public static void main(String[] args) {
+
+        boolean board[][] = {
+                {true,true,true},
+                {true,true,true},
+                {true,true,true}
+
+        };
+        allPaths("", board, 0, 0);
+    }
+
+    static void allPaths(String p, boolean[][] maze, int r, int c) {
+        if(r == maze.length - 1 && c ==  maze[0].length -1) {
+            System.out.println(p);
+            return;
+        }
+
+        if (!maze[r][c]) {
+            return;
+        }
+
+        maze[r][c] = false;						//Make changes
+
+        if(r < maze.length - 1) {				//Down
+            allPaths(p + 'D',maze ,r+1, c);
+        }
+        if(c < maze[0].length - 1) {				//Right
+            allPaths(p + 'R',maze, r, c+1);
+        }
+        if(r > 0) {							//Right
+            allPaths(p + 'U',maze, r-1, c);
+        }
+        if(c> 0) {
+            allPaths(p + 'U',maze, r, c-1);
+        }
+        maze[r][c] = true;						//Revert changes
+
+    }
+}
+
+> DDRR
+DDRURD
+DDRUURDD
+DRDR
+DRRD
+DRURDD
+RDDR
+RDRD
+RDUDRR
+RRDD
+RRDUDR
+RRDUUDRR
+
+
+//Backtracking
+
+
+//Where is this concept useful? Sudoku Solver
+if we try incorrect ans, have to remove other incorrect ans also have to be removed

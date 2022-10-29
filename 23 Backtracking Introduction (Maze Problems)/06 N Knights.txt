@@ -1,0 +1,178 @@
+Objective : Place knights (4) without any killing any
+Q1) Recursive function 
+(0, 0, 4)			//row,col,knightremaintobeplaced
+
+(0,1,3)
+
+(0,2,2)
+
+(0,3,1)  
+  (1,0,1)
+  (1,1,1)
+  (1,2,1)
+  (1,3,1)
+   ...
+  	           /\
+	  	      |   //return
+(0,4,0)  		
+	
+
+
+
+	
+	 3    2    1 	0
+ 
+3	 K |   K | K  | K  |
+	   |     |    |    |
+	---------------------
+2	   |     |    |    |
+	   |     |    |    |
+	-----------------------
+1	   |     |    |    |
+	   |     |    |    |
+	----------------------   
+0	   |     |	   |    |
+ 	   |     |    |    |
+	---------------------- 
+
+
+Q2) isSafe() checks?
+
+	a) row - 2,col+1
+	b) row - 2,col-1
+	c) row - 1,col+2
+	d) row - 1,col-2  
+
+
+PseudoCode:
+
+a) main
+
+
+b) knight	//what argument? board(boolean) , int row, int col, remaining knights
+
+When to display board? no. of knights = 0
+
+if reach end (col == board.length) --> try next line (recursive call)
+
+if(col == board.length) {
+            knight(board, row+1, 0, ;
+        }
+
+
+if board,row,col is safe
+	board[row][col] = true;  				//mark as true
+	knight(board, row+1, col+1, knights-1);	//check next col,reduce knights by 1
+	board[row][col] = false;				//backtrack	
+
+
+if not safe, move ahead
+	knight(board, row, col+1, knights);
+
+
+if col goes out of bound, skip
+if(row == board.length-1 && col == board.length) {
+	return;
+}
+
+c) isSafe()
+	Check for 4 conditions
+
+4x	Check if valid coord
+		Check if knight is avail
+			if so return false	
+
+	else return true
+
+
+d) isValid()	//arg board,row,col	//check row and col are not running out of matrix
+			//used in isSafe repeatedly
+	check row >0, row < board.length
+	check col>=0 , col< board.length
+
+
+Code:
+
+
+
+ class main {
+    public static void main(String[] args) {
+        int n = 4;
+        boolean[][] board = new boolean[n][n];
+        knight(board, 0, 0, 4);
+    }
+
+    static void knight(boolean[][] board, int row, int col, int knights) {
+        if (knights == 0) {
+            display(board);
+            System.out.println();
+            return;
+        }
+
+        if (row == board.length - 1 && col == board.length) {
+            return;
+        }
+
+        if (col == board.length) {
+            knight(board, row + 1, 0, knights);
+            return;
+        }
+
+        if (isSafe(board, row, col)) {
+            board[row][col] = true;
+            knight(board, row, col + 1, knights - 1);
+            board[row][col] = false;
+        }
+
+        knight(board, row, col + 1, knights);
+    }
+
+    private static boolean isSafe(boolean[][] board, int row, int col) {
+        if (isValid(board, row - 2, col - 1)) {
+            if (board[row - 2][col - 1]) {
+                return false;
+            }
+        }
+
+        if (isValid(board, row - 1, col - 2)) {
+            if (board[row - 1][col - 2]) {
+                return false;
+            }
+        }
+
+        if (isValid(board, row - 2, col + 1)) {
+            if (board[row - 2][col + 1]) {
+                return false;
+            }
+        }
+
+        if (isValid(board, row - 1, col + 2)) {
+            if (board[row - 1][col + 2]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // do not repeat yourself, hence created this function
+    static boolean isValid(boolean[][] board, int row, int col) {
+        if (row >= 0 && row < board.length && col >= 0 && col < board.length) {
+            return true;
+        }
+        return false;
+    }
+
+    private static void display(boolean[][] board) {
+        for(boolean[] row : board) {
+            for(boolean element : row) {
+                if (element) {
+                    System.out.print("K ");
+                } else {
+                    System.out.print("X ");
+                }
+            }
+            System.out.println();
+        }
+    }
+}

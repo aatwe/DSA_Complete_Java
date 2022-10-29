@@ -1,0 +1,84 @@
+1) What given?
+	cannot land at rock
+
+	  0    1    2
+ 
+0	 X |     |
+	   |     |
+	--------------
+1	   | rock|
+	   |     |
+	--------------
+2	   |     |
+	   |     |  Y
+
+
+
+How represented? boolean matrix  0 = rock 1 = accesible path
+what possible moves? right/diagonal
+
+
+
+Q) What is recursion tree?
+				(path,0,0)
+    		//down   /		\	//right
+			(1,0)		  (0,1)
+		    /	     \      /	  \
+		(2,0)     (1,1) (1,1)   (1,2)		//After(1,1) which is rock -> no recursion calls
+			\	  \		  /  	  \
+		     (2,1)	   X	 	(2,2)
+			   \
+			   (2,2)
+
+Pseudo Code:
+After every move have to check if rock or not
+	if rock found --> stop recursion
+			how to stop recursion? return
+How to identify rock position? boolean array
+	How to identify boolean array? pass in argument of recursive function
+	Pass maze in recursive function also
+
+What is base case? cornermost 3,1		(earlier it was 1,1)  //why? 2d array now, earlier 1d array
+
+Wha tcondition for obstacle/rock? if bool array maze's [row][col] = 0 / false
+			HOw to check false? !maze[r][c] => maze[r][c] == false
+
+Create boolean board 3x3 to pass as maze
+
+
+Code:
+
+
+import java.util.ArrayList;
+class main{
+
+    public static void main(String[] args) {
+
+        boolean board[][] = {
+                {true,true,true},
+                {true,false,true},
+                {true,true,true}
+
+        };
+        pathRestrictions("", board, 0, 0);
+    }
+
+    static void pathRestrictions(String p, boolean[][] maze, int r, int c) {
+        if(r == maze.length - 1 && c ==  maze[0].length -1) {
+            System.out.println(p);
+            return;
+        }
+
+        if (!maze[r][c]) {
+            return;
+        }
+
+        if(r < maze.length - 1) {
+            pathRestrictions(p + 'D',maze ,r+1, c);
+        }
+        if(c < maze[0].length - 1) {
+            pathRestrictions(p + 'R',maze, r, c+1);
+        }
+
+    }
+}

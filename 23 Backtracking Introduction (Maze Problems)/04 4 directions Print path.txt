@@ -1,0 +1,193 @@
+For ex Given below path example  from 0,0 to 3,3
+
+	  0    1    2
+ 
+0	 1 |     |
+	   |     |
+	--------------
+1	 2 | 	5   | 6 
+	   |     |
+	--------------
+2	 3 |  4  | 7
+	   |     |  
+
+
+What path? DDRURD
+How to print all remaining paths from 0,0 to 3,3
+Note: also print 1,2... in matrix
+
+
+
+1) What does 1,2... mean? represents what level of recursion we at
+
+	How to add these steps? take another array
+	How to pass this array? pass in argument (different references -> 1 object)
+		
+	What problem here?
+For ex below array in argument
+	What happens when we go back?
+		when go back 5 will be at ddifferent place up(cant have multiple 5), have to erase path		
+
+
+Q) How path value will increment? count var in argument
+							no backtracking the count variable
+							primitive variables in argument -> unique for call
+						if pass array as argument -> when make change, original object modify
+
+
+
+Q) Why are we doing backtracking? original object modified (have to keep og object new for every function call)
+
+Q) Why path array needs backtracking but  step does not?
+	step
+	
+	  0    1    2
+ 
+0	 1 |     |
+	   |     |
+	--------------
+1	 2 | 	 5  |  
+	   |     |
+	--------------
+2	 3 |  4  | 5
+	   |     |  
+
+DDRR
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pseudo Code:
+1) create step variable
+
+2) update step in path array
+	add path array in recursive call
+		increment step in every function call
+			add step in path[][]
+
+	  path[r][c] = step;								//add step
+
+3) print step in base condition
+
+4) backtrack when going back
+	  path[r][c] = 0;								//backtrack
+
+5) print arr in base condition
+
+6) create path array in main
+	size: board.length and board[0].length
+
+7) dont forget to add new line in base condition
+Code:
+
+
+import java.util.Arrays;
+import java.util.ArrayList;
+class main{
+
+    public static void main(String[] args) {
+
+        boolean board[][] = {
+                {true,true,true},
+                {true,true,true},
+                {true,true,true}
+
+        };
+        int [][] path = new int [board.length][board[0].length];
+        allPathPrint("", board, 0, 0, path, 1);
+    }
+
+    static void allPathPrint(String p, boolean[][] maze, int r, int c, int[][] path, int step) {
+        if(r == maze.length - 1 && c ==  maze[0].length -1) {
+		 path[r][c] = step;							//last step is also a step
+            for(int[] arr : path) {
+                System.out.println(Arrays.toString(arr));
+            }
+		 System.out.println(p);
+		 System.out.println();
+            return;
+        }
+
+        if (!maze[r][c]) {
+            return;
+        }
+
+        maze[r][c] = false;
+        path[r][c] = step;								//add step
+
+        if(r < maze.length - 1) {				//Down
+            allPathPrint(p + 'D',maze ,r+1, c, path, step+1);
+        }
+        if(c < maze[0].length - 1) {				//Right
+            allPathPrint(p + 'R',maze, r, c+1, path, step+1);
+        }
+        if(r > 0) {							//Right
+            allPathPrint(p + 'U',maze, r-1, c, path, step+1);
+        }
+        if(c> 0) {
+            allPathPrint(p + 'U',maze, r, c-1, path, step+1);
+        }
+        maze[r][c] = true;
+        path[r][c] = 0;								//backtrack
+    }
+}
+  
+>
+
+[1, 0, 0]
+[2, 0, 0]
+[3, 4, 5]
+DDRR
+
+[1, 0, 0]
+[2, 5, 6]
+[3, 4, 7]
+DDRURD
+
+[1, 6, 7]
+[2, 5, 8]
+[3, 4, 9]
+DDRUURDD
+
+[1, 0, 0]
+[2, 3, 0]
+[0, 4, 5]
+DRDR
+
+[1, 0, 0]
+[2, 3, 4]
+[0, 0, 5]
+DRRD
+
+[1, 4, 5]
+[2, 3, 6]
+[0, 0, 7]
+DRURDD
+
+[1, 2, 0]
+[0, 3, 0]
+[0, 4, 5]
+RDDR
+
+[1, 2, 0]
+[0, 3, 4]
+[0, 0, 5]
+RDRD
+
+[1, 2, 0]
+[4, 3, 0]
+[5, 6, 7]
+RDUDRR
+
+[1, 2, 3]
+[0, 0, 4]
+[0, 0, 5]
+RRDD
+
+[1, 2, 3]
+[0, 5, 4]
+[0, 6, 7]
+RRDUDR
+
+[1, 2, 3]
+[6, 5, 4]
+[7, 8, 9]
+RRDUUDRR
+

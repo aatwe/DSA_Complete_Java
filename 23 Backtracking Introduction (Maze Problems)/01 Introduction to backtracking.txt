@@ -1,0 +1,252 @@
+What problem
+	  0    1    2
+ 
+0	 X |     |
+	   |     |
+	--------------
+1	   |     |
+	   |     |
+	--------------
+2	   |     |
+	   |     |  Y
+
+
+Q) How to reach from X to Y?
+	What possible movement? right,down
+
+
+Ex of path solutions: 
+	R,R,D,D
+
+	D,D,R,R
+
+	D,R,D,R
+	
+	R,D,D,R
+
+	R,D,R,D
+
+How many ways ?
+	What condition for end? reach from (0,0) to (2,2)
+
+	What is simple solution?
+		if at last col -> dd //1 path
+		if at last row -> rr //1 pat
+
+
+Q) How to check recursion is applicable?
+	Given maze
+
+	
+	 3    2    1 	0
+ 
+3	 X |     |    |    |
+	   |     |    |    |
+	---------------------
+2	   |  Y  |    |    |
+	   |     |    |    |
+	-----------------------
+1	   |     |    |    |
+	   |     |    |    |
+	----------------------   
+0	   |     |	   |    |
+ 	   |     |    |    |
+	----------------------   
+
+
+Q) How to reach from x to y
+RD + Rec()
+DR + Rec()	
+
+
+Basic idea = Path till that point + remaining possible paths
+				RD		 +		 Rec()
+
+
+Q) What is recursion tree?
+				 r c
+				(3,3)
+		//down	/       \		//right
+			  2,3          3,2
+			/    \        /    \
+									//rec matrix becomes smaller ->3x3 -> 2x3
+//1path	   1,3    2,2     3,1   2,2
+found			   /    \
+			1,2	  2,1
+
+// when a path is found -> return 1
+
+//When is answer found? row/col becomes 1
+
+total returned 1s = ways to reach end point
+// How many paths from point (2,3)? 3 paths  (a) from 1,3 b) 1,2 c) 2,1) 
+
+// total how many paths returned? 6 
+
+//why we computing paths (2,2) twice ? Solution : Dynamic Programming
+
+Pseudo Code: //Similar concept in phone pad? we return 1 in base condition, take sum of all answers
+			we get from recursion calls , return that answer
+a) main
+
+b) count
+	Base condition : if any row/col reaches 1 -> return 1 path
+		if r == 1 or c ==1 -> return 1
+	if not base condition
+		row decrease / col decrease
+		left			right
+	find total: right + left
+
+
+
+Code:	//we use p / up
+
+What output?
+
+
+import java.util.ArrayList;
+    class main {
+        public static void main(String[] args) {
+        System.out.println(count(3,3));
+        }
+        static int count(int r, int c) {
+            if(r == 1 || c == 1 ) {
+                return 1;
+            }
+        int left = count(r-1, c);
+        int right  = count(r,c-1);
+        return right + left;
+        }
+    }
+
+>6  //ways to reach 0,0 from 3,3
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) How to print paths?
+
+
+
+		 		pathtillpt, r, c
+				("",3,3)
+				/       \		
+			 d, 2,3         r,3,2
+			/    \        	 /    \
+		   dd,1,3  dr,2,2     3,1   2,2			//cannot just return once any one becomes 1 , why? need complete path not just first path
+			   /    							//what return condition? both r and c = 1
+			ddr,1,2
+				\	  						//what condition to make left recursion call? r value >1
+				ddrr,1,1							//what condition to make right recursion call? col value >1
+					//one path found -> print path //base condition
+
+//how different from previous problems? 2 variables instead of 1
+
+Pseudo code:
+
+a) main
+
+b) path  //arg p,r,c
+	b.1) if you call left recursion call ->add D in p
+	b.2) if you call right recursion call ->add R in p
+
+Code:
+
+
+import java.util.ArrayList;
+class main {
+    public static void main(String[] args) {
+        path("", 3, 3);
+
+    }
+    static void path(String p, int r, int c) {
+        if(r==1 && c==1) {
+            System.out.println(p);
+            return;
+        }
+
+        if(r> 1) {
+            path(p + 'D', r-1, c);
+        }
+        if(c> 1) {
+            path(p + 'R', r, c-1);
+        }
+
+    }
+}
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) How to return in ArrayList?
+
+
+import java.util.ArrayList;
+ class main{
+
+    public static void main(String[] args) {
+        System.out.println(pathRet("", 3, 3));
+    }
+        static ArrayList<String> pathRet(String p, int r, int c) {
+            if(r==1 && c==1) {
+                ArrayList<String> list = new ArrayList<>();
+                list.add(p);
+                return list;
+            }
+
+            ArrayList<String> list = new ArrayList<>();
+
+            if(r> 1) {
+                list.addAll(pathRet(p + 'D', r-1, c));
+            }
+            if(c> 1) {
+                list.addAll(pathRet(p + 'R', r, c-1));
+            }
+
+            return list;
+
+        }
+    }
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) What if diagonal paths also existed? total 3 moves, r, down, diagonal
+
+What changes in algo? 
+a) 3 recursion calls
+b) diagonal recursion end condition r>1 && c>1
+c) 
+
+
+
+import java.util.ArrayList;
+class main{
+
+    public static void main(String[] args) {
+        System.out.println(pathRetDiagonal("", 3, 3));
+
+
+    }
+    static ArrayList<String> pathRetDiagonal(String p, int r, int c) {
+        if(r==1 && c==1) {
+            ArrayList<String> list = new ArrayList<>();
+            list.add(p);
+            return list;
+        }
+
+        ArrayList<String> list = new ArrayList<>();
+
+        if(r> 1 && c> 1) {
+            list.addAll(pathRetDiagonal(p + 'D', r-1, c-1));
+        }
+        if(r> 1) {
+            list.addAll(pathRetDiagonal(p + 'V', r-1, c));
+        }
+        if(c> 1) {
+            list.addAll(pathRetDiagonal(p + 'H', r, c-1));
+        }
+
+        return list;
+
+    }
+}
+
+> [DD, DVH, DHV, VDH, VVHH, VHD, VHVH, VHHV, HDV, HVD, HVVH, HVHV, HHVV]
