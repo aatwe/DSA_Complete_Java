@@ -1,0 +1,28 @@
+Objective: How to call a constructor from another?
+
+Call param constructor from a default constructor.How? call this("", "", "") from inside default constructor
+//What use case? people pass nothing, so if you want default parameters still.
+
+
+class Student {
+    int rno;
+    String name;
+    float marks;
+ 
+    Student (int rno, String name, float marks) {
+        this.rno = rno; 			//becomes random.rno = abhi.rno
+        this.name = name;
+        this.marks = marks; 			//can do marks = other.marks but prior is better convention
+    }
+
+    Student() {			//Function //return type = class, no name
+        this(13, "default person", 100.0f);
+    }
+
+}
+class main {
+    public static void main(String[] args) {
+        Student random = new Student();
+        System.out.println(random.name);
+    }
+}

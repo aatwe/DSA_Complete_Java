@@ -1,0 +1,27 @@
+Objective: Create primitive data types using new keyword
+	Solution: 	 wrapper classes
+
+What is function of wrapper class? convert primitive to object
+public class WrapperExample {
+	public static void main(String[] args) {
+		//m1
+		int a = 10;
+
+		//m2
+		Integer num = new Integer(45);
+
+
+		//m3
+		Integer num = 45;
+	}
+
+}
+
+
+What advantage?
+if we do a. -> no extra functions
+
+
+But if we do
+num.		-> many functions and properties 
+

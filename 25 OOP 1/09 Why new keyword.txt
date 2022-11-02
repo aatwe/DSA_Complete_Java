@@ -1,0 +1,9 @@
+Why didn use new with int/char/boolean/floats		//primitives
+
+
+Primiitives are not implemented as objects in java.
+
+WHERE ARE PRIMITIVES STORED IN JAVA?! STACK!!
+
+	Why java stores in stack? efficiency 
+	//python creates primtive objects -> slower

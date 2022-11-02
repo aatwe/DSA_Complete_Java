@@ -1,0 +1,17 @@
+1) What properties an object has?
+	a) State of object
+		what value in data type
+	
+	b) Identity of object	
+		unique object identifier(memory level)
+
+	c) behaviour of object
+		effect of data type operations
+
+
+Q0) How to create objects from class template? new
+
+
+	what class has? properties and functions
+	what object has? class properties real values	
+	

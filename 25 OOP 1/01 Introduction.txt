@@ -1,0 +1,72 @@
+why oops?
+Objective: create a  data type to store 5 roll no.
+
+
+Solution?
+	a)Create array
+		int[] array = new int[5];
+
+
+Objective: create a  data type to store 5 names.
+
+
+Solution?
+	a)Create array
+		int[] string = new string[5];
+
+
+
+
+Objective: create a  data type to store 5 (roll no. + marks + names)
+
+
+Solution?
+	a)Create array
+	b) create String
+	c) float array
+
+
+//How to have 1 single data structure to store all 3 types? classes
+//How to create your own data type? classes
+
+
+Solution? Classes/Object Oriented programming
+	
+
+Q0) What is class? 
+	template of an object
+	logical construct	
+	named group
+		contains what? properties and functions
+
+
+QA) How to create class?
+
+class className {
+	//properties
+	//functions
+
+}
+
+
+
+
+QB) what is object? 
+instance of a class
+something that represents the class
+physical reality
+	//what is instance? physical thing
+		//what is physical? occupies space in memory/RAM
+
+QC) How to create a object of type class
+
+className objectname
+
+
+
+QD) different objects may have  same properties but different values
+
+
+QE) An object is real example
+   A class is set of rules
+

@@ -1,0 +1,99 @@
+Q0) WHat function? Acces instance variables
+
+
+
+Q1) What are instance variables?variable inside object (variables inside set of rules)
+				
+
+Q2) What are reference var? these give real definition to object
+	
+
+
+Q2) How to access object properties from reference variable? dot
+
+
+Q3) what dot does? links reference var to instance var
+		 	
+			
+
+
+
+Ex of dot operator accessing instance varviable
+How to access instance variables of a reference variable
+
+		Student
+		/  |	\
+Student1    Student2	Student3
+14,atwe	 45,manoj	64,patu    
+87		 95		82	
+
+
+Q4) How to create a object?
+
+
+1) 												//Create class 
+	class Student{int roll_no; String name; float marks}		
+
+
+2) 												//declare reference to object of class type
+Student Student1;
+
+												//reference var in stack pointing to null object
+
+
+
+3) 												//a)  Dynamically allocate memory at run time	where , heap? how? new
+   												//b)  Return reference to memory			(student1)
+ 
+Student1 = new Student();
+
+	System.out.ln(student1.roll_no) 		--> 14
+			   --------  ------
+			ref var	  instance var	 
+
+
+
+Q) OR 											//Why allocate all class object in java dynamically?
+												//what is dynamic memory allocation? memory allocated at runtime
+
+Student Student1 = new Student();
+//compile time	   //runtime
+	
+
+Q) Can we access memory address of object Student1? NO not in java
+//cant point object reference to other memory location
+
+
+
+Q) What is value of newly created object?
+
+a) 	Student kunal = new Student();
+	System.out.println(kunal);
+
+>com.kunal.introduction.Student@4617c264
+
+b) 	System.out.println(kunal.roll_no);			//default value of int object
+>0
+
+c) 	System.out.println(kunal.name);				//default value of string object
+>null
+Q) What is Student()
+
+d) 	System.out.println(kunal.marks);				//default value of float object
+>0.0
+
+---------------Instantiating a class = Create an object of class---------------- 
+
+
+
+Q) Can we change instance var?
+
+Student abhi = new Student();
+
+abhi.roll_no = 13;
+abhi.name = "Abhi atwe"
+abhi.marks = 88.5f; 
+
+System.out.println(abhi);			//13
+System.out.println(abhi.name);		//Abhi Atwe
+System.out.println(abhi.marks);		//88.5f

@@ -1,0 +1,158 @@
+Objetive: Prove there si no pass by reference in java
+
+
+//Java = Pass by Value for primitives
+
+public class WrapperExample {
+ public static void main(String[] args) {
+	int a = 10;
+	int b = 20;
+	
+	swap(a,b);
+
+	System.out.println(a + " " + b);
+		
+}
+
+ static void swap (int a, int b) {\
+
+	int temp = a;
+	a = b;
+	b = temp;
+
+	}
+}
+
+> 10  20		//Why didnt swap in java?
+		
+What we swapping? primitives
+	How primitives are swapped? pass by reference
+		Does java support pass by reference? NO , only pass by value
+
+		the a in swap(a,b) and int a = 10
+		//both are different
+
+		the a in swap(a,b) is local to swap()
+		value passed in swap() -> but value in scope of swap() only
+
+Q) What if we pass object instead of primitives? 
+Reference gets passed		
+
+//Java = pass by reference value for objects
+
+class main {
+    public static void main(String[] args) {
+        Integer  a = 10;
+        Integer  b = 20;
+
+        swap(a,b);
+
+        System.out.println(a + " " + b);
+    }
+    static void swap (Integer a, Integer b) {
+        int temp = a;
+        a = b;
+        b = temp;
+
+    }
+}
+
+>Output: 10  20
+
+Q) Why still not swapping? Ideally should have swapped (Since object passed by reference value and not just pass by value)
+
+	Ans: Integer is : public final class Integer
+
+
+--------FINAL---------------------------------------------------------
+A) Final keyword variable cannot me modified
+	
+	Q) What is final class ? 
+			
+	Function:	prevents content from modifying
+
+	
+	How to use final keyword?
+
+		final int increase = 2;		//we cannot modify increase
+
+
+	Ex Code
+
+
+class main {
+    public static void main(String[] args) {
+
+	  final int bonus = 2;
+	  bonus = 3
+        System.out.println(bonus);
+    }
+
+}
+
+Error: java: cannot assign a value to final variable bonus
+//Cannot modify final
+
+
+B) Final keyword variable must be initialized while declaring
+
+class A {
+
+	final int num;
+}
+>error:java: variable bonus might not have been initialized
+
+	//why final variable must be initialized?Unmodifiable hence  
+
+-----------------------------------------------------------------------
+
+C) Immutability of final works only when instance variables are primitive data type
+
+(Object reference types wont work)
+
+Object reference var -> will refer to same object
+value of object can change
+
+c.1) primitive
+
+class main {
+    public static void main(String[] args) {
+
+	  final int bonus = 2;
+	  bonus = 3
+        System.out.println(bonus);
+    }
+
+}
+
+
+
+
+c.2) object
+
+final Student kunal = new Student();			//Cant change reference var	to point to new object	//kunal  = other object //wont works
+Kunal.name = "new name";				 	//can change object values
+
+---------------------------------------------------------------------------------------------------------------------------
+
+Shortcut to create constructor (IntelliJ)
+Alt + Enter -> Constructor -> name 	
+
+
+ex
+
+class A {
+    final int num = 18;
+    String name;
+
+    public A(String name) {
+        this.name = name;
+    }
+}
+class main {
+    public static void main(String[] args) {
+        final A kunal = new A("Kunal Kushwaha");
+        kunal.name = "other name";						//allowed		//can change value
+        kunal = new A("new object");						//not allowed	//cant reassign to new object
+    }
+}

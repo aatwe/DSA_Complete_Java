@@ -1,0 +1,55 @@
+a) Garbage collector releases memory for unrachable objects
+
+//Automatically 
+
+b) How to destroy object manually in java? Cannot
+
+c) Feature in java: Finalizer
+How to perform actions when object destroyed? finalize class
+
+
+ex. when object destroyed , display message
+    when file object destroyed, close stream
+	etc	
+
+
+		
+class A {
+    final int num = 10;
+    String name;
+
+    public A(String name) {
+        System.out.println("Object is created");
+        this.name = name;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("Object is destroyed");
+    }
+
+}
+
+
+class main {
+    public static void main(String[] args) {
+        final A kunal = new A("Kunal Kushwaha");
+        kunal.name = "other name";                        ////can change object values
+        A obj;	
+	
+        for (int i = 0; i < 100000000; i++) {			//note have to be many objects -> if less load on memory -> objects are not destroyed
+            obj = new A("Random name");            //what created? one object , other objects will be uninit, why? same ref var can only point to 1 object --> who removes garbage collector
+        }
+    }
+}
+
+
+
+//if any object of class A freed -> finalize() called
+
+
+Q) Can we do obj.finalize() ? NO  , Exception
+
+Q) What is override? later
+
+Q) What is throwable? later

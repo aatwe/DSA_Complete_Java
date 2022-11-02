@@ -1,0 +1,34 @@
+Objective: Create object with ref var1, point ref var2 to same object, 
+change value of object instance variable, check if reference var2 shows change
+
+
+//changes made using one -> reflect in two
+
+class Student {
+    int rno;
+    String name;
+    float marks;
+  
+    Student (int rno, String name, float marks) {
+        this.rno = rno; 			//becomes random.rno = abhi.rno
+        this.name = name;
+        this.marks = marks; 			//can do marks = other.marks but prior is better convention
+    }
+
+    Student() {			//Function //return type = class, no name
+        this(13, "default person", 100.0f);
+    }
+
+}
+class main {
+    public static void main(String[] args) {
+      Student one = new Student();
+	 Student two = one;
+	 one.name = "Something Something";
+	 System.out.println(two.name);
+    }
+}
+>Something Something
+
+
+Conclusion var1 and var2 point to same object, change in 1 will reflect

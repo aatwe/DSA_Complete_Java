@@ -1,0 +1,38 @@
+Objective: pass another class object (Student other) into constructor
+
+class Student {
+    int rno;
+    String name;
+    float marks;
+    void greeting() {
+        System.out.println("Hi my name is " +this.name);
+    }
+    Student (Student other) {
+	 this.rno = other.rno; 			//becomes random.rno = abhi.rno
+	 this.name = other.name;
+	 this.marks = other.marks; 			//can do marks = other.marks but prior is better convention
+
+	}
+
+    Student() {			//Function //return type = class, no name
+        this.rno = 13;
+        this.name = "ram";
+        this.marks = 13;
+    }
+    Student(int roll, String naam, float mark) {			//Function //return type = class, no name
+        rno = roll;
+        name = naam;
+        marks = mark;
+    }
+}
+class main {
+    public static void main(String[] args) {
+        Student abhi = new Student(33,"Abhi Atwe", 85.4f);
+	   Student random = new Student(abhi);
+
+	  System.out.println(random.name);
+    }
+}
+
+>Output
+Abhi Atwe

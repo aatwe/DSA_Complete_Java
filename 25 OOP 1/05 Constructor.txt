@@ -1,0 +1,148 @@
+Q) What problem? instancing every instance var individually //cumbersome
+	Solution? Constructor
+
+kinda automate creation of values (Creates objet)
+ 
+
+Student abhi = new Student (13, "AbhiAtwe", 84.5);
+
+
+
+Q1) What is constructor? Special type of function inside class
+	does what? creates object
+
+For ex
+
+a) Student abhi = new Student();
+			//Where is this function? we didnt create. It is bydefault
+
+
+b) Student abhi = new Student(13,"Kunal Kushwaha", 84.3);
+			//how to bind these arguments with object? Do inside constructor
+			
+	
+//constructor should be general for any reference variables (not just abhi)			
+
+//one word to access any object ? this keyword
+
+class Student {
+    int rno;
+    String name;
+    float marks;
+
+    Student() {			//Function //return type = class, no name
+        this.rno = 13;
+        this.name = "Abhi Atwe";
+        this.marks = 88.5f;
+    }
+}
+class main {
+    public static void main(String[] args) {
+        Student abhi = new Student();
+        System.out.println(abhi.rno);
+    }
+}
+
+
+
+
++++++++++++++++++++++++++++++++++++++++
+What "this" does? this replaced with name of reference var
+putting this is good convention
+
+ex1:
+
+when we 
+Student abhi = new Student();
+
+Student rahul = new Student();
+
+//this helps initialize instance variables for abhi and rahul respectively
+	//abhi.name = "Abhi Atwe"
+	//rahul.name = "Abhi Atwe"
+
++++++++++++++++++++++++++++++++++++++
+ex2:
+Objective: add another function greeting() to class. 
+	what this function does? prints value of instance var name
+
+call this method with reference var.dot 	 
+
+Q>What is value of instance var printed? abhi atwe
+
+
+class Student {
+    int rno;
+    String name;
+    float marks;
+    void greeting() {
+		System.out.println("Hi my name is " +this.name);
+	}
+
+
+    Student() {			//Function //return type = class, no name				//Q) Why constructors dont have return type? type of class is the return type
+        this.rno = 13;
+        this.name = "Abhi Atwe";
+        this.marks = 88.5f;
+    }
+}
+class main {
+    public static void main(String[] args) {
+        Student abhi = new Student();
+        System.out.println(abhi.rno);
+	  abhi.greeting();
+    }
+}
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Obejctive: pass parameters while creating object
+
+	
+
+>Output
+0
+Hi my name is null
+0.0
+--------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------
+Q) Why passed parameters didnt get picked up and modify instance variables? Passed argument not specific, compiler ocnfused if talking about local var or parameter passed
+
+
+
+//Note:when same name arguments for ex below, use this keyword
+  Student(int rno, String name, float marks) {			//Function //return type = class, no name
+        this.rno = rno;			//this.rno = rno of abhi object , rno = passed in argument
+        this.name = name;
+        this.marks = marks;
+    }
+
+For ex below works:
+
+class Student {
+    int rno;
+    String name;
+    float marks;
+    void greeting() {
+        System.out.println("Hi my name is " +this.name);
+    }
+
+    Student(int roll, String naam, float mark) {			//Function //return type = class, no name
+        rno = roll;
+        name = naam;
+        marks = mark;
+    }
+}
+class main {
+    public static void main(String[] args) {
+        Student abhi = new Student(13,"Abhi Atwe", 85.4f);
+        System.out.println(abhi.rno);
+        abhi.greeting();
+        System.out.println(abhi.marks);
+    }
+}
+>13
+Hi my name is Abhi Atwe
+85.4
+ 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

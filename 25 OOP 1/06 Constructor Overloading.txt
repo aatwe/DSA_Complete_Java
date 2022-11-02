@@ -1,0 +1,40 @@
+Objective: which constructor called when?
+	when we pass parameters when dynamically creating object -> param constructor/ function called
+	when we pass no parameters when dynamically creating object -> default constructor/function called
+
+class Student {
+    int rno;
+    String name;
+    float marks;
+    void greeting() {
+        System.out.println("Hi my name is " +this.name);
+    }
+    Student() {			//Function //return type = class, no name
+        this.rno = 13;
+        this.name = "ram";
+        this.marks = 13;
+    }
+    Student(int roll, String naam, float mark) {			//Function //return type = class, no name
+        rno = roll;
+        name = naam;
+        marks = mark;
+    }
+}
+class main {
+    public static void main(String[] args) {
+        Student abhi = new Student(33,"Abhi Atwe", 85.4f);
+        //note calling same reference var again wont work //Student abhi = new Student();
+        Student abhi_default = new Student();
+        System.out.println(abhi.rno);
+        System.out.println(abhi_default.rno);
+        abhi.greeting();
+        abhi_default.greeting();
+        System.out.println(abhi.marks);
+        System.out.println(abhi_default.marks);
+    }
+}
+
+
+
+//Objective Achieved: 
+    Student abhi = new Student(33,"Abhi Atwe", 85.4f);  //can create many students easily now //can initialize many objects easily

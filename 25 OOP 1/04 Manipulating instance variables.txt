@@ -1,0 +1,55 @@
+
+Student abhi = new Student();
+
+abhi.roll_no = 13;
+abhi.name = "Abhi atwe"
+abhi.marks = 88.5f; 
+
+System.out.println(abhi);			//13
+System.out.println(abhi.name);		//Abhi Atwe
+System.out.println(abhi.marks);		//88.5f
+
+
+
+
+___________________________________________________
+
++++++++++++++++++++++++++++++++++++
+CLASS Student				+
+						+
+roll_no		//0			+
+						+
+name			//null		+
+						+
+marks			//0			+
++++++++++++++++++++++++++++++++++++
+
+
+
+	/				\
+     /				 \
+    /new abhi			  \
+
+abhi.roll_no
+
+
+
+1) print(abhi.roll_no)	//check object
+
+
+2) 0					//check default value
+
+
+
+
+Q) Can we use dot with instance var not present in class?NO, can do in python
+for ex
+abhi.salary; //wont work	//java is static type
+
+
+
+Q) What problem? instancing every instance var individually //cumbersome
+	Solution? Constructor
+
+kinda automate creation of values
+ 
