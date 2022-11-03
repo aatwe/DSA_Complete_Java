@@ -1,0 +1,136 @@
+Q0) Why packages?
+
+	if we have a main.java class, can we create another class main.java?
+
+
+
+Q1) What are packages
+
+	Container/boxes/folder for class stored in hierarchial manner
+
+		Ex
+		package com.kunal.packages.b;		//mentioned path like this
+									//where file stored  
+		public class Greeting {
+			public static void main(String[] args) {
+				System.out.println("Hello");
+			}
+			
+
+		}
+
+
+
+		//What convention? if developing for atwe.com
+			package = com.atwe
+
+
+
+
+
+
+
+
+
+
+Q2)		Why packages?
+
+		a) 	create class Greeting.java in com.kunal.packages
+					//Greetings.java -> prints hello world
+			
+		b) 	How to print another class //Greattings.java
+					//Greetings.java -> prints sup world
+
+		c) 	//Java does now allow 2 class w same name
+
+			Solution?
+			a) Create Greetings.java in com.kunal.packages.a	//prints hello world
+ 			b) Create Greetings.java in com.kunal.packages.b //print sup world
+
+	
+Q2) ex of packages
+	com
+		demo
+		kunal
+
+	//note if we have only 1 folder in com(kunal)? shows com.kunal,
+		else hierarchial view
+
+
+
+
+Q3) How java knows where to look for file?
+
+
+
+a) //Greetings.java	//package a
+package com.kunal.packages.b;		//mentioned path like this
+									//where file stored 
+ 
+		public class Greeting {
+			public static void main(String[] args) {
+				System.out.println("Hello");
+			}
+
+			public static void message() {						//Couldnt access if this was private static void message(){}
+				System.out.println("This course is awesome");
+			}
+			
+
+		}
+
+
+b) Greetings.java	//package b
+
+package com.kunal.packages.a;		//mentioned path like this
+									//where file stored  
+
+
+import static com.kunal.packages.b.Message.message	//appears when we alt+enter on message()
+
+	
+		public class Greeting {
+			public static void main(String[] args) {
+				System.out.println("Hello");
+
+				message();		// what if we Alt+Enter --> import...
+							//How to check where this function is from? Ctrl+ Click ---> Message.ava //package a
+			}
+			
+
+		}
+
+
+What happening?
+	we used code(message()) from package a in a code in package b
+
+
+Debug:
+	prints hello world
+	message() -> com.kunal.b
+			-> prints this course is awesome
+
+
+Q1) How java knows where message() code is? import statement
+
+	
+import static com.kunal.packages.b.Message.message		//Message class //message method
+
+
+Q2) How java runtime knows where to look?
+	message() was public method
+
+
+
+WHAT PUBLIC DOES?
+**//Only public items are available to Files outside package**
+
+//Learn more in access modifiers
+
+
+
+
+
+
+Q3) When did we use import statements before?
+	import java.util.ArrayList;			//ArrayList in java.util folder	//get it during installing java

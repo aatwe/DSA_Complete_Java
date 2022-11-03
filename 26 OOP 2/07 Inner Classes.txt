@@ -1,0 +1,192 @@
+What is inner class?Class inside a class
+
+
+Ex1
+Objective:
+create non static class inside static : not allowed
+
+static public class InnerClasses {
+
+	class Test {
+
+	}
+
+}
+
+Ex2
+Objective:
+Which classes are allowed to be static? inner
+
+Ex1
+Error:
+Why? 
+	a) test class depends on other class
+
+//Outside classes cannot be static
+
+public class InnerClasses {
+
+	class Test {
+		String name;
+
+		public Test(String name) {
+			this.name = name;
+		}
+}
+
+public static void main(String[] args) {
+		Test a = new Test("Kunal");			//calling non static in static //error
+		Test b = new Test("Rahul");
+
+}
+----------------------------------------------------------------------------------------------------
+Ex2 //Works
+Why? 
+	a) Test class not depend on other class
+
+
+class Test {
+		String name;
+
+		public Test(String name) {
+			this.name = name;
+		}
+	}
+
+
+
+public class InnerClasses {
+
+	public static void main(String[] args) {
+		Test a = new Test("Kunal");			//calling non static in static //error
+		Test b = new Test("Rahul");
+	}
+
+}
+
+/*static class A {		//Not allowed, why? not dependent on any other class
+
+}
+*/	
+
+---------------------------------------------------------------------------------------------------
+Ex 3 //works
+Solution to ex1  -> declare inner class as static
+
+
+
+public class InnerClasses {
+
+	static class Test {
+		String name;	
+		public Test(String name) {
+			this.name = name;
+		}
+	}
+	public static void main(String[] args) {
+		Test a = new Test("Kunal");			//calling non static in static //error
+		Test b = new Test("Rahul");
+	}
+
+}
+
+---------------------------------------------------------------------------------------------------
+Ex4
+
+class Test {
+		static String name;	
+		public Test(String name) {
+			Test.name = name;
+		}
+	}
+
+public class InnerClasses {
+
+	public static void main(String[] args) {
+		Test a = new Test("Kunal");			//calling non static in static //error
+		Test b = new Test("Rahul");
+		System.out.println(a.name);	
+		System.out.println(b.name);
+	
+	}
+
+}
+
+> Rahul
+  Rahul
+---------------------------------------------------------------------------------------------------
+Ex5
+
+
+public class InnerClasses {
+
+static class Test {					//class Test {// //changing this to static  //-> Class Test not dependent on objects of class Test
+		 String name;	
+		 public Test(String name) {
+			this.name = name;
+		}
+	}
+
+
+	public static void main(String[] args) {
+		Test a = new Test("Kunal");			//error  //error resolves once Test is static
+		Test b = new Test("Rahul");			//error  //error resolves  once Test is static
+		System.out.println(a.name);	
+		System.out.println(b.name);
+	
+	}
+
+}
+
+What output?
+Kunal 
+Rahul
+
+WHY?!
+	Test mentioned as classic inside InnerClass --> Test not dependent on InnerClass Objects !!
+
+	main() and Test class ---> CAN HAVE instances of each other
+
+---------------------------------------------------------------------------------------------------
+Ex6
+//No error:
+
+public class InnerClasses {
+
+ static class Test {					//class Test {// //changing this to static  //-> Class Test not dependent on objects of class Test
+	     String name;	
+		public Test(String name) {
+			this.name = name;
+		}
+	}
+
+
+	public static void main(String[] args) {
+		Test a = new Test("Kunal");			//error  //error resolves once Test is static
+		Test b = new Test("Rahul");			//error  //error resolves  once Test is static
+
+		System.out.println(a.name);	
+		System.out.println(b.name);
+	
+	}
+
+}
+
+What output?
+Kunal 
+Rahul
+
+
+++++++++++++++++++++
+Note:
+static var -> not depend on objects
+ ->when objects created? runtime
+	static var and methods are resolved during compile time
+
+
+Note: if a ..object of test class is printed -> println() calls valueOf -> calls toString() -> a.toString() //a object does not contain -> use default toString() => hash value
+
+	Test a = new Test("Kunal");
+	System.out.println(a.name);	
+
+>Test@4617c264 

@@ -1,0 +1,92 @@
+What is singleton?
+
+1) Given a class, 
+	How to limit class to have only 1 object?
+		Dont allow to call constructor
+
+
+a) Create a Singleton Constructor
+b) prevent from using -> make constructor private
+	//can call private constructor in that file only
+c) Create one instance
+d) create a function getInstance that returns a instance
+	do a check every time called
+	if null instance -> instance = new Singleton();		/if 1 allowed object also not created
+
+Code1
+public class Singleton {
+	private Singleton() {
+
+	}
+}	
+
+
+Code 2
+public class Main {
+	public static void main(String[] args) {
+		Singleton obj = new Singleton();		//error //cant access constructor
+		
+	}
+}
+
+c) Try creating a instance
+
+Code1
+public class Singleton {
+	private Singleton() {
+
+	}
+
+	private static Singleton instance;		//Create static
+	
+	public static Singleton getInstance() {	//make it static to access in void main
+		if(instance == null) {
+			instance = new Singleton();
+		}
+	return instance
+
+	}	
+
+Code 2
+public class Main {
+	public static void main(String[] args) {
+		Singleton obj = Singleton.getInstance();		
+
+		Singleton obj2 = Singleton.getInstance();	
+
+		Singleton obj3 = Singleton.getInstance();	
+		 
+	}
+}
+}	
+
+
+Objective achieved? 
+when someone calls getInstance() multiple times -> same instance returned
+why?
+	1 object in memory created -> reference var to that is returned
+
+
+
+Debug:
+
+obj called -> calls getInstance()
+		   checks instance == null
+			-> creates one  //instance = new Singleton()
+				-> returns it //return instance			
+					//returns instance
+						//where stored ? Singleton instance
+
+
+obj2	 called ->calls getInstance()
+			checks instance == null
+				-> not null //1 is created
+					-> returns that same
+
+obj3
+					  returns the same	  	
+
+
+//Alll 3 obj,obj2,obj3 pointing to 1 object
+
+	

@@ -1,0 +1,194 @@
+Q1) Why static?
+
+a) 
+package com.kunal.staticExample;
+
+public class Human {
+	int age;
+	String name;
+	int salary;
+	boolean married;
+
+	public Human(int age, String name, int salary, boolean married){
+		this.age = age;
+		this.name = name;
+		this.salary = salary;
+		this.married = married;
+	
+		
+	}
+}
+
+b) 
+package com.kunal.staticExample;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Human abhi = new Human(24,Abhi. 10000, false);
+		Human rahu = new Human(24,rahu. 10001, true);
+
+		System.out.println(abhi.name);
+
+	}
+}
+
+
+Objective: what if a property was common to all objects of class Human? Population
+
+//all objects of class Human will have same population
+//population property is not logically related to object	//Object independent
+
+
+
+Q) What are static variables/methods? properties that are not related to object
+Ex
+
+package com.kunal.staticExample;
+
+public class Human {
+	int age;
+	String name;
+	int salary;
+	boolean married;
+	static long population;
+	
+	public Human(int age, String name, int salary, boolean married){
+		this.age = age;
+		this.name = name;
+		this.salary = salary;
+		this.married = married;
+		
+		this.population += 1;
+		
+	}
+}
+
+
+package com.kunal.staticExample;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Human abhi = new Human(24,Abhi. 10000, false);
+		Human rahu = new Human(24,rahu. 10001, true);
+
+		System.out.println(abhi.population);
+		System.out.println(rahu.population);
+	}
+}
+
+
+
+Q) Why use "this" if population is anyways static? Use className staticvariable
+
+	
+
+package com.kunal.staticExample;
+
+public class Human {
+	int age;
+	String name;
+	int salary;
+	boolean married;
+	static long population;									//by default 0
+	
+	public Human(int age, String name, int salary, boolean married){
+		this.age = age;
+		this.name = name;
+		this.salary = salary;
+		this.married = married;
+			
+		Human.population += 1;		//this.population also works -> but with warning
+		
+	}
+}
+
+
+package com.kunal.staticExample;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Human abhi = new Human(24,Abhi. 10000, false);	//population 1
+		Human rahu = new Human(24,rahu. 10001, true);	//population 1
+
+		System.out.println(abhi.population);		//not preferred
+		System.out.println(rahu.population);  		//not preferred
+		System.out.println(Human.population);		//convention for static 	 
+		System.out.println(Human.population); 		//convention for static
+	}
+}
+
+>Output
+2 
+2 
+
+
+
+---------------
+CONCLUSION
+if a member -> declared static
+a) 	can access it before any object of class is created
+
+
+package com.kunal.staticExample;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		//This will also work, didnt create object, can still access
+
+										//Human abhi = new Human(24,Abhi. 10000, false);	//population 1
+										//Human rahu = new Human(24,rahu. 10001, true);	//population 1
+
+		System.out.println(Human.population);		//convention for static 	 
+		System.out.println(Human.population); 		//convention for static
+	}
+}
+
+
+
+
+
+
+b)	can be accessed without referencing to object
+
+
+
+if static var population
+declare as  Human.population += 1; in class
+
+and use like:
+
+	
+		System.out.println(abhi.population);		//not preferred
+		System.out.println(rahu.population);  		//not preferred
+		System.out.println(Human.population);		//convention for static 	 
+		System.out.println(Human.population); 		//convention for static
+
+
+
+c) a variabl / function can be static
+	Ex of static method?
+	public static void main() {}
+
+	Q) Why is public static void main(){} static method?
+
+	so that it can be accessed by any program from anywhere without creating object
+	//main is mandatory to run a program
+
+
+	//what if main werent static?
+	 to use main in a class, 
+		create object of class where main is
+			But we cant create object without a main :P
+				LOOP
+
+	//should be able to run main() without creating object of class where main is
+
+
+	CONCLUSION Note	: Static method + static variable belong to class not to object 
+
+		

@@ -1,0 +1,69 @@
+
+
+-> When is static block run? class loaded first time/ first object created
+
+
+Objective:	 How to initialize static variables? static block
+			when staic block executed? once, when class loaded
+
+Ex
+package com.kunal.staticExample;
+
+public class StaticBlock {
+	static int a = 4;
+	static int b;
+
+	static{
+		//initialize here
+		System.out.println("I am in static block");
+		b = a*5;
+	}
+
+	public static void main(String[] args) {
+		StaticBlock obj = new StaticBlock();
+		System.out.println(StaticBlock.a + " " + StaticBlock.b);
+	}
+
+} 
+>I am in static block
+4  20
+
+
+Objective: What if we change the value of b and then create another object
+
+Ex
+
+public class StaticBlock {
+	static int a = 4;
+	static int b;
+
+	static{
+		//initialize here
+		System.out.println("I am in static block");
+		b = a*5;
+	}
+
+	public static void main(String[] args) {
+		StaticBlock obj = new StaticBlock();
+		System.out.println(StaticBlock.a + " " + StaticBlock.b);		//4 20
+
+		StaticBlock.b += 3;
+		System.out.println(StaticBlock.a + " " + StaticBlock.b);		//4 23
+
+
+		StaticBlock obj2 = new StaticBlock();
+		System.out.println(StaticBlock.a + " " + StaticBlock.b);		//4 23
+	}
+
+} 
+
+Conclusion?
+if create a new object obj2 -> static{} block didnt run again
+
+Static block ran when? only once when first object obj1 was created
+		//first object created = class is loaded
+		//if it had run -> would have seen 4,20 not 4,23
+
+
+Note:
+a) static elements are loaded first in class

@@ -1,0 +1,22 @@
+System.out.println(a.name);
+
+
+
+1) out : => public static final Printstream out = null
+
+	//static : no need to  create object of Printstream to use Printstream
+
+			//null by default displays on console
+
+
+	//dot: binds instance variables/methods --> reference var
+
+
+	//println() method in PrintStream
+
+		What println() does?
+			writeln(String.valueOf(x)); --> toString()
+		else
+			synchonized (this)
+				print(x);	
+				newLine();

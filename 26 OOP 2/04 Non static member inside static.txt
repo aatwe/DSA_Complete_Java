@@ -1,0 +1,127 @@
+Objective1: try using non-static method in a static method
+Conclusion: static method can access only static data
+
+Ex1)
+public class Main {
+
+	public static void main(String[] args) {
+		greeting();
+	}
+	void greeting() {					//non static method
+		System.out.println("Hello World");
+	}
+
+
+}
+
+
+Error: non-static method greeting() cannot be referenced from a static context
+
+
+Why cant access non static in static?
+	non static belongs to object instance
+	//in static-> no concept of instance  //not dependent on objects
+
+
+
+Q) why no object needed in non static?	 can call diretly since eventually object is created in static main. 100%
+
+
+Ex2)
+
+How to access non static in static? Create a object and refer there instance
+
+Objective: create object for non static and use in static
+
+public class Main {
+
+    public static void main(String[] args) {
+    fun();
+    }
+    static void fun() {
+	  Main obj = new Main();			//object needed
+	  obj.greeting();
+        System.out.println("Hello");
+    }
+
+    void greeting() {					//non static method
+        fun();						//no obejct needed
+        System.out.println("Hello World");
+    }
+}
+
+
+Ex3
+
+Objective1: try using static method in a non-static method
+Conclusion: can use static in non static
+Ex
+
+
+public class Main {
+
+    public static void main(String[] args) {
+    fun();
+    Main funn = new Main();
+    funn.fun2();	
+    }
+    static void fun() {
+        System.out.println("Hello");
+    }
+
+    void fun2() {
+	   greeting();	
+    }
+
+    void greeting() {					//non static method
+        fun();
+        System.out.println("Hello World");
+    }
+}
+
+
+
+Q) Can you use non static variable in a static class? NO
+
+package com.kunal.staticExample;
+
+public class Human {
+	int age;
+	String name;
+	int salary;
+	boolean married;
+	static long population;									//by default 0
+	
+	public Human(int age, String name, int salary, boolean married){
+		this.age = age;
+		this.name = name;
+		this.salary = salary;
+		this.married = married;
+		Human.population += 1;		//this.population also works -> but with warning
+		
+	}
+	static void message() {
+		System.out.println("Hello World");
+		System.out.println(this.age);		//this keyword wont work in static --> this represents object  // we are in static //static not dependent on any object
+																				//cant use anything dependent on any object
+	}
+}
+
+
+package com.kunal.staticExample;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Human abhi = new Human(24,Abhi. 10000, false);	//population 1
+		Human rahu = new Human(24,rahu. 10001, true);	//population 1
+
+		System.out.println(abhi.population);		//not preferred
+		System.out.println(rahu.population);  		//not preferred
+		System.out.println(Human.population);		//convention for static 	 
+		System.out.println(Human.population); 		//convention for static
+	}
+}
+
+
+Objective3
