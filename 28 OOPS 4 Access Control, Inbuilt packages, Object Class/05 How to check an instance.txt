@@ -1,0 +1,22 @@
+Also part of object class
+
+How to check if obj is instance of A? println( obj instanceof A)
+
+
+public SubClass extends A{
+
+	public SubClass(int num, String name) {
+	super(num,name);
+}
+
+	public static void main(String[] args) {
+		SubClass obj = new SubClass(45,"Kunal Kushwaha");
+		int n = obj.num;	
+	
+		System.out.println(obj instanceof A);			//o/p true
+		System.out.println(obj instanceof Subclass);	//o/p true
+		System.out.println(obj instanceof Object);		//o/p true
+	}
+}
+
+>

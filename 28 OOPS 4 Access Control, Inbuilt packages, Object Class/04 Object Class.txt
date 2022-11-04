@@ -1,0 +1,145 @@
+Q) What is object? topmost class in inheritence
+
+
+//NOte:
+	public class SubClass extends A		//extends object class indirectly
+	
+	How? is multiple inheritence allowed in java? NO
+	Internal  / Indirectly
+
+ 	
+//lang package auto import
+
+public class SubClass extends A {
+
+	public SubClass(int num, String name) {
+		super(num,name);
+		Object obj = 
+
+	}
+
+	}
+
+
+Q) WHat important things in object class?
+
+	//Q) Why override? to use internal implementaiton as our own
+
+public class ObjectDemo {
+
+	int num;
+	float gpa;	
+	
+public static void main(String[] args) {
+
+//case1   //.hashCode
+		ObjectDemo obj	= new objectDemo(34);							1112376766	 //
+		ObjectDemo obj2	= new objectDemo(34);
+		System.out.println(obj.hashCode());					//Output : 1523554304	 //what is this? unique value of object //in python gives 34	
+														//What is hashcode? unique representation of object via number
+														//different hashcode for separate objects printed
+													//Q) Is hashcode address? No , its random integer value using some algo		
+
+
+//case2	//.equals()
+
+		ObjectDemo obj	= new objectDemo(34, 56.8f);							
+		ObjectDemo obj2	= new objectDemo(12, 78.9f);
+		
+		if (obj < obj2) {
+			System.out.println("obj is less than obj2");		//Q) What will java compare? num or gpa  //ERROR  //Solution: Java comparable interface
+		}
+
+		if (obj == obj2) {						
+			System.out.println("obj is equal obj2");		//Q)  WARNING  , why?  what == does? checks if 2 variables pointing to same object  //checks address
+		}
+
+		if (obj.equals(obj2)) {
+			System.out.println("obj is equal obj2");		//Q)	NO WARNING , why? .equals() checks the content / value			
+		}
+
+		
+//case3	//How to get which class is obj  //use . with getClass to use even more methods	
+
+		System.out.println(obj1.getClass());				//Output: class com.kunal.access.ObjectDemo	 
+		System.out.println(obj1.getClass().getName());				com.kunal.access.ObjectDemo	 
+		
+		//note where is data we get from .getClass() is stored? heap
+
+
+
+}
+	public ObjectDemo(int num){
+
+		this.num = num;
+	}
+
+	public ObjectDemo(int num, float gpa){
+
+		this.num = num;
+		this.gpa = gpa;
+	}
+
+//a Object () Constructor
+
+//b @override
+	public int hashCode() {								//What hashcode does? gives no. representation of object	//How to create hashcode? Hashmap lecture
+		return super.hashCode();
+	}
+
+//c @Override
+	public boolean equals(Object obj) {						
+		return this.num == ((ObjectDemo)obj).num;
+	}
+
+//d @Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
+//e @Override
+	public String toString() throws CloneNotSupportedException {	//String representation
+		return super.toString();
+	}
+//f @Override
+	protected void finalize() throws Throwable {				//called during garbage collection
+		super.finalize();
+	}
+
+
+
+
+
+}
+
+//case4 How to check if is instance
+
+Q) Also part of object class
+
+How to check if obj is instance of A? println( obj instanceof A)
+
+
+public SubClass extends A{
+
+	public SubClass(int num, String name) {
+	super(num,name);
+}
+
+	public static void main(String[] args) {
+		SubClass obj = new SubClass(45,"Kunal Kushwaha");
+		int n = obj.num;	
+	
+		System.out.println(obj instanceof A);			//o/p true
+		System.out.println(obj instanceof Subclass);	//o/p true
+		System.out.println(obj instanceof Object);		//o/p true
+	}
+}
+
+>
+
+
+
+//Case5 : cannot override a final method
+
+
+

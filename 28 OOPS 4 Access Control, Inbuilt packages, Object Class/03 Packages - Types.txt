@@ -1,0 +1,37 @@
+Q) What are packages?
+
+ Folder we use to categorize classes
+
+Q) How to import packages?
+	import java.lang etc
+
+
+Q) What types ofpackages?
+	a) User defined	
+		we know how to create our own packages
+	
+
+	b) In-built
+	java folder
+		
+		b.1) lang : essential / mandatory java stuff (Lang specific stuff)
+				for ex operations/ language related
+			java.lang
+
+			Q) Why using int etc we dont import java.lang? java.lang auto imported
+	
+		b.2)  I/O : Input/Output classes used for reading file/ optimize input output for CP / Buffer  reader
+			
+			java.io
+
+		b.3)  util : utility classes //DS  ArrayList/Collections etc
+
+		b.4)  applet : used to create applets in java	//Note: JSP/Servlet/Obsolete
+									//instead learn Spring/Maven
+									//skip
+
+
+		b.5)	awt    : GUI				//skip
+		
+		b.6) net	  : Networking appls	
+

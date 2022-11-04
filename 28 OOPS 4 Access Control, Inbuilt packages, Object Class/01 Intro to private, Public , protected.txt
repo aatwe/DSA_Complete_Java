@@ -1,0 +1,187 @@
+How to protect data
+
+Object classes
+Object cloning
+
+
+What we learnt? encapsulation and abstraction
+
+
+What is access control?
+a) we know file divided into packages
+	create a object of class A
+		ClassA has 2 variable data members
+Code1
+	public class A {
+		int num;
+		String name;
+		int[] arr;
+
+		public A(int num, String name){
+			this.num = num;
+			this.name = name;	
+			this.arr = new int[num];		
+		}
+	}
+
+Code 2
+public class Main {
+	public static void main() {
+		A obj = new A(34, "Kunal");
+	}
+}
+
+b) How to modify data members?
+	obj.arr;
+
+
+c) Accessing data members like this is not good way for security
+
+d) Ex of data hiding: ArrayList
+
+public class ArrayList<E> extends AbstractList<E>
+
+//has its methods as final and private
+
+	private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+
+	private static final int DEFAULT_CAPACITY = 10;
+
+
+	What private means? Cant access from outside
+
+For ex
+	ArrayList<Integer> list = new ArrayList<>();
+	list.DEFAULT_CAPACITY = 10; 				//Error
+										//cannot access
+
+e) How to change these?
+	Class constructors
+
+	for ex
+	public ArrayList() 
+
+f) Conclusion: if ArrayLIst is internally Array etc
+	We can print array
+	We can change array
+	But we cannot access array directly
+		Why? private
+
+g) How to implement this protection in our code? declare member variable as private, public, protected
+
+Code1
+	public class A {
+		privateint num;
+		public String name;
+		protected int[] arr;
+
+		public A(int num, String name){
+			this.num = num;
+			this.name = name;	
+			this.arr = new int[num];		
+		}
+	}
+
+Code 2
+public class Main {
+	public static void main() {
+		A obj = new A(34, "Kunal");
+	}
+}
+
+h) How to modify data members?
+	obj.arr;
+
+
+h) How to access private/public/protected?
+	getters and setters
+		Right click -> getter/setter
+
+		//Not directly accessing private/protected var and methods
+		accessing using getNum() getter methods of class
+		Note: getNum() is public
+
+		Q) Where can we access private? anywhere inside code
+		Q) Where can we access public? outside code
+
+Code1
+	public class A {
+		privateint num;
+		public String name;
+		protected int[] arr;
+	
+		public int getNum() {
+			return num;
+		}
+		
+		public void setNum(int num) {
+			this.num = num;
+		}
+
+
+		public A(int num, String name){
+			this.num = num;
+			this.name = name;	
+			this.arr = new int[num];		
+		}
+	}
+
+Code 2
+public class Main {
+	public static void main() {
+		A obj = new A(34, "Kunal");
+		obj.getNum();
+	}
+}
+
+
+i) What advantage of having public getters in class?
+for ex in code Singleton.java
+
+public class Main {
+	public static void main(String[] args){
+		A obj = new A(10, "Abhi");
+		obj.getNum();
+		
+	}
+	}
+
+
+j) Q) What if no public on getter? Error
+
+no access modifier specified
+Default access modifier
+Cant access default members outside package
+-> Cant access num outside pakcae
+
+For ex
+
+Code1
+	public class A {
+		int num;
+		public String name;
+		protected int[] arr;
+	
+		public int getNum() {
+			return num;
+		}
+		
+		public void setNum(int num) {
+			this.num = num;
+		}
+
+
+		public A(int num, String name){
+			this.num = num;
+			this.name = name;	
+			this.arr = new int[num];		
+		}
+	}
+
+Code 2
+public class Main {
+	public static void main() {
+		A obj = new A(34, "Kunal");
+		obj.getNum();
+	}
+}

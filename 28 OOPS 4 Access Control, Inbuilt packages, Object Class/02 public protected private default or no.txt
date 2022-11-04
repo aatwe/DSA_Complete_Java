@@ -1,0 +1,150 @@
+What is subclass? parent-> child
+Q) Where can each modifier be accessed?
+
+
+		Same class		Same package	Subclass 				Subclass(parent/itself)			World
+								same package && subclass	 diff package && subclass	diff pkg && not subclass
+
+public		+			+		 	+				+					+
+
+
+protected		+			+			+				+
+
+
+no modifier	+			+			+
+
+
+private		+
+
+
+
+When to use each?
+private: sensitive data
+How to access? public getter and setters
+
+
+no modifier: package specific data
+
+protected
+
+public: access anywhere
+
+
+Q) Why psvm is public? want to access from anywhere
+
+
+
+
+Q) why only subclass can access protected members in different package
+
+
+public class Subclass extends A {
+
+	public subClass(int num, String name) {super(num,name);}
+
+	public static void main(String[] args) {
+//case1		A obj = new SubClass(45,"Kunal Kushwaha");
+			int n = obj.num;			//num error			//if this worked, there would be no difference between public and protected
+
+
+//case2		A obj = new A(45,"Kunal Kushwaha");
+			int n = obj.num;			//Works
+
+	A does not know who is using it
+	//Cant access using parent class reference
+	Have to use child class reference
+
+		}
+	}
+
+
+
+Q) 
+
+Objective: Can access protected if subclass of A or subclass of itself
+
+
+public class Subclass extends A {
+
+	public subClass(int num, String name) {super(num,name);}
+
+	public static void main(String[] args) {
+//case1		A obj = new SubClass(45,"Kunal Kushwaha");
+			int n = obj.num;			//num error			//if this worked, there would be no difference between public and protected
+
+
+//case2		A obj = new A(45,"Kunal Kushwaha");
+			int n = obj.num;			//Works
+
+	A does not know who is using it
+	//Cant access using parent class reference
+	Have to use child class reference
+
+		}
+	}
+
+
+public class SubSubclass extends Subclass {
+
+	public SubSubClass(int num, String name) {super(num,name);}
+
+	public static void main(String[] args) {
+		A obj = new SubSubClass(45,"Kunal Kushwaha");
+			int n = obj.num;			//num error			//if this worked, there would be no difference between public and protected
+
+
+	A does not know who is using it
+	//Cant access using parent class reference
+	Have to use child class reference
+
+		}
+	}
+
+
+
+
+
+public class Subclass2 extends A {
+
+	public subClass(int num, String name) {super(num,name);}
+
+	public static void main(String[] args) {
+		A obj = new SubClass(45,"Kunal Kushwaha");
+			int n = obj.num;			//num error			//if this worked, there would be no difference between public and protected 
+
+	A does not know who is using it
+	//Cant access using parent class reference
+	Have to use child class reference
+
+		}
+	}
+
+
+Q) What if object of type subClass2 which extends A
+Both subClass and subClass2 extends A
+
+a) if subClass2 was not written when using subClass
+	How can subClass manipulate subClass2's protected members
+
+class SubClass2 (int num, String name) {super(num,name);}
+
+public static void main(String[] args) {
+		SubClass2 obj = new SubClass2(45, "Kunal Kushwaha");
+	}
+
+
+
+
+CONCLUSION:
+Simple Rule followed
+
+		A
+	/		\
+	S1		S2	 
+
+SubClass1 and Subclass2 have all knowledge of chains above it
+But not up to down no knowledge
+
+
+ALso,
+it is static 
