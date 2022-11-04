@@ -1,0 +1,191 @@
+Runtime / Dynamic polymorphism
+
+
+How to achieve runtime/ dynamic polymorphism?
+	Method overriding
+
+
+
+Q10 What is overriding?	
+	a) child and parent class
+	b) both have same methods
+	c) same arguments
+	d) same return type
+	e) different body
+
+Ex of overriding
+Child class is overriding parent class
+
+Note: Child class priority > Parent for overriding
+
+Code 1 Circle.java
+
+public class Circle etends Shapes {	//Child class
+
+ @Override						//what is the keyword?
+							//Annotation 
+	void area() {								//Different body
+		System.out.println("Area is pie * r * r");
+	}
+}
+
+Code 2: Shapes.java
+
+
+public class Shapes extends Shapes {	//Parent class
+	void area() {
+		System.out.println("I am in shapes");
+	}
+}
+
+
+
+Q1) What is @Override Annotation?
+	How to check if a method is overriden or not? write @override on top
+
+
+	if @Override errors -> method just below not overriden
+	if no error 	    -> method just below overriden
+
+Q2)
+
+public class Main {
+	public static void main(String[] args) {
+		Shapes shape = new Shapes();
+		//Circle circle = new Circle();		/Area is pie * r * r
+		Shapes sqaure = new Square();
+		Shapes circle = new Circle();		/Area is pie * r * r
+		
+		square.area();
+		circle.area();		//what is circle type?Circle -> will call //Area is pie * r * r
+						//Whatever the type of object -> method from that is used
+	}
+}
+
+Q) Dilemma:? We learnt reference type determines what object can access, Why circle is called?
+
+
+
+WHICH METHOD IN OVERRIDE CALLED?
+	a) depends what type of object is
+		reference only checks what is accessible
+		for ex if we remove area() from Shapes ->error -> why? all elements accesible to Shapes are available  //Reference type should have area()
+
+		However
+		which area() called? Circle , why? object type = Circle
+
+		Conclusion:
+			reference determines what it can access
+			object type determines which one is actually accessed
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q) How method overriden works? How are we able to access the correct method? Upcasting
+
+Observation:
+	a) if type of reference var -> parent class and object type -> subclass
+
+
+For ex	Parent obj = new Child();
+		Which method called? depends on CHild() type
+
+
+public class Main {
+	public static void main(String[] args) {
+		Shapes shape = new Shapes();
+		Circle circle = new Circle();		/Area is pie * r * r
+		//Shapes sqaure = new Square();
+		Shapes circle = new Circle();		/Area is pie * r * r
+		
+		circle.area();		//what is circle type?Circle -> will call //Area is pie * r * r
+						//Whatever the type of object -> method from that is used
+	}
+}
+
+a) if above -> calls area() from class Circle
+
+b) what if no area() in Shapes() -> will still call area() from class Circle
+
+
+Observation:
+	a) if type of reference var -> parent class and object type -> subclass
+
+
+For ex	Parent obj = new Child();
+		Which method called? depends on CHild() type
+
+//UPCASTING
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+DYNAMIC METHOD DISPATCH
+
+
+Q) How java knows which function to run from parent / child? 
+By upcasting we know object type determines which to run
+	also we know reference type determines which one to access
+
+How java knows? Dynamic Method Dispatch
+
+
+What is Dynamic Method dispatch?
+
+a) Call to overriden method resolved at runtime, instead of compile time
+
+
+
+Ex
+
+public class ObjectPrint {
+	int num;
+
+	public ObjectPrint(int num) {
+		this.num = num;
+	}
+
+	public static void main(String[] args) {
+		ObjectPrint obj = new ObjectPrint(54);
+
+		System.out.println(obj);				//we didnt specify to print obj's num
+	}
+
+}
+
+>Print@5acf9800
+
+
+What java does internally? obj.toString() calls internally
+
+since our obj does not have its own toString() -> default one called (Object class's toString())-> prints hash value
+
+Q) What if we gave our own toString()? by overriding   //it will override object  class's toString()  //how to check? no error on @Override
+						..also since every class extends object class //it is extending also
+
+public class ObjectPrint {
+	int num;
+
+	public ObjectPrint(int num) {
+		this.num = num;
+	}
+
+	@Override
+	public String toString() {
+		return "ObjectPrint{" + "num=" + num + 	'}';
+	}
+
+	public static void main(String[] args) {
+		ObjectPrint obj = new ObjectPrint(54);
+
+		System.out.println(obj);				//we didnt specify to print obj's num
+	}
+
+}
+
+>ObjectPrint{num=54}
+
+Conclusion: at runtime determines : class's toString() method to run. How? dynamic method dispatch
+
+
+
+How to check if it was decided at runtime? Ctrl + Click println() --> does not direct to ObjectPrint class toString() method. Why doesnt direct? it doesnt know, it was decided at runtime
+
+
+

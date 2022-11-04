@@ -1,0 +1,23 @@
+	Class A	Class B
+	n=5		n=10
+
+		\	/	
+   	      Class C	
+
+
+
+C obj = new C();
+C.n
+
+Q) Problem: Which one to print
+
+Solution: Java Does not Support Multiple inheritence
+
+If 2 variables have same variable/property -> child confused which to pick
+
+
+
+Q)If multiple inheritence not supported
+	 How to access properties of multiple classes in a class in Java ?
+
+Solution: Interfaces

@@ -1,0 +1,20 @@
+1) What will we learn?
+Properties of Object oriented programming
+
+
+
+2) Why OOP
+	Chunks
+	easy to debug
+	Security 
+	etc
+
+3) How OOPS does all this?	
+	4 Properties of OOP
+
+	
+4) What 4
+	Inheritence
+	Polymorphism
+	Encapsulation
+	Abstraction

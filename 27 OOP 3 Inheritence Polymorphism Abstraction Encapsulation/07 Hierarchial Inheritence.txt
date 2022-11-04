@@ -1,0 +1,6 @@
+		A
+	/	|	\
+	B	C	D
+
+
+B dont have acess to C

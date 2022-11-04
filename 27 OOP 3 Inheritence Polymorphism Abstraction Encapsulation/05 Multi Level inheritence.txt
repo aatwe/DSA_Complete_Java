@@ -1,0 +1,138 @@
+
+
+B) Multi Level Inheritence
+
+1) Class Box
+	|
+   Class Box Weight
+	|
+   Class Box Price
+
+
+2) Box Price has access to elements in Box
+
+3) Ex
+
+Code 1 BoxPrice.java
+
+	a) Create class BoxPrice that extends Boxweight
+	b) Create var cost
+	c) Create a constructor default
+	d) Create copy constructor
+	e) Create constructor with all arguments	//note right click -> create
+		//calls super with (l,h,w,weight)
+	f) Create constructor with side argument
+
+
+public class BoxPrice extends BoxWeight {
+	
+	double cost;
+
+	BoxPrice () {
+		super();	
+		this.cost = -1;
+	}
+
+	BoxPrice(BoxPrice other) {
+		super(other);
+		this.cost = other.cost;
+	}
+	
+	public BoxPrice(double l, double h, double w, double weight, double cost) {
+		super(l,h,w,weight);
+		this.cost = other.cost;
+	}
+	public BoxPrice(double side, double weight, double cost) {
+		super(side,weight);
+		this.cost = cost;
+	}
+}
+
+Code 2 Main.java
+
+a) Create box object of type BoxPrice
+b) BoxPrice() -> Super() -> BoxWeight() -> super(other) -> this.weight = -1
+	BoxPrice(5,8,200) --> BoxPrice(side,weight,cost) --> super(side,weight), this.weight --> BoxWeight(double side, double weight) --> super(side),this.weight --> Box(double side) {this.w = side; this.l= side; this.h = side;})
+
+public class Main {
+
+	public static void main(String[] args) {
+		BoxPrice box = new BoxPrice(5,8,200);
+		
+	}
+}
+
+
+Code 3 BoxWeight.java
+
+public class Boxweight extends Box {
+	double weight;
+	
+	public Boxweight() {
+		this.weight = -1;
+
+	}
+
+	BoxWeight(BoxWeight other) {
+		super(other);
+		weight = other.weight
+	}
+
+	
+	BoxWeight(double side, double weight) {
+		super(side);
+		this.weight = weight;
+	}
+
+	//right click -> constructor
+	public BoxWeight (double l, double h, double w, double weight) {
+		super(l,h,w);
+		this.weight = weight;	
+									//what is super() //How this sets the parent class variables
+	}
+}
+
+
+Code 4 Box.java	
+
+public class Box {
+	double l;
+	double w;
+	double h;
+	private double d;
+
+	Box(){
+		this.h = -1;
+		this.l = -1;
+		this.w = -1;
+	}
+	Box(double side) {
+		Super();
+		this.w = side;	
+		this.l = side;
+		this.h = side;
+	}
+	Box(double l, double h, double w){;	
+		this.w = w;	
+		this.l = l;
+		this.h = h;
+	}
+	Box(Box old) {			//pass constructor within constructor
+		this.h = old.h;
+		this.l = old.l;
+		this.w = old.w;
+	}
+	Box(double l, double h, double w, double d)
+	
+	public void information() {
+		System.out.println("Running the box");
+	}
+	
+}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Conclusion:
+   Class Box
+	|
+   Class Box Weight
+	|
+   Class Box Price

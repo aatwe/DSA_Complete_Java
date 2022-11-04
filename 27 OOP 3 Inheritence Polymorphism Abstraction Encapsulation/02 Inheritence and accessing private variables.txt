@@ -1,0 +1,181 @@
+1) What is inheritence?
+
+Child class inheriting properties from base = inheritence
+Class 1 using properties of Class 2
+
+
+Class 1 = base class
+Class 2 = derived from Class 1 = child class
+
+Class 1 (l,w,h)
+ |
+ |
+ |
+ V
+Class 2 (l,w,h,weight)
+
+
+Q) Can child class have its own properties? YES
+
+2) How child uses properties from base?
+	Extends keyword
+
+Code1:
+public class Box {
+	double l;
+	double w;
+	double h;
+	private double d;
+
+	Box(){
+		this.h = -1;
+		this.l = -1;
+		this.w = -1;
+	}
+	Box(double side) {
+		this.w = side;	
+		this.l = side;
+		this.h = side;
+	}
+	Box(double l, double h, double w){;	
+		this.w = w;	
+		this.l = l;
+		this.h = h;
+	}
+	Box(Box old) {			//pass constructor within constructor
+		this.h = old.h;
+		this.l = old.l;
+		this.w = old.w;
+	}
+	Box(double l, double h, double w, double d)
+	
+	public void information() {
+		System.out.println("Running the box");
+	}
+	
+}
+
+------------------------------------------------
+Code 2:
+public class Main {
+	public static void main(String[] args) {
+		Box box = new Box();
+		System.out.println(box.l + " " + box.w + " " + box.h);
+
+		Box box1 = new Box(4);
+		System.out.println(box1.l + " " + box1.w + " " + box1.h);
+
+		Box box2 = new Box(4.6,7.9,9.9);
+		System.out.println(box2.l + " " + box2.w + " " + box2.h);
+	
+		Box box3 = new Box(box2); 
+		System.out.println(box3.l + " " + box3.w + " " + box3.h);
+
+
+		BoxWeight box4 = new BoxWeight();
+		System.out.println(box4.h + " " + box4.weight);
+
+		BoxWeight box5 = new BoxWeight(2,3,4,8); 			//how all these initialized? //how to check? Ctrl + Click
+	}
+}
+
+> -1.0, -1.0, -1.0
+   4.0, 4.0 , 4.0
+   4.6, 7.9 , 9.9
+
+  -1.0 , -1.0
+
+Debug:
+Checks child class
+	sees extends
+		Checks Base class
+-----------------------------------------------
+Code 3
+public class Boxweight extends Box {
+	double weight;
+	
+	public Boxweight() {
+		this.weight = -1;
+		//this.d;			//cannot access since private
+	}
+	
+	//right click -> constructor
+	public BoxWeight (double l, double h, double w, double weight) {
+
+		super(l,h,w);							//what is super() //How this sets the parent class variables
+
+		this.weight = weight;						//cant access
+	}
+
+
+}
+
+Q) When calling constructor, do we have to initialize parent class variables also?
+	Yes , child can have its own values of the properties inherited	
+
+
+
+Q) How super(l,w,h) works?
+	a) Calls appropriate parent class Constructor
+
+	/*
+	Box(double l, double h, double w){;	
+		this.w = w;	
+		this.l = l;
+		this.h = h;
+	} */
+
+
+Q) Can we access all members of parent class? NO
+	Cannot acces private members in other file	//cant use in main ,cant use in Boxweight
+	Can only use private in that file
+
+	Q) if l was private -> how super(l,w,h) would have initialized?
+			Box() constructor is initilaizing so all Ok
+
+
+Q) Can we access child class Boxweight elements in main with Box? NO
+
+	What child class can access? parent members (not private ones)
+	Parent object cannot access child
+
+	//Parent cant access child members
+
+
+Q) What if we create object of type BoxWeight and store in reference of type Box
+Ex1
+	public class Main {
+		public static void main(String[] args) {
+			Box box6 = new boxWeight(2,3,4,8);
+			box6.w	//can access
+			box6.weight	//CANNOT ACCESS
+		}
+	}
+	Why cannot access private weight in box6 ?
+	a) What is reference variable type?	Box
+	   What is type of object? boxWeight
+	
+
+	"what members can be accessed?": Type of reference variable decides
+							--> can access all members in Box
+
+	Understand in memory:
+	
+	Stack			Heap
+	box6	   --->	boxWeight
+	
+	When reference to subclass object --> assigned to superclass (from which subclass derived) reference variable, we can access only super class objects
+
+Ex2
+	Similarly
+	public class Main {
+		public static void main(String[] args) {
+			BoxWeight box6 = new Box(2,3,4,8);
+			System.out.println(box6);	//Error  , why? what we have access to? BoxWeight variables --> includes weight , But cant call constructor of child class 
+											//cant initilaize  new Box(2,3,4,8) //weight, -> why? since called constructor of parent class and it doesnt know about weight
+			//Conclusion cant have child reference var and parent object
+		}
+	}
+	
+
+	

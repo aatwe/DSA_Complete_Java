@@ -1,0 +1,90 @@
+Polymorphism: many ways to represent
+
+
+if want to do a task : in many ways
+
+
+Lang that supports polymorphism : Object Oriented language
+Land that do not				: Object basis language
+
+
+
+public class Shapes {
+
+	void area() {
+		System.out.println("I am in shapes");
+	}
+	
+
+}
+
+public class Circle extends Shapes{
+	void area() {
+		System.out.println("Area is pie * r * r");
+	}
+	
+}
+
+
+public class Triangle extends Shapes{
+	void area() {
+		System.out.println("0.5 * h * b	");
+	}
+}
+
+
+public class Square extends Shapes {
+	void area() {
+		System.out.println("side*side");
+	}
+}
+
+
+
+Main.java
+
+public class Main {
+	public static void main(String[] args) {
+		Shapes shape = new Shapes();
+		Circle circle = new Circle();
+		Square square = new Square();
+
+		shape.area();		//has access to area() since size of reference var is Shape		
+		//> I am in shapes	
+
+		circle.area();
+		//> Area is pie * r * r
+		
+	}
+}
+
+
+Conclusion: Polymorphism: we represented area() in multiple ways
+					//just used the  area() in every class
+
+
+How polymorophism works? later
+
+
+
+Q) What if
+
+instead of 
+		Shapes shape = new Shapes();
+		Circle circle = new Circle();
+		Square square = new Square();
+
+We have
+		Shapes shape = new Shapes();
+		Circle circle = new Circle();
+		Shapes square = new Square();		//has access to 	elements in class Square 
+
+>Output:
+side*side
+
+
+Q) Where did we see polymorphism before?
+
+Different Box() constructors
+
+Automatically understands which constructor to call

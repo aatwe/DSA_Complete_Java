@@ -1,0 +1,48 @@
+final: What is final used for? 
+	a) Create constants
+	b) prevent overriding				
+	c) prevent inheritence
+
+
+B) Prevent overriding
+
+Ex
+public class Square extends Shapes {
+	final void area() {							//Causes problems //cannot override
+		System.out.println("Area is square of side");
+	}
+}
+
+
+Q1) How to prevent overriding a method? use final
+		when overriding takes place? runtime
+
+ 
+Why is using final efficient? final method cant be overriden //call is resolved at compile time
+	What java compiler does to this final?
+		copies bytecode
+			from where? subroutine/internal implementation
+				with? directly with compile code
+					eliminate overhead : (does not have to decide which one to resolve)	
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Early Binding/Late Binding
+
+Note: Dynamic Method Dispatch: late binding	//resolved at runtime
+	final method cant be overriden : early binding //resolved at compile time
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+C) Prevent Inheritence	
+
+for ex
+
+public final class Box{}
+
+
+public class BoxWeight extends Box{} 	//error
+
+Q2) How to prevent inheritence? use final
+
+Note: when class is declared final --> all methods also become final
+

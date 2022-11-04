@@ -1,0 +1,150 @@
+SIMPLE:
+
+Abstraction: method of gaining info		design level: hide unnecessary details from users
+Encapsulation ; method of storing info		Implementaion level:why encapsulate? hide complexity
+Data Hiding						why data hide? for data security
+		
+	//data hiding achieved via encapsulation	
+
+A) What is encapsulation?
+
+1) wrap implementation of 
+	  data member + methods
+		wrap in class
+
+
+2) What wrap means?
+	Hides code + data into 1 unit
+		
+		Why hide? protect from outside world
+
+
+3)
+	
+
+
+B) What is abstraction?
+
+Hide unnecessary details show only necessary info
+
+
+Ex of abstraction:
+
+Ex1 real life
+	put key -> start car 
+	How car works? dont need to know, just need key
+	What is abstraction here? 
+		Hiding mechanics of car
+
+Ex2 Code:
+
+	
+	System.out.println()		//dont care how it works, we can just use
+
+	Array List	//Abstract Data type		//dotn care how defined internally
+		//can just use methods
+
+
+
+C) What difference bw encapsulation and abstraction 
+
+Abstraction: Design issue 
+	//Designers tell	 
+	we need x,y,z methods requirements
+	external how it looks and works
+	A way to gain information
+	
+
+	How to abstraction? abstract classes / interfaces
+	Ex will see
+
+	
+EncapsulatioN:
+	Writing code to achieve abstraction
+	internal technical details
+	a way to contain information
+	Ex objects //are encapsulated
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Ex How to encapsulate? getter/setter
+
+1) Ctrl + Click ArrayList() code
+	 given an empty array Object[]
+
+	How to manipulate this? getter() and setter()
+	Cannot directly manipulate
+
+2) Getter	//Encapsulation
+	
+	Box Class
+	We set values using constructor, 
+	lets create a getter getL();
+3)
+
+
+
+Box.java	
+
+public class Box {
+	private double l;				//Note make private l			//Data Hiding
+	double w;
+	double h;
+	private double d;
+
+	static void greeting() {
+		System.out.println("Hey I amin box class, Greetings!");
+	}
+	
+	public double getL() {			//can access private l //since in same class	//Encapsulation
+		return l;
+	}
+
+
+	Box(){
+		this.h = -1;
+		this.l = -1;
+		this.w = -1;
+	}
+	Box(double side) {
+		Super();
+		this.w = side;	
+		this.l = side;
+		this.h = side;
+	}
+	Box(double l, double h, double w){;	
+		this.w = w;	
+		this.l = l;
+		this.h = h;
+	}
+	Box(Box old) {			//pass constructor within constructor
+		this.h = old.h;
+		this.l = old.l;
+		this.w = old.w;
+	}
+	Box(double l, double h, double w, double d)
+	
+	public void information() {
+		System.out.println("Running the box");
+	}
+	
+}
+
+//Main
+public class Main {
+	public static void main(String[] args) {
+		
+		Box box1 = new Box(4.6,7.9,9.9);
+		box1.getL();						//prints us value of l		//despite l being private
+	
+	
+	}
+
+}
+
+-------------------------
+Ex
+LinkedList --> internally lets say normal array
+
+	a) how to modify linkedList? .get() /.move() etc		//Encapsulation
+	b) Cant direct access array						//Data hiding
+

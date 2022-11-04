@@ -1,0 +1,13 @@
+A) Single Inheritence
+
+1) Class A
+	|
+     V
+   Class B	
+
+
+Note:
+Cannot inherit
+
+Class A --> Class B
+//class cannot be its own super class

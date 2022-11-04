@@ -1,0 +1,132 @@
+Objective : Cant override static, Can inherit static methods
+
+	Overriding : depends on objects, but static does not depend on objects
+		--> hence cant override static
+
+	Dynamic Method dispatch does not happen with static
+
+
+For ex
+a) Create a static method greeting() in BoxPrice
+	Prints Hey I amin box class, Greetings
+
+b) What special about static methods? not dependent on object of class (Box)
+	How to access them? className.method()		//can access via reference var also but prefered prior
+
+	Q) How to overwrite static method
+			Use @Override in BoxWeight
+	
+c) shows error. Why is it not overriding?
+
+d) 	Comment out @Overriding of Boxweight
+	add Box box = new BoxWeight(); in main()
+	
+	Output:
+		Hey I amin box class, Greetings!	
+	means child class greeting() not called parent class greeting() called
+	
+	Why? If All static methods were inherited -> no need to override static methods in child class.		Why? parent class method will always run no matter from which object call it
+								Hence @Override static greeting() not called
+
+e) if
+	BoxWeight.greeting();		//you can inherit but you cant override
+
+CONCLUSION: Cannot override static methods static methods can be inherited
+_---------------------------------------------------------------------------
+Note: Overloading and overriding do not apply on instance variables	
+	Why? Overriding takes place by resolving type of object at runtime, not at compile time
+																	
+
+
+Box.java	
+
+public class Box {
+	double l;
+	double w;
+	double h;
+	private double d;
+
+	static void greeting() {
+		System.out.println("Hey I amin box class, Greetings!");
+	}
+
+	Box(){
+		this.h = -1;
+		this.l = -1;
+		this.w = -1;
+	}
+	Box(double side) {
+		Super();
+		this.w = side;	
+		this.l = side;
+		this.h = side;
+	}
+	Box(double l, double h, double w){;	
+		this.w = w;	
+		this.l = l;
+		this.h = h;
+	}
+	Box(Box old) {			//pass constructor within constructor
+		this.h = old.h;
+		this.l = old.l;
+		this.w = old.w;
+	}
+	Box(double l, double h, double w, double d)
+	
+	public void information() {
+		System.out.println("Running the box");
+	}
+	
+}
+------------------------------------------------------------------------
+Code 2
+public class Main {
+	public static void main(String[] args) {
+		
+		Box box1 = new Box(4.6,7.9,9.9);
+		Box box2 = new Box(box1);	
+		Box box = new BoxWeight();
+		box.greeting();
+	
+	
+		box1.greetings();
+		
+		BoxWeight.greeting();		//you can inherit but you cant override
+	
+	}
+
+}
+------------------------------------------------------------------------
+public class Boxweight extends Box {
+	double weight;
+	
+	public Boxweight() {
+		this.weight = -1;
+
+	}
+
+	@Override
+	static void greeting() {
+		System.out.println("Hey I am in BoxWeight Class Greetings!");
+	}
+
+	BoxWeight(BoxWeight other) {
+		super(other);
+		weight = other.weight
+	}
+
+	
+	BoxWeight(double side, double weight) {
+		super(side);
+		this.weight = weight;
+	}
+
+	//right click -> constructor
+	public BoxWeight (double l, double h, double w, double weight) {
+		super(l,h,w);
+		this.weight = weight;	
+									//what is super() //How this sets the parent class variables
+	}
+}
+>Box class constructor
+Hey I amin box class, Greetings!

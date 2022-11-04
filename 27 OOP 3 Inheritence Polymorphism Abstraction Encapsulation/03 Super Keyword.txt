@@ -1,0 +1,228 @@
+Q) How super(l,w,h) works?
+	a) Calls appropriate directly above parent class Constructor
+
+Code1:
+public class Box {
+	double l;
+	double w;
+	double h;
+	private double d;
+
+	Box(){
+		this.h = -1;
+		this.l = -1;
+		this.w = -1;
+	}
+	Box(double side) {
+		Super();
+		this.w = side;	
+		this.l = side;
+		this.h = side;
+	}
+	Box(double l, double h, double w){;	
+		this.w = w;	
+		this.l = l;
+		this.h = h;
+	}
+	Box(Box old) {			//pass constructor within constructor
+		this.h = old.h;
+		this.l = old.l;
+		this.w = old.w;
+	}
+	Box(double l, double h, double w, double d)
+	
+	public void information() {
+		System.out.println("Running the box");
+	}
+	
+}
+
+Code 2
+public class Boxweight extends Box {
+	double weight;
+	
+	public Boxweight() {
+		this.weight = -1;
+		//this.d;			//cannot access since private
+	}
+	
+	//right click -> constructor
+	public BoxWeight (double l, double h, double w, double weight) {
+
+		super(l,h,w);							//what is super() //How this sets the parent class variables
+
+		this.weight = weight;						//cant access
+	}
+
+
+}
+
+
+Scenario: 
+If Subclass Boxweight wants to refer to superclass 
+-> Use Super()
+
+
+Ex Multilevel inheritence scenario
+
+Class A	//Super in A? -> refers Object class (Ctrl + Click)
+	|
+	|
+	|
+	V
+Class B	//Super in B -> refers A
+	|
+	|
+	|
+	V
+Class C  //Super in C -> refers B
+
+
+Conclusion: Object class is main class from which all other classes are inherited
+	every class has object as superclass									//Java design
+
+
+
+
+Objective: Use Super() keyword as this keyword
+
+
+Code 2
+public class Boxweight extends Box {
+	double weight;
+	
+	public Boxweight() {
+		this.weight = -1;
+		//this.d;			//cannot access since private
+	}
+	
+	//right click -> constructor
+	public BoxWeight (double l, double h, double w, double weight) {
+
+		super(l,h,w);							//what is super() //How this sets the parent class variables
+		System.out.println(super.h);
+		System.out.println(this.w);
+		this.weight = weight;						//cant access
+	}
+}
+
+Why use super? if base class and super class both have a variable weight //to specifically refer
+
+
+Note: whatever parameters super() needs, must be passed by subclass
+
+Note: super class has no knowledge of subclass
+Any initialization super class wants to perform -> has to be separate from prerequisites
+
+
+For ex  below will error. Why? Super class does not know what child class contains
+						Box						BoxWeight
+			But vice versa not true
+						Box weight		knows and cares about what Box contains
+						//Boxweight allows to initilaize box first
+
+//Error
+
+public class Boxweight extends Box {
+	double weight;
+	
+	public Boxweight() {
+		this.weight = -1;
+		//this.d;			//cannot access since private
+	}
+	
+	//right click -> constructor
+	public BoxWeight (double l, double h, double w, double weight) {
+		this.weight = weight;	
+		super(l,h,w);							//what is super() //How this sets the parent class variables
+	}
+}
+
+//No Error
+public class Boxweight extends Box {
+	double weight;
+	
+	public Boxweight() {
+		this.weight = -1;
+		//this.d;			//cannot access since private
+	}
+	
+	//right click -> constructor
+	public BoxWeight (double l, double h, double w, double weight) {
+		this.weight = weight;	
+		super(l,h,w);							//what is super() //How this sets the parent class variables
+	}
+}
+
+
+=============================================================================================================================
+Q) What if super keyword not used in subclass constructor -> Default Constructor of super class called
+
+Ex
+
+
+public class Boxweight extends Box {
+	double weight;
+	
+	public Boxweight() {
+		this.weight = -1;
+	
+	}
+	
+	//right click -> constructor
+	public BoxWeight (double l, double h, double w, double weight) {
+		this.weight = weight;	
+							
+	}
+}
+
+
+//Default one gets called
+Box(){
+		this.h = -1;
+		this.l = -1;
+		this.w = -1;
+	}
+=============================================================================================================================
+
+1) Create a BoxWeight Copy constructor //takes another BoxWeight
+2) get other.weight
+3) call Super(other)
+
+Why no error?
+	What is type of other? BoxWeight	
+	What is type in Box constructor? Box type
+	//Box(Box old) {			//pass constructor within constructor
+		this.h = old.h;
+		this.l = old.l;
+		this.w = old.w;
+	}//
+	
+4) Similar to previous case reference and object of different type
+5) BoxWeight type has access to all members of Box type		
+	//eventually becomes Box old = Boxweight other
+6)
+
+//Works
+public class Boxweight extends Box {
+	double weight;
+	
+	public Boxweight() {
+		this.weight = -1;
+
+	}
+
+	BoxWeight(BoxWeight other) {
+		super(other);
+		weight = other.weight
+	}
+
+	
+	//right click -> constructor
+	public BoxWeight (double l, double h, double w, double weight) {
+		super(l,h,w);
+		this.weight = weight;	
+									//what is super() //How this sets the parent class variables
+	}
+}
+
