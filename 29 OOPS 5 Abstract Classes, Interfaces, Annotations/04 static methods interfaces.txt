@@ -1,0 +1,37 @@
+Why static methods dont get overriden? static methods dont have objects
+Inheritence -> needs overriding -> needs objects (since runtime poly) -> static dont depend on objects -> cant inherit static methods
+
+what about static methods in interfaces
+
+Since cant be inherited-> overriden
+	static methods of interfaces should have body insidd	//Use from interfaces
+
+public interface A {
+	
+	static void greeting() 	//error
+
+	static void greeting() {
+		System.out.println("Hey I am static method");
+	}
+
+	static void greeting() {}
+
+	defualt void fun() {
+		System.out.println("I am in A");
+	} 
+
+}
+
+
+public class Main implements A,B {
+	@Override
+	public void greet() {
+
+	}
+
+	public static void main(String[] args){
+		Main obj = new Main();
+		A.greeting();			//call it via name of class//we know how to call static methods? by name of interface/class
+	}
+
+}

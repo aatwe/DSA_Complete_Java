@@ -1,0 +1,478 @@
+What problems in inheritence
+
+
+given; 2 classes have same methods fun()(same arg, different body)  //Multiple inheritence
+
+If you inherit both in class C and call c.fun() 
+
+class A
+	fun()
+
+class B
+	fun()
+
+
+which fun() gets called?
+
+Solution: Java does not support multiple inheritence
+-------------------------------------------------------------------
+Ex use case:
+
+Scenario:
+	parent class gives a function generalised form(without body)
+			why give general form? tells name of method below class will implement
+
+		What are these generalized methods? abstract method
+		
+		who provides body for abstract method? child class
+
+		Why good? Child class gets to define its own body
+		
+		How to change a body of a function of parent class in child? overriding
+
+		what job of child class here? just override necessary methods and find its meaning
+	
+
+1) 
+	career(name);		//super class/parent class
+	
+	/		\
+
+career(name){	  career(name){	
+ name = "Coder";    name = "Doctor";
+}			   }
+
+
+
+
+
+
+2) HOW TO DEFINE ABSTRACT METHOD
+
+
+abstract returntype functionname (arg)
+
+
+abstract void career (String name);
+
+
+3) What if multiple abstract methods
+	declare the class also abstract
+
+	if a class has >1 abstract methods -> class should be abstract
+
+
+4)  How to code:
+
+	//what is child class job? has to override parent class methods
+	//both child class Son and Daughter have to override parent class methods
+
+Code1
+	public abstract class Parent {
+		abstract void career(String name);
+		abstract void partner(String name, int age);	
+	}
+Code2
+	public class Main {
+		public static void main(String[] args){
+			Son son = new Son();
+			son.career();						//Output:Iam going to be a doctor
+
+			Daughter daughter = new Daughter();
+			daughter.career("");					//Output:Iam going to be a coder
+		}									//Runtime polymorphism //overriding
+	
+	}
+Code3
+	public class Son extends Parent {
+		@Override 
+		void career() {
+			System.out.println("Iam going to be a doctor");
+		}
+
+
+		@Override
+		void partner() {
+			System.out.println("I love naruto");
+		}
+	}
+Code4
+	public class Daughter extends Parent {
+		@Override 
+		void career() {
+			System.out.println("Iam going to be a coder");
+		}
+
+
+		@Override
+		void partner() {
+			System.out.println("I love Iron man");
+		}
+	}
+
+
+5) Why abstract class methods have to be overriden?What use case
+
+	If method in class NEEDS/MUST be overriden -> declare Abstract
+
+
+6)a)  Can we add variables in this? Yes
+	add age
+	assign using a constructor
+
+ 
+  b) Can we crate constructor of abstract class? Yes
+	add int age in Parent
+
+  c) can we call this parent constructor of abstract class? NOO!
+   Why? CANNOT CREATE OBJECTS OF ABSTRACT CLASS 	
+		call in Parent moms
+
+	CAN Create objects by calling method  //have to override // cant create just object
+
+Code1:
+
+public abstract class Parent {
+
+		int age;
+
+		Parent  parent (int age){
+		this.age = age;
+		}
+
+		abstract void career(String name);
+		abstract void partner(String name, int age);	
+	}
+
+
+Code2:
+
+public class Son extends Parent {
+		public Son(int age) {
+			this.age = age;
+		}
+
+		@Override 
+		void career() {
+			System.out.println("Iam going to be a doctor");
+		}
+
+
+		@Override
+		void partner() {
+			System.out.println("I love naruto");
+		}
+	}
+
+
+Code 3:
+ 
+	public class Main {
+		public static void main(String[] args){
+			Son son = new Son(30);
+			son.career();						//Output:Iam going to be a doctor
+
+			Daughter daughter = new Daughter(28);
+			daughter.career("");					//Output:Iam going to be a coder
+
+
+			Parent mom = new Parent();					//Doesnt work
+
+			Parent mom = new Parent() {				//works
+			 @Override
+			void career() {}
+
+			@Override
+			void partner() {}
+
+			}
+
+
+		}									//Runtime polymorphism //overriding
+	
+	}
+
+Code 4
+
+	public class Daughter extends Parent {
+
+		public Son(int age) {
+			this.age = age;
+		}
+		@Override 
+		void career() {
+			System.out.println("Iam going to be a coder");
+		}
+
+
+		@Override
+		void partner() {
+			System.out.println("I love Iron man");
+		}
+	}
+
+
+
+6) How to create abstract constructors? NO
+
+
+public abstract class Parent {
+
+		int age;
+
+		Parent  parent (int age){
+		this.age = age;
+		}
+
+		abstract Parent();
+
+		abstract void career(String name);
+		abstract void partner(String name, int age);	
+	}
+
+
+7) Can we create abstract static methods? NO
+	Can we override static methods? no
+		-> if cant override -> cannot create abstract static methods	
+
+
+8) can we create static methods in abstract class? yes
+	why? no objects for abstract classes
+
+public abstract class Parent {
+
+		int age;
+
+		Parent  parent (int age){
+		this.age = age;
+		}
+
+		static void hello(){
+			System.out.println("hello");
+		}
+
+		abstract void career(String name);
+		abstract void partner(String name, int age);	
+	}
+
+
+	public class Main {
+		public static void main(String[] args){
+			Son son = new Son(30);
+			son.career();						//Output:Iam going to be a doctor
+
+			Daughter daughter = new Daughter(28);
+			daughter.career("");					//Output:Iam going to be a coder
+
+
+			Parent.hello();						//hello
+
+
+
+
+		}									//Runtime polymorphism //overriding
+	
+	}
+
+
+9) Can abstract classes contain normal methods? Yes  //just with sysout	//method with bodies
+					//can also override normal() method
+
+	Can we have static member variables in abstract class? Yes
+public abstract class Parent {
+
+		int age;
+
+		Parent  parent (int age){
+		this.age = age;
+		}
+
+		static void hello(){
+			System.out.println("hello");
+		}
+
+		void normal() {
+			System.out.println("This is a normal method");
+		}
+
+		abstract void career(String name);
+		abstract void partner(String name, int age);	
+	}
+
+
+
+public class Son extends Parent {
+		public Son(int age) {
+			this.age = age;
+		}
+
+		@Override
+		void normal() {
+			super.normal();
+		}		
+
+
+		@Override 
+		void career() {
+			System.out.println("Iam going to be a doctor");
+		}
+
+
+		@Override
+		void partner() {
+			System.out.println("I love naruto");
+		}
+	}
+
+
+
+	public class Main {
+		public static void main(String[] args){
+			Son son = new Son(30);
+			son.career();						//Output:Iam going to be a doctor
+
+			son.normal();
+
+			Daughter daughter = new Daughter(28);
+			daughter.career("");					//Output:Iam going to be a coder
+
+
+			Parent.hello();						//hello
+
+
+
+
+		}									//Runtime polymorphism //overriding
+	
+	}
+
+
+10) Q) If cant create object of parent abstract class ->  what other way to use? Use as reference variable
+
+
+	public class Main {
+		public static void main(String[] args){
+			Son son = new Son(30);
+			son.career();						//Output:Iam going to be a doctor
+
+			son.normal();
+
+			Daughter daughter = new Daughter(28);
+			daughter.career("");					//Output:Iam going to be a coder
+
+			Parent daughter = new Daughter(28);
+			daughter.career();						//use object as reference variable		//i am going to be a coder   //output depends on object type
+
+
+			Parent.hello();						//hello
+
+
+
+
+		}									//Runtime polymorphism //overriding
+	
+	}
+
+
+
+11) Q) Why ccreating public constructor has no sense?
+	Cant instantiate a abstract class directly
+	//instantiate via derived type	//derived type shouldnt be abstract
+
+
+
+
+12) abstract class have to be extended for overriding methods
+	Can we use final with abstract class? NO ---> Does not allow class to be inherited
+
+
+
+13) how to access final member variables in abstract class? add value in a constructor in abstract class
+
+//
+
+
+public abstract class Parent {
+
+		int age;
+		final int value;
+
+		Parent  parent (int age){				//where is this called? --> Son extends Parent // Som(int age){ super(age); }	//call in constructor super(age)
+		this.age = age;
+		value = 3423556;  	
+		}
+
+		static void hello(){
+			System.out.println("hello");
+		}
+
+		void normal() {
+			System.out.println("This is a normal method");
+		}
+
+		abstract void career(String name);
+		abstract void partner(String name, int age);	
+	}
+
+
+
+
+
+
+	public class Main {
+		public static void main(String[] args){
+			Son son = new Son(30);
+			son.career();						//Output:Iam going to be a doctor
+
+			son.normal();
+
+			Daughter daughter = new Daughter(28);
+			daughter.career("");					//Output:Iam going to be a coder
+
+			Parent daughter = new Daughter(28);
+			daughter.career();						//use object as reference variable		//i am going to be a coder   //output depends on object type
+
+
+			Parent.hello();						//hello
+
+
+
+
+		}									//Runtime polymorphism //overriding
+	
+	}
+
+
+
+public class Son extends Parent {
+		public Son(int age) {
+			super(age);
+		}
+
+		@Override
+		void normal() {
+			super.normal();
+		}		
+
+
+		@Override 
+		void career() {
+			System.out.println("Iam going to be a doctor");
+		}
+
+
+		@Override
+		void partner() {
+			System.out.println("I love naruto");
+		}
+	}
+
+
+14) Do 2 abstract classes support multiple inheritence? NOO
+
+
+public class Son extends Parent,Parent2		//not allowed
+
+What solution? Interfaces
+ 
+

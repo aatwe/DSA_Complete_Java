@@ -1,0 +1,7 @@
+Generics
+Collection framework
+Advanced DS
+	Write your own ds using OOPs learnt	
+		LL,Stack,Queues,DP,GraphAlgo,Trees,Heaps,Hashmaps
+		
+	How to use / How to implement 

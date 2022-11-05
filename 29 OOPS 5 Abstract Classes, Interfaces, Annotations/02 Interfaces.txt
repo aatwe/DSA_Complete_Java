@@ -1,0 +1,516 @@
+ 0) Why interface
+Why multiple inheritence not suppotred in java? 2 body of function,same name, confusing
+
+	Solution to confusion problem? Interface
+
+
+1) What are interfaces?What is their function?
+
+	Similar to abstract classes /methods
+
+	tell what class is doing
+	DOES NOT tell how class is doing what its doing
+
+	What difference between abstract classes and Interfaces?
+		abstract classes have -> multiple inheritence problem
+
+
+2) What interface file extension? still .java
+
+3) What interfaces contain?
+	
+	a) Static + final variables	//By default		//abstract class may contain final/non final // difference
+		//cannot change these variables
+		//not dependent on object
+		//why final? since interface cant have constructor -> how will we initialize variable -> hence final
+				-> final forces them to initialize
+
+	b) Abstract functions() only		//no body functions	//abstract classes can have non asbtract //difference 
+		What are abstract functions?
+			no body functions
+			public functions
+			
+	c) Java 8 -> Defualt() and static() methods allowed
+
+
+	d) Interface cant have constructors	e
+
+Note: Cannot create object of interfaces
+
+		
+4) What interface mean/specify?
+
+Abstract class can give implementation of interface
+
+interface cannot give  implementaiton of abstract class
+
+5) How to implement 
+   Interface	
+	a) java interface
+
+   Abstract Class
+	b) extends keyword
+
+
+6) What advantage of interface? 
+	a) can implement multiple interface	//Solves inheritence problem
+	b) 1 class can implement multiple inheritence
+	c) 1 class can inherit only 1 superclass
+
+
+
+7)	Ex every car has different Engine,brake and media
+Q) Cant we create below as abstract classes and overrid methods? yes
+	what problem? multiple inheritence problem	
+		//Cant extend all 3 classes
+Car:
+	class Engine 
+		start()
+		stop()
+		acc()
+
+	Class Brake
+		brake()
+
+	class Media
+		 start()
+		 stop()
+}
+	
+	
+8) 
+
+a) create new package
+b) create new interface Engine
+	declare var final
+c) create new interface brake
+d) create new interface media
+e) How to use these interfaces
+	Implement in class Car
+	
+public interface Engine {
+
+	static final int PRICE = 78000;			//static and final by default hence blurred
+	void start();
+	void stop();
+	void acc();
+}
+
+
+
+
+public interface Brake{
+
+	void brake();
+
+}
+
+
+public interface Media{
+
+	void start();
+	void stop();
+}
+
+
+public class Car implements Engine,Brake {		//right click on implements -> implement methods
+	@Override
+	public void brake() {
+	System.out.println("Normal brakes");
+	}
+
+	@Override
+	public void start() {
+	System.out.println("Normal start");
+	}
+
+	@Override
+	public void stop() {
+	System.out.println("Normal stop");
+	}
+
+	@Override
+	public void acc() {
+	System.out.println("Normal acc");
+	}
+
+}
+
+
+public class Main {
+	public static void main(String[] args) {
+		Car car = new Car();
+
+		car.acc();
+		car.start();
+		car.stop();
+}
+}
+//which method to run decided when? at runtime (Dynamic method dispatch)
+
+Object achieved: inherited multiple interfaces(abstract class) in a class
+
+
+Q)Note:
+ if calling a function from child class, function exists in parent class
+	-> parent + child class both have to be present at compile time
+
+
+Q) How to make more function avail in child classes?
+	push function higher and higher up in parent
+	//problem
+
+
+solution: interfaces
+	what they do?
+	disconnect definition of method from hierarchy of inheritence
+	//inheriting is done in sub class / main body only
+
+ConclusioN: Interfaces are not in class hierarchy
+
+2 unrelated (who knows what parents )class can implement same interface  //FEASTURE OF INTERFACE
+
+in classes more used function are put up, in interface dont care
+
+
+
+
+
+
+Q) Can we add type of variable as type of interface?			//can in abstract class , parent class	
+	Yes, how?
+
+
+public class Main {
+	public static void main(String[] args) {
+		Engine car = new Car();			//type of variable = type of interface
+											//if a variable inside class car -> we cant access it here
+		car.acc();				//works
+		car.start();			//works
+		car.stop();		
+
+		car.a;				//error			//why? what can be accessed depends  on reference type:--> Engine
+								 what version of it can be accessed? depends on --> object type : car		
+	}
+
+}
+
+
+public class Car implements Engine,Brake {		//right click on implements -> implement methods
+
+	int a = 30;
+
+
+	@Override
+	public void brake() {
+	System.out.println("Normal brakes");
+	}
+
+	@Override
+	public void start() {
+	System.out.println("Normal start");
+	}
+
+	@Override
+	public void stop() {
+	System.out.println("Normal stop");
+	}
+
+	@Override
+	public void acc() {
+	System.out.println("Normal acc");
+	}
+
+}
+
+
+Q) We know when is dynamic look up? runtime
+	BUt some disadvantage? when comparing to normal way of invoking functions
+
+
+	CONCLUSION : Dont use interfaces casually in performance critical code
+
+
+
+Q) 
+a) if Car also extends Media
+b) Media : contains start() and stop()
+c) Engine: contains start() and stop()
+d) car   : contains start() and stop()
+e) What below outputs?
+	Media carMedia = new Car();
+		carMedia.stop();
+
+		>Output:  Normal engine stop
+			//wrong stopped called
+
+What solutioN? Create separate classes for interface
+f) Create a class CDPlayer that implements Media interface
+	add start() and stop()
+
+g) Create class PowerEngine
+
+h) Create class ElectricEngine	
+
+i) Create class NiceCar  
+	create public Engine object
+	default constructor : powerEngine()
+
+	//How to add engine of our own?
+	public NiceCar(Engine engine){
+		this.engine = engine;
+	}
+
+	add start()
+		engine.start();
+	add startMusic()
+
+	add private Media player = new CDPlayer();
+
+j) If engine initialized
+	if power engine ->		  Power Engine Start
+	if electric engine call ->   Electric Engine Start
+
+
+h) earlier
+	public void startMusic(){
+		engine.start();	
+	}
+
+   Now
+	public void startMusic(){
+		player.start();	
+	}
+
+   also add
+	public void upgradeEngine(Engine engine){
+		this.engine = engine;		
+	}
+
+i) Add in main()
+
+	NiceCar car = new NiceCar();
+	car.start();
+	car.startMusic();
+
+
+j) -------------------------------------------------------------------------------------------------------
+		//how can we change engine?
+		//main
+			car.upgradeEngine();	//Electric engine start		//What achieved? we changed a part of engine, without creating a new object
+			car.start();											//earlier we would have had to make change in class Car -> upgradeEngien()
+		//NiceCar
+			void upgradeEngine() {
+				this.engine = new ElectricEngine();
+-------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------
+public interface Media{
+
+	void start();
+	void stop();
+}
+
+
+Code 1:
+
+public class Car implements Engine,Brake,Media {		//right click on implements -> implement methods
+	@Override
+	public void brake() {
+	System.out.println("Normal brakes");
+	}
+
+	@Override
+	public void start() {
+	System.out.println("Normal engine start");
+	}
+
+	@Override
+	public void stop() {
+	System.out.println("Normal engine stop");
+	}
+
+	@Override
+	public void acc() {
+	System.out.println("Normal acc");
+	}
+}
+
+Code 2
+
+public interface Engine {
+
+	static final int PRICE = 78000;			//static and final by default hence blurred
+	void start();
+	void stop();
+	void acc();
+}
+
+
+Code  3:
+
+public class Main {
+	public static void main(String[] args) {
+		Engine car = new Car();			//type of variable = type of interface
+											//if a variable inside class car -> we cant access it here
+		car.acc();				//works
+		car.start();			//works
+		car.stop();		
+
+		car.a;				//error			//why? what can be accessed depends  on reference type:--> Engine
+								 what version of it can be accessed? depends on --> object type : car		
+		Media carMedia = new Car();
+		carMedia.stop();
+	
+		NiceCar car = new NiceCar();				// --> NiceCar() { engine = new PowerEngine();}
+		car.start();			//Power engine start 		//engine.start() runs
+		car.startMusic();		//Music start			//player.start() runs
+
+
+			}
+
+	}
+
+}
+
+
+public class CDPlayer implements media {
+
+	@Override
+	public void start() {
+		System.out.println("Music Start");
+	}
+
+
+	@Override
+	public void stop() {
+	System.out.println("Music stop");
+	}
+
+	
+}
+
+
+
+public class PowerEngine implements Engine {
+
+	@Override
+	public void start() {
+		System.out.println("Power Engine Start");
+	}
+
+
+	@Override
+	public void stop() {
+	System.out.println("Power Engine stop");
+	}
+
+	@Override
+	public void acc() {
+	System.out.println("Power Engine accelerate");
+	}
+
+
+
+	
+}
+
+
+public class ElectricEngine implements Engine {
+
+	@Override
+	public void start() {
+		System.out.println("Electric Engine Start");
+	}
+
+
+	@Override
+	public void stop() {
+	System.out.println("Electric Engine stop");
+	}
+
+	@Override
+	public void acc() {
+	System.out.println("Electric Engine accelerate");
+	}
+
+	
+}
+
+
+public class NiceCar {
+	private Engine engine;			//notice private //data hiding
+	private Media Player = new CDPlayer();
+
+	public NiceCar(){
+		engine = new PowerEngine();
+	}
+
+
+	public NiceCar(Engine engine){
+		this.engine = engine;
+	}
+
+	public start() {
+		engine.start();
+	]
+
+	public stop() {
+		engine.stop();
+	]
+
+/*
+	public void startMusic(){
+		engine.start();	
+	} *.
+
+/*
+	public void stopMusic(){
+		engine.stop();	
+	}
+
+	public void upgradeEngine(Engine engine){
+		this.engine = engine;	
+	}
+	
+	
+}
+
+
+
+
+
+
+
+Q) How to extend interfaces?	//note not implements
+							//implements is used with classes -> interfaces
+							//interface -- interface inheritence is via "extends"
+
+
+public interface A{
+	void fun();
+}
+
+
+public interface B extends A{
+	void greet();
+}
+
+public class Main implements B {
+	
+	  @Override			//if B extends A have to implement both methods
+	void fun(){			//also have to implement abstract methods of b + interface B is inheriting from also
+
+	}
+
+	@Override
+	void greet(){
+
+	}
+
+
+}
+
+
+
+

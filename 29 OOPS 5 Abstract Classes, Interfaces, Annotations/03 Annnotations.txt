@@ -1,0 +1,60 @@
+Q1) What is annotation? Also an interface
+
+Q2) How to check
+
+Ctrl + click -> @Override
+
+
+public @interface Override {
+
+}
+
+
+Q3) How to create our won annotations?
+
+create using @interface
+
+
+Q4) Objective: can there be a method that is not overriden in interface? yes using default
+
+
+//How to expand interfaces without breaking existing code	//Not recommend use
+
+default implementation in java 8 to the interfaces
+
+what is default implementation?How to provide default implementation?
+a) create interface A
+	abstract method fun		//no error if dont override
+b) create interface B	
+	abstract method fun		//now get error if dont override in Main 
+c) create Mains that implements A,B
+
+Conclusion: special feature, main why of interface is still: must override 
+this feature use:
+	expand interface without breaking existing code
+	for ex. if method in interface
+			ALL classes implementting the itnerface
+				must override that method
+					to avoid this , this feature
+
+public interface A {
+	default void fun(){					//abstract method
+		System.out.println("I am in A");
+}		
+
+
+}
+
+public interface B {
+	void greet();
+	default void fun();
+
+	}
+
+
+public class Main implements A, B{
+	@Override
+	public void greet() {
+
+	}
+}

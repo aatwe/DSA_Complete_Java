@@ -1,0 +1,30 @@
+1) Access modiffier for overriden methods should be same or better
+for ex
+protected < public
+
+foe ex 
+	if parent class method greet() was protected
+
+	overriden method should >= protected
+	for ex below its public
+
+	//Cannot be more restrictive than protected	//cannot be private for ex//error
+
+public class Main implements A,B {
+	@Override
+	private void greet(){	//error
+
+	}
+
+
+	@Override
+	public void greet(){	//works
+
+	}
+
+	public static void main(String[] args) {
+		Main obj= new Main();	
+		A.greeting();
+	}
+
+}
