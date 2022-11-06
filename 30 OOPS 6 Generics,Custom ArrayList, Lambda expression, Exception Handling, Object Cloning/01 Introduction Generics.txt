@@ -1,0 +1,215 @@
+Q1) Few basic functions 	//java list provides
+
+
+import java.util.ArrayList;
+
+public class CustomArrayList{
+
+	public static void main(String[] args) {
+		ArrayList list = new ArrayList();		//warning: raw use of parameterized class ArrayList
+		list.add(45);								//generics solve this warning
+		list.remove(0);		//can remove many
+		list.get(0);
+		list.set(1,6789)	;
+		list.size();
+		list.isEmpty();
+ 
+	}
+}
+
+
+Q2) How ArrayList works?
+	doubles in size at a time when full -> copies item into new 
+	doubling occurs exponentially: constant time (avg)	//amortized
+
+	why O(1)
+		a) size 10 -> insert 10 items -> doubles
+		b) size 20	-> insert 20 	   -> doubles
+		c) size 40
+
+	//time taken linear on average
+
+
+
+Q2) How to make these on own
+
+	a) How arraylist stores internally? lets say array for our ex	
+	
+	b) Should people directly access the array? NO  //create private array data
+	c) what we want? use methods listed //get / set
+	d) keep initial size of array 0
+	e) create constructor CustomArrayList()
+			initializes size of data array
+	f) How to create add() method
+			if(isFull())  -> resize()
+			add data at size++
+	g) create isFull()		//check if array is full
+
+	h) Create resze() 
+		create a nrw array of double size
+		copy previous items in new array
+			loop from 0 to data.length
+				temp[i] = data[i]
+			make temp as new data	//point data to newly created temp	
+		
+		//What happens to temp after function over :temp goes outofscope 
+		//why data is not out of scope? not inside function  //instance variable
+			//when instance variable go out of scope? when object finished
+	i) create remove()			//remove from end
+		//how to remove item?
+		data[--size]
+		Why not actively deleting data? size is also index value, 
+		Does the decremented value still exist? yes
+		what when we have to add? it will overwrite that value
+
+	j) get(int index)
+		//pass index -> return data[index]
+
+	k)public int size() {
+			//return size variable
+
+	l) set()	//pass index and what value to set
+
+	m) Main:
+		m.1) create object  list of type CustomArrayList
+				//ref var type: CustomArrayList
+				//object type : CustomArrayList
+
+		m.2) Add 2,3,9 in list
+
+		m.3) print(list)		//printing object
+						//another way to print? overide toString()
+
+	n) Output:
+		CustomArrayListdata=[3, 5, 9, 0, 0, 0, 0, 0, 0, 0], size3}
+			//created of size default 10, shows us 3, is actually 10
+
+	Q) What if we add 14 items? -> size will double
+	//main
+		for(int i = 0; i<14 ; i++) {
+
+		}
+	//Output: CustomArrayListdata=[0, 2, 4 ,6 , 8 ,10,....24,26,0,0,0,0,0,0], size14}
+					//actually 20 item , but 14 elements
+
+
+
+-----Generics Premise---------------------------------------------------------------------
+HOW TO SPECIFY WHAT TYPE OF DATA TO PUT IN CUSTOM CLASSES		//Parameterized types
+
+What problem? Our arrayList stores int
+	What actual arrayLIst can store? int,char,custom-data-types,string,boolean
+
+	Real Array List : have optioon to specify
+
+
+	ArrayList<Integer> list2 = new ArrayList<>();
+	list.add("adsf");	//error
+
+
+	What is<>? Generics
+
+What generics do? help to provide a parameterizeds type to objects of a class
+
+
+	ArrayList<Integer> list2 = new ArrayList<>();
+	list2.add("adsf");	//no error
+
+
+
+Q) How to make change in our code to suit strings?
+	a) copy code and change value to string	//much duplication
+
+	b) template		
+
+
+Q) What features of template
+
+//I can reuse code for various datatypes
+	
+//Type safety
+	//if a list werent generic for ex
+		ArrayList list2 = new ArrayList();
+		list2.add("dfgh");		//anyone can add string/ int/float
+	//we can make it type specific  //type safe
+
+
+Q) What to add in generics? Classes ex Integer , primitives not allowed for ex int
+
+-----------------------------------------------------------------------------------------
+
+
+Code:
+
+
+import java.util.ArrayList;
+
+public class CustomArrayList{
+
+	private int[] data;
+	private static int DEFAULT_SIZE = 10; 
+	private int size = 0;
+
+	public CustomArrayList() {
+		this.data = mew int[DEFAULT_SIZE];
+	}	
+
+	public void add(int num){
+		if (this.isFull()){
+			resize();	
+		
+		}
+	   	data[size++] = num;
+	}
+
+	private void resize() {\
+		int[] temp = new int[data.length * 2];
+
+		for(int i=0; i< data.length; i++) {
+			temp[i] = data[i];
+		}
+		data = temp;
+
+	} 
+
+	private boolean isFull() {
+		return size == data.length;
+	}
+
+	public int remove() {
+		int removed = data[--size];
+		return removed;
+	}
+
+	public int get(int index) {
+		return data[index];
+	}
+
+	public int size() {
+		return size;
+	}
+	public void set(int index, int value) {
+		data[index] = value;
+	}
+
+	public String toString() {
+		return "CustomArrayList" + 
+		"data=" + Arrays.toString(data) +
+		", size" + size +
+		"}";
+
+	}
+
+	public static void main(String[] args) {
+		CustomArrayList list = new CustomArrayList();		//warning: raw use of parameterized class ArrayList
+		list.add(3);
+		list.add(5);
+		list.add(9);
+
+		System.out.println(list);
+	}
+}
+
+Output:
+CustomArrayListdata=[3, 5, 9, 0, 0, 0, 0, 0, 0, 0], size3}
+

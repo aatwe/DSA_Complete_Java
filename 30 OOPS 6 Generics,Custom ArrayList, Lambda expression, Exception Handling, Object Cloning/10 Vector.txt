@@ -1,0 +1,48 @@
+1) What is vector?
+
+	Like an ArrayList
+	
+
+
+2) What difference between Vector and arrayList?
+	synchronized		//only 1 thread can access at a time
+
+
+	What is threading? processes in accessing a particular DS
+		What threads do? access object 
+
+					
+
+
+	In ArrayList:	//faster  //can sync also though  //prefer
+				multiple threads -> access object  //not synchornized
+	In Vector:		 
+				thread 2 waits while thread1 is accessing		
+
+
+3) Code
+
+public class Main {
+	public static void main(Sting[] args) {
+		List <Integer> list = new ArrayList<>();
+		
+		List <Integer> list2 = new LinkedList<>();
+
+		list2.add(34);
+		list2.add(78);	
+		list2.add(55);
+		list2.add(89);
+		
+		List<Integer> vector = new Vector<>();
+		vector.add(45);
+		vector.add(5);
+		vector.add(15);
+		vector.add(56);
+
+
+		System.out.println(vector);
+
+}
+
+
+//If not dealing with multithreading applications -> Use ArrayList  //recommended

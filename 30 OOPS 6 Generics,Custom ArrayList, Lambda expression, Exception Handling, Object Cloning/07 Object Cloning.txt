@@ -1,0 +1,224 @@
+Q1) What is object cloning
+
+a) Create class Human with age and name and object kunal
+b) Create constructor Human
+c) Create a constructor that copies object kunal
+d) What problem reusing new keyword to create constructor	//processing time
+
+	Solution: object cloning	//exact copy of object
+
+e) What is clone? 
+	e.1) method in Object class
+	e.2) java.lang -> Interface cloneable
+	e.3) implement this interface by the class for which we creating clone
+
+//How to implement clone
+
+f) class Human implements Cloneable
+
+g) Create function clone() of type Object class
+					//throws CloneNotSupportedException
+	returns super.clone()
+
+	//Note parse object to HUman class
+		Human twin = kunal.clone();		//since this also thows exception -> mention throws CloneNotSupportedException in main
+
+h) System.out.println(twin.age + " " + twin.name);		> 34 Kunal Kushwaha
+	
+
+#Conclusion:
+			kunal and twin both have same value
+			//Clone copies value from one object to another
+
+			
+//Instead of 		Human kunal = new  Human(34,"Kunal Kushwaha");
+				Human twin = new Human(kunal);
+
+//Can just write 
+			Human kunal = new  Human(34,"Kunal Kushwaha");
+			Human twin =  (Human)kunal.clone();
+
+#What advantage?
+	instead of lengthy
+
+	public Human(Human other) {		//copy constructor
+		this.age = other.age;
+		this.name = other.name;
+	}
+	
+	can just write
+		return super.clone();	
+
+
+#Faster way of copying	//big objects like array can be cloned faster
+
+
+
+
+public class Human implements Cloneable {
+	
+	int age;
+	String name;	 
+
+	public Human(int age, String name) {
+		this.age = age;
+		this.name = name;
+	}
+
+	public Human(Human other) {		//copy constructor
+		this.age = other.age;
+		this.name = other.name;
+	}
+	
+	public Object clone() throws CloneNotSupportedException {	//why add this exception? if we dont implement Cloneable -> it will generate CloneNotSupportedException //hence implement
+		return super.clone();							//this throws exception //hence adding throws above //throw vs throws
+	}
+
+}
+
+
+public class Main {
+	public static void main(String[] args) throws CloneNotSupportedException {
+		Human kunal = new  Human(34,"Kunal Kushwaha");
+		Human twin = new Human(kunal);
+
+	//OR use this
+		Human twin = (Human)kunal.clone();
+		System.out.println(twin.age + " " + twin.name);		> 34 Kunal Kushwaha
+	}
+}
+
+
+++++++++++++
+Simply
+just implement cloneable to clone an object for that class
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+What disadvantages? 
+have to add Cloneable, clone(), CloneNotSUpportedException etc
+
+
+NOte: Interface Cloneable has no abstract methdos if we click, why we using?
+
+	to make jvm know that Human is cloneable
+
+
+
+Q) How is copying done?
+	
+	a) Shallow Copying
+		a.1) What is shallow copying?
+				if givena  int arr[]
+				initialize arr in constructor
+					this.arr = new int[5]
+
+		a.2) Print twin.name
+				Human twin = (Human)kunal.clone();
+		a.3) now try printing that arr initialized
+				System.out.println(Arrays.toString(twin.arr));
+				we get output: {3,4,5,6,9,1}
+
+		a.4) if we try changing value of 0th item
+				 twin.arr[0] = 100;
+	
+		a.5) Print twin.arr -> modifies		{3,4,5,6,9,1}
+			Print kunal.arr -> also modifies {3,4,5,6,9,1}
+			//why kunal.arr changed? shallow copying
+
+ 	What is shallow copying? 
+
+	If object copied
+		inside that object
+
+		-> primitives 			 -> copied	as it is		//age
+		-> non primitives object types -> point to same // name and arr
+
+	For ex 
+		a.5.1) if given kunal object : age = 34, name = "kunal kushwaha", arr = [3,4,5,6,9,1]
+				
+		a.5.2) creates copy in shallow copying
+				kunal object :  age = 34, name = "kunal kushwaha", arr = [3,4,5,6,9,1]
+				twin  object   :  age = 34, name = "kunal kushwaha", arr = [3,4,5,6,9,1]
+		
+				twin.name and twin.arr point to kunal.name and kunal.arr
+					//change in twin name or array -> reflects in kunal name or arr
+
+		//Why shallow copying name? not pure copy
+		a.5.2) How to shallow copy
+		public Object clone() throws CloneNotSupportedException {	//why add this exception? if we dont implement Cloneable -> it will generate CloneNotSupportedException //hence implement
+		Human twin = (Human)super.clone();						//this throws exception //hence adding throws above //throw vs throws
+		}	
+
+
+	B) What is deep copying?
+	 Solution to shallow copying
+
+		-> totally copied
+	
+		kunal object :  age = 34, name = "kunal kushwaha", arr = [3,4,5,6,9,1]
+		twin  object   :  age = 34, name = "kunal kushwaha", arr = [3,4,5,6,9,1]
+
+		//2 different objects
+
+		if change kunal.arr -> not reflected in twin.arr
+		b.1) How to deep copy	
+			b.1.1) Create a new array
+			b.1.2) for(int i = 0; i< twin.arr.length; i++){
+				twin.arr[i] = this.arr[i];
+			}
+			b.1.3) return twin;
+
+		public Object clone() throws CloneNotSupportedException {	//why add this exception? if we dont implement Cloneable -> it will generate CloneNotSupportedException //hence implement
+		twin.arr = new int[twin.arr.length];						//this throws exception //hence adding throws above //throw vs throws
+	}
+
+	After doing twin.arr[0] = 100;
+
+		twin.arr -> will change {3,4,5,6,9,1} -> {100,4,5,6,9,1}
+		kunal.arr -> will not change {3,4,5,6,9,1}  -> {3,4,5,6,9,1} 
+
+	//for(int i = 0; i< twin.arr.length; i++){		//copies from twin into current object kunal
+				twin.arr[i] = this.arr[i];
+			}
+
+=++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Code:
+
+public class Main {
+	public static void main(String[] args) throws CloneNotSupportedException {
+		Human kunal = new  Human(34,"Kunal Kushwaha");
+
+		Human twin = (Human)kunal.clone();
+		System.out.println(twin.age + " " + twin.name);		> 34 Kunal Kushwaha
+		System.out.println(Arrays.toString(twin.arr)); 	 //> {3,4,5,6,9,1}				
+		twin.arr[0] = 100;										OR 
+		System.out.println(Arrays.toString(kunal.arr));		{100,4,5,6,9,1}			{3,4,5,6,9,1}
+								  twin.arr		//						{100,4,5,6,9,1}
+	}
+}
+
+
+public class Human implements Cloneable {
+	
+	int age;
+	String name;	 
+
+	public Human(int age, String name) {
+		this.age = age;
+		this.name = name;
+		this.arr = new int[]{3,4,5,6,9,1}
+	}
+
+	
+	public Object clone() throws CloneNotSupportedException {	//why add this exception? if we dont implement Cloneable -> it will generate CloneNotSupportedException //hence implement
+		return super.clone();							//this throws exception //hence adding throws above //throw vs throws
+
+OR
+
+		for(int i = 0; i< twin.arr.length; i++){
+				twin.arr[i] = this.arr[i];
+			}
+		return twin;
+	}
+
+}

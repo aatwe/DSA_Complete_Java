@@ -1,0 +1,226 @@
+1) Intro to error vs exception
+
+Imp in development
+a) error vs exception?
+	error    :   a.1) cant recover from error
+			  a.2) cant write code to handle error
+			  a.3) lack of resources/ stack overflow 
+
+	exception: : b.1) recoverable , can write code to handle
+			  b.2) prevents normal flow of program
+			  b.3) ex /0,  null pointer exception, 
+
+
+b) Which class handles all exception in java?
+
+			        Object
+			           |
+			       Throwable
+		   /					\
+  	   Exceptions					Errors
+     /			\
+
+checked	       Unchecked
+
+compile time	 compiler cant detect 
+checking		 Runtime 
+
+ex file open,	ex /0
+location not	//arithmetic exception
+exist
+//file not found
+exception	
+ 
+
+
+
+
+----------------------------------------------------------
+2) Create your own exceptions
+
+a) try dividing 5/0 -> Arithmetic Exception
+	public class ArithmeticException extends RuntimeException
+	public class RuntimeException extends Exception
+
+b) how to print our own exception?
+	try {what code to try} catch{what exception object} {what to code to run if caught}
+
+		ArtihmeticException e = new ArithmeticException
+		//parent				//child
+
+c) 	try{}
+	catch{}
+	finally{this code always executes whether exception thrown or not}		//use in scenarios like , close a file	 etc	
+			
+		Note: finally is optional, cannot have multiple
+			
+d) can we use static method in try? yes
+
+public class Main{
+
+	public static void main(String[] args) {
+	   int a =5;	
+	   int b =0;
+	   try {
+			divide(a,b);
+		} catch(Exception e){
+			System.out.println(e.getMessage());	//which method runs , depends on child
+		} finally {
+			System.out.println("This will always execute"); 			// / by zero  this will always execute
+		}
+
+	}
+	static int divide(int a, int b){
+		return a/b;			
+	}
+
+}
+
+e) What if we want to add a exception in a check in try block itself
+
+
+public class Main{
+
+	public static void main(String[] args) {
+	   int a =5;	
+	   int b =0;
+	   try {
+			divide(a,b);
+		} catch(Exception e){					//catch(ArithmeticException e)	//also works //why? Arithmetic Exception is subclass of Exception	
+			System.out.println(e.getMessage());	//which method runs , depends on child
+		} finally {
+			System.out.println("This will always execute"); 			// / by zero  //Output: this will always execute
+		}
+
+	}
+	static int divide(int a, int b) throws ArithmeticException{
+		if(b == 0) {
+			throw new ArithmeticException("please do not divide by zero");		//>Output: please do not divide by zero
+		}			
+
+		return a/b; 
+	}
+
+}
+
+
+f) How to explicitly throw error message
+		static int divide(int a, int b) throws ArithmeticException {		//dotn forget to throw in method also
+		if(b == 0) {
+			throw new ArithmeticException("please do not divide by zero");	//throw explicit exception
+		}
+
+
+g) throw vs throws
+	throw : we throwing an exception	
+	throws: just declares exception
+	
+	static int divide(int a, int b) throws ArithmeticException{
+	//read as we using divide that may throw an exception
+
+	while
+
+	throw new ArithmeticException("please do not divide by zero");	//actually throwing an exception
+
+
+
+
+Code: 
+
+
+public class Main{
+
+	public static void main(String[] args) {
+	   int a =5;	
+	   int b =0;
+	   try {
+			int c =a/b;
+		} catch(Exception e){
+			System.out.println(e.getMessage());	//which method runs , depends on child
+		} 
+
+	}
+
+}
+> / by zero
+
+
+
+public class Demo {
+	public static void main(String[] args) {
+		Main.divide(3,0);
+	}	
+
+}
+>Please do not divide by zero
+
+
+
+h) can we add multiple catch? Yes 	add one below another		//Note if top catch exceutes below doesnt,if top  catch does not -> below checks
+
+  catch(ArithmeticException e){					//catch(ArithmeticException e)	//also works //why? Arithmetic Exception is subclass of Exception	
+			System.out.println(e.getMessage());	//which method runs , depends on child
+	
+} catch(Exception e){					//catch(ArithmeticException e)	//also works //why? Arithmetic Exception is subclass of Exception	
+			System.out.println("Normal exception");	//which method runs , depends on child
+}	
+
+
+Q) What if we put parent class(Exception) first before child (ArithmeticException)
+
+catch(Exception e){					//catch(ArithmeticException e)	//also works //why? Arithmetic Exception is subclass of Exception	
+			System.out.println("Normal exception");	//which method runs , depends on child
+}	
+  catch(ArithmeticException e){					//catch(ArithmeticException e)	//also works //why? Arithmetic Exception is subclass of Exception	
+			System.out.println(e.getMessage());	//which method runs , depends on child
+	
+} 	
+
+
+
+	//throws error: exception already caught
+			why? Exception class includes everything, no need for ArithmeticException
+
+CONCLUSION: Keep more strict rules above
+
+
+
+
+i) How to create/define your own exception?
+
+a) Create a class MyException that extends Exception
+
+a) if String name is kunal -> throw my own exception that prints "name is kunal"
+
+b) 
+
+
+Create a constructor
+b) 
+
+	public class MyException extends Exception {
+		public MyException(String message) {
+			super(message);
+	}
+}
+
+
+
+	public class Main {
+		public static void main(String[] args) {
+			int a = 5; 	
+	   		int b =0;
+	   try {
+			String name = "Kunal";
+			if(name.equals("Kunal ")){
+				throw new MyException("name is kunal");			..MyException constructor -> super(message) ->	e.getMessage()
+			}
+			} catch(MyException e){
+				System.out.println(e.getMessage());	//which method runs , depends on child
+			} finally {
+			System.out.println("This will always be executed");	//which method runs , depends on child
+		}
+	}
+
+>name is kunal
+This will always be executed

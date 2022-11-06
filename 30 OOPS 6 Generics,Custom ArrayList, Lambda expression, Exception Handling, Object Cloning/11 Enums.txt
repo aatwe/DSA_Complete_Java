@@ -1,0 +1,214 @@
+Q1) What are enums?
+
+	group of variables we cant change
+
+
+2) if fixed no. of objects in class -> use enums
+
+
+3) a;; enum constants are : public,static,constant
+		
+	enum enum_name {enumconstant1, enumconstant2 ...}
+
+		if static: can access with className
+			Week week;
+			week = Week.Monday;
+				//className.enumConstant
+	
+
+//how did we access enum constant value?
+System.out.println(enumClass.constantName);
+
+Output:
+//Output:
+>Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+Sunday
+
+
+>Monday
+
+>0
+
+
+
+5) Code:
+
+package com.kunal.enumExamples;
+
+public class Basic {
+	enum Week {			//what type of enum constants? Week
+
+		Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sundar
+	}
+
+	Week() {
+		System.out.println("Constructor called for" + this);
+	}
+
+	public static void main(String[] args) {
+		Week week;				//create class Object for enum
+		week = Week.Monday;			Classname.enumConstant
+		
+		for(Week day :Week.constantName()) {	//classname object : classname.constantName()
+			System.out.println(day);
+		}
+	
+
+		System.out.println(week);
+		System.out.println(week.ordinal());	//tells position of MOnday
+	}		
+}
+
+
+//Output:
+>Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+Sunday
+
+
+>Monday
+
+>0
+
+
+
+
+
+4) Try creating a constructor 
+Week() {
+		System.out.println("Constructor called for" + this);
+	}
+
+Output: 
+	Constructor called for Monday
+	Constructor called for Tuesday
+	Constructor called for Wednesday
+	Constructor called for Thursday
+	Constructor called for Friday
+	Constructor called for Saturday
+	Constructor called for Sunday
+
+//Constructor executed for every enum
+	
+Q) we accessed only week.Monday; enum constant object
+	Why constructor got called for all?
+
+	The constructor is not public/protected  --> if public/protected --> allows initialization  of more than 1 objects
+	The constructor is private / default     --> if private/default  --> allows initialization  of constant no. of objects
+
+Internally
+Week() {
+		System.out.println("Constructor called for" + this);
+	}
+works as
+	public static final Week Monday = new Week();
+
+
+
+//we cant create objects explicitly
+//cant invoke cosntructor explicitly
+//when we try to access even 1 -> all gets called
+
+-------------
+
+5) Code:
+
+package com.kunal.enumExamples;
+
+public class Basic {
+	enum Week {			//what type of enum constants? Week
+
+		Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday
+	}
+
+	Week() {
+		System.out.println("Constructor called for" + this);
+	}
+
+	public static void main(String[] args) {
+		Week week;				//create class Object for enum
+		week = Week.Monday;			Classname.enumConstant
+	
+	}		
+}
+
+Output: 
+	Constructor called for Monday
+	Constructor called for Tuesday
+	Constructor called for Wednesday
+	Constructor called for Thursday
+	Constructor called for Friday
+	Constructor called for Saturday
+	Constructor called for Sunday
+
+
+6) Inheritence in enum
+
+a) cannot extend with enm
+
+enum Week extends ...
+
+b) enum cannot be a super class
+
+c) System.out.println(this)	//prints name of constants
+
+
+d) can enum implement an interface? Yes can implement as many interface as we want  // enum cannot extend classes
+
+public interface A {
+	void hello(){
+		System.out.println("hey how are you");
+	}
+}
+public class Basic {
+	enum Week implements A{
+		Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday;
+}
+	Week() {
+		System.out.println("Constructor called for" + this);
+	}
+
+	public static void main(String[] args) {
+		Week week;				//create class Object for enum
+		week = Week.Monday;			Classname.enumConstant
+		week.hello();
+	}		
+}
+
+Output: 
+	Constructor called for Monday
+	Constructor called for Tuesday
+	Constructor called for Wednesday
+	Constructor called for Thursday
+	Constructor called for Friday
+	Constructor called for Saturday
+	Constructor called for Sunday
+	hey how are you
+
+//Conclusion: can enum implement an interface? Yes can implement as many interface as we want  // enum cannot extend classes
+
+
+7) How to compare enum for equality? == 
+
+8) methods with enum
+
+	.values()
+	.ordinal()
+	.valueOf()
+	System.out.println(Week.valueOf("Monday"));
+		>Output: Monday	//returns enum constant
+	
+
+9) Since cannot inherit with enum
+	cannot override
+		also cannot declare abstract functions
+			//method body required

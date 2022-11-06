@@ -1,0 +1,246 @@
+a) provide type: add T keyword in class CustomGenArrayList<T>
+
+b) replace data by T
+
+c) constructor 
+
+	this.data = new T[DEFAULT_SIZE];		//error: type parameter cannot be instantiated directly
+								//read java documentation:  
+									type check at compile time
+									how implemented generics? type erasure
+									replaces all type parameters in generics types with bounds or object if type parameters are unbounded			
+									//produced bytecode:
+										contains only ordinary classes,methods,interfaces
+								why type erasure? ensure no new classes created for parameterized types											due to which generics incur no runtime overhead
+d) for Generics
+
+	Qd.1) When is type checking done? compile time
+	Qd.2) when is object creation done? runtime
+	 d.3) when we create new object T //compile time first -> runtime
+	
+
+public CustomGenArrayList() {
+		data = new T[DEFAULT_SIZE];
+	}
+
+	public T add(T num) {
+		if (isFull()) {
+			resize();
+		}
+		data[size++] = num;
+	}
+------------------------------------------------------------------------
+Generics Dos and Donts
+1) Cannot instantiate Generic Types with Primitive types
+	class Pair<int,char>	//error
+	class Pair<K,V> {
+		private K key;
+		private V value;
+	}
+	
+
+2)Cannot create instances of type parameters
+	public static <E> void append(List<E> list) {
+		E elem = new E();
+		list.add(elem);
+	}
+
+	soln : workaround create object of type parameter through reflection
+		
+	public static <E> void append(List<E> list, Class<E> cls) throws Exception {
+			E elem = cls.newInstance();
+			list.add(elem);
+	}
+
+
+
+
+3) Cannot declare static fields whose types are type parameters
+
+	//why?
+		a) os is static //does not depend on objects
+		b) objects are of different types
+			//os doesnt know which type it should be
+
+
+public class MobileDevice<T> {
+		private static T os;		//type parameter  //cant declare static 
+	
+	}
+
+
+4) Cannot use casts / instanceof variable with Parameterized types
+		//why? it works at runtime
+
+
+	public static <E> void rtti(List<E> list) {
+		if (list instanceof ArrayList<Integers>)		//compile time error
+	} 
+}
+
+
+5) cannot overload methods for generic types
+		//why? no info of object at compile time
+
+-----------------------------------------------------------------------------------	
+Wild Card Premise
+
+
+e) How will we implement generic in ArrayList ? 
+		Object[]		/object type
+
+
+  e.1) add Object[] as data
+  e.2) Object type constructor
+		//note: 	if needed cast:	temp[i] = (T)data[i];	//not needed for our case //adding T in Object type //redundant	//adding smaller in bigger type
+
+  e.3) Cast data --> T removed = data[--size];		//adding data(int) type --> in T type	// adding biggger in smaller
+  e.4) cast get
+
+  e.5) Test 
+		CustomGenArrayList<Integer> list3 = new CustomGenArrayList<>();
+		add integer //no error
+		add string  //error 
+
+
+f) How to restrict the types ion generics ?
+	for ex restrict only to int,string,float
+
+	HOw to restrict? Bound Wildcards
+		We know Integer extends Number
+		//means? Number contains so many other classes
+		//how to restrict type to be a Number
+
+	f.1)
+
+		public static void process(List? extends Foo> list) {/**/}
+		public class CustomGenArrayList<T extends Number>{			///works without ? also	
+	
+	f.2) 
+		Try adding string in main
+
+				CustomGenArrayList<String> list3 = new CustomGenArrayList<>();		//Works
+				CustomGenArrayList<String> list3 = new CustomGenArrayList<>();		//Error	//String is not Number
+			
+		Conclusion What can we add as T? Number or subclass of Number
+
+	f.3) What is ? logic 
+			public void getLIst(List<Number> list)				//can only pass Number type
+			public void getLIst(List<? extends Number> list)		//can pass Number + subclasses of Number(int/float)
+			
+		
+
+
+g) How to create interface with generic type
+		public interface Comparable<T> {}
+
+
+
+public interface GenericInterface<T> {
+	void display(T value);
+}
+
+
+
+public class Main implements GenericInterface<Integer> {
+
+	@Override
+	public void display(Integer value) {
+
+	}
+
+
+	public static void main(String[] args){
+		Student kunal = new Student(12, 89.76f);
+		Student rahul = new Student(5,  99.52f);
+
+
+	if(kunal > rahul)  {
+		System.out.println("Kunal has more marks");
+	}
+	if(kunal < rahul)  {
+		System.out.println("Rahul has more marks");
+	}
+
+	}
+
+
+}
+------------------------------------------------------------------------
+Code:
+
+
+import java.util.ArrayList;
+
+public class CustomGenArrayList<T>{
+
+	private Object[] data;
+	private static int DEFAULT_SIZE = 10; 
+	private int size = 0;
+
+	public CustomGenArrayList() {
+		this.data = new Object[DEFAULT_SIZE];
+	
+	}	
+
+	public void add(T num){
+		if (this.isFull()){
+			resize();	
+		
+		}
+	   	data[size++] = num;
+	}
+
+	private void resize() {\
+		Object[] temp = new Object[data.length * 2];
+
+		for(int i=0; i< data.length; i++) {
+			temp[i] = data[i];
+		}
+		data = temp;
+
+	} 
+
+	private boolean isFull() {
+		return size == data.length;
+	}
+
+	public T remove() {
+		T removed = (T)data[--size];
+		return removed;
+	}
+
+	public T get(int index) {
+		return (T)data[index];
+	}
+
+	public int size() {
+		return size;
+	}
+	public void set(int index, T value) {
+		data[index] = value;
+	}
+
+	public String toString() {
+		return "CustomArrayList" + 
+		"data=" + Arrays.toString(data) +
+		", size" + size +
+		"}";
+
+	}
+
+	public static void main(String[] args) {
+		CustomGenArrayList<Integer> list3 = new CustomGenArrayList<>();		//warning: raw use of parameterized class ArrayList
+		list3.add(3);		//works
+		list3.add("asdv");	//error	
+
+	
+		System.out.println(list);
+	}
+}
+
+Output:
+CustomArrayListdata=[3, 5, 9, 0, 0, 0, 0, 0, 0, 0], size3}
+
+
+

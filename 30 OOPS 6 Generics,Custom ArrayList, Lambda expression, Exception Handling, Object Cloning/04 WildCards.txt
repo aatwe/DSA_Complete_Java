@@ -1,0 +1,219 @@
+Objective:
+a) Create 2 student objects with rollno and marks
+
+b) how will java compare kunal<rahul
+
+What solution? Comparable interface
+	//Note: Comparable Interface has generic type
+		//interfaces can have generic type
+			public interface Comparable<T> {}
+
+
+	Use compareTo method from interfaces
+
+c) Compare Student withStudent type
+public class Student implements Comparable<Student>
+
+
+d) What kunal.compareTo(rahul) returns?
+
+  We have overriden compareTo
+	//if diff == 0 --> botha have equal marks
+	//if diff < 1  --> o is bigger
+	  else o is smaller
+	
+		@Override
+	public int compareTo(Student o) {
+		int diff = (int)(this.marks - o.marks);
+		return diff;
+	}
+
+
+Earlier:
+1) Without Compare To
+
+public class Main {
+
+	public static void main(String[] args){
+		Student kunal = new Student(12, 89.76f);
+		Student rahul = new Student(5,  99.52f);
+
+
+	if(kunal > rahul)  {
+		System.out.println("Kunal has more marks");
+	}
+	if(kunal < rahul)  {
+		System.out.println("Rahul has more marks");
+	}
+
+	}
+
+
+}
+
+
+
+
+public class Student implements Comparable {
+
+	int rollno;
+	float marks;
+
+	public Student(int rollno, float marks) {
+		this.rollno = rollno;
+		this.marks = marks;
+
+	}
+	//Note can also create main as psvm here
+
+}
+
+
+------------------------------------------------------
+
+2) Using CompareTo
+
+
+
+public class Student implements Comparable<Student> {
+
+	int rollno;
+	float marks;
+
+	public Student(int rollno, float marks) {
+		this.rollno = rollno;
+		this.marks = marks;
+
+	}
+	//Note can also create main as psvm here
+
+	@Override
+	public int compareTo(Student o) {
+		int diff = (int)(this.marks - o.marks);
+		return diff;
+	}
+
+}
+
+
+
+public class Main {
+
+	public static void main(String[] args){
+		Student kunal = new Student(12, 89.76f);
+		Student rahul = new Student(5,  99.52f);
+
+
+	if(kunal.compareTo(rahul)< 0)  {
+		System.out.println("Rahul has more marks");
+	}
+	else  {
+		System.out.println("kunal has more marks");
+	}
+
+	}
+
+
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Another cool example
+
+a) If we dont override compareTo and use default provided one
+
+
+b) add toString() -> returns rollNo
+
+
+c) print(list)
+
+
+d) Arrays.sort(list);		//this will use compareTo() internally
+
+
+e) print(list)
+ 
+	//why sorts we implements Comparable
+
+	//if we remove implements Comparable and compareTo(): Error	
+
+		*Why error it doesnt know, while sorting what to compare with *
+
+
+CONCLUSION: compareTo() is required
+
+Note: can also add in sort() as parameter
+
+	Arrays.sort(list, new Comparator<Student>(){					//Note : right click -> replace with lambda or arrow functions  //to use lambda expressions //will learn later
+		@Override
+		public int compare(Student o1, Student o2) {
+			return (int)o1.marks - o2.marks;			//dont forget to cast into integer
+		}
+
+	});
+
+
+-----------------------------------------------------------------------------
+
+public class Student implements Comparable<Student> {
+
+	int rollno;
+	float marks;
+
+	public Student(int rollno, float marks) {
+		this.rollno = rollno;
+		this.marks = marks;
+
+	}
+	//Note can also create main as psvm here
+
+	@Override
+	public String toString() {
+		return marks + " ";
+
+	}
+
+	@Override
+	public int compareTo(Student o) {
+		int diff = (int)(this.marks - o.marks);
+		return diff;
+	}
+
+}
+
+
+
+
+
+public class Main {
+
+	public static void main(String[] args){
+		Student kunal = new Student(12, 89.76f);
+		Student rahul = new Student(5,  99.52f);
+		Student arpit = new Student(2,  99.52f);
+		Student karan = new Student(13,  77.52f);
+		Student sachin = new Student(9,  96.52f);
+
+
+	Student[] list = {kunal, rahul, arpit, karan, sachin};
+
+	System.out.println(Arrays.toString(list));				//Output: [89.76f , 99.52f , 99.52f , 77.52f , 96.52f]
+	Arrays.sort(list);	
+	System.out.println(Arrays.toString(list));				//Output: [99.52f , 99.52f, 96.52f, 89.76f, 77.52f,]
+ 
+
+//
+	System.out.println(Arrays.toString(list));
+	Arrays.sort(list, new Comparator<Student>(){			//This will sort according to marks	//we used comparable insdie sort()
+		@Override
+		public int compare(Student o1, Student o2) {
+			return (int)o1.marks - o2.marks;			//dont forget to cast into integer
+		}
+
+	});
+	System.out.println(Arrays.toString(list));
+//
+
+
+}
+

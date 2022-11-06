@@ -1,0 +1,104 @@
+1) why collection? makes life easy
+	use colelctions for every DS
+
+
+2) What is collection? framework
+	what is framework? collection of files etc
+
+ Collection has many interfaces and classes.
+		
+
+	for ex to implement linkedlist
+	a) we use internal java linkedlist --> where ? collection framework
+	b) create your own linkedlist
+	
+
+3) wwhat before collections?
+	DS like array/hashmap
+		the common functions -> had separate implementation for every DS
+
+	No common interface
+		//problem -> people cant remember for ex add() for every DS
+
+4) -> Collection Framework : Single interface
+
+		what it has? interfaces and classes + api calls
+				  common set of methods, different DS
+
+
+5) common methods --> different DS
+	Abstraction concept 
+
+
+6) How to use collection
+		import java.util	
+
+7) 2 important interfaces of Collection framework:
+	contain abstract methods
+
+	a) Collection
+		//set,queue,list extend Collection
+
+	b) Map
+
+
+
+8) What collection contains?	
+	8.1)	size(), isEmpty(), iterator, toArray(), <T> T[] toArray, add(), remove(),containsAll()
+		etc 
+
+		//All DS will use it
+
+	9.2) how will any claass implement this? override
+			List will override
+			Linkedlist will override
+
+		//internally linkedlist will have some implementation of all things that list
+		interface provides
+	9.3) Try creating ArrayList<>() and LinkedList<>();
+	
+							//add works for both
+		list.add();	//ArrayList
+		list2.add(); 	//LinkedList
+
+		list2.add(34); 	//LinkedList
+		list2.add(78);
+		list2.add(55);
+		list2.add(89);
+
+		System.out.println(list2);	//[34,78,55,89]
+
+
+
+9) Code:
+
+//List Interface:
+public interface List<E> extends Colleciton<E> {
+	int size();
+	boolean isEmpty();
+	....
+}
+
+
+
+
+
+import java.util.Collection;
+public class Main {
+	public static void main(String[] args) {
+		List<Integer> list = new ArrayList<>();
+		//parent				//child
+		List<Integer> list2 = new LinkedList<>();
+	
+					//add works for both
+		list.add();	//ArrayList
+		list2.add(34); 	//LinkedList
+		list2.add(78);
+		list2.add(55);
+		list2.add(89);
+
+		System.out.println(list2);
+
+	}
+
+}

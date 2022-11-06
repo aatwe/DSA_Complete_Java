@@ -1,0 +1,89 @@
+1) how to convert sum() into a lambda function
+     main()
+	a.1) Create ArrayList arr taking argument Integer
+	a.2) add elements to arr using for loop
+	a.3) Use forEach with arr for each item
+			print item*2
+					//forEach takes consumer type
+					//what is item? single element in arr
+					//1st bracket : parameters
+					//2nd bracket : body of a function
+
+
+
+2) How to store it in consumer type?
+	Consumer<Integer> fun = (item) -> System.out.println(item*2);
+	arr.forEach(fun);
+
+	What can we assign lambda function to? variables of type interfaces
+
+
+
+
+4) How to add multiple parameters in lambda
+	4.1) Create interface
+	4.2) Declare sum() with 2 arg
+	4.3) Create object sum of interface Operation
+
+
+5) How to call lambda function?
+
+							
+	private int operate(int a, int b, Operation op ) {
+		return op/operation(a,b);
+}
+
+
+6) Create myCalculator object of type class LambdaFunctions
+	call private operate() with this class
+				-> takes Operation interface object op as argument
+					-> each Operation calls Lambda function  that does sum/product/subtraction
+
+ LambdaFunctions myCalculator = new LambdaFunctions();
+	myCalculator.operate(5,3, sum)	
+
+
+Code:
+
+
+public class LambdaFunctions {
+	public static void main(String[] args){
+		ArrayList<Integer> arr = new ArrayList<>();
+		for(int i = 0; i < 5; i++ ){
+			arr.add(i + 1);
+		}
+
+		//arr.forEach((item) -> {System.out.println(item*2);});		//What forEach() takes? consumer type
+		//Sum sum = () -> (); 		
+
+		Consumer<Integer> fun = (item) -> System.out.println(item*2);	//Implementation
+		arr.forEach(fun)
+	
+		Operation sum = (a,b) -> a + b;
+		Operation prod = (a,b) -> a * b;
+		Operation sub = (a,b) -> a - b;
+	
+
+		LambdaFunctions myCalculator = new LambdaFunctions();
+		System.out.println(myCalculator.operate(5,3, sum));			//8
+		System.out.println(myCalculator.operate(5,3, prod));			//15
+		System.out.println(myCalculator.operate(5,3, sub));			//2
+	
+	}
+
+	//int sum(int a, int b) {
+	//	return a + b;
+	
+
+	private int operate(int a, int b, Operation op ) {
+	return op.operation(a,b);
+
+	
+
+}
+}
+
+interface OPeration{				//same code		//Interface decides at runtime which body to execute
+	int operation(int a, int b);	
+}
+> 2 4 6 8 10
