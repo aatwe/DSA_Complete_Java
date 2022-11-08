@@ -1,0 +1,217 @@
+1) What it looks like
+		
+		  head
+		  8  //1
+	      /	  \
+	     /	   \
+tail   //4  7	    9 //2
+	     \	   /
+	      \	  /
+		  2 //3
+
+
+2) Wha is structure of node?
+
+class Node {
+	int val;
+	Node next;
+}
+
+
+
+3) Note: no node pointing to null unless LL is empty
+
+
+4) How to insert a value?
+
+Insert 17 after tail 
+
+What initially looks like?
+
+
+		  head
+		  8  //1
+	      /	  \
+	     /	   \
+tail   //4  7	    9 //2
+	     \	   /
+	      \	  /
+		  2 //3
+
+
+
+After:
+	
+		head
+		  8 - 
+	tail	/     \
+	   17   	  \
+         |   	   \
+     	    |	         9 
+	    7	   	   /
+	      \	  /
+		  2 //3
+
+
+
+Pseudo Code:
+a) Create new node
+b) tail.next = node
+c) node.next = head
+d) tail = node
+
+if(head == null) { head = node , tail = node}	//1 node CLL	
+
+Code:
+
+//create head,tail
+
+//Create Node Class structure
+
+//Create constructor
+
+//Create insert
+
+Code1:
+public class CLL {
+    private Node head;
+    private Node tail;
+
+
+    public CLL(){
+        this.head = head;
+        this.tail= tail;
+    }
+
+    public void insert(int val) {
+        Node node = new Node(val);
+        if(head == null) {
+            head = node;
+            tail = node;
+            return;
+        }
+        tail.next = node;
+        node.next = head;
+        tail =  node;
+    }
+
+    public void display() {
+        //start from head until node again becomes head  //since print atleast once  -> do while		//2nd way print head to tail //while (node!=tail) //just print tail also
+
+        Node node = head;
+        if(head != null) {
+            do {
+                System.out.println(node.val + "-> ");
+                node = node.next;
+            } while (node != head);
+        }
+    }
+
+
+    private class Node {
+        int val;
+        Node next;
+
+        public Node(int val) {
+            this.val = val;
+        }
+
+    }
+}
+
+Code 2:
+public class Main {
+    public static void main(String[] args) {
+        CLL list = new CLL();
+        list.insert(23);
+        list.insert(3);
+        list.insert(19);
+        list.insert(75);
+        list.display();
+    }
+}
+
+
+
+>Output:
+23-> 
+3-> 
+19-> 
+75-> 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+5) Delete from CLL
+
+How to delete 8 from CLL
+		
+		  head
+		  8  //1
+	      /	  \
+	     /	   \
+tail   //4  7	    9 //2
+	     \	   /
+	      \	  /
+		  2 //3
+
+
+a) if head = null -> return
+b) head = head.next
+c) tail.next = head
+
+
+How to delete 1 or no. n
+
+a) create temp node node to traverse
+b) if node.next =n	//note checking for n one node before
+	node.next = n.next
+
+   else 
+	node.next	
+
+x) do above until reach back at head
+
+
+
+Q) What TC? O(n) //n = total no. of nodes
+
+
+CODE:
+
+
+public void delete(int val) {
+	Node node = head;	temp object node -> point to head
+	if(node == null) {
+		return;
+	}
+	
+	if(node.val == val){		//think what if temp Node node was on head //case when head is the element to be deleted
+		head = head.next;
+		tail.next = head;
+		return;
+	}
+	
+	do {
+		Node n = node.next;		//Check the next to head element//create another temp node n //start from node.next //node is predecessing n
+		if(n.val == val) {
+			node.next = n.next;
+			break;
+		}
+
+	   node = node.next;	
+	} while(node != head);	//do until node again reaches head
+}
+
+Code 2:
+
+public class Main {
+    public static void main(String[] args) {
+        CLL list = new CLL();
+        list.insert(23);
+        list.insert(3);
+        list.insert(19);
+        list.insert(75);
+	   list.display();
+	  list.delete(19);
+        list.display();
+    }
+}

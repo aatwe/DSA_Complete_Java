@@ -1,0 +1,956 @@
+1) draw what to be done with step by step arrows
+
+
+Unanswered questions:
+1) why head and tail fixed?
+	To avoid changing structure of linkedlist
+
+
+
+
+
+
+1) What is a node? DS of type node
+
+
+	contains: integer value , what its pointing to
+
+	Why next is Node Type	
+	
+
+1) draw what to be done with step by step arrows
+
+
+
+
+
+
+
+
+
+
+1) What is a node? DS of type node
+
+
+2) why cant jump direct to a node?
+How we move around in LL? reference var of type Node pointing to a object of type Node
+
+	contains: integer value , what its pointing to
+
+	Why next is Node Type? it is pointing to object in heap of type Node
+
+	All objects at different places in memory -> cant jump on it
+
+	nodename.next => next node in LL
+
+
+
+
+Note: 
+	node.something = something	//making change	//we dont do this
+	node = node.something		//reassigning	//we do this to traverse
+
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+A) How to create a struccture of a linkedList
+
+
+Create class LL
+	head			//reference variables of type Node --> pointing to starting node
+	tail			//reference variables of type Node --> pointing to last node
+	size			//reference var storing size of LL
+
+	constructor -> initializes (current LL instance's size )this.size to 0
+	a.1) class Node 		//Structure of a node
+		a.1.1) value
+		a.1.2) next 
+		a.1.3) Node constructor with value -> initializes this.value with value
+		a.1.4) Node constructor with next node -> initializes node value and next
+														initializes (current Node instance's value)this.value with value (value passed)
+														initializes (current Node instance's next )this.next with next			
+
+
+Code: 1
+ public class Main {
+        public static void main(String[] args) {
+            LL list = new LL();
+        }
+    }
+
+
+Code: 2 //Create a node																																							
+public class LL {
+
+   private Node head;
+   private Node tail;
+   private int size;							
+   public LL() {
+	this.size = 0;
+	}
+   
+
+   private class Node {
+	private int value;
+	private Node next;
+
+	public Node(int value) {
+		this.value = value;
+	}
+
+	public Node(int value, Node next) {
+		this.value = value;
+		this.next = next;
+	}
+    }
+
+}		
+
+
+B) How to create first node of linkedlist?
+What important question to ask? what is needed/requied //how solves	//visualize
+
+  b.1) Create a new node object with value
+  b.2) point node object's next to head reference variable which points to starting node object
+  b.3) point head reference variable to newly created Node node  //why? head reference variable points to first node of linked list
+  b.4) point tail also to same where head reference variable pointing
+  b.5) increment size by 1
+
+
+Code: 1
+public class Main {
+	public static void main(String[] args) {
+		LL list  = new LL();
+
+}
+
+}
+
+
+Code: 2 //Create a node																																							
+public class LL {
+
+   private Node head;
+   private Node tail;
+   private int size;							
+   public LL() {
+	this.size = 0;
+	}
+   
+  public void insertFirst(int val) {
+        Node node = new Node(val);
+        node.next = head;
+        head = node;
+
+        if (tail == null) {
+            tail = head;
+        }
+        size += 1;
+    }
+
+       private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+}		
+
+
+
+C) How to display nodes of a linkedlist
+	what given? head reference variable pointing to first node of LL
+
+	c.1) print head.value	//head.val
+	c.2) increment head reference variable to point to next node of LL	//head = head.next
+	c.3) do above while headreference variable does not point to null		//head != null
+
+	What problem above? after displaying head is not moved back to its position 	//its function is to point to head of linkedlist
+	
+	Note: Dont move head unless changing structure of linkedlist (Adding/removing elements)	
+	
+	Solution : create a temporary reference variable of type NOde and point it to same where head pointing (first Node)
+	Move temp instead of head reference variable of type Node
+	
+
+	c.1) Create temp	 of type Node//disposable,temp point to same object head pointing (= head)
+	c.2) print temp type Node's value
+	c.3) update temp with next value of temp object
+					temp = temp.next 	//what is next? reference variabel
+	c.4) do above until temp object is not equal null
+Code: 1
+
+    public class Main {
+        public static void main(String[] args) {
+            LL list = new LL();
+            list.insertFirst(3);
+            list.insertFirst(2);
+            list.insertFirst(8);
+            list.insertFirst(17);
+
+            list.display();
+        }
+    }
+
+
+
+Code: 2 //Create a node																																							
+public class LL {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public LL() {
+        this.size = 0;
+    }
+
+    public void insertFirst(int val) {
+        Node node = new Node(val);
+        node.next = head;
+        head = node;
+
+        if (tail == null) {
+            tail = head;
+        }
+        size += 1;
+    }
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("END");
+    }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+}
+
+Output: 17 -> 8 -> 2 -> 3 -> END
+
+
+Debug:
+a) LL list = new LL();
+b) public LL() {this.size = 0;}
+
+c) list.insertFirst(3);
+	Node node = new Node(val);
+	public Node(int value) {this.value = value;}
+		public Node(int value){
+			this.value = value;
+		}
+	Node node = new Node(val)
+	node.next = head;
+	head = node;
+
+	 if (tail == null) {
+            tail = head;
+        }
+
+	 size += 1;
+
+d) list.insertFirst(2);
+	Node node = new Node(val);
+	public Node(int value) {
+            this.value = value;
+        }
+	Node node = new Node(val);
+	node.next = head;
+	head = node;
+	 if (tail == null) {
+            tail = head;
+        }
+	size += 1;
+..
+
+e)list.display()
+	 Node temp = head;
+	 while (temp != null) {
+	System.out.print(temp.value + " -> ");
+	   temp = temp.next;
+
+	 while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
+
+	 while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
+
+	 while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
+
+	 System.out.println("END");
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+D) Insert Linked list at end
+
+
+How to insert element at end?
+
+What Given : 3 -> 5 -> 8 -> 9
+		head			tail
+
+	add 17 at end
+
+What we want? 
+	currently 9.next = null	/ tail.next = null
+	change    9.next = 17		  tail.next = 17
+			size++
+Add a case:
+	if tail == null
+		insertFirst()
+
+Pseudo-Code:
+
+a) create insertLast()	
+	a.1) create a node
+	a.2) connect tail.next to this created node
+	a.3) make the newly added node as new tail	
+	a.4) increment size
+	a.5) add check to above block: if tail is null / list is empty -> call isnertFirst(val)
+		no need to run above code block / return
+
+
+-----------------------------------------------------------------------------------------------
+Code: 1
+
+    public class Main {
+        public static void main(String[] args) {
+            LL list = new LL();
+            list.insertFirst(3);
+            list.insertFirst(2);
+            list.insertFirst(8);
+            list.insertFirst(17);
+		 list.insertLast(99);
+            list.display();
+        }
+    }
+
+
+
+Code: 2 //Create a node																																							
+public class LL {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public LL() {
+        this.size = 0;
+    }
+
+    public void insertLast(int val){
+	if(tail == null){
+		insertFirst(val);
+		return;
+	}
+	Node node = new Node(val);
+	tail.next = node;
+	tail = node;	
+	size++;
+    }
+
+
+    public void insertFirst(int val) {
+        Node node = new Node(val);
+        node.next = head;
+        head = node;
+
+        if (tail == null) {
+            tail = head;
+        }
+        size += 1;
+    }
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("END");
+    }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+}
+
+Q) What TC? O(1) //we have tail , not traversing
+   What TC if not tail? O(n)
+	//go till last and find tail
+		 while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+E) How to insert at a particular index?
+
+3 -> 5 ->9 -> 9 -> 12 -> 18
+how to insert at index i
+
+case 1: index = 0 -> inserFirst()
+
+case 2: index = size -> indexLast()
+
+Pseudo Code:
+a) create node to be added
+b)Reach ith index	using a temp node (Create temp)	 
+	 start from i=0 to i
+
+c) take backup of link between ith and i+1th node
+	Create a new node (pass val and temp.next)	//this node should know what value to add and where temp.next is pointing after seeking
+    point ith node to newly created node
+ current node.next =  newly created node
+
+d) 
+
+
+Code: 1
+
+    public class Main {
+        public static void main(String[] args) {
+            LL list = new LL();
+            list.insertFirst(3);
+            list.insertFirst(2);
+            list.insertFirst(8);
+            list.insertFirst(17);
+		 list.insertLast(99);
+		 list.insert(100,3);
+            list.display();
+        }
+    }
+
+
+
+Code: 2 //Create a node
+
+
+																																							
+public class LL {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public LL() {
+        this.size = 0;
+    }
+
+    public void insert(int val, int index){
+        if(index == 0){
+            insertFirst(val);
+            return;
+        }
+        if(index == size){
+            insertLast(val);
+            return;
+        }
+        Node temp = head;
+        for(int i=1; i< index; i++) {
+            temp = temp.next;
+        }
+
+        Node node = new Node(val, temp.next);	//before breaking link point new node
+        temp.next = node;			//break the link
+        size++;
+    }
+    public void insertLast(int val){
+        if(tail == null){
+            insertFirst(val);
+            return;
+        }
+        Node node = new Node(val);
+        tail.next = node;
+        tail = node;
+        size++;
+    }
+
+
+    public void insertFirst(int val) {
+        Node node = new Node(val);
+        node.next = head;
+        head = node;
+
+        if (tail == null) {
+            tail = head;
+        }
+        size += 1;
+    }
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("END");
+    }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+}
+
+>17 -> 8 -> 2 -> 100 -> 3 -> 99 -> END
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Debug
+a) list.insert(100,3);
+b) if(index == 0){
+            insertFirst(val);
+            return;
+        }
+c) if(index == size){
+            insertLast(val);
+            return;
+        }
+d) Node temp = head;
+e) for(int i=1; i< index; i++) {
+            temp = temp.next;
+        }
+f) for(int i=1; i< index; i++) {
+            temp = temp.next;
+        }
+g) for(int i=1; i< index; i++) {
+            temp = temp.next;
+        }
+h) Node node = new Node(val, temp.next);
+
+i) public Node(int value, Node next) {
+            //this.value = value;
+            this.next = next;
+        }
+
+j) Node node = new Node(val, temp.next);
+
+k)  temp.next = node;			//break the link
+        size++;
+
+
+	
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+F) Delete first in LinkedLIst
+
+a) move head to head.next
+b) dont worry about deleted value , it is still attacgedm ,but it will overwrited if we use insertFirst() later
+c) corner case: if only 1 item
+	check if head.next = null, if so make tail also null
+d) reduce size
+e) return removed value
+
+Code:
+public int deleteFirst() {
+	int val = head.value;	//get head value
+	head = head.next;	//point head reference to next 
+	if(head == null){	//add corner case
+	  tail = null;		//if head null,make tail also null
+	}	
+	size--;
+	return val;
+
+	}	
+
+------------------			
+
+
+Code: 1
+
+    public class Main {
+        public static void main(String[] args) {
+            LL list = new LL();
+            list.insertFirst(3);
+            list.insertFirst(2);
+            list.insertFirst(8);
+            list.insertFirst(17);
+		 list.insertLast(99);
+		 list.insert(100,3);
+            list.display();
+		 list.deleteFirst();
+		 list.display();
+        }
+    }
+
+
+
+Code: 2 //Create a node
+
+
+																																							
+public class LL {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public LL() {
+        this.size = 0;
+    }
+
+    public int deleteFirst() {
+	int val = head.value;	//get head value
+	head = head.next;	//point head reference to next 
+	if(head == null){	//add corner case
+	  tail = null;		//if head null,make tail also null
+	}	
+	size--;
+	return val;
+
+	}	
+
+    public void insert(int val, int index){
+        if(index == 0){
+            insertFirst(val);
+            return;
+        }
+        if(index == size){
+            insertLast(val);
+            return;
+        }
+        Node temp = head;
+        for(int i=1; i< index; i++) {
+            temp = temp.next;
+        }
+
+        Node node = new Node(val, temp.next);	//before breaking link point new node
+        temp.next = node;			//break the link
+        size++;
+    }
+    public void insertLast(int val){
+        if(tail == null){
+            insertFirst(val);
+            return;
+        }
+        Node node = new Node(val);
+        tail.next = node;
+        tail = node;
+        size++;
+    }
+
+
+    public void insertFirst(int val) {
+        Node node = new Node(val);
+        node.next = head;
+        head = node;
+
+        if (tail == null) {
+            tail = head;
+        }
+        size += 1;
+    }
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("END");
+    }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+}
+				
++++++++++++++++++++++++++++++++++++++++++++++++++
+G) Delete Last item
+
+a) can we tail = tail.prev? we dont have		//cant move back in SLL
+b) How to reach second last item? 
+Reach size-1 item	//get()
+
+	b.1) start from head Node node = head;
+	b.2) move index times node = node.next
+	b.3) return deleted node
+	
+
+
+
+make it tail
+point to null
+
+  
+What Complexity? O(N)	//traversing entire to second last and then removing
+
+
+Code:
+
+
+
+
+
+Code: 1
+
+    public class Main {
+        public static void main(String[] args) {
+            LL list = new LL();
+            list.insertFirst(3);
+            list.insertFirst(2);
+            list.insertFirst(8);
+            list.insertFirst(17);
+		 list.insertLast(99);
+		 list.insert(100,3);
+            list.display();
+		 list.deleteFirst();
+		 list.display();
+		 list.deleteLast();
+		 list.display();
+	
+        }
+    }
+
+
+
+Code: 2 //Create a node
+
+
+public class LL {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public LL() {
+        this.size = 0;
+    }
+    public int deleteLast(){
+        if(size<=1){
+            return deleteFirst();
+        }
+
+        Node secondLast = get(size - 2);	//get the second last node
+        int val = tail.value;
+        tail = secondLast;
+        tail.next = null;
+
+        return val;
+
+    }
+
+
+    public Node get(int index) {
+        Node node = head;
+
+        for(int i = 0;i< index; i++){
+            node = node.next;
+        }
+        return node; 		//returns reference pointer to that node
+    }
+
+    public int deleteFirst() {
+        int val = head.value;	//get head value
+        head = head.next;	//point head reference to next
+        if(head == null){	//add corner case
+            tail = null;		//if head null,make tail also null
+        }
+        size--;
+        return val;
+
+    }
+
+    public void insert(int val, int index){
+        if(index == 0){
+            insertFirst(val);
+            return;
+        }
+        if(index == size){
+            insertLast(val);
+            return;
+        }
+        Node temp = head;
+        for(int i=1; i< index; i++) {
+            temp = temp.next;
+        }
+
+        Node node = new Node(val, temp.next);	//before breaking link point new node
+        temp.next = node;			//break the link
+        size++;
+    }
+    public void insertLast(int val){
+        if(tail == null){
+            insertFirst(val);
+            return;
+        }
+        Node node = new Node(val);
+        tail.next = node;
+        tail = node;
+        size++;
+    }
+
+
+    public void insertFirst(int val) {
+        Node node = new Node(val);
+        node.next = head;
+        head = node;
+
+        if (tail == null) {
+            tail = head;
+        }
+        size += 1;
+    }
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("END");
+    }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+
+        public Node(int value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+H) Delete from particular index i
+
+1) reach i-1		//Node prev = get(index-1);
+2) delete that index
+
+
+
+Code:
+
+
+code1:
+public class Main {
+        public static void main(String[] args) {
+            LL list = new LL();
+            list.insertFirst(3);
+            list.insertFirst(2);
+            list.insertFirst(8);
+            list.insertFirst(17);
+		 list.insertLast(99);
+		 list.insert(100,3);
+            list.display();
+		 list.deleteFirst();
+		 list.display();
+		 list.deleteLast();
+		 list.display();
+		 list.delete();
+		 list.display();
+        }
+    }
+
+Code2:
+
+public int delete(int index) {
+	if(index == 0){
+		return deleteFirst();
+	}
+	if(index == size - 1){
+		return deleteLast();
+	}
+
+	Node prev = get(index - 1);
+	int val = prev.next.value;
+
+	prev.next = prev.next.next;
+
+	return val;
+
+}
+
+
+What TC? O(n)
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+How to find value? similar to get()? just pass value instead of index
+
+
+
+    public Node find(int value) {
+        Node node = head;
+
+	  while(node != null){
+		if(node.value == value){
+			return node;
+		}
+		node = node.next;
+	
+        }
+        return null; 		//returns reference pointer to that node
+    }
+
+
+What TC? O(n) 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -1,0 +1,52 @@
+NOte: Linked List and trees are most important
+
+1) What are linkedlist
+
+java arrays are not contagious
+cannot add items in array once full
+
+
+Solution: ArrayList : Amortized -> doubles and copies  O(1)
+
+//still limiting
+
+
+2) Linkedlist breaks into boxes / nodes  //where nodes? at different places
+
+
+3) What is node
+	its own type
+   contains:
+		value , which node pointing to 
+		val	   Node next;
+
+------------------------------------------
+//Definition of a node
+
+	class Node {
+		int val;
+		Node next;
+	}
+------------------------------------------
+
+2) How are they connected?
+
+head					  tail
+node A -> node B -> node C -> node D
+
+What is head? reference variable in stack pointing to first node
+
+What is tail? reference variable in stack pointing to last node
+			note: tail node points to null
+
+Each node only knows its value and what pointing to
+
+
+LinkedList questions: 
+	a) with head
+	b) with head and tail //easier
+
+
+
+
+

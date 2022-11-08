@@ -1,0 +1,259 @@
+A) 		    head						tail
+null   <-----	8   --------> 3	------> 2 ------> 5 ------> Null
+	    	    	    <--------	<------   <------
+
+
+
+
+B) What is structure of doubly linked list
+
+	Class Node {
+		int val;
+		Node next;
+		Node prev; 
+		
+	}
+
+
+
+
+C) How to add to first of DLL?
+
+a) Create the Node node to be added
+b) node.next = head
+c) head.prev = node
+d) node.prev = null		//corner case check null pointer exception	
+e) head = node 
+
+
+What Time Complexity? O(1)
+
+Why efficient? efficient in backward traversal
+			//not using yet
+
+
+
+Code:
+
+public class DLL {
+    private Node head;		//by default null 	//make private
+
+    public void insertFirst(int val){
+        Node node = new Node(val);		//box created
+        node.next = head;
+        node.prev = null;
+
+        if(head != null) {
+            head.prev = node;
+        }
+        head = node;
+    }
+
+    public void display() {
+        Node node = head;	//start from head	//temporary variable		//note not modifying structure , just pointing
+        while(node != null) {
+            System.out.println(node.val	 + " -> ");
+            node = node.next;
+        }
+        System.out.println("End");
+
+    }
+
+    private class  Node{
+        int val;
+        Node next;
+        Node prev;
+
+		public Node(int val){
+            this.val = val;
+        }
+
+		public Node(int val, Node next, Node prev){
+            this.val = val;
+            this.next = next;
+            this.prev = prev;
+
+        }
+
+    }
+
+}
+
+
+public class Main {
+        public static void main(String[] args) {
+            DLL list = new DLL();
+            list.insertFirst(3);
+            list.insertFirst(2);
+            list.insertFirst(8);
+            list.insertFirst(17);
+		
+		 list.display();
+        }
+    }
+
+ 
+C) How to print in reverse?
+
+a) create last node
+b) update last till it reaches last	//we not using tail
+c) print back
+	
+
+
+ public void displayRev() {
+     	   Node node = head;	//start from head	//temporary variable		//note not modifying structure , just pointing
+	   Node last = null;
+	
+        while(node != null) {
+            System.out.println(node.val	 + " -> ");
+            last = node;
+		 node = node.next;
+        }
+        System.out.println("End");
+	
+	System.out.println("Print in reverse");
+	while(last != null){
+		System.out.print(last.val + "->");
+		last = last.prev;
+
+	}
+	System.out.println("Start");
+
+    }
+
+    
+
+
+D) How to insert at last?
+
+	// See how end result looks
+	// See what current ll looks
+
+a) Create node
+b) node.next = null
+c) last.next = node
+d) node.prev = last
+
+e) edge case? if head = null?
+	node = head
+	node.prev= null
+
+
+public void insertlast(int val) {
+	Node node = new Node(val);
+	Node last = head;
+	
+	node.next = null;
+	if(head == null) {
+		node.prev = null;
+		head = node;
+		return;
+	}
+
+	while(last.next!= null) {
+		last = last.next; 
+	}
+	
+	last.next = node;
+	node.prev = last;
+
+}
+
+
+
+public class Main {
+        public static void main(String[] args) {
+            DLL list = new DLL();
+            list.insertFirst(3);
+            list.insertFirst(2);
+            list.insertFirst(8);
+            list.insertFirst(17);
+		 list.insertLast(99);
+
+		 list.display();
+        }
+    }
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+E) How to insert after a given node?
+
+
+Given DLL:
+
+	null  ---8 --- 2 ---5 --- 7 ---- null
+	      ---  ---   ---- ---   ---- 
+
+
+Objective: Insert 18 after 5
+
+Before
+	null  ---8 --- 2 ---5 --- 7 ---- null
+	      ---  ---   ---- ---   ---- 
+
+AFter
+	null  ---8 --- 2 ---5 --- 18 --- 7 ---- null
+	      ---  ---   ---- ---    ---   ---- 
+
+						//Note in general check for null pointer exceptions for all
+a) Create a Node node 18
+b) seek till 5 // p
+c) node.next = p.next
+d) p.next = node
+e) node.prev = p
+f) node.next.prev = node 	//this may be null
+g) 	 
+
+//Dont think, just follow diagram
+
+
+What TC? O(n) for finding p
+
+
+Code:
+
+public void insert(int after, int value) {
+	Node p = find(after);
+	if(p == null) {
+		System.out.println("does not exist");
+		return;
+	}
+
+	Node node = new Node(val);
+	node.next = p.next;
+	p.next = node;
+	node.prev = p;
+	if(node.next!= null) {
+		node.next.prev = node;
+	}
+}
+
+
+public Node find(int value) {
+	Node node = head;
+	while(node != null){
+		if(node.val == value) {
+			return node;
+		}
+		node = node.next;
+	}
+	return null;
+}
+
+
+public class Main {
+        public static void main(String[] args) {
+            DLL list = new DLL();
+            list.insertFirst(3);
+            list.insertFirst(2);
+            list.insertFirst(8);
+            list.insertFirst(17);
+		 list.insertLast(99);
+		 list.insert(8,65);
+
+		 list.display();
+        }
+    }
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++
