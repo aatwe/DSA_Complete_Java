@@ -1,0 +1,157 @@
+Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+Ex
+Input: head = [1,2,2,1]
+Output: true
+
+
+
+
+
+
+
+
+1) What given? 1 -> 2 -> 2 -> 1
+
+NOte:	 both are palindrome
+	1-2-3-2-1
+	1-2-3-3-2-1
+
+	
+
+2) How to check if palindrome?
+	read same from start and behind
+		start - mid = rev (mid - end)
+
+		Check f and s
+			if equal -> move ahead -> if reaches end -> return true
+			of not equal -> return false		
+
+	//Use Reverse Linked list approach
+
+
+3) start - mid = rev (mid - end)
+1-2-3-2-1
+	f   s
+	1-2-1-2-3			//after reversing
+
+		Check if f = s and move ahead
+1-2-3-3-2-1
+     f   s
+	1-2-3-1-2-3		//after reversing
+		Check if f = s and move f& s ahead
+
+
+4)  Dont forget to rereverse after traversing
+
+-------------------------------------------------------------------------------------------------
+Pseudo Code:
+
+0) Create methods isPalindrome
+			  reverseList
+			  middleNode	
+			
+1) find middle
+
+
+2) find head of second half
+
+3) Store the head in a temp variable rereverseHead
+
+
+	
+
+5) Compare both halves
+	if head value != headSecond value
+		break
+
+	move head 
+	move headSecond
+
+
+reverseList(rereverseHead);
+
+
+
+What TC? O(n)
+What SC? no extra space -> O(1)
+-------------------------------------------------------------------------------------------------
+Code:
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+          ListNode mid = middleNode(head);
+
+	  ListNode headSecond = reverseList(mid);
+
+	
+	  ListNode rereverseHead = headSecond;
+
+	  //Compare both halves
+		while(head!= null && headSecond!= null) {
+
+			if (head.val != headSecond.val) {
+				break;
+			}		
+			head = head.next;
+			headSecond = headSecond.next;
+	}
+	  reverseList(rereverseHead);
+	  if(head == null || headSecond == null) {
+			return true;
+	  }
+	  return false;
+    }
+    
+    
+    public ListNode reverseList(ListNode head) {		//Make Node -> ListNode
+	
+	if(head == null){
+                return head;
+      }
+	
+	ListNode prev = null;
+	ListNode present = head;
+	ListNode next = present.next;
+
+	while(present != null) {
+		present.next = prev;
+		prev = present;
+		present = next;
+		
+		if(next != null) {
+			next = next.next;
+		}
+
+	}
+	return prev;					//return prev instead of head = prev;
+
+
+    }
+    
+    public ListNode middleNode(ListNode head) {
+        	ListNode s = head;
+	        ListNode f = head;
+
+	while(f!= null && f.next!=null) {
+		    s = s.next;
+		    f = f.next.next;
+	    }        
+	return s;
+    }
+    
+}
+
+
+
+	

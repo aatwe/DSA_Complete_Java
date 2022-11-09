@@ -1,0 +1,103 @@
+What given?
+
+
+head : of linked list
+
+How to check if linked list has cycle on it?
+
+
+
+3 --> 2 --> 0 --> -4
+	/\		  |
+	|		  | 
+	--------------
+
+
+Input: head = [3,2,0,-4], pos = 1
+Output: true
+
+++++++++++++++++++++++++++++++++++++++++++++
+Linked LIst Cycle Detection
+
+2) Objective: Check for loop in linked list
+	How to check for loop in a linked list?
+	What is condition for loop?
+
+		Use 2 pointers fast and slow
+
+
+
+	
+
+Fast and Slow pointer method:	//Cycle Questions : trick
+	a) Used for Cycle Detection
+	
+	b) FInding a node in cycle
+-------------------------------------------
+
+   1 -> 2 -> 3 -> 4 -> 5 -> 6 
+			   \		 |
+				8  <-	 7 
+
+a) start from head with 2 pointers fast and slow
+
+b) slow pointer : moves 1 step //1 by 1
+
+c) fast pointer : moves 2 step //2 by 2
+
+d) what will happen everntually? both will meet if cycle present   (DEFINITELY if cycle present)
+		if cycle not present-> both will not meet , fast will point to null
+
+-------------------------------------------
+Pseudo Code:
+
+Given: ListNode class
+	with int val, next,and constructor
+
+
+a) create node fast
+	//point to head
+
+b) create node slow
+	//point to head
+
+c) no cycle condition: fast != null and fast.next!=null
+
+	c.1) move fast by 2
+	c.2) move slow by 1
+
+	c.3) if fast == slow at any time
+			return true , cycle is present
+
+	c.4) else cycle not present
+
+++++++++++++++++++++++++++++++++++++++++++++
+ 	
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode fast = head;
+	    ListNode slow = head;
+	
+	    while(fast!=null && fast.next != null){
+		    fast = fast.next.next;
+		    slow = slow.next;
+
+		    if(fast == slow){
+			    return true;
+		    }
+		}
+		return false;
+	 }
+	}

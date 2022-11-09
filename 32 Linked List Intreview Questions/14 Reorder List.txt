@@ -1,0 +1,136 @@
+Input: head = [1,2,3,4,5]
+Output: [1,5,2,4,3]
+
+You are given the head of a singly linked-list. The list can be represented as:
+
+L0 → L1 → … → Ln - 1 → Ln
+Reorder the list to be on the following form:
+
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+
+ 
+
+1st last 2nd 2ndlast ...
+
+How to reorder list?
+What constraint? cant move back, have to move front
+
+1) FInd middle of LL, reverse it
+
+hf			  hs
+s			  e
+L0 L1 L2 L3 L4 L5 Ln Ln-1 Ln-2 Ln-3...
+
+2) Print
+s e s++ e++...				//Note all big question using: Cycle detection , fast & slow , reversal(Inplace)
+	How will we print like this?
+
+	 2.0) store temp = hf.next 
+	 2.1) hf.next = hs
+	 2.2) hf = temp;
+	 2.3) store temp = hs.next 
+	 2.4) hs.next =  hf
+	 2.5) hs = temp;
+	
+	
+
+	
+-----------------------------------------------------------------------------------------
+
+Pseudo Code:
+a.0) Copy reverseList() and middleNode()
+
+a) Add base conditon: if head or head.next is null -> return
+
+b) Find mid node using middleNode(head)
+
+c) reverse list from mid using reverseList(mid)
+
+d) hf
+
+e) while hf is not null and hs is not null
+	above logic
+			temp = hf.next;
+			hf.next = hs;
+			hf = temp;
+
+			temp = hs.next;
+			hs.next = hf;
+
+			hs = temp;
+f) set next of tail to null
+
+-----------------------------------------------------------------------------
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public void reorderList(ListNode head) {
+        
+        if(head == null || head.next == null){
+			return;
+	  }
+	   ListNode mid = middleNode(head);
+	   ListNode hs =  reverseList(mid);
+	   ListNode hf = head;
+
+	   while(hf!= null &&  hs != null) {
+			ListNode temp = hf.next;
+			hf.next = hs;
+			hf = temp;
+
+			temp = hs.next;
+			hs.next = hf;
+
+			hs = temp;
+		}
+	   if(hf != null) {
+		hf.next = null;
+		}	 
+
+    }     
+        
+   public ListNode middleNode(ListNode head) {
+        	ListNode s = head;
+	        ListNode f = head;
+
+	while(f!= null && f.next!=null) {
+		    s = s.next;
+		    f = f.next.next;
+	    }        
+	return s;
+    }               
+        
+    public ListNode reverseList(ListNode head) {		//Make Node -> ListNode
+	
+	if(head == null){
+                return head;
+      }
+	
+	ListNode prev = null;
+	ListNode present = head;
+	ListNode next = present.next;
+
+	while(present != null) {
+		present.next = prev;
+		prev = present;
+		present = next;
+		
+		if(next != null) {
+			next = next.next;
+		}
+
+	}
+	return prev;					//return prev instead of head = prev;
+
+
+    }
+    }

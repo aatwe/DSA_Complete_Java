@@ -1,0 +1,192 @@
+Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.
+
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not passed as a parameter.
+
+Do not modify the linked list.
+
+
+Objective: return node from where cycle begins
+		if no cycle : return null
+
+What given
+
+
+	1 -> 2 -> 3 -> 4 -> 5 
+				\     \
+				 8- 7- 6	 
+
+
+
+How to find node where cycle begins?
+
+a) Apply fast and slow pointer method
+
+b) Find length of cycle
+
+c) Move s ahead how many times? length of cycle times
+
+d) move s and f  -> they will meet at start
+
+for ex case1:
+		 f
+		 1 -> 2 -> 3 -> 4 -> 5  s
+				     \    \
+				      8-7-6   
+
+
+Dist of f from 4 = 3 = k
+Dist of s from 4 down cycle = 3 = k
+Dist of s from head? l
+	
+What is length of cycle? l or 4
+
+
+
+
+
+
+How to make f and s reach 4
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/**
+Leetcode
+
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        
+    }
+}
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Pseudo Code:
+
+a)Create detectCycle method, pass head ListNode type
+
+b) add lengthCycle method
+
+c) inside detectCycle
+	c.1) create fast and slow
+	c.2) move fast 2x and slow 1x until they meet
+	c.3) if they meet , findlengthCycle() from slow position		//sanity check for finding lenght of cycle, cycle should exist first
+
+
+	c.4) create node f nad s = head
+	c.5) while lengthCycle >0
+		c.5.1) move s by 1
+		c.5.2) reduce length
+		//do above till lengthCycle >0
+
+	c.6) move s and f until they meet at cycle start
+
+What TC? O(n) //cycle detection
+
+What SC? O(1)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+     public int lengthCycle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                // calculate the length
+                ListNode temp = slow;
+                int length = 0;				
+			//while(temp != slow)		////notice how initiially they will be equal so it wont run, we want to run atleast once, solution? Do While()
+                do {
+                    temp = temp.next;
+                    length++;
+                } while (temp != slow);
+                return length;
+            }
+        }
+        return 0;
+    }
+
+     public ListNode detectCycle(ListNode head) {
+        int length = 0;
+
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                length = lengthCycle(slow);
+                break;
+            }
+        }
+
+        if (length == 0) {
+            return null;
+        }
+
+        // find the start node
+        ListNode f = head;
+        ListNode s = head;
+
+        while (length > 0) {
+            s = s.next;
+            length--;
+        }
+
+        // keep moving both forward and they will meet at cycle start
+        while (f != s) {
+            f = f.next;
+            s = s.next;
+        }
+        return s;
+    }
+ 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

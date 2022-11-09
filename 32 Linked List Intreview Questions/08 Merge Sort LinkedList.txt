@@ -1,0 +1,151 @@
+Objective: Sort a given linkedlist
+
+
+What we will use?
+
+
+
+a) Merge sort
+Pseudo Code:
+a) Create functions MergeSort() 
+	
+	a.1) ListNode class
+		 2 constructors 
+
+			 	
+
+	a.2) mergeTwoLists()
+
+		
+	a.3)	sortList()
+		a.3.1) return head if not empty LL
+		a.3.2)
+	
+				
+
+
+	a.4) 	getMid(ListNode head)
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+public ListNode sortList(ListNode head) {		//Leetcode
+	if(head == null || head.next == null) {
+		return head;
+	   }
+	   ListNode mid = getMid(head);
+	   ListNode left = sortList(head);
+  	   ListNode right = sortList(mid);
+
+
+	  return merge(left,right);
+
+
+	}
+
+
+
+
+------------------------------------------------------------------
+
+
+
+public class MergeSort {
+
+	class ListNode {
+		int val;
+		ListNode.next;
+
+		public ListNode() {
+
+
+		}
+
+		ListNode(int x) {
+			val = x;
+			next= null;
+		}
+	
+	}
+
+}
+
+
+-----------------------------------------------------------------
+
+
+//Merge two sorted LL code
+	
+
+
+
+-----------------------------------------------------------------
+getMid(ListNode head){
+			ListNode midPrev = null;
+			while(head != null && head.next != null){
+				midPrev = (midPrev == null) ? head : midPrev.next;
+				head = head.next.next;
+			}
+		  ListNode mid = midPrev.next;
+		  midPrev.next =null;
+		  return mid;
+	
+		}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+FInal COde:
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {		//Leetcode
+	if(head == null || head.next == null) {
+		return head;
+	   }
+	   ListNode mid = getMid(head);
+	   ListNode left = sortList(head);
+  	   ListNode right = sortList(mid);
+    
+	   return mergeTwoLists(left,right);
+	}
+
+    ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        	ListNode dummyHead = new ListNode();
+            ListNode tail = dummyHead;
+	        while(list1 != null && list2 != null) {
+                if(list1.val < list2.val) {
+                    tail.next = list1;
+                    list1 = list1.next;
+			        tail = tail.next;
+                } else {
+           	        tail.next = list2;
+			        list2 = list2.next;
+			        tail = tail.next;     
+            }
+        }
+	    tail.next = list1 != null ? list1 : list2;
+		return dummyHead.next;
+    }
+    ListNode getMid(ListNode head){
+			ListNode midPrev = null;
+			while(head != null && head.next != null){
+				midPrev = (midPrev == null) ? head : midPrev.next;
+				head = head.next.next;
+			}
+		  ListNode mid = midPrev.next;
+		  midPrev.next =null;
+		  return mid;
+	
+		}
+   }
+
+
+

@@ -1,0 +1,133 @@
+Given the head of a linked list, rotate the list to the right by k places.
+
+
+Input: head = [1,2,3,4,5], k = 2
+Output: [4,5,1,2,3]
+
+
+Ex
+
+Input : 1,2,3,4,5
+
+rotate 1: 5 1 2 3 4
+
+rotate 2: 4 5 1 2 3
+
+
+//basically:
+Input : 1,2,3,4,5		//if rotate 2 times
+		   ---
+		  //2 items go in back
+	  4 5 1 2 3
+
+
+Input : 1,2,3,4,5		//if rotate 3 times
+		 -----
+		  //3 items go in back
+	  3 4 5 1 2 
+
+	//we observe a sublist that gets added
+
+
+Strategy:
+	Draw
+	See Output
+	Code it
+
+
+
+Approach
+
+a) How to rotate
+	a.0) if k=2 what is sublist? last 2 elements : 5,6
+		How to move last 2 elements to front? skip totallength - k = 4 times
+
+	What is newlast? 4
+
+
+
+	a.1)  //original last node.next = original head
+		find last node
+		connect to head
+			What is newhead? start of sublist = 5 // head = newlast.next
+
+			point newlast to null : newlast.next = null
+
+	a.2) new head = start of sublinkedlist
+	a.3) new tail = node before start of sublist
+
+	1.4 add a rotation check
+		for ex if length = 6 -> rotate 6 times -> no change
+		for ex if length = 7 -> rotate 6 times -> just rotate 1 times
+		for ex if length = 6 -> rotate 12 tims -> no change
+
+	no. of rotations = k%l
+
+	//avoid extra computations
+
+
+
+
+
+Pseudo Code:
+a) base condition
+	if k<=0 or head is null or head.next = null
+	return head
+
+b) find last node
+
+c) make last node point to head	//last.next = head
+
+d) optimize how many rotaions	//int rotations = k % length;
+
+e) define how many to skip		// skip = length - rotations
+
+	where to land? newlast
+	create newlast ListNode -> point to head
+
+f)
+
+
+What TC? O(n)
+What SC? O(1)		
+
+----Question solved----
+		
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if (k<=0 || head == null || head.next == null) {
+			return head;
+		}
+	ListNode last = head;
+	int length = 1;
+
+	while(last.next != null) {
+		last = last.next;
+		length++;
+	}
+
+	last.next = head;
+	int rotations = k % length;
+	int skip = length - rotations;
+    ListNode newLast = head;
+	for(int i=0; i< skip - 1; i++) {
+		newLast = newLast.next;
+	}
+	head = newLast.next;
+	newLast.next = null;
+
+	return head;		//why return head? leetcode wants
+
+    }
+}

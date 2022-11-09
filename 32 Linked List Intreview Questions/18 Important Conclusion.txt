@@ -1,0 +1,10 @@
+A) 
+1) look at problem
+2) find end goal
+3) code whatver you see
+
+
+B) 
+1) Inplace reversal of LL
+2) Fast and Slow pointer
+3) Recursion

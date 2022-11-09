@@ -1,0 +1,40 @@
+How to find length of the cycle?
+
+
+a) Use fast and slow pointer method
+
+b) once slow and fast pointer meets (loop detected, they are inside loop)
+	
+	b.1) move slow pointer until it meets fast again
+
+	b.2) no. of steps taken by slow  = length of cycle
+
+
+
+public class Solution {
+    public boolean lengthCycle(ListNode head) {
+        ListNode fast = head;
+	    ListNode slow = head;
+	
+	    while(fast!=null && fast.next != null){
+		    fast = fast.next.next;
+		    slow = slow.next;
+
+		    if(fast == slow){
+			    //Calculate length
+				ListNode temp = slow;	
+				int length = 0;
+				//while(temp != slow)	//notice how initiially they will be equal so it wont run, we want to run atleast once, solution? Do While()
+				
+				do {
+					temp = temp.next;
+					length++;
+				} while(temp != slow);
+
+				return length;
+		
+		    }
+		}
+		return 0;
+	 }
+	}

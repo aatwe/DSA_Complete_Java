@@ -1,0 +1,120 @@
+Write an algorithm to determine if a number n is happy.
+
+A happy number is a number defined by the following process:
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy.
+Return true if n is a happy number, and false if not.
+
+
+
+Input: n = 19
+Output: true
+Explanation:
+1^2 + 9^2 = 82
+8^2 + 2^2 = 68
+6^2 + 8^2 = 100
+1^2 + 0^2 + 0^2 = 1	
+
+
+
+Objective: Check if n is happy
+
+happy = true
+	if summing squares of digit leads to 1
+
+
+else happy = false
+	//loop endlessly
+	//how to stop? //how to avoid TLE(Time limit exceeded) error
+
+
+1) Ask interviewer example
+
+12 = 1^2 + 2^2 = 1 + 4 	= 5
+     5^2 = 25
+     2^2 + 5^2 = 4 + 25 	= 29
+     2^2 + 9^2 = 4 + 81 	= 89
+     8^2 + 9^2 = 64 + 81 	= 145
+     1^2 + 4^2 + 5^2 		= 42
+     4^2 + 2^2 			= 20
+     2^2 + 0   			= 4
+     4^2       			= 16
+     1^2 + 6^2 			= 37
+     3^2 + 7^2 = 9 + 49 	= 58
+     5^2 + 8^2 = 25 + 64 	= 89	//repeated
+     8^2 + 9^2 = 64 + 81   =...
+
+					//Time limited exceeded
+
+
+2) The above is a linkedlist of numbers with a cycle starting at 89
+
+
+
+3) Conclusion:
+	Happy no. true -> if LL formed by that no. leads to 1
+					if cycle formed -> not happy
+
+				Note : not a corner case : if loop at 1 //  no loop at 1 possible LOL contradicted yourself
+
+CIRCULAR LINKEDLIST PROBLEM : Fast and Slow pointer
+
+
+--------------------------------------------------------------------------------------------------------------
+Pseudo pointer
+
+a) Create isHappy(int n)
+
+b) start slow and fast from n
+
+	
+c) create findSquare(int number){
+		create ans variable , initialize to 0
+
+		condition: no. >0
+			take remainder of number with 10 , get last digit
+			add square of rem to ans
+			divide number with 10 , remove last digit from number
+			//do above intil no.>0
+				
+
+d) isHappy(int n)
+	d.1) start slow and fast at n
+
+	d.2) calculate while what condition? fast!= slow //loop condition
+
+	d.3) slow = findSquare(slow);
+	d.4) fast = findSquare(findSquare(fast));
+	d.5) if slow == 1 -> return happy no. true
+
+
+Code:
+
+class Solution {
+    public boolean isHappy(int n) {
+        	int slow = n;
+	        int fast = n;
+
+	        do {
+		        slow = findSquare(slow);
+		        fast = findSquare(findSquare(fast));	
+	        } while (slow != fast);
+		 
+	        if(slow == 1){
+		        return true;
+	        }
+	        return false;
+            }
+
+    private int findSquare(int number){
+		    int ans = 0;
+		    while(number > 0){
+		        int rem = number %10;
+		        ans += rem * rem;
+		        number /= 10;
+		    }
+	return ans;
+   }
+  }

@@ -1,0 +1,83 @@
+Pseudo Code:
+
+1) Same reverseKGroup Code
+
+2) while(1) -> whlie(current!= null)
+
+3) After newEnd.next = Current
+
+a)	//no need for
+	//if(current == null){
+	//	break;
+	//}
+	//prev = newEnd;	
+
+b) skip k nodes
+
+	for(int i=0; current!=null&i<k; i++){
+		prev = current;
+		current = current.next;
+	}
+
+
+What TC? O(N)
+What SC? O(1)
+
+-----------------------------------------------------------------	
+
+
+Code:
+
+class Solution {
+    public ListNode reverseAlternateKGroup(ListNode head, int k) {
+		if(k <= 1 || head == null) {
+			return head;
+		}    
+	
+	ListNode current = head;
+	ListNode prev = null;
+	
+
+	while(1){
+
+	for(int i=0; current!= null && i< left - 1; i++) {
+		prev= current;
+		current = current.next;
+	}
+	ListNode last = prev;
+	ListNode newEnd = current;
+	
+
+	ListNode next = current.next;
+
+	for(int i=0; current!= null && i< k; i++) {
+		current.next = prev;
+		prev = current;
+		current = next;
+		
+		if(next != null) {
+			next = next.next;
+		}	
+	}
+
+	//Reversing done
+
+	if(last != null) {
+		last.next = prev;
+	} else {
+		head = prev;
+	}
+
+	newEnd.next = current;
+
+	for(int i=0; current!=null&i<k; i++){
+		prev = current;
+		current = current.next;
+	}
+
+
+    }
+  return head;	//leetcode asking for head 
+}
+
+}

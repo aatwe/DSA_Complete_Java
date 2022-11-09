@@ -1,0 +1,193 @@
+ Given the head of a singly linked list and two integers left and right where left <= right, 
+reverse the nodes of the list from position left to position right, and return the reversed list.
+
+ 
+
+
+Input: head = [5], left = 1, right = 1
+Output: [5]
+
+
+Objective: Reversea  sub linkedlist
+    last
+  p	c    L	    R
+	1 -> 2 -> 3 -> 4 -> 5
+
+    last		  newEnd
+	1 -> 4 -> 3 -> 2 -> 5		//last.next = p
+
+
+How to reverse a linkedlist in part?
+1) What diagram to code
+
+1 -> 2 -> 3 -> 4 -> 5
+
+
+1 -> 4 -> 3 -> 2 -> 5
+
+
+How to?
+1) take 3 pointers l, r, p, c
+				  //prev //current
+
+	
+2) Objective: how to reverse a sublinkedlist?
+	get the previous element of sublinked list // l
+
+
+3) How to get previous element of sublinkedlist?
+	 p starts at null, c starts at 1st element
+		last = l -1
+		l = 2 = newend of sublinkedlist
+
+	What newend points to?
+		move p and c-> 1 time
+		
+		p = last // p becomes last
+		c = newend	   // c becomes l = newend
+
+Objective achieved: p and c just before sublinkedlist
+     last	 	
+	 1 -> 2 -> 3 -> 4 -> 5
+
+What before reversing
+
+    last		    p    c	
+	1 -> 2 -> 3 -> 4 -> 5
+
+
+
+4) Reverse the sublinkedlist
+ l			newEnd
+		     prev pres next
+ 1    4 -> 3 -> 2    5
+	------------
+	//after reversing the sublinkedlist
+
+
+5) What after reversing?
+	c will be at 5 , p will be at 4
+	point last.next = p
+
+
+	pres = at 5
+	next = null
+
+
+Q) What if last = null
+	means head = prev
+
+6) newEnd.next = pres	
+----------------------------------------------------------------------------------------------------
+
+Pseudo code:
+
+a) if left == right, sublinkedlist not exist -> return head	
+
+b) start current ListNode an
+
+ how to skip first left-1 (l-1) nodes
+	loop i from 0 to left -1		//while looping add condition //present != null	//sublinkedlist shouldnt go outside the linkedlist
+
+	move ahead prev and current
+
+c) what will be our last ndoe in linkedlist?
+   what will be new end node? current
+
+d) Reverse between left and right
+	how many elements bw left and right =  right - left + 1
+	//while reversing current shouldnt be null
+
+		How to reverse?
+		add reverseList(ListNode head)
+			//add code in while loop -> into for loop
+	//reversing done
+
+e) 	if(last != null) {
+		last.next = prev;
+	} else {
+		head = prev;
+	}
+
+----------------------------------------------------------------------------------------------------
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(left == right){
+		return head;
+	}
+
+	ListNode current = head;
+	ListNode prev = null;
+
+	for(int i=0; current!= null && i< left - 1; i++) {
+		prev= current;
+		current = current.next;
+	}
+	ListNode last = prev;
+	ListNode newEnd = current;
+	
+
+	ListNode next = current.next;
+
+	for(int i=0; current!= null && i< right - left + 1; i++) {
+		current.next = prev;
+		prev = current;
+		current = next;
+		
+		if(next != null) {
+			next = next.next;
+		}	
+	}
+
+	//Reversing done
+
+	if(last != null) {
+		last.next = prev;
+	} else {
+		head = prev;
+	}
+
+	newEnd.next = current;
+	return head;	//leetcode asking for head
+    }
+}
+---------------------------------------------------------------------------------------------------
+
+
+public ListNode reverseList(ListNode head) {		//Make Node -> ListNode
+	
+	if(head == null){
+                return head;
+      }
+	
+	ListNode prev = null;
+	ListNode present = head;
+	ListNode next = present.next;
+
+	while(present != null) {
+		present.next = prev;
+		prev = present;
+		present = next;
+		
+		if(next != null) {
+			next = next.next;
+		}
+
+	}
+	return prev;					//return prev instead of head = prev;
+
+
+    }
