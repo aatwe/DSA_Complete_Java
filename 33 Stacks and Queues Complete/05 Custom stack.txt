@@ -1,0 +1,154 @@
+1) Check how stack class works internally
+
+	a) protected / private class
+	
+	
+2) Pseudo Code:
+
+a) main()
+	a.1)  Create stack object	
+
+
+
+b) CustomStack
+	b.1) protected data[]		//imagine this will get full some time
+	b.2) Create DEFAULT_SIZE variable		//private: people cant change directly //static: same for all objects	//final: we also dont want to change it in code
+	b.3) CustomStack()		//constructor : takes argument size	//Default
+		
+		when object of stack created //where object created? heap -> 
+		object contains internal array with default size
+			initialize int array in constructor
+		CustomStack(int size)								//Parameterized
+			//call another constructor witha  constructor	//this(DEFAULT_SIZE)	//initializes array with size 10
+	b.4) How to insert data in array? ptr of type int to track
+
+		initialize ptr as -1
+		
+	b.5) Create boolean push()	//takes input item
+		Add basic check for outof bound
+			check if stack is full using isFull()
+				isFull() returns what? ptr if ptr is at last index
+
+				ifEmpty() returns -1 if ptr is at -1 index
+
+		How to insert an item
+		ptr++;
+		data[ptr] = item
+	
+	b.6) Create pop() method
+		 what does? throws  new custom exception	//cannot pop
+
+	b.7) store removed value
+		reduce ptr
+		return Stored removed value
+
+	b.8) peek()
+
+
+c) Create customException
+
+
+
+Q) Why original stack doesnt get empty.
+How to make our stack unfillable? when our array filling -> create new array of twice size , copy previous items into new array 	//DYNAMIC STACK
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Code 1: 
+
+public class CustomStack {
+    protected int[] data;
+    private static final int DEFAULT_SIZE = 10;
+
+    int ptr = -1;
+
+    public CustomStack() {
+        this(DEFAULT_SIZE);
+    }
+
+
+   	
+
+    public boolean push(int item) {
+        if(isFull()) {
+            System.out.println("Stack is full");
+            return false;
+        }
+        ptr++;
+        data[ptr] = item;
+        return true;
+    }
+
+    private boolean isFull(){
+        return ptr == data.length -1;
+    }
+
+    private boolean isEmpty(){
+        return ptr == -1;
+    }
+    public int pop() throws StackException {
+        if(isEmpty()) {
+            throw new StackException("Cannot pop from Empty stack");
+        }
+
+        int removed = data[ptr];
+        ptr --;
+        return removed;
+        //return data[ptr--];
+
+    }
+    public int peek() throws StackException {
+        if(isEmpty()) {
+            throw new StackException("Cannot peek from Empty stack");
+        }
+        return data[ptr];
+    }
+
+}
+Code 2:
+
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Deque;
+import java.util.Stack;
+public class Main {
+    public static void main(String[] args) throws StackException {		//dont forget throws StackException in main also
+
+        CustomStack stack = new CustomStack (5);
+
+        stack.push(34);
+        stack.push(45);
+        stack.push(2);
+        stack.push(9);
+        stack.push(18);
+
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+    }
+}
+
+
+Code 3: //use it in throws
+
+public class StackException extends Exception {
+    public StackException(String message) {
+        super(message);
+    }
+
+}
+
+
+>Output:
+18
+9
+2
+45
+
+
+//if we try to remove more times, gives our custom exception	
+
+
+

@@ -1,0 +1,252 @@
+What complexity of removing? O(N)	//have to shift all items		//efficient solution: Circular queue
+
+
+	______	 ______	  _______	     ______	_____
+	|_____| --> |____|  --> |_____| -->  |_____| --> |____|
+
+
+			-->
+	 f,e	/ /		\ \	e
+		  
+		 |		| |
+				
+		\ \	<--	/ / 
+
+
+1) How to implement
+
+A) how to add element
+	a) Use 2 pointers f and e both at index 0
+	b) initialize f and e
+	b) add num
+	c) increment e
+	
+
+B) How to remove element	//Note: item always removed from f 	//f can be anywhere depending how many items were removed
+	a) Use 2 pointers
+	b) increment f 		//note only elements bw f and e considered for Circular Queue
+					// other elements overriden
+
+   f	e
+1) 8 
+
+   f	  e
+2) 8 9 
+
+   f	     e
+3) 8 9 19
+   f		   e
+4) 8 9 19 20
+
+   f	 	   e	//where will end go after all elements inserted?
+5) 8 9 19 20 35
+
+   f	 	   e
+6)   9 19 20 35
+
+     f 	   e
+  78 9 19 20 35	//78 added at e%size
+
+        f     e
+  78 9 19 20 35
+
+
+How to connect index 4 - index 0
+	a.1) increment e -> gives index 5 //index out of bound
+
+	a.2) add at e%size = 0 	//will overwrite
+
+
+What TC? Insertion: O(1)
+	    Removal : O(1)
+
+
+Pseudo Code:
+0) create data[]
+	init DEFAULT_SIZE: 10
+
+1) declare end and front at 0
+
+2) declare int size
+
+3) create 2 constructors
+
+4) create isFull()
+	returns size if size is at data.length		//why no end? end might be at higher index
+
+5) create isEmpty()
+	returns end if end is at -1
+
+6) copy isnert() from CustomQueue
+	if full -> return false
+	add item at end
+	increment end
+	find modulo of end continiously
+	return true
+
+7) copy remove()
+	changes?
+	removed data = data[front] instead of data[0]
+	increase front
+	no need to shift elements
+	also take modulo of front, since it may also go beyond
+	reduce size everytime removed
+	
+
+
+8) Copy front()
+	What changes? return data[front]
+
+9) Copy display()
+	What changes? front to end
+
+	9.0) Add a check if isEmpty() -> return "Empty"
+	9.1) start from i = front
+	
+	
+	9.2) print data[i]
+	9.3) increment i
+	9.4) take modulo of i with data.length on every turn
+		//do above 3 lines until i != end  //if i = end 
+	9.5) Print END
+
+	
+
+--------------------------------------------------------------------------------------------------------------------------
+Code
+
+
+
+public class CircularQueue {
+    private int[] data;
+    private static final int DEFAULT_SIZE = 10;
+
+
+    protected int end  = 0;		//we using the end pointer
+    protected int front = 0;
+    private int size = 0;
+
+    public CircularQueue() {
+        this(DEFAULT_SIZE);
+    }
+    public CircularQueue(int size) {
+        this.data = new int[size];
+    }
+
+    private boolean isFull(){
+        return end == data.length;
+    }
+
+    private boolean isEmpty(){
+        return end == -1;
+    }
+
+    public boolean insert(int item) {
+        if(isFull()) {
+            return false;
+        }
+
+        data[end] = item;		//end++ first assign then evaluate   ++end first evaluate then assign
+        end++;
+        end = end % data.length;
+        size++;
+        return true;
+    }
+
+    public int remove() throws Exception {
+        if(isEmpty()) {
+            throw new Exception("Queue is empty");
+        }
+
+        int removed = data[front++];
+        front = front % data.length;
+        size--;
+        return removed;
+    }
+    public int front() throws Exception {
+
+        if(isEmpty()) {
+            throw new Exception("Queue is empty");
+        }
+        return data[front];
+
+    }
+
+    public void display() {
+        if(isEmpty()) {
+            System.out.print("Empty");
+            return;
+        }
+
+        int i = front;
+        do {
+            System.out.print(data[i] + " -> ");
+            i++;
+            i%= data.length;
+        } while(i != end);
+
+        System.out.print("END");
+    }
+
+}
+
+Code 2:
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Deque;
+import java.util.Stack;
+public class Main {
+    public static void main(String[] args) throws Exception {
+
+        //CustomStack stack = new CustomStack (5);
+
+        CircularQueue queue = new  CircularQueue (5);
+
+        queue.insert(3);
+        queue.insert(6);
+        queue.insert(5);
+        queue.insert(19);
+        queue.insert(1);
+
+        queue.display();
+        System.out.println(queue.remove());
+        queue.insert(133);
+        queue.display();
+    }
+    }
+
+
+
+
+
+
+
+
+// Why output: End 3 End? when using old display? no modulo of i in that
+f and e both coming on index 0
+
+
+Bugfix in display()?
+
+public void display() {
+        if(isEmpty()) {
+            System.out.print("Empty");
+            return;
+        }
+
+        int i = front;
+        do {
+            System.out.print(data[i] + " -> ");
+            i++;
+            i%= data.length;
+        } while(i != end);
+
+        System.out.print("END");
+    }
+
+
+
+
+
+3 -> 6 -> 5 -> 19 -> 1 -> END3
+6 -> 5 -> 19 -> 1 -> 133 -> END

@@ -1,0 +1,96 @@
+Pseudo Code:
+prerequisites: import java.util.Queue
+
+1) How to create Queue
+	Interface Queue extends Collection
+								// internally LinkedList with head and tail  //thats why efficient
+
+	Queue<Integer> queue = new Queue<Integer>() {}
+OR
+	Queue<Integer> queue = new LinkedList();
+
+
+2) How to push instack?
+	stack.push()
+
+3) How to remove from stack?	//Note convention: when something is removed from stack -> display what was removed
+	stack.pop()
+		//also returns
+
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+public class Main {
+
+    public static void main(String[] args) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(3);
+        queue.add(6);
+        queue.add(5);
+        queue.add(19);
+        queue.add(2);
+
+
+        System.out.println(queue.peek());
+	   System.out.println(queue.remove());
+
+    }
+}
+
+
+How DS looks like?
+2) 1) What is Queue?
+					//Insertion from back
+					what order of going in Queue?	//Input
+	|  p5   |	1		//p5 went in first , came out first
+	|  p4   |	2
+	|  p3   |	3
+	|  p2   |	4
+	|  p1   |	5
+	|       |
+
+		
+
+
+
+2) What output was removed first from Queue?
+
+					//Removal from front
+	|  p1   |			//p1 input last -> output : last
+	|       |	
+	|       |	
+	|       |	
+	|       |	
+	|       |
+
+
+
+
+
+
+
+
+
+Q) What happens when empty stack is popped? EmptyStack Exception
+
+
+Q) What is stack internally? class Stack extends Vector<E>	 
+						is internally an Array[]
+
+
+Q) If made of array , why we call this stack? different implementation than array
+	cannot modify the array[]
+	//not accessible
+
+	//OOPS Principles : Encapsulation/abstraction/data hiding etc
+
+ConclusioN: Stack is Abstract Data type
+
+
+Q) What is TC?
+	insertion : O(1)	//why? Array based
+	removal   : O(1)
+
+
+

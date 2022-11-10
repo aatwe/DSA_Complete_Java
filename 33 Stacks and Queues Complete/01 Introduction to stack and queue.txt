@@ -1,0 +1,88 @@
+1) What is stack?
+	Where we saw stack? Recursion:
+	
+	function calls go in stack
+			what order of going in stack?	//Input
+	| fun() |	5
+	| fun() |	4
+	| fun() |	3
+	| fun() |	2
+	| fun() |	1
+	|_______|
+
+		When function call is entered -> gets pushed/ added to stack
+
+
+
+2) What output was removed first from stack?
+
+
+	| fun() |	1
+	| fun() |	2
+	| fun() |	3
+	| fun() |	4
+	| fun() |	5
+	|_______|
+
+
+		Whena  fucntion call is finished -> gets popped/remove from stack
+
+
+
+
+Conclusion: Item that comes first, is removed last	FILO
+		 Item that comes last , is remove first	LIFO
+
+
+What we know about? arrays/linkedlists/arraylists etc
+
+What we dont know? Queue
+	We will learn to 
+		create our own Queue
+		use Queue provided by java
+
+
+
+2) 1) What is Queue?
+	Where we say stack? Recursion:
+	
+			Insertion from back
+			what order of going in Queue?	//Input
+	|  p5   |	1		//p5 went in first , came out first
+	|  p4   |	2
+	|  p3   |	3
+	|  p2   |	4
+	|  p1   |	5
+	|       |
+
+		
+
+
+
+2) What output was removed first from Queue?
+			
+			Removal from front
+	|  p1   |			//p1 input last -> output : last
+	|       |	
+	|       |	
+	|       |	
+	|       |	
+	|       |
+
+
+
+
+
+
+
+Conclusion: Item that comes first, is removed first	FIFO
+		 Item that comes last , is remove last		LILO
+
+
+What we know about? arrays/linkedlists/arraylists etc
+
+What we dont know? Queue
+	We will learn to 
+		create our own Queue/Circular Queue / Dynamic Queue
+		use Queue provided by java
+

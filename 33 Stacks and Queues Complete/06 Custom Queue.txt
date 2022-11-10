@@ -1,0 +1,157 @@
+Objetive: Implement custom queue
+How? insert from last remove from first
+How? 2 pointers first and lasts
+	1 pointer
+
+
+
+Pseudo code:
+A) CustomQueue
+
+1) create data[]
+
+2) create DEFAULT_SIZE
+
+3) Create end pointer		//starts at end
+
+4) Create 2 constructors for CustomQueue
+
+5) Copy isFull() and isEmpty()
+	both return end pointer
+
+
+6) main algo: add from end , remove from 
+
+7) insert()	//input item
+
+	insert item at index
+	increment index end
+
+	OR->	data[end++] = item
+	
+8) remove()		//dont forget to throw and exceptiion
+	get the first item and store
+
+	shift elements
+	reduce end pointer
+	return the stored item
+	
+9) front()
+
+10) display()
+
+What complexity of adding? O(1)		//know the index	//just adding and shifing pointer
+
+What complexity of removing? O(N)	//have to shift all items		//efficient solution: Circular queue
+
+
+
+B) QueueMain {}
+
+	 void main()
+		b.1) create CustomQUeue object
+		b.2) object.insert
+
+----------------------------------------------------
+CustomQueue.java
+
+public class CustomQueue {
+    private int[] data;
+    private static final int DEFAULT_SIZE = 10;
+
+
+    int end  = 0;		//we using the end pointer
+
+    public CustomQueue() {
+        this(DEFAULT_SIZE);
+    }
+    public CustomQueue(int size) {
+        this.data = new int[size];
+    }
+
+    private boolean isFull(){
+        return end == data.length;
+    }
+
+    private boolean isEmpty(){
+        return end == -1;
+    }
+
+    public boolean insert(int item) {
+        if(isFull()) {
+            return false;
+        }
+
+        data[end] = item;		//end++ first assign then evaluate   ++end first evaluate then assign
+        end++;
+
+        return true;
+    }
+
+    public int remove() throws Exception {
+        if(isEmpty()) {
+            throw new Exception("Queue is empty");
+        }
+
+        int removed = data[0];
+
+        //shift the elements to left
+        for(int i =1; i< end; i++) {
+            data[i-1] = data[i];
+        }
+
+
+        end--;
+        return removed;
+    }
+
+    public int front() throws Exception {
+
+        if(isEmpty()) {
+            throw new Exception("Queue is empty");
+        }
+        return data[0];
+
+    }
+
+
+    public void display() {
+        for(int i= 0; i< end; i++){
+            System.out.print(data[i] + "<- ");
+        }
+        System.out.println("End");
+
+    }
+}
+
+
+Code2:
+
+Main.java
+
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Deque;
+import java.util.Stack;
+public class Main {
+    public static void main(String[] args) throws Exception {
+
+        //CustomStack stack = new CustomStack (5);
+
+        CustomQueue queue = new  CustomQueue(5);
+
+        queue.insert(3);
+        queue.insert(6);
+        queue.insert(5);
+        queue.insert(19);
+        queue.insert(1);
+
+        queue.display();
+        System.out.println(queue.remove());
+        queue.display();
+    }
+    }
+
+
+
+

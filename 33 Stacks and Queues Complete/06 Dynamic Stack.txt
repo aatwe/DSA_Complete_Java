@@ -1,0 +1,156 @@
+Q) Why original stack doesnt get empty.
+How to make our stack unfillable? when our array filling -> create new array of twice size , copy previous items into new array 	//DYNAMIC STACK
+
+
+Pseudo Code:
+
+1) extend our custom stack
+
+2) create constructor
+	default: super() --> calls default constructor in parent class
+
+3) keep all methods same, except push()
+  a) 	How to use push() of this instead of parent	//override()
+	//wanna use isFull() -> make it private -> public
+	
+	if isFull() -> double the array size
+	copy all prev items in new int data[] using for loop
+
+	
+	data = temp;
+
+ b) insert item
+	call push() of parent class
+
+Q) What if we use
+	CustomStack stack = new DynamicStack(5);
+
+	//what accesses		//What type of access
+	  we get			  we get
+
+
+Q) What TC? O(n) , on avg Amortized O(1)	//same for arrayLists
+----------------------------------------------------------------------------------------
+Code 1
+
+public class DynamicStack extends CustomStack {
+
+public DynamicStack() {
+	super();
+}
+public DynamicStack(int size) {
+	super(size);
+}
+
+@Override
+public boolean push(int item) {
+	if(this.isFull()) {
+		int[] temp = new int[data.length * 2];			//note temp will be rmeoved lataer since inside function	//previous data also removed by garbage collector
+		for(int i=0; i< data.length; i++) {
+			temp[i] = data[i];
+		}
+
+		data = temp;
+	}
+	//insert item
+	return super.push(item);
+
+	
+
+  }
+
+}
+
+
+
+
+
+Code 2: 
+
+public class CustomStack {
+    protected int[] data;
+    private static final int DEFAULT_SIZE = 10;
+
+    int ptr = -1;
+
+    public CustomStack() {
+        this(DEFAULT_SIZE);
+    }
+
+
+    public CustomStack(int size) {
+        this.data = new int[size];
+    }
+
+    public boolean push(int item) {
+        if(isFull()) {
+            System.out.println("Stack is full");
+            return false;
+        }
+        ptr++;
+        data[ptr] = item;
+        return true;
+    }
+
+    private boolean isFull(){
+        return ptr == data.length -1;
+    }
+
+    private boolean isEmpty(){
+        return ptr == -1;
+    }
+    public int pop() throws StackException {
+        if(isEmpty()) {
+            throw new StackException("Cannot pop from Empty stack");
+        }
+
+        int removed = data[ptr];
+        ptr --;
+        return removed;
+        //return data[ptr--];
+
+    }
+    public int peek() throws StackException {
+        if(isEmpty()) {
+            throw new StackException("Cannot peek from Empty stack");
+        }
+        return data[ptr];
+    }
+
+}
+Code 2:
+
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Deque;
+import java.util.Stack;
+public class Main {
+    public static void main(String[] args) throws StackException {		//dont forget throws StackException in main also
+
+        DynamicStack stack = new DynamicStack (5);
+
+        stack.push(34);
+        stack.push(45);
+        stack.push(2);
+        stack.push(9);
+        stack.push(18);
+	   stack.push(18);
+	   stack.push(18);		//dynamic stack will allow to insert
+
+	
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+    }
+}
+
+
+Code 3: //use it in throws
+
+public class StackException extends Exception {
+    public StackException(String message) {
+        super(message);
+    }
+
+}

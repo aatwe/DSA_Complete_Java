@@ -1,0 +1,94 @@
+1) When to use stacks and Queues?
+
+	If want to store answer so far to be used later --> stacks / queues
+
+
+2) Trees
+
+
+3) Recursion to iteration programs
+
+
+------------------------------------------------------------------------
+
+
+Q) What is Deque?
+
+	Doubly ended queue
+
+	a) can insert from both sides	
+	
+	b) can remove from both sides
+
+
+//nnormal queue : insert from back only
+			  remove from front only
+
+	c) null elements not allowed
+
+	d) not thread safe
+
+	e) no capacity restrictions
+
+	f) faster than LL and Stack implementations	 
+
+
+
+Q) What Dequeue code?
+
+	public interface Deque<E> extends Queue<E> {
+
+	add()		//adds in queue, throws illegal state exception if no space available
+	addFirst()
+	addLast()
+	offer()	//prefer instead of add(), when using a capacity restricted deque 
+	offerFirst()
+	offerLast()
+	getFirst()
+	getLast()
+	remove()	//removes							//no exception if deque is empty
+	poll()	//removes and retrieves head of queue		//does not throw exception
+	element()
+	peek()	//first element of deque
+	addAll()	//adds all
+	push()
+	pop()
+	...etc
+	
+	}
+
+
+
+Q) How to create object
+	
+	Deque<Integer> deque = new ArrayDeque();
+
+
+
+//What is ArrayDeque? allows to create objects of methods in dequeu interface
+				//resizeable array	//has no capacity problem	//grow as necessary
+
+				//faster than stack when used as stack
+				//faster than LinkedList when sued as queue
+
+
+Code:	
+
+import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.Deque;
+import java.util.Stack;
+public class Main {
+
+    public static void main(String[] args) {
+        Deque<Integer> deque = new ArrayDeque<>();
+        deque.add(89);
+        deque.addLast(78);
+        deque.removeFirst();
+
+
+        System.out.println(deque.peek());
+
+    }
+}
+

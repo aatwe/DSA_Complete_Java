@@ -1,0 +1,80 @@
+Pseudo Code:
+prerequisites: import java.util.Stack
+
+1) How to create stack
+	What is stack type? generics with argument Integer
+
+
+2) How to push instack?
+	stack.push()
+
+3) How to remove from stack?	//Note convention: when something is removed from stack -> display what was removed
+	stack.pop()
+		//also returns
+
+public class InBuiltExamples {
+
+	public static void main(String[] args) {
+		Stack<Integer> stack = new Stack<>();
+		stack.push(34);
+		stack.push(45);
+		stack.push(2);
+		stack.push(9);
+		stack.push(18);
+	
+
+		System.out.println(stack.pop());	//note stack.pop() will remove it  + return it but wont print it
+		System.out.println(stack.pop());
+		System.out.println(stack.pop());
+		System.out.println(stack.pop());
+		System.out.println(stack.pop());			
+
+	}
+}
+
+How DS looks like?
+
+Push order
+
+|  18   | 5
+|  9    | 4
+|  2    | 3
+|  45   | 2
+|  34   | 1 
+|_______|
+
+
+
+Pop order
+
+
+|  18   | 1
+|  9    | 2
+|  2    | 3
+|  45   | 4
+|  34   | 5 
+|_______|
+
+
+Q) What happens when empty stack is popped? EmptyStack Exception
+
+
+Q) What is stack internally? class Stack extends Vector<E>	 
+						is internally an Array[]
+
+
+Q) If made of array , why we call this stack? different implementation than array
+	cannot modify the array[]
+	//not accessible
+
+	//OOPS Principles : Encapsulation/abstraction/data hiding etc
+
+ConclusioN: Stack is Abstract Data type
+
+
+Q) What is TC?
+	insertion : O(1)	//why? Array based
+	removal   : O(1)
+
+
+
